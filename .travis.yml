@@ -6,7 +6,8 @@ services:
 
 before_install:
   - docker pull circleci/node:lts-browsers
+  - export DOCKER_IMAGE_HASH=$(docker build -q .)
 
 script:
   - npm test
-  - docker run circleci/node:lts-browsers /bin/sh -c "echo 'Hello World'"
+  - docker run --rm --sig-proxy=true -it $DOCKER_IMAGE_HASH bash -c 'npm run test:e2e'

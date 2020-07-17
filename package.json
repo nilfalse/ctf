@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack -p",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "echo 'FIXME' && jest --ci"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
