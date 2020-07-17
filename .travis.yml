@@ -6,3 +6,7 @@ services:
 
 before_install:
   - docker pull circleci/node:lts-browsers
+
+script:
+  - npm test
+  - docker run circleci/node:lts-browsers /bin/sh -c "echo 'Hello World'"
