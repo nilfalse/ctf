@@ -2,16 +2,20 @@
   "private": true,
   "name": "capture-the-flag",
   "version": "0.0.0-dev",
-  "description": "Smartest country flag extension",
+  "description": "Best effort country flag extension",
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack -p",
     "test": "jest"
   },
+  "dependencies": {
+    "maxmind": "4.1.3"
+  },
   "devDependencies": {
     "@babel/core": "7.10.2",
     "@babel/preset-env": "7.10.2",
     "@babel/preset-typescript": "7.10.1",
+    "@types/chrome": "0.0.122",
     "babel-jest": "26.0.1",
     "jest": "26.0.1",
     "null-loader": "4.0.0",

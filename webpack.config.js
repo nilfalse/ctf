@@ -12,6 +12,11 @@ module.exports = [
           use: 'ts-loader',
           exclude: /node_modules/,
         },
+
+        {
+          test: path.resolve(__dirname, './node_modules/maxmind/lib/fs.js'),
+          use: 'null-loader',
+        },
       ],
     },
     resolve: {
@@ -20,6 +25,10 @@ module.exports = [
     output: {
       filename: 'background.js',
       path: path.resolve(__dirname, 'output'),
+    },
+
+    node: {
+      net: 'empty',
     },
   },
 ];
