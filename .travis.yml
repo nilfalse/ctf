@@ -1,13 +1,7 @@
 language: node_js
 node_js:
   - lts/*
-services:
-  - docker
-
-before_install:
-  - docker pull circleci/node:lts-browsers
-  - export DOCKER_IMAGE_HASH=$(docker build -q .)
 
 script:
   - npm test
-  - docker run --rm --sig-proxy=true -it $DOCKER_IMAGE_HASH bash -c 'npm run test:e2e'
+  - npm run e2e

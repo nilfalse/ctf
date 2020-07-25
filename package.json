@@ -7,7 +7,7 @@
     "start": "webpack --watch",
     "build": "webpack -p",
     "test": "jest",
-    "test:e2e": "echo 'FIXME' && jest --ci"
+    "e2e": "jest --config test/jest.e2e.config.js"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
@@ -15,6 +15,7 @@
     "@babel/preset-typescript": "7.10.1",
     "babel-jest": "26.0.1",
     "jest": "26.0.1",
+    "jest-playwright-preset": "1.3.0-rc9",
     "null-loader": "4.0.0",
     "ts-loader": "7.0.5",
     "typescript": "3.9.5",
@@ -24,6 +25,11 @@
   "keywords": [],
   "author": "Yaroslav",
   "license": "UNLICENSED",
+  "jest": {
+    "testMatch": [
+      "**/src/**/*.spec.js"
+    ]
+  },
   "prettier": {
     "singleQuote": true
   }
