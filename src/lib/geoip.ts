@@ -7,5 +7,6 @@ export async function createReader() {
   db.utf8Slice = function (start: number | undefined, end: number | undefined) {
     return this.toString('utf8', start, end);
   };
+
   return new Reader<CountryResponse>(db);
 }

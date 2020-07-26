@@ -6,8 +6,6 @@ import * as maxmind from 'maxmind';
 import * as background from './background';
 
 describe('Background script', () => {
-  beforeEach(() => {});
-
   it('should initialize listeners', async () => {
     const geoip = new maxmind.Reader(
       await fs.readFile(

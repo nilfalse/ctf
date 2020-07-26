@@ -4,6 +4,7 @@
     "strict": true,
     "sourceMap": true,
     "module": "CommonJS",
-    "target": "esnext"
+    "target": "esnext",
+    "resolveJsonModule": true
   }
 }

@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "country-flag-emoji-json": "1.0.2",
     "maxmind": "4.1.3"
   },
   "devDependencies": {
