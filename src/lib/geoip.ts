@@ -10,3 +10,16 @@ export async function createReader() {
 
   return new Reader<CountryResponse>(db);
 }
+
+export let lazy = () => {
+  const databasePromise = createReader();
+
+  lazy = () => databasePromise;
+  return databasePromise;
+};
+
+export async function lookup(ipAddress: string) {
+  const database = await lazy();
+
+  return database.get(ipAddress);
+}

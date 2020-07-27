@@ -30,6 +30,9 @@
   "keywords": [],
   "author": "Yaroslav",
   "license": "UNLICENSED",
+  "jest": {
+    "verbose": true
+  },
   "prettier": {
     "singleQuote": true
   }

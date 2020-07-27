@@ -6,7 +6,7 @@ build : output/data
 prerequisites : data
 
 output/data : data
-	rm -rf $@
+	- rm -rf $@
 	cp -r $^ $@
 
 data : data/GeoLite2-Country.mmdb data/airports.json
