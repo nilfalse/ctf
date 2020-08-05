@@ -1,10 +1,15 @@
+import { CountryRequest } from '../country_request';
 import { lookup } from '../lib/geoip';
-import { Heuristic } from './_util';
+import { Match } from './_base';
 
-export async function parse(
-  res: chrome.webRequest.WebResponseCacheDetails
-): Promise<ReadonlyArray<Heuristic>> {
-  const { ip } = res;
+export interface IPMatch extends Match {
+  heuristic: 'ip' | 'ip_registered';
+  extra: null;
+}
+
+export async function resolve({
+  ip,
+}: CountryRequest): Promise<ReadonlyArray<IPMatch>> {
   if (!ip) {
     return [];
   }
@@ -19,24 +24,27 @@ export async function parse(
   if (country) {
     const continent = countryResponse.continent
       ? countryResponse.continent.code
-      : undefined;
+      : null;
 
     result.push({
-      heuristic: 'ip',
+      heuristic: 'ip' as const,
 
-      weight: 0.5,
+      score: 0.5,
       isoCountry: country.iso_code,
       isoRegion: null,
       continent,
+      extra: null,
     });
   }
   if (registered_country) {
     result.push({
-      heuristic: 'ip_registered',
+      heuristic: 'ip_registered' as const,
 
-      weight: 0.1,
+      score: 0.1,
       isoCountry: registered_country.iso_code,
       isoRegion: null,
+      continent: null,
+      extra: null,
     });
   }
 

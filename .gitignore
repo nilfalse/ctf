@@ -1,6 +1,7 @@
 node_modules
+coverage
+.env
 
-/.env
 /data
 /output/data
 /output/*.js

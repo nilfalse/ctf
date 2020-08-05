@@ -1,30 +1,28 @@
+import { CountryRequest } from '../country_request';
 import { findByIATA } from '../lib/airports';
-import { Heuristic } from './_util';
+import { Match } from './_base';
 
-type Ray = [string, string];
-
-function findRay(headers?: chrome.webRequest.HttpHeader[]) {
-  if (!headers) {
-    return null;
-  }
-
-  const header = headers.find(({ name }) => name.toLowerCase() === 'cf-ray');
-  if (!header || !header.value) {
-    return null;
-  }
-
-  const ray: ReadonlyArray<string> = header.value.split('-');
-  if (ray.length !== 2) {
-    return null;
-  }
-
-  return ray as Ray;
+export interface CloudflareMatch extends Match {
+  heuristic: 'cloudflare';
+  extra: {
+    ray: Ray[1];
+    cacheStatus: CacheStatus | null;
+  };
 }
 
-export async function parse(
-  res: chrome.webRequest.WebResponseCacheDetails
-): Promise<ReadonlyArray<Heuristic>> {
-  const ray = findRay(res.responseHeaders);
+type Ray = Readonly<[string, string]>;
+enum CacheStatus {
+  'HIT' = 'HIT',
+  'MISS' = 'MISS',
+  'BYPASS' = 'BYPASS',
+  'EXPIRED' = 'EXPIRED',
+  'DYNAMIC' = 'DYNAMIC',
+}
+
+export async function resolve(
+  request: CountryRequest
+): Promise<ReadonlyArray<CloudflareMatch>> {
+  const ray = getRay(request);
   if (!ray) {
     return [];
   }
@@ -35,14 +33,40 @@ export async function parse(
     return [];
   }
 
-  return [
-    {
-      heuristic: 'cloudflare',
+  const cacheStatus = request.getHeader('cf-cache-status');
 
-      weight: 1.0, // FIXME: check Server header to match 'cloudflare'
-      isoCountry: airport.iso_country,
-      isoRegion: airport.iso_region,
-      continent: airport.continent,
+  const result: CloudflareMatch = {
+    heuristic: 'cloudflare',
+
+    score: getScore(request),
+    isoCountry: airport.iso_country,
+    isoRegion: airport.iso_region,
+    continent: airport.continent || null,
+
+    extra: {
+      ray: ray[1],
+      cacheStatus: isCacheStatus(cacheStatus) ? cacheStatus : null,
     },
-  ];
+  };
+
+  return [result];
+}
+
+function getRay(request: CountryRequest) {
+  const header = request.getHeader('cf-ray');
+
+  const ray: ReadonlyArray<string> = header.split('-');
+
+  return ray.length === 2 ? (ray as Ray) : null;
+}
+
+function isCacheStatus(token: string): token is CacheStatus {
+  return Object.values(CacheStatus).includes(token as CacheStatus);
+}
+
+function getScore(request: CountryRequest) {
+  const score =
+    request.getHeader('server').toLowerCase() === 'cloudflare' ? 1.0 : 0.8;
+
+  return score;
 }

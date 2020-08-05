@@ -1,8 +1,9 @@
 import * as maxmind from 'maxmind';
 
-import { guess } from './heuristics';
-import * as GeoIp from './lib/geoip';
+import { CountryRequest } from './country_request';
 import * as emoji from './lib/emoji';
+import * as GeoIp from './lib/geoip';
+import * as ISO from './lib/iso';
 import { render } from './rendering';
 
 interface InitParams {
@@ -20,11 +21,14 @@ async function main() {
 export function init({ browser }: InitParams) {
   browser.webRequest.onCompleted.addListener(
     async function (res) {
-      const rankedGuesses = await guess(res);
-      console.log(res, rankedGuesses);
+      const request = new CountryRequest(res);
+      const resolutions = await request.resolve();
 
-      for (const rankedGuess of rankedGuesses) {
-        const flag = emoji.fromISOCountryCode(rankedGuess.isoCountry);
+      console.log(resolutions);
+      for (const resolution of resolutions) {
+        const flag = emoji.fromISOCountryCode(resolution.isoCountry);
+        const countryName = ISO.getCountryName(resolution.isoCountry);
+
         if (flag) {
           chrome.pageAction.setIcon({
             tabId: res.tabId,
