@@ -1,11 +1,11 @@
 .PHONY : prerequisites build
 
-build : output/data
+build : bundle/data
 	webpack --production
 
 prerequisites : data
 
-output/data : data
+bundle/data : data
 	- rm -rf $@
 	cp -r $^ $@
 
@@ -22,4 +22,4 @@ data/airports.json :
 	ls -lAh $@
 
 clean :
-	- rm -rf output/data output/*.js data
+	- rm -rf bundle/data bundle/*.js data

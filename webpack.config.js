@@ -24,7 +24,7 @@ module.exports = [
     },
     output: {
       filename: 'background.js',
-      path: path.resolve(__dirname, 'output'),
+      path: path.resolve(__dirname, 'bundle'),
     },
 
     node: {

@@ -5,5 +5,9 @@ node_js:
 before_script:
   - make -j prerequisites
 
+script:
+  - npm test -- --coverage
+  - make
+
 after_success:
-  - ls -lAh output/*
+  - ls -lAh bundle/*

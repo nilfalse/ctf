@@ -3,5 +3,5 @@ coverage
 .env
 
 /data
-/output/data
-/output/*.js
+/bundle/data
+/bundle/*.js
