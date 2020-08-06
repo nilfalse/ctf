@@ -10,4 +10,5 @@ script:
   - make
 
 after_success:
+  - npm run codecov
   - ls -lAh bundle/*

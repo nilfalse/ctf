@@ -5,7 +5,8 @@
   "description": "Best effort country flag extension",
   "scripts": {
     "start": "webpack --watch",
-    "test": "jest"
+    "test": "jest",
+    "codecov": "codecov"
   },
   "dependencies": {
     "country-flag-emoji-json": "1.0.2",
@@ -19,6 +20,7 @@
     "@types/chrome": "0.0.122",
     "@types/jest": "26.0.7",
     "babel-jest": "26.1.0",
+    "codecov": "^3.7.2",
     "csv-stream": "0.2.0",
     "jest": "26.1.0",
     "node-fetch": "2.6.0",

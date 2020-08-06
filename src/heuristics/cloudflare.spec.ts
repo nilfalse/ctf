@@ -148,7 +148,7 @@ describe('Cloudflare heuristic', () => {
         const request = new CountryRequest({
           responseHeaders: [
             { name: 'server', value: 'cloudflare' },
-            { name: 'cf-ray', value: '5be31a7c0944d875-CPH' },
+            { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
           ],
         });
         const [resolution] = await cloudflare.resolve(request);
@@ -160,7 +160,7 @@ describe('Cloudflare heuristic', () => {
         const request = new CountryRequest({
           responseHeaders: [
             { name: 'server', value: 'CloudFlare' },
-            { name: 'cf-ray', value: '5be31a7c0944d875-CPH' },
+            { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
           ],
         });
         const [resolution] = await cloudflare.resolve(request);
@@ -174,7 +174,7 @@ describe('Cloudflare heuristic', () => {
         const request = new CountryRequest({
           responseHeaders: [
             { name: 'server', value: 'Server' },
-            { name: 'cf-ray', value: '5be31a7c0944d875-CPH' },
+            { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
           ],
         });
         const [resolution] = await cloudflare.resolve(request);
@@ -192,7 +192,7 @@ describe('Cloudflare heuristic', () => {
         for (const status of validCacheStatuses) {
           const request = new CountryRequest({
             responseHeaders: [
-              { name: 'cf-ray', value: '5be31a7c0944d875-CPH' },
+              { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
               { name: 'cf-cache-status', value: status },
             ],
           });
@@ -207,7 +207,7 @@ describe('Cloudflare heuristic', () => {
       it('should not report it back', async () => {
         const request = new CountryRequest({
           responseHeaders: [
-            { name: 'cf-ray', value: '5be31a7c0944d875-CPH' },
+            { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
             { name: 'cf-cache-status', value: 'CPH' },
           ],
         });
