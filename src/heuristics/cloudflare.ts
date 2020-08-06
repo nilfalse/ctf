@@ -1,5 +1,6 @@
+import { lookupUpperCase } from '../common';
 import { CountryRequest } from '../country_request';
-import { findByIATA } from '../lib/airports';
+import * as airports from '../lib/airports';
 import { Match } from './_base';
 
 export interface CloudflareMatch extends Match {
@@ -28,7 +29,7 @@ export async function resolve(
   }
 
   const [, iataCode] = ray;
-  const airport = await findByIATA(iataCode);
+  const airport = lookupUpperCase(await airports.load(), iataCode);
   if (!airport) {
     return [];
   }
@@ -66,7 +67,7 @@ function isCacheStatus(token: string): token is CacheStatus {
 
 function getScore(request: CountryRequest) {
   const score =
-    request.getHeader('server').toLowerCase() === 'cloudflare' ? 1.0 : 0.8;
+    request.getHeader('server').toLowerCase() === 'cloudflare' ? 1.0 : 0.75;
 
   return score;
 }

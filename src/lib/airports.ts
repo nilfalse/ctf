@@ -1,31 +1,14 @@
-import { isKeyof } from './_util';
-
 interface Airport {
   continent?: string;
   iso_country: string;
   iso_region: string;
 }
 
-type AirportDatabase = { [key: string]: Airport };
+export let load = function () {
+  const dataPromise = fetch('/data/airports.json').then<{
+    [key: string]: Airport;
+  }>((r) => r.json());
 
-export function createIndex(): Promise<AirportDatabase> {
-  return fetch('data/airports.json').then((r) => r.json());
-}
-
-export let lazy = function () {
-  const dataPromise = createIndex();
-
-  lazy = () => dataPromise;
+  load = () => dataPromise;
   return dataPromise;
 };
-
-export async function findByIATA(iataCode: string) {
-  const indexedAirports = await lazy();
-
-  iataCode = iataCode.toUpperCase();
-  if (isKeyof(indexedAirports, iataCode)) {
-    return indexedAirports[iataCode];
-  }
-
-  return null;
-}

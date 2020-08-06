@@ -2,7 +2,7 @@ import * as maxmind from 'maxmind';
 
 import { CountryRequest } from './country_request';
 import * as emoji from './lib/emoji';
-import * as GeoIp from './lib/geoip';
+import * as GeoIp from './lib/maxmind';
 import * as ISO from './lib/iso';
 import { render } from './rendering';
 
@@ -14,7 +14,7 @@ interface InitParams {
 async function main() {
   init({
     browser: chrome,
-    geoip: await GeoIp.createReader(),
+    geoip: await GeoIp.load(),
   });
 }
 

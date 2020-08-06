@@ -1,5 +1,5 @@
 import { CountryRequest } from '../country_request';
-import { lookup } from '../lib/geoip';
+import * as maxmind from '../lib/maxmind';
 import { Match } from './_base';
 
 export interface IPMatch extends Match {
@@ -14,7 +14,8 @@ export async function resolve({
     return [];
   }
 
-  const countryResponse = await lookup(ip);
+  const geoip = await maxmind.load();
+  const countryResponse = geoip.get(ip);
   if (!countryResponse) {
     return [];
   }
