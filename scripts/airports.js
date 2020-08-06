@@ -6,7 +6,13 @@ const csv = require('csv-stream');
 async function main() {
   const url = 'https://datahub.io/core/airport-codes/datapackage.json';
 
-  const dataset = await fetch(url).then((r) => r.json());
+  const datasetResponse = await fetch(url);
+  if (datasetResponse.headers.get('Content-Type') !== 'application/json') {
+    console.error(await datasetResponse.text());
+    process.exit(1);
+  }
+
+  const dataset = await datasetResponse.json();
   const resource = dataset.resources.find((r) => r.format === 'csv');
 
   const codes = {};
