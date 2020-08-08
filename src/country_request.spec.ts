@@ -72,4 +72,86 @@ describe('Country Request', () => {
       });
     });
   });
+
+  describe('when resolving request', () => {
+    const heuristicsModule = require('./heuristics');
+    let originalHeuristics: Function[];
+    let request: CountryRequest;
+
+    beforeEach(() => {
+      originalHeuristics = heuristicsModule.heuristics;
+      request = new CountryRequest({});
+    });
+
+    afterEach(() => {
+      heuristicsModule.heuristics = originalHeuristics;
+    });
+
+    it('should pass itself to all heuristics', async () => {
+      for (const heuristic of heuristicsModule.heuristics) {
+        jest.spyOn(heuristic, 'resolve');
+      }
+
+      const ignored = await request.resolve();
+
+      expect(heuristicsModule.heuristics).toHaveLength(2);
+      for (const mock of heuristicsModule.heuristics) {
+        expect(mock.resolve).toHaveBeenCalledWith(request);
+      }
+
+      for (const mock of heuristicsModule.heuristics) {
+        mock.resolve.mockRestore();
+      }
+    });
+
+    it('should return only matches scoring higher than 0', async () => {
+      heuristicsModule.heuristics = [
+        { resolve: jest.fn().mockReturnValue([{ score: 0.0 }]) },
+        { resolve: jest.fn().mockReturnValue([{ score: 0.5 }]) },
+        { resolve: jest.fn().mockReturnValue([{ score: 0.000001 }]) },
+        { resolve: jest.fn().mockReturnValue([{ score: 0.0 }]) },
+      ];
+
+      await expect(request.resolve()).resolves.toStrictEqual([
+        { score: 0.5 },
+        { score: 0.000001 },
+      ]);
+    });
+
+    it('should should support more than 1 match per heuristic', async () => {
+      heuristicsModule.heuristics = [
+        {
+          resolve: jest
+            .fn()
+            .mockReturnValue([{ score: 0.0 }, { score: 0.000001 }]),
+        },
+        {
+          resolve: jest
+            .fn()
+            .mockReturnValue([{ score: 0.005 }, { score: 0.0 }]),
+        },
+      ];
+
+      await expect(request.resolve()).resolves.toStrictEqual([
+        { score: 0.005 },
+        { score: 0.000001 },
+      ]);
+    });
+
+    it('should sort matches by ranking score in descending order', async () => {
+      heuristicsModule.heuristics = [
+        { resolve: jest.fn().mockReturnValue([{ score: 0.5 }]) },
+        { resolve: jest.fn().mockReturnValue([{ score: 0.4 }]) },
+        { resolve: jest.fn().mockReturnValue([{ score: 0.6 }]) },
+        { resolve: jest.fn().mockReturnValue([{ score: 0.7 }]) },
+      ];
+
+      await expect(request.resolve()).resolves.toStrictEqual([
+        { score: 0.7 },
+        { score: 0.6 },
+        { score: 0.5 },
+        { score: 0.4 },
+      ]);
+    });
+  });
 });

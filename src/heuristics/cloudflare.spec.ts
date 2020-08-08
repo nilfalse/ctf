@@ -68,9 +68,54 @@ describe('Cloudflare heuristic', () => {
         expect(resolution).toHaveProperty('isoRegion', 'DK-84');
       });
 
+      it('should report expected continent', async () => {
+        const [resolution] = await cloudflare.resolve(request);
+        expect(resolution).toHaveProperty('continent', 'EU');
+      });
+
       it('should contain ray in the reported results', async () => {
         const [resolution] = await cloudflare.resolve(request);
         expect(resolution).toHaveProperty('extra.ray', 'CPH');
+      });
+    });
+
+    describe('with a ray pointing to partial or missing data', () => {
+      let request: CountryRequest;
+      let spy: jest.SpyInstance;
+
+      beforeEach(() => {
+        request = new CountryRequest({
+          responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-EKNM' }],
+        });
+
+        spy = jest.spyOn(common, 'lookupUpperCase').mockReturnValue({
+          iso_country: 'EU',
+          iso_region: 'DK',
+        });
+      });
+
+      afterEach(() => {
+        spy.mockRestore();
+      });
+
+      it('should report expected country code', async () => {
+        const [resolution] = await cloudflare.resolve(request);
+        expect(resolution).toHaveProperty('isoCountry', 'EU');
+      });
+
+      it('should report expected region code', async () => {
+        const [resolution] = await cloudflare.resolve(request);
+        expect(resolution).toHaveProperty('isoRegion', 'DK');
+      });
+
+      it('should report expected continent', async () => {
+        const [resolution] = await cloudflare.resolve(request);
+        expect(resolution.continent).toBeNull();
+      });
+
+      it('should contain ray in the reported results', async () => {
+        const [resolution] = await cloudflare.resolve(request);
+        expect(resolution).toHaveProperty('extra.ray', 'EKNM');
       });
     });
   });
@@ -97,13 +142,12 @@ describe('Cloudflare heuristic', () => {
       });
       const ignored = await cloudflare.resolve(request);
 
-      const [, iataCode] = spy.mock.calls[0];
-      expect(iataCode).toBe('CPH');
-
-      const airport = spy.mock.results[0].value;
-      expect(airport).toHaveProperty('iso_country', 'DK');
-      expect(airport).toHaveProperty('iso_region', 'DK-84');
-      expect(airport).toHaveProperty('continent', 'EU');
+      expect(spy).toHaveBeenCalledWith(expect.any(Object), 'CPH');
+      expect(spy).toHaveReturnedWith({
+        iso_country: 'DK',
+        iso_region: 'DK-84',
+        continent: 'EU',
+      });
     });
 
     it('should find the airport regardless of letter case', async () => {
@@ -116,11 +160,12 @@ describe('Cloudflare heuristic', () => {
         ],
       });
       const ignored = await cloudflare.resolve(request);
-      const airport = spy.mock.results[0].value;
 
-      expect(airport).toHaveProperty('iso_country', 'DK');
-      expect(airport).toHaveProperty('iso_region', 'DK-84');
-      expect(airport).toHaveProperty('continent', 'EU');
+      expect(spy).toHaveReturnedWith({
+        iso_country: 'DK',
+        iso_region: 'DK-84',
+        continent: 'EU',
+      });
     });
 
     it('should not find airport unless it exists', async () => {
@@ -134,11 +179,8 @@ describe('Cloudflare heuristic', () => {
       });
       const ignored = await cloudflare.resolve(request);
 
-      const [, iataCode] = spy.mock.calls[0];
-      expect(iataCode).toBe('XXX');
-
-      const airport = spy.mock.results[0].value;
-      expect(airport).toBeNull();
+      expect(spy).toHaveBeenCalledWith(expect.any(Object), 'XXX');
+      expect(spy).toHaveReturnedWith(null);
     });
   });
 
@@ -151,8 +193,8 @@ describe('Cloudflare heuristic', () => {
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
           ],
         });
-        const [resolution] = await cloudflare.resolve(request);
 
+        const [resolution] = await cloudflare.resolve(request);
         expect(resolution.score).toBeCloseTo(1.0);
       });
 
@@ -163,8 +205,8 @@ describe('Cloudflare heuristic', () => {
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
           ],
         });
-        const [resolution] = await cloudflare.resolve(request);
 
+        const [resolution] = await cloudflare.resolve(request);
         expect(resolution.score).toBeCloseTo(1.0);
       });
     });
@@ -177,8 +219,8 @@ describe('Cloudflare heuristic', () => {
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
           ],
         });
-        const [resolution] = await cloudflare.resolve(request);
 
+        const [resolution] = await cloudflare.resolve(request);
         expect(resolution.score).toBeCloseTo(0.75);
       });
     });

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --watch",
     "test": "jest",
-    "codecov": "codecov"
+    "codecov": "codecov --disable=gcov"
   },
   "dependencies": {
     "country-flag-emoji-json": "1.0.2",

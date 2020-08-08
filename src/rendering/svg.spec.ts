@@ -9,6 +9,17 @@ describe('SVG rendering subsystem', () => {
   };
 
   describe('when producing content', () => {
+    it('should use size of 256px by default', () => {
+      const { documentElement } = new DOMParser().parseFromString(
+        svg.content('🏁'),
+        'image/svg+xml'
+      );
+
+      expect(documentElement.getAttribute('viewBox')).toBe('0 0 256 256');
+      expect(documentElement.getAttribute('width')).toBe('256');
+      expect(documentElement.getAttribute('height')).toBe('256');
+    });
+
     for (const [emoji, description] of Object.entries(emojis)) {
       const SIZE = 128;
       describe(`for ${description}`, () => {
