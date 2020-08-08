@@ -5,6 +5,7 @@
     "sourceMap": true,
     "module": "CommonJS",
     "target": "esnext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "jsx": "react"
   }
 }

@@ -1,0 +1,9 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#react-root {
+  min-width: 400px;
+  min-height: 200px;
+}

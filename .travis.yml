@@ -1,13 +1,14 @@
 language: node_js
 node_js:
   - lts/*
+  - node
 
 before_script:
-  - make -j prerequisites
+  - make --jobs --output-sync prerequisites
 
 script:
   - npm test -- --coverage
-  - make build
+  - make --jobs build
 
 after_success:
   - npm run codecov

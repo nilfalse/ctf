@@ -15,19 +15,20 @@ describe('Cloudflare heuristic', () => {
     });
 
     describe('with an incorrect ray', () => {
-      describe('of more than two components', () => {
+      describe('of less than two components', () => {
         it('should not report any matches', () => {
           const request = new CountryRequest({
-            responseHeaders: [{ name: 'cf-ray', value: 'cache-cph20634-CPH' }],
+            responseHeaders: [{ name: 'cf-ray', value: 'CPH' }],
           });
 
           return expect(cloudflare.resolve(request)).resolves.toHaveLength(0);
         });
       });
-      describe('of less than two components', () => {
+
+      describe('of more than two components', () => {
         it('should not report any matches', () => {
           const request = new CountryRequest({
-            responseHeaders: [{ name: 'cf-ray', value: 'CPH' }],
+            responseHeaders: [{ name: 'cf-ray', value: 'cache-cph20634-CPH' }],
           });
 
           return expect(cloudflare.resolve(request)).resolves.toHaveLength(0);

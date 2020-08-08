@@ -1,7 +1,7 @@
 .PHONY : prerequisites build
 
 build : bundle/data
-	webpack --production
+	webpack --env production -p
 
 prerequisites : data
 

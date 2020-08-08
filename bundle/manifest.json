@@ -22,12 +22,12 @@
       "256": "icons/icon_256px.png",
       "512": "icons/icon_512px.png"
     },
-    "default_popup": "popup/intro.html",
+    "default_popup": "popup.html",
     "show_matches": ["<all_urls>"]
   },
 
   "author": "Yaroslav",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["runtime.bundle.js", "background.chunk.js"]
   }
 }
