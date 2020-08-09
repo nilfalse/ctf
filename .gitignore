@@ -4,5 +4,7 @@ coverage
 
 /data
 /bundle/data
+/bundle/popup.html
 /bundle/*.js
 /bundle/*.css
+/bundle/*.hot-update.json

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
-import { Popup } from '../components/popup';
+import { PopupContent } from '../components/popup_content';
 
 import './index.css';
 
-ReactDOM.render(<Popup />, document.getElementById('react-root'));
+render(<PopupContent />, document.getElementById('react-root'));

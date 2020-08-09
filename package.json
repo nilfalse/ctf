@@ -4,16 +4,15 @@
   "version": "0.0.0-dev",
   "description": "Best effort country flag extension",
   "scripts": {
-    "start": "webpack --watch",
-    "test": "jest",
-    "codecov": "codecov --disable=gcov"
+    "start": "webpack-dev-server --watch --hot",
+    "test": "jest"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.13.0",
     "country-flag-emoji-json": "1.0.2",
     "i18n-iso-countries": "^6.0.0",
     "maxmind": "4.1.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
@@ -24,35 +23,39 @@
     "@types/jest": "26.0.7",
     "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.8",
+    "@types/webpack-env": "^1.15.2",
     "babel-jest": "26.1.0",
+    "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",
+    "bundlesize": "^0.18.0",
     "codecov": "^3.7.2",
     "css-loader": "^4.2.1",
     "csv-stream": "0.2.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.14",
+    "html-webpack-plugin": "^4.3.0",
     "jest": "26.1.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-fetch": "2.6.0",
     "null-loader": "4.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "ts-loader": "7.0.5",
+    "react-hot-loader": "^4.12.21",
+    "style-loader": "^1.2.1",
     "typescript": "3.9.5",
     "webpack": "4.43.0",
     "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.1.1"
   },
   "keywords": [],
   "author": "Yaroslav",
   "license": "UNLICENSED",
+  "bundlesize": [
+    {
+      "path": "./bundle/**/*.js"
+    }
+  ],
   "jest": {
     "verbose": true
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-typescript",
-      "react-app",
-      "@babel/preset-react"
-    ]
   },
   "prettier": {
     "singleQuote": true

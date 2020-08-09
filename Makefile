@@ -1,7 +1,9 @@
-.PHONY : prerequisites build
+.PHONY : default prerequisites build clean pristine
+
+default : clean build
 
 build : bundle/data
-	webpack --env production -p
+	webpack -p
 
 prerequisites : data
 
@@ -22,4 +24,7 @@ data/airports.json :
 	ls -lAh $@
 
 clean :
-	- rm -rf bundle/data bundle/*.js data
+	- rm -rf bundle/*.hot-update.json bundle/*.css bundle/*.js bundle/popup.html
+
+pristine : clean
+	- rm -rf node_modules bundle/data data

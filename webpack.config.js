@@ -1,24 +1,28 @@
 const path = require('path');
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const { merge } = require('webpack-merge');
 
 module.exports = (env, { mode, watch }) => {
-  logIfDefined(process.env.NODE_ENV, 'process.env.NODE_ENV');
-  logIfDefined(env, 'env');
-  logIfDefined(mode, 'mode');
+  const bundlePath = path.resolve(__dirname, 'bundle');
 
-  const isDevelopment =
-    process.env.NODE_ENV === 'development' ||
-    env === 'development' ||
-    mode === 'development' ||
-    watch;
+  const isDevelopment = watch;
+
+  process.env.NODE_ENV = isDevelopment ? 'development' : 'production';
 
   const development = {
     mode: 'development',
     devtool: 'inline-cheap-module-source-map',
+    devServer: {
+      contentBase: bundlePath,
+      port: 35727,
+      writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
+      disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
+    },
   };
 
   const maxmindMocks = {
@@ -33,22 +37,27 @@ module.exports = (env, { mode, watch }) => {
     node: { net: 'empty' },
   };
 
+  const typescriptRule = {
+    test: /\.(tsx?)|(jsx?)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: { cacheDirectory: true },
+    },
+  };
+
   const common = merge(
     {
       mode: mode || 'production',
 
-      module: {
-        rules: [{ test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ }],
-      },
+      plugins: [new ForkTsCheckerWebpackPlugin()],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
       output: {
         filename: '[name].bundle.js',
         chunkFilename: '[name].chunk.js',
-        path: path.resolve(__dirname, 'bundle'),
+        path: bundlePath,
       },
-      optimization: {
-        runtimeChunk: 'single',
-      },
+      optimization: { runtimeChunk: 'single' },
     },
 
     isDevelopment ? development : {}
@@ -60,31 +69,54 @@ module.exports = (env, { mode, watch }) => {
     },
   };
 
-  return [
+  const configs = [
     merge(common, maxmindMocks, {
       entry: { background: './src/background' },
+
+      module: {
+        rules: [typescriptRule],
+      },
     }),
 
     merge(common, isDevelopment ? {} : cssProductionOptimization, {
-      plugins: [new MiniCssExtractPlugin()],
+      entry: { popup: ['react-hot-loader/patch', './src/popup'] },
+
+      resolve: {
+        alias: {
+          'react-dom': '@hot-loader/react-dom',
+        },
+      },
+      plugins: [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          title: 'Capture The Flag Popup',
+          filename: 'popup.html',
+          template: 'src/popup.template.html',
+        }),
+      ],
       module: {
         rules: [
+          merge(typescriptRule, {
+            use: {
+              options: {
+                presets: ['@babel/preset-react'],
+                plugins: ['react-hot-loader/babel'],
+              },
+            },
+          }),
           {
             test: /\.css$/,
-            use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader'],
+            use: [
+              isDevelopment
+                ? 'style-loader'
+                : { loader: MiniCssExtractPlugin.loader },
+              'css-loader',
+            ],
           },
         ],
       },
-
-      entry: {
-        popup: './src/popup',
-      },
     }),
   ];
-};
 
-function logIfDefined(value, name) {
-  if (value !== undefined) {
-    console.log(`"${name}" is ${value}`);
-  }
-}
+  return configs;
+};

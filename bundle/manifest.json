@@ -29,5 +29,7 @@
   "author": "Yaroslav",
   "background": {
     "scripts": ["runtime.bundle.js", "background.chunk.js"]
-  }
+  },
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:35727; object-src 'self'"
 }

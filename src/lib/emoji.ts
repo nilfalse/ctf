@@ -1,4 +1,4 @@
-import * as flags from 'country-flag-emoji-json/json/flag-emojis-by-code.json';
+import flags from 'country-flag-emoji-json/json/flag-emojis-by-code.json';
 
 import { lookupUpperCase } from '../common';
 

@@ -8,8 +8,9 @@ before_script:
 
 script:
   - npm test -- --coverage
-  - make --jobs build
+  - make build
 
 after_success:
-  - npm run codecov
+  - codecov --disable=gcov
   - ls -lAh bundle/*
+  - bundlesize
