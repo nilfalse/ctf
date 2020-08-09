@@ -91,7 +91,7 @@ module.exports = (env, { mode, watch }) => {
         new HtmlWebpackPlugin({
           title: 'Capture The Flag Popup',
           filename: 'popup.html',
-          template: 'src/popup.template.html',
+          template: 'src/popup/template.html',
         }),
       ],
       module: {

@@ -13,4 +13,4 @@ script:
 after_success:
   - codecov --disable=gcov
   - ls -lAh bundle/*
-  - bundlesize
+  - bundlewatch

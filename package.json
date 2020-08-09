@@ -27,7 +27,7 @@
     "babel-jest": "26.1.0",
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",
-    "bundlesize": "^0.18.0",
+    "bundlewatch": "^0.2.7",
     "codecov": "^3.7.2",
     "css-loader": "^4.2.1",
     "csv-stream": "0.2.0",
@@ -49,11 +49,13 @@
   "keywords": [],
   "author": "Yaroslav",
   "license": "UNLICENSED",
-  "bundlesize": [
-    {
-      "path": "./bundle/**/*.js"
-    }
-  ],
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./bundle/**/*.js"
+      }
+    ]
+  },
   "jest": {
     "verbose": true
   },
