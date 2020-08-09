@@ -50,6 +50,11 @@
   "author": "Yaroslav",
   "license": "UNLICENSED",
   "bundlewatch": {
+    "ci": {
+      "trackBranches": [
+        "main"
+      ]
+    },
     "files": [
       {
         "path": "./bundle/**/*.js"
