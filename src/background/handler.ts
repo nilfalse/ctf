@@ -1,4 +1,6 @@
 import { CountryRequest } from '../country_request';
+import { fromISOCountryCode } from '../lib/emoji';
+import { getCountryName } from '../lib/iso';
 import { render } from '../rendering';
 
 export async function handleWebRequestCompleted(
@@ -15,7 +17,7 @@ export async function handleWebRequestCompleted(
 
   console.log(resolutions);
   for (const resolution of resolutions) {
-    const flag = await getFlagEmoji(resolution.isoCountry);
+    const flag = await fromISOCountryCode(resolution.isoCountry);
     const countryName = await getCountryName(resolution.isoCountry);
 
     if (flag) {
@@ -25,7 +27,10 @@ export async function handleWebRequestCompleted(
       );
 
       if (countryName) {
-        chrome.pageAction.setTitle({ tabId, title: countryName }, reportError);
+        chrome.pageAction.setTitle(
+          { tabId, title: countryName + '\n - Capture The Flag' },
+          reportError
+        );
       }
       chrome.pageAction.setPopup(
         { tabId, popup: 'popup.html?tab=' + tabId },
@@ -36,18 +41,6 @@ export async function handleWebRequestCompleted(
       return;
     }
   }
-}
-
-function getFlagEmoji(code: string) {
-  return import(
-    /* webpackChunkName: "emoji" */ '../lib/emoji'
-  ).then(({ fromISOCountryCode }) => fromISOCountryCode(code));
-}
-
-function getCountryName(code: string) {
-  return import(
-    /* webpackChunkName: "iso" */ '../lib/iso'
-  ).then(({ getCountryName }) => getCountryName(code));
 }
 
 function reportError() {

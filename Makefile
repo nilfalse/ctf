@@ -24,7 +24,7 @@ data/airports.json :
 	ls -lAh $@
 
 clean :
-	- rm -rf bundle/*.hot-update.json bundle/*.css bundle/*.js bundle/popup.html
+	- rm -f bundle/*.hot-update.json bundle/manifest.json bundle/*.css bundle/*.js bundle/popup.html
 
 pristine : clean
 	- rm -rf node_modules bundle/data data

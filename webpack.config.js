@@ -1,14 +1,19 @@
 const path = require('path');
 
+const package = require('./package.json');
+
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const { merge } = require('webpack-merge');
 
 module.exports = (env, { mode, watch }) => {
   const bundlePath = path.resolve(__dirname, 'bundle');
+  const popupHtmlPath = 'popup.html';
 
   const isDevelopment = watch;
 
@@ -25,6 +30,7 @@ module.exports = (env, { mode, watch }) => {
     },
   };
 
+  // https://ilin.dk/weblog/maxmind-in-browser
   const maxmindMocks = {
     module: {
       rules: [
@@ -50,14 +56,19 @@ module.exports = (env, { mode, watch }) => {
     {
       mode: mode || 'production',
 
-      plugins: [new ForkTsCheckerWebpackPlugin()],
+      plugins: [
+        new webpack.ProgressPlugin({ activeModules: true }),
+        new ForkTsCheckerWebpackPlugin(),
+      ],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
       output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         chunkFilename: '[name].chunk.js',
         path: bundlePath,
       },
-      optimization: { runtimeChunk: 'single' },
+      optimization: {
+        runtimeChunk: { name: (entrypoint) => `${entrypoint.name}.runtime` },
+      },
     },
 
     isDevelopment ? development : {}
@@ -69,13 +80,22 @@ module.exports = (env, { mode, watch }) => {
     },
   };
 
-  const configs = [
+  return [
     merge(common, maxmindMocks, {
       entry: { background: './src/background' },
 
       module: {
         rules: [typescriptRule],
       },
+      plugins: [
+        new ManifestPlugin({
+          seed: {
+            popupHtmlPath,
+            devServer: isDevelopment ? development.devServer : null,
+          },
+          generate: manifestFactory,
+        }),
+      ],
     }),
 
     merge(common, isDevelopment ? {} : cssProductionOptimization, {
@@ -86,14 +106,6 @@ module.exports = (env, { mode, watch }) => {
           'react-dom': '@hot-loader/react-dom',
         },
       },
-      plugins: [
-        new MiniCssExtractPlugin(),
-        new HtmlWebpackPlugin({
-          title: 'Capture The Flag Popup',
-          filename: 'popup.html',
-          template: 'src/popup/template.html',
-        }),
-      ],
       module: {
         rules: [
           merge(typescriptRule, {
@@ -115,8 +127,56 @@ module.exports = (env, { mode, watch }) => {
           },
         ],
       },
+      plugins: [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          title: 'Capture The Flag Popup',
+          filename: popupHtmlPath,
+          template: 'src/popup/template.html',
+        }),
+      ],
     }),
   ];
-
-  return configs;
 };
+
+function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
+  const icons = {
+    '32': 'icons/icon_32px.png',
+    '48': 'icons/icon_48px.png',
+    '128': 'icons/icon_128px.png',
+    '256': 'icons/icon_256px.png',
+    '512': 'icons/icon_512px.png',
+  };
+
+  const manifest = {
+    manifest_version: 2,
+
+    name: 'Capture The Flag',
+    short_name: 'CTF',
+    description: package.description,
+    version: package.version,
+    icons,
+
+    permissions: ['webRequest', '<all_urls>'],
+
+    page_action: {
+      default_icon: icons,
+      default_popup: popupHtmlPath,
+      show_matches: ['<all_urls>'],
+    },
+
+    author: package.author,
+    background: {
+      scripts: entrypoints['background'],
+    },
+  };
+
+  if (devServer) {
+    manifest.content_security_policy = [
+      `script-src 'self' 'unsafe-eval' http://localhost:${devServer.port}`,
+      "object-src 'self'",
+    ].join('; ');
+  }
+
+  return manifest;
+}

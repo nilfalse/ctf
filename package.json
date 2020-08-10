@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "capture-the-flag",
-  "version": "0.0.0-dev",
-  "description": "Best effort country flag extension",
+  "version": "0.0.0",
+  "description": "Server country flag browser extension.",
   "scripts": {
     "start": "webpack-dev-server --watch --hot",
     "test": "jest"
@@ -44,17 +44,13 @@
     "webpack": "4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^5.1.1"
   },
   "keywords": [],
   "author": "Yaroslav",
   "license": "UNLICENSED",
   "bundlewatch": {
-    "ci": {
-      "trackBranches": [
-        "main"
-      ]
-    },
     "files": [
       {
         "path": "./bundle/**/*.js"

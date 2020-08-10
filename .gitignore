@@ -4,6 +4,7 @@ coverage
 
 /data
 /bundle/data
+/bundle/manifest.json
 /bundle/popup.html
 /bundle/*.js
 /bundle/*.css
