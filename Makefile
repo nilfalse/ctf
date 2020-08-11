@@ -20,10 +20,11 @@ data/GeoLite2-Country.mmdb :
 
 data/airports.json :
 	mkdir -p `dirname $@`
-	node scripts/airports.js > $@
+	node scripts/airports.js $@
 	ls -lAh $@
 
 clean :
+	- rm -rf coverage
 	- rm -f bundle/*.hot-update.json bundle/manifest.json bundle/*.css bundle/*.js bundle/popup.html
 
 pristine : clean

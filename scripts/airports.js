@@ -1,9 +1,11 @@
 'use strict';
 
+const fs = require('fs');
+
 const fetch = require('node-fetch');
 const csv = require('csv-stream');
 
-async function main() {
+async function main([outputFilePath]) {
   const url = 'https://datahub.io/core/airport-codes/datapackage.json';
 
   const datasetResponse = await fetch(url);
@@ -65,11 +67,10 @@ async function main() {
     .pipe(csv.createStream())
     .on('data', filterAirports)
     .on('end', () => {
-      console.log(
-        JSON.stringify({
-          ...codes,
-          ...extraCodes,
-        })
+      fs.writeFileSync(
+        outputFilePath,
+        JSON.stringify({ ...codes, ...extraCodes }),
+        'utf-8'
       );
     })
     .on('error', (err) => {
@@ -78,4 +79,4 @@ async function main() {
     });
 }
 
-main();
+main(process.argv.slice(2));

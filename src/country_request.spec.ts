@@ -44,7 +44,7 @@ describe('Country Request', () => {
   });
 
   describe('when getting existing proper header', () => {
-    const headerValue =
+    const headerValue = // FIXME
       'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/12.0';
     let request: CountryRequest;
 
@@ -104,7 +104,7 @@ describe('Country Request', () => {
       }
     });
 
-    it('should return only matches scoring higher than 0', async () => {
+    it('should return only matches scoring higher than 0', () => {
       heuristicsModule.heuristics = [
         { resolve: jest.fn().mockReturnValue([{ score: 0.0 }]) },
         { resolve: jest.fn().mockReturnValue([{ score: 0.5 }]) },
@@ -112,13 +112,13 @@ describe('Country Request', () => {
         { resolve: jest.fn().mockReturnValue([{ score: 0.0 }]) },
       ];
 
-      await expect(request.resolve()).resolves.toStrictEqual([
+      return expect(request.resolve()).resolves.toStrictEqual([
         { score: 0.5 },
         { score: 0.000001 },
       ]);
     });
 
-    it('should should support more than 1 match per heuristic', async () => {
+    it('should should support more than 1 match per heuristic', () => {
       heuristicsModule.heuristics = [
         {
           resolve: jest
@@ -132,13 +132,13 @@ describe('Country Request', () => {
         },
       ];
 
-      await expect(request.resolve()).resolves.toStrictEqual([
+      return expect(request.resolve()).resolves.toStrictEqual([
         { score: 0.005 },
         { score: 0.000001 },
       ]);
     });
 
-    it('should sort matches by ranking score in descending order', async () => {
+    it('should sort matches by ranking score in descending order', () => {
       heuristicsModule.heuristics = [
         { resolve: jest.fn().mockReturnValue([{ score: 0.5 }]) },
         { resolve: jest.fn().mockReturnValue([{ score: 0.4 }]) },
@@ -146,7 +146,7 @@ describe('Country Request', () => {
         { resolve: jest.fn().mockReturnValue([{ score: 0.7 }]) },
       ];
 
-      await expect(request.resolve()).resolves.toStrictEqual([
+      return expect(request.resolve()).resolves.toStrictEqual([
         { score: 0.7 },
         { score: 0.6 },
         { score: 0.5 },

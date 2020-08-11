@@ -1,0 +1,110 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="558"
+  height="80"
+  viewBox="0 0 558 80"
+>
+  <defs>
+    <style>
+      .button { opacity: 0.3; }
+
+      .flag { opacity: 0; font-size:15px; }
+      .flag-de { animation:hideshow 6s      ease infinite; }
+      .flag-us { animation:hideshow 6s 1.5s ease infinite; }
+      .flag-dk { animation:hideshow 6s 3s   ease infinite; }
+      .flag-ua { animation:hideshow 6s 4.5s ease infinite; }
+      @keyframes hideshow {
+        0% { opacity:0.25; }
+        5% { opacity:1; }
+        20% { opacity:1; }
+        25% { opacity:0; }
+        100% { opacity:0; }
+      }
+
+      .url {
+        font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,sans-serif;
+        font-size:12px;
+        fill:#4c5558;
+        opacity: 0;
+      }
+      .url-1 { animation:hideshow2 12s       ease infinite; }
+      .url-2 { animation:hideshow2 12s 1.5s  ease infinite; }
+      .url-3 { animation:hideshow2 12s 3s    ease infinite; }
+      .url-4 { animation:hideshow2 12s 4.5s  ease infinite; }
+      .url-5 { animation:hideshow2 12s 6s    ease infinite; }
+      .url-6 { animation:hideshow2 12s 7.5s  ease infinite; }
+      .url-7 { animation:hideshow2 12s 9s    ease infinite; }
+      .url-8 { animation:hideshow2 12s 10.5s ease infinite; }
+      @keyframes hideshow2 {
+        0% { opacity:0; }
+        1% { opacity:1; }
+        10% { opacity:1; }
+        15% { opacity:0; }
+        100% { opacity:0; }
+      }
+    </style>
+
+    <g id="tab">
+      <path d="m 67.5,35 c 7.4,0 7,-19 13.2,-19 h 70 c 7.5,0 7,19 13.2,19 z" />
+      <path
+        d="m 150.7,27 -1.17,-1.32 1.17,-1.33 a 0.5,0.5 0 0 0 -0.7,-0.7 l -1.1,1.3 -1.1,-1.3 a 0.5,0.5 0 0 0 -0.7,0 0.5,0.5 0 0 0 0,0.7 l 1.2,1.3 -1.2,1.3 a 0.5,0.5 0 0 0 0.7,0.7 l 1.1,-1.3 1.1,1.3 a 0.5,0.5 0 0 0 0.7,0 0.5,0.5 0 0 0 0,-0.7 z"
+        fill="#4a5468"
+      />
+    </g>
+  </defs>
+  <rect x="5.5" y="7.2" width="546.5" height="31" rx="5" fill="#4c5558" />
+  <circle cx="21" cy="22" r="5.6" fill="#ff605c" />
+  <circle cx="40" cy="22" r="5.6" fill="#ffbd44" />
+  <circle cx="59" cy="22" r="5.6" fill="#00ca4e" />
+
+  <use xlink:href="#tab" fill="#bac2cc" transform="translate(165.6 0)" />
+  <use xlink:href="#tab" fill="#cbd1da" transform="translate(83 0)" />
+  <use xlink:href="#tab" fill="#f0f0f0" />
+
+  <rect x="5.3" y="34.5" width="546.8" height="40.4" fill="#f0f0f0" />
+  <rect x="81" y="44" width="420" height="22" rx="3" fill="#fff" />
+  <g>
+    <path
+      d="M94.75,48.48h-6a.17.17,0,0,0-.15.17v12a.16.16,0,0,0,.15.16h9.08a.16.16,0,0,0,.15-.16V51.88Z"
+      fill="#e3e2e2"
+    />
+    <path
+      d="M94.75,48.5v0L98,51.88l-3,0a.27.27,0,0,1-.22-.29V48.48"
+      fill="#c4c1c1"
+    />
+  </g>
+
+  <path
+    d="M19.93,49.19c-.41.39-4.37,4.55-4.37,4.55a1.06,1.06,0,0,0,0,1.54s4,4.16,4.37,4.55a1.15,1.15,0,0,0,1.57,0,1,1,0,0,0,0-1.53l-3.64-3.79,3.64-3.79a1,1,0,0,0,0-1.53A1.15,1.15,0,0,0,19.93,49.19Z"
+    class="button"
+  />
+  <path
+    d="M38.47,59.69c.41-.39,4.37-4.56,4.37-4.56a1.05,1.05,0,0,0,0-1.53s-4-4.16-4.37-4.56a1.17,1.17,0,0,0-1.57,0,1,1,0,0,0,0,1.53l3.64,3.8L36.9,58.16a1,1,0,0,0,0,1.53A1.16,1.16,0,0,0,38.47,59.69Z"
+    class="button"
+  />
+  <path
+    d="M63.32,48.55a5.32,5.32,0,0,1,5.31,5.2h1.59l-2.39,2.66-2.38-2.66H67.3a4,4,0,1,0-1.62,3.35l.91,1a5.32,5.32,0,1,1-3.27-9.53Z"
+    class="button"
+  />
+  <path
+    d="M530.14,54.76H518.42a1.17,1.17,0,0,0,0,2.31h11.72a1.17,1.17,0,0,0,0-2.31Zm-11.72-2.31h11.72a1.17,1.17,0,0,0,0-2.31H518.42a1.17,1.17,0,0,0,0,2.31Zm11.72,6.94H518.42a1.17,1.17,0,0,0,0,2.31h11.72a1.17,1.17,0,0,0,0-2.31Z"
+    class="button"
+  />
+
+  <g class="awesomebar">
+    <text class="url url-1" transform="translate(103 59)">metallica.com</text>
+    <text class="url url-2" transform="translate(103 59)">feedly.com</text>
+    <text class="url url-3" transform="translate(103 59)">zendesk.com</text>
+    <text class="url url-4" transform="translate(103 59)">shopify.com</text>
+    <text class="url url-5" transform="translate(103 59)">peakon.com</text>
+    <text class="url url-6" transform="translate(103 59)">marketo.com</text>
+    <text class="url url-7" transform="translate(103 59)">nilfalse.com</text>
+    <text class="url url-8" transform="translate(103 59)">ilin.dk</text>
+
+    <text class="flag flag-de" transform="translate(472 61)">🇩🇪</text>
+    <text class="flag flag-us" transform="translate(472 61)">🇺🇸</text>
+    <text class="flag flag-dk" transform="translate(472 61)">🇩🇰</text>
+    <text class="flag flag-ua" transform="translate(472 61)">🇺🇦</text>
+  </g>
+</svg>

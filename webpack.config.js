@@ -11,7 +11,7 @@ const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const { merge } = require('webpack-merge');
 
-module.exports = (env, { mode, watch }) => {
+module.exports = function (_, { mode, watch }) {
   const bundlePath = path.resolve(__dirname, 'bundle');
   const popupHtmlPath = 'popup.html';
 
@@ -56,10 +56,7 @@ module.exports = (env, { mode, watch }) => {
     {
       mode: mode || 'production',
 
-      plugins: [
-        new webpack.ProgressPlugin({ activeModules: true }),
-        new ForkTsCheckerWebpackPlugin(),
-      ],
+      plugins: [new ForkTsCheckerWebpackPlugin()],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
       output: {
         filename: '[name].js',
@@ -73,10 +70,13 @@ module.exports = (env, { mode, watch }) => {
 
     isDevelopment ? development : {}
   );
+  if (!process.env.CI) {
+    common.plugins.push(new webpack.ProgressPlugin());
+  }
 
   const cssProductionOptimization = {
     optimization: {
-      minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+      minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
     },
   };
 
@@ -155,6 +155,7 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
     short_name: 'CTF',
     description: package.description,
     version: package.version,
+    version_name: getVersionTag(),
     icons,
 
     permissions: ['webRequest', '<all_urls>'],
@@ -179,4 +180,11 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
   }
 
   return manifest;
+}
+
+function getVersionTag() {
+  const { TRAVIS_TAG, TRAVIS_COMMIT } = process.env;
+  const version = TRAVIS_TAG || package.version;
+
+  return TRAVIS_COMMIT && `${version} (${TRAVIS_COMMIT.substring(0, 8)})`;
 }
