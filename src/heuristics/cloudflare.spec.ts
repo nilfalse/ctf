@@ -1,15 +1,15 @@
 import * as common from '../common';
-import { CountryRequest } from '../country_request';
+import { CountryRequest } from '../lib/country_request';
 import * as cloudflare from './cloudflare';
 
 jest.mock('../lib/airports');
 
-describe('Cloudflare heuristic', () => {
-  describe('when resolving', () => {
+describe('Cloudflare interceptor', () => {
+  describe('when dispatching', () => {
     describe('with no ray', () => {
       it('should not report any matches', () => {
         return expect(
-          cloudflare.resolve(new CountryRequest({}))
+          cloudflare.dispatch(new CountryRequest({}))
         ).resolves.toHaveLength(0);
       });
     });
@@ -21,7 +21,7 @@ describe('Cloudflare heuristic', () => {
             responseHeaders: [{ name: 'cf-ray', value: 'CPH' }],
           });
 
-          return expect(cloudflare.resolve(request)).resolves.toHaveLength(0);
+          return expect(cloudflare.dispatch(request)).resolves.toHaveLength(0);
         });
       });
 
@@ -31,7 +31,7 @@ describe('Cloudflare heuristic', () => {
             responseHeaders: [{ name: 'cf-ray', value: 'cache-cph20634-CPH' }],
           });
 
-          return expect(cloudflare.resolve(request)).resolves.toHaveLength(0);
+          return expect(cloudflare.dispatch(request)).resolves.toHaveLength(0);
         });
       });
     });
@@ -42,7 +42,7 @@ describe('Cloudflare heuristic', () => {
           responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-ZZZ' }],
         });
 
-        return expect(cloudflare.resolve(request)).resolves.toHaveLength(0);
+        return expect(cloudflare.dispatch(request)).resolves.toHaveLength(0);
       });
     });
 
@@ -56,27 +56,27 @@ describe('Cloudflare heuristic', () => {
       });
 
       it('should report exactly one match', () => {
-        return expect(cloudflare.resolve(request)).resolves.toHaveLength(1);
+        return expect(cloudflare.dispatch(request)).resolves.toHaveLength(1);
       });
 
       it('should report expected country code', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('isoCountry', 'DK');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('isoCountry', 'DK');
       });
 
       it('should report expected region code', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('isoRegion', 'DK-84');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('isoRegion', 'DK-84');
       });
 
       it('should report expected continent', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('continent', 'EU');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('continent', 'EU');
       });
 
       it('should contain ray in the reported results', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('extra.ray', 'CPH');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('extra.ray', 'CPH');
       });
     });
 
@@ -100,23 +100,23 @@ describe('Cloudflare heuristic', () => {
       });
 
       it('should report expected country code', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('isoCountry', 'EU');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('isoCountry', 'EU');
       });
 
       it('should report expected region code', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('isoRegion', 'DK');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('isoRegion', 'DK');
       });
 
       it('should report expected continent', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution.continent).toBeNull();
+        const [match] = await cloudflare.dispatch(request);
+        expect(match.continent).toBeNull();
       });
 
       it('should contain ray in the reported results', async () => {
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution).toHaveProperty('extra.ray', 'EKNM');
+        const [match] = await cloudflare.dispatch(request);
+        expect(match).toHaveProperty('extra.ray', 'EKNM');
       });
     });
   });
@@ -141,7 +141,7 @@ describe('Cloudflare heuristic', () => {
           },
         ],
       });
-      const ignored = await cloudflare.resolve(request);
+      const ignored = await cloudflare.dispatch(request);
 
       expect(spy).toHaveBeenCalledWith(expect.any(Object), 'CPH');
       expect(spy).toHaveReturnedWith({
@@ -160,7 +160,7 @@ describe('Cloudflare heuristic', () => {
           },
         ],
       });
-      const ignored = await cloudflare.resolve(request);
+      const ignored = await cloudflare.dispatch(request);
 
       expect(spy).toHaveReturnedWith({
         iso_country: 'DK',
@@ -178,7 +178,7 @@ describe('Cloudflare heuristic', () => {
           },
         ],
       });
-      const ignored = await cloudflare.resolve(request);
+      const ignored = await cloudflare.dispatch(request);
 
       expect(spy).toHaveBeenCalledWith(expect.any(Object), 'XXX');
       expect(spy).toHaveReturnedWith(null);
@@ -195,8 +195,8 @@ describe('Cloudflare heuristic', () => {
           ],
         });
 
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution.score).toBeCloseTo(1.0);
+        const [match] = await cloudflare.dispatch(request);
+        expect(match.score).toBeCloseTo(1.0);
       });
 
       it('should ignore letter case', async () => {
@@ -207,8 +207,8 @@ describe('Cloudflare heuristic', () => {
           ],
         });
 
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution.score).toBeCloseTo(1.0);
+        const [match] = await cloudflare.dispatch(request);
+        expect(match.score).toBeCloseTo(1.0);
       });
     });
 
@@ -221,8 +221,8 @@ describe('Cloudflare heuristic', () => {
           ],
         });
 
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution.score).toBeCloseTo(0.75);
+        const [match] = await cloudflare.dispatch(request);
+        expect(match.score).toBeCloseTo(0.75);
       });
     });
   });
@@ -240,8 +240,8 @@ describe('Cloudflare heuristic', () => {
             ],
           });
 
-          const [resolution] = await cloudflare.resolve(request);
-          expect(resolution).toHaveProperty('extra.cacheStatus', status);
+          const [match] = await cloudflare.dispatch(request);
+          expect(match).toHaveProperty('extra.cacheStatus', status);
         }
       });
     });
@@ -255,8 +255,8 @@ describe('Cloudflare heuristic', () => {
           ],
         });
 
-        const [resolution] = await cloudflare.resolve(request);
-        expect(resolution.extra.cacheStatus).toBeNull();
+        const [match] = await cloudflare.dispatch(request);
+        expect(match.extra.cacheStatus).toBeNull();
       });
     });
   });

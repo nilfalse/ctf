@@ -1,5 +1,3 @@
-import { CountryRequest } from '../country_request';
-
 export interface Match {
   score: number;
   isoCountry: string;
@@ -9,8 +7,4 @@ export interface Match {
   extra: null | {
     [key: string]: any;
   };
-}
-
-export interface BaseHeuristic {
-  resolve(request: CountryRequest): Promise<ReadonlyArray<Match>>;
 }

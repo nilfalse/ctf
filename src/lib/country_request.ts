@@ -1,6 +1,4 @@
-import { heuristics, Resolutions } from './heuristics';
-
-interface CountryRequestInit {
+export interface CountryRequestInit {
   url?: string;
   ip?: string;
   responseHeaders?: chrome.webRequest.HttpHeader[];
@@ -34,16 +32,19 @@ export class CountryRequest {
     return this._headersByName.get(headerName.toLowerCase()) || '';
   }
 
-  async resolve() {
-    const results = await Promise.all<Resolutions>(
-      heuristics.map((heuristic) => heuristic.resolve(this))
-    );
+  toJSON() {
+    return {
+      url: this.url,
+      ip: this.ip,
+      headers: this.headers,
+    };
+  }
 
-    const ranked = results
-      .flatMap((match) => match)
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score);
-
-    return ranked;
+  static fromJSON(json: CountryRequest) {
+    return new CountryRequest({
+      url: json.url || undefined,
+      ip: json.ip || undefined,
+      responseHeaders: json.headers,
+    });
   }
 }

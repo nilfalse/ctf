@@ -1,13 +1,13 @@
-import { CountryRequest } from '../country_request';
+import { CountryRequest } from '../lib/country_request';
 import * as maxmind from '../lib/maxmind';
-import { Match } from './_base';
+import { Match } from './_common';
 
 export interface IPMatch extends Match {
   heuristic: 'ip' | 'ip_registered';
   extra: null;
 }
 
-export async function resolve({
+export async function dispatch({
   ip,
 }: CountryRequest): Promise<ReadonlyArray<IPMatch>> {
   if (!ip) {

@@ -4,13 +4,13 @@ node_js:
   - node
 
 before_script:
-  - make --jobs --output-sync prerequisites
+  - make --output-sync --jobs prerequisites
 
 script:
-  - npm test -- --coverage
-  - make build
+  - make --output-sync --jobs test build
+  - bundlewatch
 
 after_success:
   - codecov --disable=gcov
+  - npm outdated
   - ls -lAh bundle/*
-  - bundlewatch

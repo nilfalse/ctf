@@ -1,20 +1,20 @@
-import * as main from './main';
+import * as controller from './controller';
 
-jest.mock('./main');
+jest.mock('./controller');
 
 describe('Background script', () => {
-  it('should call main entry point', () => {
-    const chrome = {};
+  it('should initialize background controller', () => {
+    const browser = {};
     Object.defineProperty(globalThis, 'chrome', {
       writable: true,
-      value: chrome,
+      value: browser,
     });
 
     const testingSideEffect = require('.');
 
-    expect(main.start).toHaveBeenCalledWith({
-      browser: chrome,
+    expect(controller.init).toHaveBeenCalledWith({
+      browser,
     });
-    expect(main.start).toHaveBeenCalledTimes(1);
+    expect(controller.init).toHaveBeenCalledTimes(1);
   });
 });

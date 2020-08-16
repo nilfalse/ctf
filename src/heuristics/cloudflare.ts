@@ -1,7 +1,7 @@
 import { lookupUpperCase } from '../common';
-import { CountryRequest } from '../country_request';
+import { CountryRequest } from '../lib/country_request';
 import * as airports from '../lib/airports';
-import { Match } from './_base';
+import { Match } from './_common';
 
 export interface CloudflareMatch extends Match {
   heuristic: 'cloudflare';
@@ -20,7 +20,7 @@ enum CacheStatus {
   'DYNAMIC' = 'DYNAMIC',
 }
 
-export async function resolve(
+export async function dispatch(
   request: CountryRequest
 ): Promise<ReadonlyArray<CloudflareMatch>> {
   const ray = getRay(request);

@@ -1,4 +1,4 @@
-.PHONY : default prerequisites build clean pristine
+.PHONY : default prerequisites build test clean pristine
 
 default : clean build
 
@@ -22,6 +22,9 @@ data/airports.json :
 	mkdir -p `dirname $@`
 	node scripts/airports.js $@
 	ls -lAh $@
+
+test :
+	jest --coverage
 
 clean :
 	- rm -rf coverage
