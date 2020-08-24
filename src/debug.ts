@@ -23,6 +23,7 @@ export function log(...msg: any) {
 export function error(...msg: any) {
   console.error(...msg);
 }
+
 export function assert(condition: any, message?: string) {
   console.assert(condition, message);
 }

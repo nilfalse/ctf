@@ -1,10 +1,11 @@
-.PHONY : default prerequisites build test clean pristine
+.PHONY : all
+all : clean build
 
-default : clean build
-
+.PHONY : build
 build : bundle/data
 	webpack -p
 
+.PHONY : prerequisites
 prerequisites : data
 
 bundle/data : data
@@ -23,12 +24,15 @@ data/airports.json :
 	node scripts/airports.js $@
 	ls -lAh $@
 
+.PHONY : test
 test :
 	jest --coverage
 
+.PHONY : clean
 clean :
 	- rm -rf coverage
 	- rm -f bundle/*.hot-update.json bundle/manifest.json bundle/*.css bundle/*.js bundle/popup.html
 
+.PHONY : pristine
 pristine : clean
 	- rm -rf node_modules bundle/data data

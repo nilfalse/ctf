@@ -11,7 +11,9 @@ export class CountryResponseCommand {
   }
 
   async execute() {
-    const { heuristics } = await import('../heuristics');
+    const { heuristics } = await import(
+      /* webpackChunkName: "heuristics" */ '../heuristics'
+    );
 
     const matches = await Promise.all<ReadonlyArray<Match>>(
       heuristics.map((interceptor) => interceptor.dispatch(this.request))
