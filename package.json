@@ -24,6 +24,8 @@
     "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.8",
     "@types/webpack-env": "^1.15.2",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",
@@ -31,13 +33,24 @@
     "codecov": "^3.7.2",
     "css-loader": "^4.2.1",
     "csv-stream": "^0.2.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "eslint-plugin-standard": "^4.0.1",
     "fork-ts-checker-webpack-plugin": "^5.0.14",
     "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
     "jest": "^26.4.0",
     "mini-css-extract-plugin": "^0.11.0",
     "node-fetch": "^2.6.0",
     "null-loader": "^4.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "^2.1.1",
     "react-hot-loader": "^4.12.21",
     "style-loader": "^1.2.1",
     "typescript": "^4.0.2",
@@ -50,6 +63,12 @@
   "keywords": [],
   "author": "Yaroslav",
   "license": "UNLICENSED",
+  "husky": {
+    "hooks": {
+      "pre-commit": "make lint",
+      "pre-push": "make test"
+    }
+  },
   "bundlewatch": {
     "files": [
       {

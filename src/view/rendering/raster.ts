@@ -8,6 +8,7 @@ export function createCanvas({ width, height }: CanvasSize) {
   canvas.width = width;
   canvas.height = height;
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const ctx = canvas.getContext('2d')!;
 
   return ctx;

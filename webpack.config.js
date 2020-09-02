@@ -1,7 +1,5 @@
 const path = require('path');
 
-const package = require('./package.json');
-
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,6 +8,8 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const { merge } = require('webpack-merge');
+
+const pkg = require('./package.json');
 
 module.exports = function (_, { mode, watch }) {
   const bundlePath = path.resolve(__dirname, 'bundle');
@@ -141,11 +141,11 @@ module.exports = function (_, { mode, watch }) {
 
 function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
   const icons = {
-    '32': 'icons/icon_32px.png',
-    '48': 'icons/icon_48px.png',
-    '128': 'icons/icon_128px.png',
-    '256': 'icons/icon_256px.png',
-    '512': 'icons/icon_512px.png',
+    32: 'icons/icon_32px.png',
+    48: 'icons/icon_48px.png',
+    128: 'icons/icon_128px.png',
+    256: 'icons/icon_256px.png',
+    512: 'icons/icon_512px.png',
   };
 
   const manifest = {
@@ -153,8 +153,8 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
 
     name: 'Capture The Flag',
     short_name: 'CTF',
-    description: package.description,
-    version: package.version,
+    description: pkg.description,
+    version: pkg.version,
     version_name: getVersionTag(),
     icons,
 
@@ -166,9 +166,9 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
       show_matches: ['<all_urls>'],
     },
 
-    author: package.author,
+    author: pkg.author,
     background: {
-      scripts: entrypoints['background'],
+      scripts: entrypoints.background,
     },
   };
 
@@ -184,7 +184,7 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
 
 function getVersionTag() {
   const { TRAVIS_TAG, TRAVIS_COMMIT } = process.env;
-  const version = TRAVIS_TAG || package.version;
+  const version = TRAVIS_TAG || pkg.version;
 
   return TRAVIS_COMMIT && `${version} (${TRAVIS_COMMIT.substring(0, 8)})`;
 }

@@ -1,10 +1,11 @@
 import { hot } from 'react-hot-loader/root';
+// eslint-disable-next-line import/order
 import * as React from 'react';
 
 import { usePopupContent } from '../hooks/popup_content';
 import { useQueryParams } from '../hooks/query_params';
 
-import { IPSection } from './ip_secion';
+import { IPSection } from './ip_section';
 import { ServerSoftwareSection } from './server_software_section';
 
 export const _PopupContent: React.FC = ({ children }) => {

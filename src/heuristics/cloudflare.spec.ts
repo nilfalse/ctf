@@ -1,5 +1,6 @@
 import * as common from '../common';
 import { CountryRequest } from '../lib/country_request';
+
 import * as cloudflare from './cloudflare';
 
 jest.mock('../lib/airports');

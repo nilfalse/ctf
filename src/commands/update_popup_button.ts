@@ -1,7 +1,7 @@
 import { error } from '../debug';
+import { Match } from '../heuristics';
 import { fromISOCountryCode } from '../lib/emoji';
 import { getCountryName } from '../lib/iso';
-import { Match } from '../heuristics';
 import { render } from '../view/rendering';
 
 export class UpdatePopupButtonCommand {

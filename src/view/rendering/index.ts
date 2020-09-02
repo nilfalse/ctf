@@ -1,5 +1,9 @@
-import * as svg from './svg';
 import * as raster from './raster';
+import * as svg from './svg';
+
+export const sizes = [16, 32, 64, 128, 160] as const;
+
+type Size = typeof sizes;
 
 type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
   infer ElementType
@@ -10,10 +14,6 @@ type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
 type RenderingResult = {
   [key in ElementType<Size>]: ImageData;
 };
-
-type Size = typeof sizes;
-
-export const sizes = [16, 32, 64, 128, 160] as const;
 
 export async function render(emoji: string) {
   const images = await Promise.all(

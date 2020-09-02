@@ -1,4 +1,4 @@
-export function isKeyof<T extends object>(
+export function isKeyof<T extends Record<string, unknown>>(
   obj: T,
   possibleKey: keyof any
 ): possibleKey is keyof T {

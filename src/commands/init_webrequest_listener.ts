@@ -1,4 +1,5 @@
 import { publish } from '../background/app';
+
 import { CountryResponseCommand } from './country_response';
 
 export class InitWebRequestListenerCommand {

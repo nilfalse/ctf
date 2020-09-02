@@ -1,5 +1,6 @@
 import { CountryRequest } from '../lib/country_request';
-import * as maxmind from '../lib/maxmind';
+import * as maxmind from '../lib/geo';
+
 import { Match } from './_common';
 
 export interface IPMatch extends Match {
@@ -21,7 +22,7 @@ export async function dispatch({
   }
 
   const result = [];
-  const { country, registered_country } = countryResponse;
+  const { country, registered_country: registeredCountry } = countryResponse;
   if (country) {
     const continent = countryResponse.continent
       ? countryResponse.continent.code
@@ -37,12 +38,12 @@ export async function dispatch({
       extra: null,
     });
   }
-  if (registered_country) {
+  if (registeredCountry) {
     result.push({
       heuristic: 'ip_registered' as const,
 
       score: 0.1,
-      isoCountry: registered_country.iso_code,
+      isoCountry: registeredCountry.iso_code,
       isoRegion: null,
       continent: null,
       extra: null,

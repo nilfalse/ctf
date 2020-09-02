@@ -7,7 +7,7 @@ before_script:
   - make --output-sync --jobs prerequisites
 
 script:
-  - make --output-sync --jobs test build
+  - make --output-sync --jobs test lint build
   - bundlewatch
 
 after_success:

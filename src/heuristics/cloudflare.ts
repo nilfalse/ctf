@@ -1,15 +1,8 @@
 import { lookupUpperCase } from '../common';
-import { CountryRequest } from '../lib/country_request';
 import * as airports from '../lib/airports';
-import { Match } from './_common';
+import { CountryRequest } from '../lib/country_request';
 
-export interface CloudflareMatch extends Match {
-  heuristic: 'cloudflare';
-  extra: {
-    ray: Ray[1];
-    cacheStatus: CacheStatus | null;
-  };
-}
+import { Match } from './_common';
 
 type Ray = Readonly<[string, string]>;
 enum CacheStatus {
@@ -18,6 +11,14 @@ enum CacheStatus {
   'BYPASS' = 'BYPASS',
   'EXPIRED' = 'EXPIRED',
   'DYNAMIC' = 'DYNAMIC',
+}
+
+export interface CloudflareMatch extends Match {
+  heuristic: 'cloudflare';
+  extra: {
+    ray: Ray[1];
+    cacheStatus: CacheStatus | null;
+  };
 }
 
 export async function dispatch(

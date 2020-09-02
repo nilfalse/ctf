@@ -1,6 +1,8 @@
 interface Airport {
   continent?: string;
+  // eslint-disable-next-line camelcase
   iso_country: string;
+  // eslint-disable-next-line camelcase
   iso_region: string;
 }
 

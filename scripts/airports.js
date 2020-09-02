@@ -1,9 +1,10 @@
 'use strict';
 
+/* eslint-disable camelcase */
 const fs = require('fs');
 
-const fetch = require('node-fetch');
 const csv = require('csv-stream');
+const fetch = require('node-fetch');
 
 async function main([outputFilePath]) {
   const url = 'https://datahub.io/core/airport-codes/datapackage.json';
@@ -29,7 +30,8 @@ async function main([outputFilePath]) {
 
     const skipRules = {
       [`Skipping duplicate IAIA ${iata_code}`]: () =>
-        codes.hasOwnProperty(iata_code) || extraCodes.hasOwnProperty(iata_code),
+        Object.prototype.hasOwnProperty.call(codes, iata_code) ||
+        Object.prototype.hasOwnProperty.call(extraCodes, iata_code),
 
       [`Skipping invalid IAIA ${iata_code}`]: () =>
         !/[A-Z]+/.test(iata_code) || /[^A-Z0-9]+/.test(iata_code),

@@ -1,0 +1,58 @@
+{
+  "ignorePatterns": ["/bundle/**"],
+
+  "root": true,
+  "extends": ["standard", "prettier"],
+
+  "rules": {
+    "semi": ["error", "always"],
+    "import/order": [
+      "error",
+      { "alphabetize": { "order": "asc" }, "newlines-between": "always" }
+    ],
+    "curly": ["error", "all"]
+  },
+
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    },
+
+    {
+      "files": ["**/*.jsx", "**/*.tsx"],
+      "extends": ["plugin:react-hooks/recommended", "prettier/react"]
+    },
+
+    {
+      "files": [
+        "**/*.spec.ts",
+        "**/*.spec.js",
+        "**/__mocks__/**/*.ts",
+        "**/__mocks__/**/*.js"
+      ],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+
+    {
+      "files": ["scripts/**/*.js"],
+      "parserOptions": {
+        "sourceType": "script"
+      },
+      "rules": {
+        "strict": ["error", "global"]
+      }
+    }
+  ]
+}

@@ -14,7 +14,9 @@ export const intro =
           );
         }
       }
-    : () => {};
+    : () => {
+        // ignore in test & production
+      };
 
 export function log(...msg: any) {
   console.log(...msg);

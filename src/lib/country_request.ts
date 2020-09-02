@@ -1,3 +1,5 @@
+import * as debug from '../debug';
+
 export interface CountryRequestInit {
   url?: string;
   ip?: string;
@@ -24,7 +26,7 @@ export class CountryRequest {
   }
 
   getHeader(headerName: string) {
-    console.assert(
+    debug.assert(
       headerName.length > 0,
       'Empty header name requested in CountryRequest.getHeader'
     );

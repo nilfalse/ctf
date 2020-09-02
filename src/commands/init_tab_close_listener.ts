@@ -1,4 +1,5 @@
 import { publish } from '../background/app';
+
 import { UpdateTabDetailsCommand } from './update_tab_details';
 
 export class InitTabCloseListenerCommand {

@@ -13,26 +13,34 @@ bundle/data : data
 	cp -r $^ $@
 
 data : data/GeoLite2-Country.mmdb data/airports.json
-
 data/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
 	curl -v "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" | tar --strip-components 1 -xzv -C `dirname $@`
 	ls -lAh $@
-
 data/airports.json :
 	mkdir -p `dirname $@`
 	node scripts/airports.js $@
 	ls -lAh $@
 
+.PHONY : fix
+fix :
+	prettier --write .
+	eslint --fix .
+
+.PHONY : lint prettier eslint
+lint : prettier eslint
+prettier :
+	prettier --check .
+eslint :
+	eslint .
+
 .PHONY : test
 test :
 	jest --coverage
 
-.PHONY : clean
+.PHONY : clean pristine
 clean :
 	- rm -rf coverage
 	- rm -f bundle/*.hot-update.json bundle/manifest.json bundle/*.css bundle/*.js bundle/popup.html
-
-.PHONY : pristine
 pristine : clean
 	- rm -rf node_modules bundle/data data

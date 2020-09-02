@@ -4,6 +4,7 @@ import { InitWebRequestListenerCommand } from '../commands/init_webrequest_liste
 import { InitXPCDispatcherCommand } from '../commands/init_xpc_dispatcher';
 import { UpdatePopupButtonCommand } from '../commands/update_popup_button';
 import { UpdateTabDetailsCommand } from '../commands/update_tab_details';
+
 import * as app from './app';
 
 export function init({ browser }: { browser: typeof chrome }) {

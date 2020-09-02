@@ -5,6 +5,6 @@ export interface Match {
   continent: string | null;
 
   extra: null | {
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }

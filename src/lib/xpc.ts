@@ -1,4 +1,5 @@
 import { tabDetails, TabDetails } from '../background/repo';
+
 import { CountryRequest } from './country_request';
 
 function getTabDetails(tabId: number) {
