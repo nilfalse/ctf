@@ -10,3 +10,5 @@ coverage
 /bundle/*.js
 /bundle/*.css
 /bundle/*.hot-update.json
+
+/cc-test-reporter

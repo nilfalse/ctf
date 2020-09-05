@@ -3,8 +3,7 @@
   "name": "capture-the-flag",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "make bundle/data",
-    "prestart": "make clean",
+    "prestart": "make -j clean bundle/data",
     "start": "webpack-dev-server --watch --hot",
     "test": "jest"
   },
@@ -30,7 +29,6 @@
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",
     "bundlewatch": "^0.2.7",
-    "codeclimate-test-reporter": "^0.5.1",
     "codecov": "^3.7.2",
     "coveralls": "^3.1.0",
     "css-loader": "^4.2.2",
@@ -52,7 +50,7 @@
     "i18n-iso-countries": "^6.0.0",
     "jest": "^26.4.2",
     "mini-css-extract-plugin": "^0.11.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "null-loader": "^4.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "prettier": "^2.1.1",

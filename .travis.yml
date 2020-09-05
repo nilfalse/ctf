@@ -3,14 +3,17 @@ node_js:
   - lts/*
   - node
 
+install:
+  - make --output-sync --jobs data node_modules cc-test-reporter
+
 before_script:
-  - make --output-sync --jobs data
+  - ./cc-test-reporter before-build
 
 script:
   - make --output-sync --jobs test lint build
   - bundlewatch
 
-after_success:
+after_script:
   - make --output-sync --jobs ci
 
 notifications:
