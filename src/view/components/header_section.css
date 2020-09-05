@@ -1,0 +1,8 @@
+.header-section {
+  padding: 16px 24px;
+}
+
+.header-section__country {
+  margin: 0;
+  font-size: 20px;
+}

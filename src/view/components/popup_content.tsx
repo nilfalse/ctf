@@ -5,8 +5,8 @@ import * as React from 'react';
 import { usePopupContent } from '../hooks/popup_content';
 import { useQueryParams } from '../hooks/query_params';
 
-import { IPSection } from './ip_section';
-import { ServerSoftwareSection } from './server_software_section';
+import { HeaderSection } from './header_section';
+import { ServerSection } from './server_section';
 
 export const _PopupContent: React.FC = ({ children }) => {
   const { tab } = useQueryParams();
@@ -16,16 +16,14 @@ export const _PopupContent: React.FC = ({ children }) => {
   if (popupResponse.state === 'success' && popupResponse.details) {
     content = (
       <>
-        <ServerSoftwareSection request={popupResponse.details.request} />
-        <IPSection request={popupResponse.details.request} />
+        <HeaderSection matches={popupResponse.details.matches} />
+        <ServerSection request={popupResponse.details.request} />
       </>
     );
   }
 
   return (
     <div>
-      <h1>Hello World</h1>
-
       {content}
       {children}
     </div>

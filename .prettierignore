@@ -1,2 +1,4 @@
-data/**
-bundle/**
+bundle/*
+!bundle/_locales
+coverage/*
+data/*

@@ -11,9 +11,9 @@ script:
   - bundlewatch
 
 after_success:
-  - codecov --disable=gcov
-  - npm outdated
-  - ls -lAh bundle/*
+  - make --output-sync --jobs ci
 
 notifications:
-  webhooks: https://www.travisbuddy.com/
+  webhooks:
+    - https://coveralls.io/webhook
+    - https://www.travisbuddy.com/

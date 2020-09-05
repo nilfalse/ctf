@@ -1,7 +1,6 @@
 import { error } from '../debug';
 import { Match } from '../heuristics';
 import { fromISOCountryCode } from '../lib/emoji';
-import { getCountryName } from '../lib/iso';
 import { render } from '../view/rendering';
 
 export class UpdatePopupButtonCommand {
@@ -18,7 +17,9 @@ export class UpdatePopupButtonCommand {
 
     for (const match of this.matches) {
       const flag = await fromISOCountryCode(match.isoCountry);
-      const countryName = await getCountryName(match.isoCountry);
+      const countryName = chrome.i18n.getMessage(
+        'country_name_' + match.isoCountry
+      );
 
       if (flag) {
         chrome.pageAction.setIcon(
@@ -28,7 +29,10 @@ export class UpdatePopupButtonCommand {
 
         if (countryName) {
           chrome.pageAction.setTitle(
-            { tabId, title: countryName + '\n - Capture The Flag' },
+            {
+              tabId,
+              title: countryName + '\n - ' + chrome.i18n.getMessage('ext_name'),
+            },
             reportErrorIfAny
           );
         }

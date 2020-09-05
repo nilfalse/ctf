@@ -1,5 +1,5 @@
 module.exports = (api) => {
-  const presets = ['@babel/preset-typescript'];
+  const presets = ['@babel/preset-typescript', '@babel/preset-react'];
 
   const isDevelopment = api.env('development');
   if (!isDevelopment) {

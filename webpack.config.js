@@ -125,6 +125,15 @@ module.exports = function (_, { mode, watch }) {
               'css-loader',
             ],
           },
+          {
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: { name: '[name].[ext]', outputPath: 'fonts/' },
+              },
+            ],
+          },
         ],
       },
       plugins: [
@@ -148,17 +157,16 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
     512: 'icons/icon_512px.png',
   };
 
+  const { author, version } = pkg;
   const manifest = {
     manifest_version: 2,
 
-    name: 'Capture The Flag',
-    short_name: 'CTF',
-    description: pkg.description,
-    version: pkg.version,
-    version_name: getVersionTag(),
-    icons,
+    name: '__MSG_ext_name__',
+    version,
 
-    permissions: ['webRequest', '<all_urls>'],
+    default_locale: 'en',
+    description: '__MSG_ext_description__',
+    icons,
 
     page_action: {
       default_icon: icons,
@@ -166,10 +174,17 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
       show_matches: ['<all_urls>'],
     },
 
-    author: pkg.author,
+    author,
     background: {
       scripts: entrypoints.background,
     },
+
+    minimum_chrome_version: '36',
+
+    permissions: ['webRequest', '<all_urls>'],
+
+    short_name: '__MSG_ext_short_name__',
+    version_name: getVersionTag(),
   };
 
   if (devServer) {

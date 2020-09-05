@@ -2,11 +2,15 @@
 all : clean build
 
 .PHONY : build
-build : bundle/data
+build : locales bundle/data
 	webpack -p
 
 .PHONY : prerequisites
-prerequisites : data
+prerequisites : data locales
+
+.PHONY : locales
+locales :
+	node scripts/locales
 
 bundle/data : data
 	- rm -rf $@
@@ -19,7 +23,7 @@ data/GeoLite2-Country.mmdb :
 	ls -lAh $@
 data/airports.json :
 	mkdir -p `dirname $@`
-	node scripts/airports.js $@
+	node scripts/airports $@
 	ls -lAh $@
 
 .PHONY : fix
@@ -40,7 +44,19 @@ test :
 
 .PHONY : clean pristine
 clean :
-	- rm -rf coverage
+	- rm -rf coverage bundle/fonts
 	- rm -f bundle/*.hot-update.json bundle/manifest.json bundle/*.css bundle/*.js bundle/popup.html
 pristine : clean
+	- jest --clearCache
 	- rm -rf node_modules bundle/data data
+
+.PHONY : ci codecov coveralls codeclimate
+codecov :
+	codecov --disable=gcov
+coveralls :
+	coveralls < coverage/lcov.info
+codeclimate :
+	codeclimate-test-reporter < coverage/lcov.info
+ci : codecov coveralls codeclimate
+	npm outdated
+	ls -lAh bundle/*
