@@ -2,7 +2,7 @@ node_modules
 coverage
 .env
 
-/data
+/data/maxmind
 /bundle/data
 /bundle/fonts
 /bundle/manifest.json

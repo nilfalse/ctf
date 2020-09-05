@@ -56,6 +56,7 @@ module.exports = function (_, { mode, watch }) {
     {
       mode: mode || 'production',
 
+      stats: { children: false },
       plugins: [new ForkTsCheckerWebpackPlugin()],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
       output: {

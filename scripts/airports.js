@@ -1,26 +1,15 @@
+/* eslint-disable camelcase */
 'use strict';
 
-/* eslint-disable camelcase */
-const fs = require('fs');
-
 const csv = require('csv-stream');
+const stringify = require('fast-stable-stringify');
 const fetch = require('node-fetch');
+const prettier = require('prettier');
 
-async function main([outputFilePath]) {
-  const url = 'https://datahub.io/core/airport-codes/datapackage.json';
-
-  const datasetResponse = await fetch(url);
-  if (datasetResponse.headers.get('Content-Type') !== 'application/json') {
-    console.error(await datasetResponse.text());
-    process.exit(1);
-  }
-
-  const dataset = await datasetResponse.json();
-  const resource = dataset.resources.find((r) => r.format === 'csv');
+function main() {
+  const url = 'https://ourairports.com/data/airports.csv';
 
   const codes = {};
-  const extraCodes = {};
-
   function filterAirports(airport) {
     if (!airport.iata_code || !airport.type.endsWith('airport')) {
       return;
@@ -29,20 +18,21 @@ async function main([outputFilePath]) {
     const { iata_code, iso_country, iso_region } = airport;
 
     const skipRules = {
-      [`Skipping duplicate IAIA ${iata_code}`]: () =>
-        Object.prototype.hasOwnProperty.call(codes, iata_code) ||
-        Object.prototype.hasOwnProperty.call(extraCodes, iata_code),
+      [`Skipping duplicate IAIA ${iata_code}`]: Object.prototype.hasOwnProperty.call(
+        codes,
+        iata_code
+      ),
 
-      [`Skipping invalid IAIA ${iata_code}`]: () =>
+      [`Skipping invalid IAIA ${iata_code}`]:
         !/[A-Z]+/.test(iata_code) || /[^A-Z0-9]+/.test(iata_code),
 
-      [`Skipping IAIA ${iata_code} because country ${iso_country} is not in region ${iso_region}`]: () =>
+      [`Skipping IAIA ${iata_code} because country ${iso_country} is not in region ${iso_region}`]:
         iso_country.toUpperCase() === 'NA' &&
         iso_region.substring(0, 2).toUpperCase() === 'US',
     };
 
-    for (const [reason, rule] of Object.entries(skipRules)) {
-      if (rule()) {
+    for (const [reason, condition] of Object.entries(skipRules)) {
+      if (condition) {
         console.error(reason);
 
         return;
@@ -56,29 +46,26 @@ async function main([outputFilePath]) {
       iso_region,
     };
 
-    if (iata_code.length === 3) {
-      codes[iata_code] = item;
-    } else {
-      extraCodes[iata_code] = item;
-
-      console.error(`${iata_code} will be appended at the end of the file`);
-    }
+    codes[iata_code] = item;
   }
 
-  (await fetch(resource.path)).body
-    .pipe(csv.createStream())
-    .on('data', filterAirports)
-    .on('end', () => {
-      fs.writeFileSync(
-        outputFilePath,
-        JSON.stringify({ ...codes, ...extraCodes }),
-        'utf-8'
-      );
-    })
-    .on('error', (err) => {
-      console.error(err);
-      process.exit(1);
-    });
+  fetch(url).then((r) =>
+    r.body
+      .pipe(csv.createStream({ enclosedChar: '"' }))
+      .on('data', filterAirports)
+      .on('end', () => {
+        const output = prettier.format(stringify(codes), {
+          semi: false,
+          parser: 'json',
+        });
+
+        process.stdout.write(output);
+      })
+      .on('error', (err) => {
+        console.error(err);
+        process.exit(1);
+      })
+  );
 }
 
 main(process.argv.slice(2));

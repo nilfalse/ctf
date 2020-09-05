@@ -4,7 +4,7 @@ node_js:
   - node
 
 before_script:
-  - make --output-sync --jobs prerequisites
+  - make --output-sync --jobs data
 
 script:
   - make --output-sync --jobs test lint build

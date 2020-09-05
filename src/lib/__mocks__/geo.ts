@@ -5,7 +5,15 @@ const originalModule = jest.requireActual('../geo');
 
 const reader = fs
   .readFile(
-    path.resolve(__dirname, '..', '..', '..', 'data', 'GeoLite2-Country.mmdb')
+    path.resolve(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'data',
+      'maxmind',
+      'GeoLite2-Country.mmdb'
+    )
   )
   .then(originalModule.createReader);
 
