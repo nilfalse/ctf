@@ -64,13 +64,13 @@ node_modules :
 cc-test-reporter :
 	curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $@
 	chmod +x $@
-.PHONY : ci codecov coveralls codeclimate
-codecov :
-	codecov --disable=gcov
+.PHONY : ci coveralls codecov codeclimate
 coveralls :
 	coveralls < coverage/lcov.info
+codecov :
+	codecov --disable=gcov
 codeclimate : cc-test-reporter
 	./cc-test-reporter after-build --exit-code $$TRAVIS_TEST_RESULT
 ci : codecov coveralls codeclimate
 	- npm outdated
-	ls -lAh bundle/*
+	ls -lAhR bundle

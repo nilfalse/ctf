@@ -10,7 +10,8 @@
       "error",
       { "alphabetize": { "order": "asc" }, "newlines-between": "always" }
     ],
-    "curly": ["error", "all"]
+    "curly": ["error", "all"],
+    "default-case": "error"
   },
 
   "overrides": [

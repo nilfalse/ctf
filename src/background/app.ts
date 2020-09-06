@@ -15,9 +15,9 @@ interface Observer<C extends Command> {
   action: Action<C>;
 }
 
-const observers: Observer<Command>[] = [];
+export const observers: Observer<Command>[] = [];
 
-export async function subscribe<C extends Command>(
+export function subscribe<C extends Command>(
   commandCtor: new (...args: any[]) => C,
   action: Action<C>
 ) {
@@ -38,11 +38,11 @@ export async function publish(command: Command) {
     return;
   }
 
-  await Promise.all(
+  return Promise.all(
     observers.map(async function (observer) {
       try {
         if (command instanceof observer.commandCtor) {
-          await observer.action(command, result);
+          return await observer.action(command, result);
         }
       } catch (err) {
         debug.error(err);
