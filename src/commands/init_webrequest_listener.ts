@@ -2,6 +2,18 @@ import { publish } from '../background/app';
 
 import { CountryResponseCommand } from './country_response';
 
+export function handleWebRequestCompleted(
+  payload: chrome.webRequest.WebResponseCacheDetails
+) {
+  const { tabId } = payload;
+
+  if (tabId === -1) {
+    return; // skip extension popups
+  }
+
+  publish(new CountryResponseCommand(tabId, payload));
+}
+
 export class InitWebRequestListenerCommand {
   async execute() {
     chrome.webRequest.onCompleted.addListener(
@@ -15,16 +27,4 @@ export class InitWebRequestListenerCommand {
       ['responseHeaders']
     );
   }
-}
-
-export function handleWebRequestCompleted(
-  payload: chrome.webRequest.WebResponseCacheDetails
-) {
-  const { tabId } = payload;
-
-  if (tabId === -1) {
-    return; // skip extension popups
-  }
-
-  publish(new CountryResponseCommand(tabId, payload));
 }

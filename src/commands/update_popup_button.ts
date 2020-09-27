@@ -3,6 +3,12 @@ import { Match } from '../heuristics';
 import { fromISOCountryCode } from '../lib/emoji';
 import { render } from '../view/rendering';
 
+function reportErrorIfAny() {
+  if (chrome.runtime.lastError) {
+    error(chrome.runtime.lastError);
+  }
+}
+
 export class UpdatePopupButtonCommand {
   tabId: number;
   matches: ReadonlyArray<Match>;
@@ -45,11 +51,5 @@ export class UpdatePopupButtonCommand {
         return;
       }
     }
-  }
-}
-
-function reportErrorIfAny() {
-  if (chrome.runtime.lastError) {
-    error(chrome.runtime.lastError);
   }
 }

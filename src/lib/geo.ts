@@ -4,6 +4,16 @@ export function createReader(db: Buffer) {
   return new Reader<CountryResponse>(db);
 }
 
+async function responseToBuffer(response: Response) {
+  const db = Buffer.from(await response.arrayBuffer());
+  // @ts-expect-error Monkey-patch webpack's Buffer since maxmind relies on this undocumented method
+  db.utf8Slice = function (start?: number, end?: number) {
+    return this.toString('utf8', start, end);
+  };
+
+  return db;
+}
+
 let databasePromise: Promise<Reader<CountryResponse>> | null = null;
 export function load() {
   if (!databasePromise) {
@@ -13,14 +23,4 @@ export function load() {
   }
 
   return databasePromise;
-}
-
-async function responseToBuffer(response: Response) {
-  const db = Buffer.from(await response.arrayBuffer());
-  // @ts-expect-error Monkey-patch webpack's Buffer since maxmind relies on this undocumented method
-  db.utf8Slice = function (start?: number, end?: number) {
-    return this.toString('utf8', start, end);
-  };
-
-  return db;
 }

@@ -13,6 +13,25 @@ enum CacheStatus {
   'DYNAMIC' = 'DYNAMIC',
 }
 
+function getRay(request: CountryRequest) {
+  const header = request.getHeader('cf-ray');
+
+  const ray: ReadonlyArray<string> = header.split('-');
+
+  return ray.length === 2 ? (ray as Ray) : null;
+}
+
+function isCacheStatus(token: string): token is CacheStatus {
+  return Object.values(CacheStatus).includes(token as CacheStatus);
+}
+
+function getScore(request: CountryRequest) {
+  const score =
+    request.getHeader('server').toLowerCase() === 'cloudflare' ? 1.0 : 0.75;
+
+  return score;
+}
+
 export interface CloudflareMatch extends Match {
   heuristic: 'cloudflare';
   extra: {
@@ -52,23 +71,4 @@ export async function dispatch(
   };
 
   return [result];
-}
-
-function getRay(request: CountryRequest) {
-  const header = request.getHeader('cf-ray');
-
-  const ray: ReadonlyArray<string> = header.split('-');
-
-  return ray.length === 2 ? (ray as Ray) : null;
-}
-
-function isCacheStatus(token: string): token is CacheStatus {
-  return Object.values(CacheStatus).includes(token as CacheStatus);
-}
-
-function getScore(request: CountryRequest) {
-  const score =
-    request.getHeader('server').toLowerCase() === 'cloudflare' ? 1.0 : 0.75;
-
-  return score;
 }

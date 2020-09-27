@@ -8,6 +8,23 @@ interface ServerSectionProps {
   request: CountryRequest;
 }
 
+const IPLink: React.FC<{ ip: string }> = ({ ip }) => {
+  const url = new URL(
+    'https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true'
+  );
+  url.searchParams.set('searchtext', ip);
+
+  return (
+    <a
+      className="server-section__link font_bold"
+      target="_blank"
+      href={url.toString()}
+    >
+      {ip}
+    </a>
+  );
+};
+
 export const ServerSection: React.FC<ServerSectionProps> = ({ request }) => {
   const serverHeader = request.getHeader('server');
   const server = serverHeader ? (
@@ -33,22 +50,5 @@ export const ServerSection: React.FC<ServerSectionProps> = ({ request }) => {
 
       {poweredBy}
     </div>
-  );
-};
-
-const IPLink: React.FC<{ ip: string }> = ({ ip }) => {
-  const url = new URL(
-    'https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true'
-  );
-  url.searchParams.set('searchtext', ip);
-
-  return (
-    <a
-      className="server-section__link font_bold"
-      target="_blank"
-      href={url.toString()}
-    >
-      {ip}
-    </a>
   );
 };

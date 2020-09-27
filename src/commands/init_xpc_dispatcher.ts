@@ -1,5 +1,13 @@
 import * as xpc from '../lib/xpc';
 
+export async function handleIncomingMessage(
+  message: unknown,
+  sender: chrome.runtime.MessageSender,
+  sendResponse: (response?: unknown) => void
+) {
+  sendResponse(await xpc.handle(message));
+}
+
 export class InitXPCDispatcherCommand {
   async execute() {
     chrome.runtime.onMessage.addListener(
@@ -9,12 +17,4 @@ export class InitXPCDispatcherCommand {
         : handleIncomingMessage
     );
   }
-}
-
-export async function handleIncomingMessage(
-  message: any,
-  sender: chrome.runtime.MessageSender,
-  sendResponse: (response?: any) => void
-) {
-  sendResponse(await xpc.handle(message));
 }
