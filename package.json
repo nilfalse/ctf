@@ -75,6 +75,9 @@
   "bundlewatch": {
     "files": [
       {
+        "path": "./bundle/**/*.html"
+      },
+      {
         "path": "./bundle/**/*.js"
       },
       {
@@ -100,8 +103,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 36,
-        "statements": 36
+        "lines": 34,
+        "statements": 34
       }
     }
   },

@@ -2,4 +2,6 @@
 
 > Server country flag browser extension.
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/c81669d71480f9f1cac6/maintainability)](https://codeclimate.com/github/nilfalse/ctf)
+
 [![Browser address bar demo illustration](./artwork/omnibox.svg)](https://nilfalse.com/addons/ctf)

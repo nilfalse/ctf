@@ -10,7 +10,7 @@ export const intro =
           console.log(
             '%c%s',
             'font-size: 15px',
-            `chrome-extension://${chrome.runtime.id}/popup.html\n`
+            chrome.runtime.getURL('popup.html')
           );
         }
       }
