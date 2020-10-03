@@ -5,7 +5,7 @@ import * as React from 'react';
 import { usePopupContent } from '../hooks/popup_content';
 import { useQueryParams } from '../hooks/query_params';
 
-import { HeaderSection } from './header_section';
+import { HeaderPrimary } from './header_primary';
 import { ServerSection } from './server_section';
 
 export const _PopupContent: React.FC = ({ children }) => {
@@ -14,10 +14,11 @@ export const _PopupContent: React.FC = ({ children }) => {
 
   let content = null;
   if (popupResponse.state === 'success' && popupResponse.details) {
+    const { details } = popupResponse;
     content = (
       <>
-        <HeaderSection matches={popupResponse.details.matches} />
-        <ServerSection request={popupResponse.details.request} />
+        <HeaderPrimary request={details.request} matches={details.matches} />
+        <ServerSection request={details.request} />
       </>
     );
   }

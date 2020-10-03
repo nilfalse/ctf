@@ -1,32 +1,12 @@
-@import '../../fonts/index.css';
-
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto Mono Regular';
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 16px;
+  background-color: #f2f5f7;
+  color: #829ca9;
 }
 
 #react-root {
   min-width: 360px;
-  min-height: 200px;
-}
-
-.font_bold {
-  font-family: 'Roboto Mono Bold';
-}
-.font_light {
-  font-family: 'Roboto Mono Light';
-}
-
-.primary {
-  background-color: #00838f;
-  color: rgba(255, 255, 255, 0.87);
-}
-.primary_light {
-  background-color: #4fb3bf;
-  color: rgba(0, 0, 0, 0.87);
-}
-.primary_dark {
-  background-color: #005662;
-  color: rgba(255, 255, 255, 0.87);
 }

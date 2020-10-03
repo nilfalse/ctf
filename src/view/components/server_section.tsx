@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { CountryRequest } from '../../lib/country_request';
 
+import { Typography } from './typography';
+
 import './server_section.css';
 
 interface ServerSectionProps {
@@ -15,11 +17,7 @@ const IPLink: React.FC<{ ip: string }> = ({ ip }) => {
   url.searchParams.set('searchtext', ip);
 
   return (
-    <a
-      className="server-section__link font_bold"
-      target="_blank"
-      href={url.toString()}
-    >
+    <a className="server-section__link" target="_blank" href={url.toString()}>
       {ip}
     </a>
   );
@@ -28,23 +26,23 @@ const IPLink: React.FC<{ ip: string }> = ({ ip }) => {
 export const ServerSection: React.FC<ServerSectionProps> = ({ request }) => {
   const serverHeader = request.getHeader('server');
   const server = serverHeader ? (
-    <p className="server-section__item font_light">
+    <Typography variant="light" size="xs" className="server-section__item">
       Software: <strong>{serverHeader}</strong>
-    </p>
+    </Typography>
   ) : null;
 
   const poweredByHeader = request.getHeader('x-powered-by');
   const poweredBy = poweredByHeader ? (
-    <p className="server-section__item font_light">
+    <Typography variant="light" size="xs" className="server-section__item">
       Powered By: <strong>{poweredByHeader}</strong>
-    </p>
+    </Typography>
   ) : null;
 
   return (
-    <div className="server-section primary_light">
-      <p className="server-section__item font_light">
+    <div className="server-section">
+      <Typography variant="light" size="xs" className="server-section__item">
         IP: {request.ip ? <IPLink ip={request.ip} /> : 'unknown'}
-      </p>
+      </Typography>
 
       {server}
 

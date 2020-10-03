@@ -1,14 +1,13 @@
 .server-section {
-  padding: 8px 16px 16px;
+  padding: 32px 16px;
 }
 
 .server-section__item {
   margin: 0;
   padding: 8px 4px 2px;
-  font-size: 12px;
 }
 
 .server-section__link {
-  color: #000;
-  text-decoration: none;
+  color: #00a4df;
+  text-decoration: underline;
 }

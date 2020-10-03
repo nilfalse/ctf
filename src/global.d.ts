@@ -1,3 +1,8 @@
+declare module '*.svg' {
+  const content: string;
+  export default content;
+}
+
 type Unwrap<T> = T extends Promise<infer U>
   ? U
   : T extends (...args: never) => Promise<infer U>

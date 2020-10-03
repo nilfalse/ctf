@@ -84,6 +84,9 @@
         "path": "./bundle/**/*.json"
       },
       {
+        "path": "./bundle/**/*.svg"
+      },
+      {
         "path": "./bundle/**/*.woff"
       },
       {
@@ -103,8 +106,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 34,
-        "statements": 34
+        "lines": 33,
+        "statements": 33
       }
     }
   },

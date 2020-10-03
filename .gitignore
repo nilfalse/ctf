@@ -5,10 +5,11 @@ coverage
 /data/maxmind
 /bundle/hot
 /bundle/data
-/bundle/fonts
 /bundle/manifest.json
 /bundle/popup.html
 /bundle/*.js
 /bundle/*.css
+/bundle/*.svg
+/bundle/*.woff
 
 /cc-test-reporter

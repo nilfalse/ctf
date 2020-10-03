@@ -1,4 +1,33 @@
+@import '../../../fonts/index.css';
+
 .typography {
   margin: 0;
   padding: 4px;
+}
+
+.typography_xs {
+  font-size: 12px;
+}
+
+.typography_s {
+  font-size: 14px;
+}
+
+.typography_l {
+  font-size: 36px;
+}
+
+.typography_mono {
+  font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+    'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
+    monospace;
+}
+
+.typography_light {
+  font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;
+}
+
+.typography_handwriting {
+  font-family: 'Pacifico', cursive;
 }

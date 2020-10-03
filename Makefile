@@ -50,8 +50,8 @@ test :
 
 .PHONY : clean pristine
 clean :
-	- rm -rf bundle/hot coverage bundle/fonts
-	- rm -f bundle/manifest.json bundle/*.css bundle/*.js bundle/popup.html
+	- rm -rf bundle/hot coverage
+	- rm -f bundle/manifest.json bundle/*.woff bundle/*.svg bundle/*.css bundle/*.js bundle/popup.html
 pristine : clean
 	- rm -f cc-test-reporter
 	- jest --clearCache
