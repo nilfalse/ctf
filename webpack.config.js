@@ -63,6 +63,8 @@ module.exports = function (_, { mode, watch }) {
         filename: '[name].js',
         chunkFilename: '[name].chunk.js',
         path: bundlePath,
+        hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
+        hotUpdateMainFilename: 'hot/[hash].hot-update.json',
       },
       optimization: {
         runtimeChunk: { name: (entrypoint) => `${entrypoint.name}.runtime` },

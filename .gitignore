@@ -3,12 +3,12 @@ coverage
 .env
 
 /data/maxmind
+/bundle/hot
 /bundle/data
 /bundle/fonts
 /bundle/manifest.json
 /bundle/popup.html
 /bundle/*.js
 /bundle/*.css
-/bundle/*.hot-update.json
 
 /cc-test-reporter
