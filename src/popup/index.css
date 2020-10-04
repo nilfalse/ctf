@@ -9,4 +9,5 @@ body {
 
 #react-root {
   min-width: 360px;
+  min-height: 100px;
 }

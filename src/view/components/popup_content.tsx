@@ -5,6 +5,7 @@ import * as React from 'react';
 import { usePopupContent } from '../hooks/popup_content';
 import { useQueryParams } from '../hooks/query_params';
 
+import { Empty } from './empty';
 import { HeaderPrimary } from './header_primary';
 import { Traceroute } from './traceroute';
 
@@ -20,7 +21,7 @@ export const _PopupContent: React.FC = () => {
       </>
     );
   } else {
-    return null; // FIXME implement empty state
+    return <Empty />;
   }
 };
 

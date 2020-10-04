@@ -5,13 +5,6 @@ import { CountryRequest } from '../lib/country_request';
 import { Match } from './_common';
 
 type Ray = Readonly<[string, string]>;
-enum CacheStatus {
-  'HIT' = 'HIT',
-  'MISS' = 'MISS',
-  'BYPASS' = 'BYPASS',
-  'EXPIRED' = 'EXPIRED',
-  'DYNAMIC' = 'DYNAMIC',
-}
 
 function getRay(request: CountryRequest) {
   const header = request.getHeader('cf-ray');
@@ -19,10 +12,6 @@ function getRay(request: CountryRequest) {
   const ray: ReadonlyArray<string> = header.split('-');
 
   return ray.length === 2 ? (ray as Ray) : null;
-}
-
-function isCacheStatus(token: string): token is CacheStatus {
-  return Object.values(CacheStatus).includes(token as CacheStatus);
 }
 
 function getScore(request: CountryRequest) {
@@ -36,7 +25,7 @@ export interface CloudflareMatch extends Match {
   heuristic: 'cloudflare';
   extra: {
     ray: Ray[1];
-    cacheStatus: CacheStatus | null;
+    cacheStatus: string | null;
   };
 }
 
@@ -54,8 +43,6 @@ export async function dispatch(
     return [];
   }
 
-  const cacheStatus = request.getHeader('cf-cache-status');
-
   const result: CloudflareMatch = {
     heuristic: 'cloudflare',
 
@@ -65,8 +52,8 @@ export async function dispatch(
     continent: airport.continent || null,
 
     extra: {
-      ray: ray[1],
-      cacheStatus: isCacheStatus(cacheStatus) ? cacheStatus : null,
+      ray: iataCode,
+      cacheStatus: request.getHeader('cf-cache-status') || null,
     },
   };
 

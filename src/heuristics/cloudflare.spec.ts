@@ -229,11 +229,18 @@ describe('Cloudflare interceptor', () => {
   });
 
   describe('when analyzing Cache Status', () => {
-    const validCacheStatuses = ['HIT', 'MISS', 'BYPASS', 'EXPIRED', 'DYNAMIC'];
+    const cacheStatuses = [
+      'HIT',
+      'MISS',
+      'BYPASS',
+      'EXPIRED',
+      'REVALIDATED',
+      'DYNAMIC',
+    ];
 
-    describe('for a valid one', () => {
+    describe('if present', () => {
       it('should report it back', async () => {
-        for (const status of validCacheStatuses) {
+        for (const status of cacheStatuses) {
           const request = new CountryRequest({
             responseHeaders: [
               { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
@@ -247,12 +254,12 @@ describe('Cloudflare interceptor', () => {
       });
     });
 
-    describe('for an invalid one', () => {
+    describe('if not present', () => {
       it('should not report it back', async () => {
         const request = new CountryRequest({
           responseHeaders: [
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
-            { name: 'cf-cache-status', value: 'CPH' },
+            { name: 'cf-cache-status', value: '' },
           ],
         });
 

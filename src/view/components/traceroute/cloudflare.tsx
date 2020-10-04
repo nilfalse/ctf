@@ -22,28 +22,31 @@ function assertIsCloudflareMatch(
 export const CloudflareTrace: React.FC<CloudflareTraceProps> = ({ match }) => {
   assertIsCloudflareMatch(match);
 
+  const cacheStatus = match.extra.cacheStatus && (
+    <Paragraph variant="light" size="xs">
+      Cache Status was <Span variant="mono">{match.extra.cacheStatus}</Span> (
+      <Link
+        variant="light"
+        size="xs"
+        href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
+        target="_blank"
+        title='What does "Cache status" mean?'
+      >
+        ?
+      </Link>
+      )
+    </Paragraph>
+  );
+
   return (
     <div className="cloudflare-trace">
-      <Paragraph size="s">Cloudflare anycast routed through</Paragraph>
+      <Paragraph size="s">Cloudflare anycast rerouted through</Paragraph>
 
       <div className="traceroute__nested">
         <CountryItem countryCode={match.isoCountry}>
           <strong>{match.extra.ray}</strong> data center in
         </CountryItem>
-        <Paragraph variant="light" size="xs">
-          Cache Status was <Span variant="mono">{match.extra.cacheStatus}</Span>{' '}
-          (
-          <Link
-            variant="light"
-            size="xs"
-            href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
-            target="_blank"
-            title='What does "cache status" mean?'
-          >
-            ?
-          </Link>
-          )
-        </Paragraph>
+        {cacheStatus}
       </div>
     </div>
   );

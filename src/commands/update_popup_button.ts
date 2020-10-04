@@ -37,7 +37,7 @@ export class UpdatePopupButtonCommand {
           chrome.pageAction.setTitle(
             {
               tabId,
-              title: countryName + '\n - ' + chrome.i18n.getMessage('ext_name'),
+              title: countryName + '\n- ' + chrome.i18n.getMessage('ext_name'),
             },
             reportErrorIfAny
           );
@@ -51,5 +51,13 @@ export class UpdatePopupButtonCommand {
         return;
       }
     }
+
+    // empty state fallback
+    // FIXME: implement localhost detection
+    chrome.pageAction.setPopup(
+      { tabId, popup: 'popup.html?tab=' + tabId },
+      reportErrorIfAny
+    );
+    chrome.pageAction.show(tabId, reportErrorIfAny);
   }
 }

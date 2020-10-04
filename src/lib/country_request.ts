@@ -1,6 +1,6 @@
 import * as debug from '../debug';
 
-export interface CountryRequestInit {
+export interface CountryRequestParams {
   url?: string;
   ip?: string;
   responseHeaders?: chrome.webRequest.HttpHeader[];
@@ -13,7 +13,7 @@ export class CountryRequest {
 
   protected _headersByName: Map<string, string>;
 
-  constructor({ url, ip, responseHeaders }: CountryRequestInit) {
+  constructor({ url, ip, responseHeaders }: CountryRequestParams) {
     this.url = url || null;
     this.ip = ip || null;
     this.headers = responseHeaders;

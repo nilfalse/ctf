@@ -6,4 +6,6 @@ export interface TabDetails {
   matches: ReadonlyArray<Match>;
 }
 
+export const requests: Map<number, CountryRequest> = new Map();
+
 export const tabDetails: Map<number, TabDetails> = new Map();

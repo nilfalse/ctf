@@ -24,14 +24,25 @@ export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
   matches,
 }) => {
   if (matches.length === 0) {
-    return <div className="header-primary header-primary_empty"></div>;
-  }
+    return (
+      <div className="header-primary header-primary_empty">
+        <img
+          src={logo}
+          alt={chrome.i18n.getMessage('ext_name')}
+          className="header-primary__logo"
+          aria-hidden={true}
+        />
 
-  const host = request.url ? (
-    <Paragraph size="xs" className="header-primary__host">
-      You loaded {getHost(request.url)} from
-    </Paragraph>
-  ) : null;
+        <Paragraph
+          variant="handwriting"
+          size="l"
+          className="header-primary__country"
+        >
+          Unknown country
+        </Paragraph>
+      </div>
+    );
+  }
 
   const country = chrome.i18n.getMessage(
     'country_name_' + matches[0].isoCountry
@@ -46,7 +57,11 @@ export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
         aria-hidden={true}
       />
 
-      {host}
+      {request.url ? (
+        <Paragraph size="xs" className="header-primary__host">
+          You loaded {getHost(request.url)} from
+        </Paragraph>
+      ) : null}
 
       <Paragraph
         variant="handwriting"

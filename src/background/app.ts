@@ -1,13 +1,13 @@
 import * as debug from '../debug';
 
 interface Command {
-  execute(...args: any): Promise<any>;
+  execute(...args: unknown[]): Promise<unknown> | void;
 }
 
 type CommandResult<C extends Command> = Unwrap<ReturnType<C['execute']>>;
 
 export interface Action<C extends Command> {
-  (command: C, executionResult: CommandResult<C>): Promise<void>;
+  (command: C, executionResult: CommandResult<C>): Promise<void> | void;
 }
 
 interface Observer<C extends Command> {

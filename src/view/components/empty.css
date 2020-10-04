@@ -1,0 +1,23 @@
+.empty__header {
+  padding: 16px 24px;
+  background-color: #00bbff;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.empty__header ::selection {
+  background-color: #fe57a1;
+}
+
+.empty__logo {
+  height: 8px;
+  opacity: 0.8;
+  padding: 8px 0;
+}
+
+.empty__info {
+  padding: 16px 0 0 0;
+}
+
+.empty__intro {
+  padding: 16px 24px;
+}
