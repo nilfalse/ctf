@@ -4,7 +4,7 @@ import { isKeyof } from '../../../common';
 import { Match } from '../../../heuristics';
 import { CountryRequest } from '../../../lib/country_request';
 import { Sequence, SequenceItem } from '../sequence';
-import { Typography } from '../typography';
+import { Paragraph } from '../typography';
 
 import { CloudflareTrace } from './cloudflare';
 import { IPTrace } from './ip';
@@ -42,9 +42,9 @@ export const Traceroute: React.FC<TracerouteProps> = ({ request, matches }) => {
 
   return (
     <div className="traceroute">
-      <Typography variant="light" size="xs" className="traceroute__intro">
+      <Paragraph variant="light" size="xs" className="traceroute__intro">
         Here's what we know from the request you've just made:
-      </Typography>
+      </Paragraph>
 
       <Sequence>
         {items.map((children, idx) => (

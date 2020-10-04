@@ -4,7 +4,7 @@ import { assert } from '../../../debug';
 import { Match } from '../../../heuristics';
 import { IPMatch } from '../../../heuristics/ip';
 import { CountryRequest } from '../../../lib/country_request';
-import { Link, Typography } from '../typography';
+import { Link, Paragraph, Span } from '../typography';
 
 import { CountryItem } from './_country_item';
 
@@ -41,11 +41,11 @@ const CountryInfo: React.FC<{ match: Match | undefined }> = ({ match }) => {
   if (!match) {
     return (
       <div className="traceroute__nested">
-        <Typography variant="light" size="xs">
+        <Paragraph variant="light" size="xs">
           <em>
             There's no country information on the books for this IP address.
           </em>
-        </Typography>
+        </Paragraph>
       </div>
     );
   }
@@ -79,10 +79,14 @@ const ServerInfo: React.FC<{ request: CountryRequestWithMandatoryIP }> = ({
   return (
     <div className="traceroute__nested">
       {serverHeader ? (
-        <Typography size="xs">Server Software: {serverHeader}</Typography>
+        <Paragraph size="xs">
+          Server Software: <Span variant="mono">{serverHeader}</Span>
+        </Paragraph>
       ) : null}
       {poweredByHeader ? (
-        <Typography size="xs">Powered By: {poweredByHeader}</Typography>
+        <Paragraph size="xs">
+          Powered By: <Span variant="mono">{poweredByHeader}</Span>
+        </Paragraph>
       ) : null}
     </div>
   );
@@ -100,12 +104,12 @@ export const IPTrace: React.FC<IPTraceProps> = ({ match, request }) => {
 
   return (
     <div className="ip-trace">
-      <Typography size="s">
+      <Paragraph size="s">
         You connected to IP <strong>{request.ip}</strong>&nbsp;
         <Link variant="light" size="xs" href={link} target="_blank">
           lookup
         </Link>
-      </Typography>
+      </Paragraph>
 
       <CountryInfo match={match} />
       <ServerInfo request={request} />

@@ -3,7 +3,7 @@ import * as React from 'react';
 import './typography.css';
 
 interface FactoryParams {
-  tag: 'p' | 'a';
+  tag: 'p' | 'span' | 'a';
   className?: string;
 }
 
@@ -42,7 +42,11 @@ const typographyFactory = ({
   };
 };
 
-export const Typography = typographyFactory({ tag: 'p' }) as React.FC<
+export const Paragraph = typographyFactory({ tag: 'p' }) as React.FC<
+  TypographyProps & React.AnchorHTMLAttributes<HTMLParagraphElement>
+>;
+
+export const Span = typographyFactory({ tag: 'span' }) as React.FC<
   TypographyProps & React.AnchorHTMLAttributes<HTMLParagraphElement>
 >;
 

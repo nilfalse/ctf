@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 
 import * as emoji from '../../../lib/emoji';
-import { Typography } from '../typography';
+import { Paragraph } from '../typography';
 
 interface CountryItemProps {
   countryCode: string;
@@ -60,7 +60,7 @@ export const CountryItem: React.FC<CountryItemProps> = ({
   }
 
   return (
-    <Typography {...typographyProps}>
+    <Paragraph {...typographyProps}>
       {children ? (
         <>
           {children}
@@ -68,6 +68,6 @@ export const CountryItem: React.FC<CountryItemProps> = ({
         </>
       ) : null}
       <strong>{country}</strong>
-    </Typography>
+    </Paragraph>
   );
 };

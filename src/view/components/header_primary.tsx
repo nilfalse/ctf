@@ -4,7 +4,7 @@ import logo from '../../../artwork/logo_text.svg';
 import { Match } from '../../heuristics';
 import { CountryRequest } from '../../lib/country_request';
 
-import { Typography } from './typography';
+import { Paragraph } from './typography';
 
 import './header_primary.css';
 
@@ -28,9 +28,9 @@ export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
   }
 
   const host = request.url ? (
-    <Typography size="xs" className="header-primary__host">
+    <Paragraph size="xs" className="header-primary__host">
       You loaded {getHost(request.url)} from
-    </Typography>
+    </Paragraph>
   ) : null;
 
   const country = chrome.i18n.getMessage(
@@ -48,13 +48,13 @@ export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
 
       {host}
 
-      <Typography
+      <Paragraph
         variant="handwriting"
         size="l"
         className="header-primary__country"
       >
         {country}
-      </Typography>
+      </Paragraph>
     </div>
   );
 };
