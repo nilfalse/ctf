@@ -1,7 +1,8 @@
-import { Request, requests } from '../background/repo';
+import { requests } from '../background/repo';
+import { CountryRequest } from '../lib/country_request';
 
 export class UpdatePayloadsRepoCommand {
-  constructor(public tabId: number, public request: Request | null) {
+  constructor(public tabId: number, public request: CountryRequest | null) {
     this.tabId = tabId;
     this.request = request;
   }
