@@ -28,8 +28,8 @@ export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
   }
 
   const host = request.url ? (
-    <Typography variant="light" size="xs" className="header-primary__host">
-      You've loaded {getHost(request.url)} from
+    <Typography size="xs" className="header-primary__host">
+      You loaded {getHost(request.url)} from
     </Typography>
   ) : null;
 

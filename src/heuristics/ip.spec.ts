@@ -24,8 +24,13 @@ describe('IP interceptor', () => {
         expect(
           ip.dispatch(new CountryRequest({ ip: '2.110.30.100' }))
         ).resolves.toMatchObject([
-          { heuristic: 'ip', isoCountry: 'DK' },
-          { heuristic: 'ip_registered', isoCountry: 'DK' },
+          {
+            heuristic: 'ip',
+            isoCountry: 'DK',
+            extra: {
+              registeredCountry: 'DK',
+            },
+          },
         ]));
     });
   });

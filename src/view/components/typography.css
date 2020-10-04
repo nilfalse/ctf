@@ -7,14 +7,21 @@
 
 .typography_xs {
   font-size: 12px;
+  line-height: 16px;
 }
 
 .typography_s {
   font-size: 14px;
+  line-height: 14px;
 }
 
 .typography_l {
   font-size: 36px;
+  line-height: 36px;
+}
+
+.typography_light {
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 .typography_mono {
@@ -24,10 +31,11 @@
     monospace;
 }
 
-.typography_light {
-  font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;
-}
-
 .typography_handwriting {
   font-family: 'Pacifico', cursive;
+}
+
+.link {
+  color: #00a4df;
+  text-decoration: underline;
 }

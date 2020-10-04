@@ -133,7 +133,11 @@ module.exports = function (_, { mode, watch }) {
             use: [
               {
                 loader: 'file-loader',
-                options: { name: '[name].[ext]' },
+                options: {
+                  name: isDevelopment
+                    ? '[name].[hash:8].[ext]'
+                    : '[name].[ext]',
+                },
               },
             ],
           },

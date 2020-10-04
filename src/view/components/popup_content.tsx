@@ -6,29 +6,22 @@ import { usePopupContent } from '../hooks/popup_content';
 import { useQueryParams } from '../hooks/query_params';
 
 import { HeaderPrimary } from './header_primary';
-import { ServerSection } from './server_section';
+import { Traceroute } from './traceroute';
 
-export const _PopupContent: React.FC = ({ children }) => {
+export const _PopupContent: React.FC = () => {
   const { tab } = useQueryParams();
   const popupResponse = usePopupContent(typeof tab === 'string' ? tab : null);
 
-  let content = null;
   if (popupResponse.state === 'success' && popupResponse.details) {
-    const { details } = popupResponse;
-    content = (
+    return (
       <>
-        <HeaderPrimary request={details.request} matches={details.matches} />
-        <ServerSection request={details.request} />
+        <HeaderPrimary {...popupResponse.details} />
+        <Traceroute {...popupResponse.details} />
       </>
     );
+  } else {
+    return null; // FIXME implement empty state
   }
-
-  return (
-    <div>
-      {content}
-      {children}
-    </div>
-  );
 };
 
 export const PopupContent = hot(_PopupContent);

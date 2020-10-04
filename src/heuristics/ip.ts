@@ -4,8 +4,8 @@ import * as maxmind from '../lib/geo';
 import { Match } from './_common';
 
 export interface IPMatch extends Match {
-  heuristic: 'ip' | 'ip_registered';
-  extra: null;
+  heuristic: 'ip';
+  extra: { registeredCountry: string } | null;
 }
 
 export async function dispatch({
@@ -28,6 +28,12 @@ export async function dispatch({
       ? countryResponse.continent.code
       : null;
 
+    const extra = registeredCountry
+      ? {
+          registeredCountry: registeredCountry.iso_code,
+        }
+      : null;
+
     result.push({
       heuristic: 'ip' as const,
 
@@ -35,18 +41,7 @@ export async function dispatch({
       isoCountry: country.iso_code,
       isoRegion: null,
       continent,
-      extra: null,
-    });
-  }
-  if (registeredCountry) {
-    result.push({
-      heuristic: 'ip_registered' as const,
-
-      score: 0.1,
-      isoCountry: registeredCountry.iso_code,
-      isoRegion: null,
-      continent: null,
-      extra: null,
+      extra,
     });
   }
 
