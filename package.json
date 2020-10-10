@@ -55,7 +55,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "prettier": "^2.1.1",
     "react-hot-loader": "^4.12.21",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "typescript": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
