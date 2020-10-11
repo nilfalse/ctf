@@ -10,7 +10,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - make --output-sync --jobs test lint build
+  - make --output-sync --jobs lint test build
   - bundlewatch
 
 after_script:

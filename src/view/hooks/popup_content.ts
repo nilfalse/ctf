@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { TabDetails } from '../../background/repo';
 import * as xpc from '../../lib/xpc';
 
+import { useQueryParams } from './query_params';
+
 interface PopupContentInit {
   state: null;
 }
@@ -20,10 +22,13 @@ type PopupContent =
   | PopupContentSuccess
   | PopupContentFailure;
 
-export function usePopupContent(tabId: string | null) {
+export function usePopupContent() {
   const [response, setResponse] = useState<PopupContent>({
     state: null,
   });
+
+  const { tab } = useQueryParams();
+  const tabId = typeof tab === 'string' ? parseInt(tab) : null;
 
   useEffect(() => {
     let shouldIgnore = false;
@@ -34,7 +39,7 @@ export function usePopupContent(tabId: string | null) {
       return;
     }
 
-    xpc.dispatch('getTabDetails', parseInt(tabId)).then(
+    xpc.dispatch('getTabDetails', tabId).then(
       (details) => {
         if (shouldIgnore) {
           return;
