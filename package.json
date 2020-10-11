@@ -19,6 +19,7 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "@types/chrome": "^0.0.124",
+    "@types/enzyme": "^3.10.7",
     "@types/jest": "^26.0.13",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
@@ -33,6 +34,9 @@
     "coveralls": "^3.1.0",
     "css-loader": "^4.2.2",
     "csv-stream": "^0.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
@@ -54,8 +58,9 @@
     "null-loader": "^4.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "prettier": "^2.1.1",
+    "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "typescript": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
@@ -69,7 +74,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "make lint",
-      "pre-push": "make --output-sync --jobs build test"
+      "pre-push": "make --jobs build test"
     }
   },
   "bundlewatch": {
@@ -106,10 +111,21 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 27,
-        "statements": 27
+        "lines": 57,
+        "statements": 57
       }
-    }
+    },
+    "setupFiles": [
+      "<rootDir>/src/__test__/enzyme.js",
+      "<rootDir>/src/__test__/globals.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__test__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/src/__test__/styleMock.js"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "prettier": {
     "singleQuote": true

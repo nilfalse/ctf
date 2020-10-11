@@ -16,7 +16,10 @@ interface CloudflareTraceProps {
 function assertIsCloudflareMatch(
   match: Match
 ): asserts match is CloudflareMatch {
-  assert(!match || match.heuristic === 'ip', 'Non IP Match passed to IP Trace');
+  assert(
+    !match || match.heuristic === 'cloudflare',
+    'Non Cloudflare Match passed to Cloudflare Trace'
+  );
 }
 
 export const CloudflareTrace: React.FC<CloudflareTraceProps> = ({ match }) => {

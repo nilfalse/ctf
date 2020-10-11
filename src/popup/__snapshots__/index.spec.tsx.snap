@@ -1,0 +1,839 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popup for a Cloudflare-protected website should render country info for Cloudflare IP 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        104.27.165.61
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=104.27.165.61"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=104.27.165.61"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "NA",
+        "extra": null,
+        "heuristic": "ip",
+        "isoCountry": "US",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="US"
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇺🇸"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag="🇺🇸"
+          >
+            Country:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": Array [
+          Object {
+            "name": "cf-ray",
+            "value": "5d5d5d5d5d5d5d5d-CPH",
+          },
+          Object {
+            "name": "cf-cache-status",
+            "value": "REVALIDATED",
+          },
+          Object {
+            "name": "cf-request-id",
+            "value": "00000004f10000000000000000000001",
+          },
+          Object {
+            "name": "x-nf-request-id",
+            "value": "b1b1b1b1-c9c9-4545-afaf-292929292929-33333333",
+          },
+          Object {
+            "name": "server",
+            "value": "cloudflare",
+          },
+        ],
+        "ip": "104.27.165.61",
+        "url": "https://ilin.dk/",
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Server Software: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              cloudflare
+            </span>
+          </Component>
+        </p>
+      </Component>
+    </div>
+  </ServerInfo>
+</div>
+`;
+
+exports[`Popup for a Cloudflare-protected website should show Cloudflare data center abbreviation 1`] = `
+<div
+  className="cloudflare-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      Cloudflare anycast rerouted through
+    </p>
+  </Component>
+  <div
+    className="traceroute__nested"
+  >
+    <CountryItem
+      countryCode="DK"
+    >
+      <Component
+        className="traceroute__country-item traceroute__country-item_flagged"
+        data-flag="🇩🇰"
+        size="xs"
+      >
+        <p
+          className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇩🇰"
+        >
+          <strong>
+            CPH
+          </strong>
+           data center in
+          <br />
+          <strong>
+            Denmark
+          </strong>
+        </p>
+      </Component>
+    </CountryItem>
+    <Component
+      size="xs"
+      variant="light"
+    >
+      <p
+        className="typography typography_light typography_xs"
+      >
+        Cache Status was 
+        <Component
+          variant="mono"
+        >
+          <span
+            className="typography typography_mono"
+          >
+            REVALIDATED
+          </span>
+        </Component>
+         (
+        <Component
+          href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
+          size="xs"
+          target="_blank"
+          title="What does \\"Cache status\\" mean?"
+          variant="light"
+        >
+          <a
+            className="typography typography_light typography_xs link"
+            href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
+            target="_blank"
+            title="What does \\"Cache status\\" mean?"
+          >
+            ?
+          </a>
+        </Component>
+        )
+      </p>
+    </Component>
+  </div>
+</div>
+`;
+
+exports[`Popup for a Netherlands-based website with legal entity in the US should render IP country info 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        40.114.177.156
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=40.114.177.156"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=40.114.177.156"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "EU",
+        "extra": Object {
+          "registeredCountry": "US",
+        },
+        "heuristic": "ip",
+        "isoCountry": "NL",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="NL"
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇳🇱"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag="🇳🇱"
+          >
+            Country:
+            <br />
+            <strong>
+              Netherlands
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+      <CountryItem
+        countryCode="US"
+        shouldRenderFlag={true}
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇺🇸"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag="🇺🇸"
+          >
+            Legal registration:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": Array [
+          Object {
+            "name": "status",
+            "value": "304",
+          },
+          Object {
+            "name": "server",
+            "value": "nginx",
+          },
+        ],
+        "ip": "40.114.177.156",
+        "url": "https://duckduckgo.com/",
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Server Software: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              nginx
+            </span>
+          </Component>
+        </p>
+      </Component>
+    </div>
+  </ServerInfo>
+</div>
+`;
+
+exports[`Popup for a Switzerland-based website should render IP country info 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        185.70.41.35
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=185.70.41.35"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=185.70.41.35"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "EU",
+        "extra": Object {
+          "registeredCountry": "CH",
+        },
+        "heuristic": "ip",
+        "isoCountry": "CH",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="CH"
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇨🇭"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag="🇨🇭"
+          >
+            Country:
+            <br />
+            <strong>
+              Switzerland
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+      <CountryItem
+        countryCode="CH"
+        shouldRenderFlag={false}
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag={null}
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag={null}
+          >
+            Legal registration:
+            <br />
+            <strong>
+              Switzerland
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": undefined,
+        "ip": "185.70.41.35",
+        "url": "https://protonmail.com/",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Popup for a website behind Cloudflare with Powered By info exposed should render country info for Cloudflare IP 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        104.26.7.76
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=104.26.7.76"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=104.26.7.76"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "NA",
+        "extra": null,
+        "heuristic": "ip",
+        "isoCountry": "US",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="US"
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇺🇸"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag="🇺🇸"
+          >
+            Country:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": Array [
+          Object {
+            "name": "x-powered-by",
+            "value": "WP Engine",
+          },
+          Object {
+            "name": "x-cacheable",
+            "value": "SHORT",
+          },
+          Object {
+            "name": "x-cache",
+            "value": "HIT: 8",
+          },
+          Object {
+            "name": "x-cache-group",
+            "value": "normal",
+          },
+          Object {
+            "name": "x-orig-cache-control",
+            "value": "max-age=0",
+          },
+          Object {
+            "name": "cf-cache-status",
+            "value": "DYNAMIC",
+          },
+          Object {
+            "name": "cf-request-id",
+            "value": "050505050500000ebebebebeb0000001",
+          },
+          Object {
+            "name": "server",
+            "value": "cloudflare",
+          },
+          Object {
+            "name": "cf-ray",
+            "value": "5e5e5e5e5e5e5e5e7-FRA",
+          },
+        ],
+        "ip": "104.26.7.76",
+        "url": "https://peakon.com/",
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Server Software: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              cloudflare
+            </span>
+          </Component>
+        </p>
+      </Component>
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Powered By: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              WP Engine
+            </span>
+          </Component>
+        </p>
+      </Component>
+    </div>
+  </ServerInfo>
+</div>
+`;
+
+exports[`Popup for a website behind Cloudflare with Powered By info exposed should render the header value to the user 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        104.26.7.76
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=104.26.7.76"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=104.26.7.76"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "NA",
+        "extra": null,
+        "heuristic": "ip",
+        "isoCountry": "US",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="US"
+      >
+        <Component
+          className="traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇺🇸"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            data-flag="🇺🇸"
+          >
+            Country:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": Array [
+          Object {
+            "name": "x-powered-by",
+            "value": "WP Engine",
+          },
+          Object {
+            "name": "x-cacheable",
+            "value": "SHORT",
+          },
+          Object {
+            "name": "x-cache",
+            "value": "HIT: 8",
+          },
+          Object {
+            "name": "x-cache-group",
+            "value": "normal",
+          },
+          Object {
+            "name": "x-orig-cache-control",
+            "value": "max-age=0",
+          },
+          Object {
+            "name": "cf-cache-status",
+            "value": "DYNAMIC",
+          },
+          Object {
+            "name": "cf-request-id",
+            "value": "050505050500000ebebebebeb0000001",
+          },
+          Object {
+            "name": "server",
+            "value": "cloudflare",
+          },
+          Object {
+            "name": "cf-ray",
+            "value": "5e5e5e5e5e5e5e5e7-FRA",
+          },
+        ],
+        "ip": "104.26.7.76",
+        "url": "https://peakon.com/",
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Server Software: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              cloudflare
+            </span>
+          </Component>
+        </p>
+      </Component>
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Powered By: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              WP Engine
+            </span>
+          </Component>
+        </p>
+      </Component>
+    </div>
+  </ServerInfo>
+</div>
+`;
+
+exports[`Popup for a website behind Cloudflare with Powered By info exposed should show Cloudflare data center abbreviation 1`] = `
+<div
+  className="cloudflare-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      Cloudflare anycast rerouted through
+    </p>
+  </Component>
+  <div
+    className="traceroute__nested"
+  >
+    <CountryItem
+      countryCode="DE"
+    >
+      <Component
+        className="traceroute__country-item traceroute__country-item_flagged"
+        data-flag="🇩🇪"
+        size="xs"
+      >
+        <p
+          className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+          data-flag="🇩🇪"
+        >
+          <strong>
+            FRA
+          </strong>
+           data center in
+          <br />
+          <strong>
+            Germany
+          </strong>
+        </p>
+      </Component>
+    </CountryItem>
+    <Component
+      size="xs"
+      variant="light"
+    >
+      <p
+        className="typography typography_light typography_xs"
+      >
+        Cache Status was 
+        <Component
+          variant="mono"
+        >
+          <span
+            className="typography typography_mono"
+          >
+            DYNAMIC
+          </span>
+        </Component>
+         (
+        <Component
+          href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
+          size="xs"
+          target="_blank"
+          title="What does \\"Cache status\\" mean?"
+          variant="light"
+        >
+          <a
+            className="typography typography_light typography_xs link"
+            href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
+            target="_blank"
+            title="What does \\"Cache status\\" mean?"
+          >
+            ?
+          </a>
+        </Component>
+        )
+      </p>
+    </Component>
+  </div>
+</div>
+`;
