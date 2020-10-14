@@ -32,7 +32,7 @@
     "bundlewatch": "^0.3.0",
     "codecov": "^3.7.2",
     "coveralls": "^3.1.0",
-    "css-loader": "^4.2.2",
+    "css-loader": "^5.0.0",
     "csv-stream": "^0.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
