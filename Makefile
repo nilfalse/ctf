@@ -1,13 +1,15 @@
+NODEJS=node --unhandled-rejections=strict --experimental-json-modules
+
 .PHONY : all
 all : airports locales
-	$(MAKE) --no-print-directory build webpack=--hide-modules
+	$(MAKE) --no-print-directory build
 
 .PHONY : build
 build : bundle/data webpack
 
 .PHONY : webpack
 webpack : clean
-	webpack -p $(webpack)
+	webpack
 
 .PHONY : fix
 fix :
@@ -16,7 +18,7 @@ fix :
 
 .PHONY : locales airports
 locales : node_modules
-	node scripts/locales
+	$(NODEJS) scripts/locales
 airports : node_modules
 	$(MAKE) --no-print-directory --always-make data/airports.json
 
@@ -30,7 +32,7 @@ bundle/data/GeoLite2-Country.mmdb : data/maxmind/GeoLite2-Country.mmdb
 
 data : data/maxmind/GeoLite2-Country.mmdb
 data/airports.json :
-	node scripts/airports > data/airports.json
+	$(NODEJS) scripts/airports > data/airports.json
 	ls -lAh data/airports.json
 data/maxmind/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`

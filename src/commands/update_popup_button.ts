@@ -10,13 +10,7 @@ function reportErrorIfAny() {
 }
 
 export class UpdatePopupButtonCommand {
-  tabId: number;
-  matches: ReadonlyArray<Match>;
-
-  constructor(tabId: number, matches: ReadonlyArray<Match>) {
-    this.tabId = tabId;
-    this.matches = matches;
-  }
+  constructor(public tabId: number, public matches: ReadonlyArray<Match>) {}
 
   async execute() {
     const { tabId } = this;

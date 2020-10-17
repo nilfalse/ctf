@@ -1,10 +1,8 @@
 /* eslint-disable camelcase */
-'use strict';
-
-const csv = require('csv-stream');
-const stringify = require('fast-stable-stringify');
-const fetch = require('node-fetch');
-const prettier = require('prettier');
+import csv from 'csv-stream';
+import stringify from 'fast-stable-stringify';
+import fetch from 'node-fetch';
+import prettier from 'prettier';
 
 function main() {
   const url = 'https://ourairports.com/data/airports.csv';

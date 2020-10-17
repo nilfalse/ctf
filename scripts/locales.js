@@ -1,15 +1,13 @@
-'use strict';
+import assert from 'assert';
+import { promises as fs } from 'fs';
+import path from 'path';
 
-const assert = require('assert');
-const fs = require('fs').promises;
-const path = require('path');
-
-const stringify = require('fast-stable-stringify');
-const prettier = require('prettier');
+import stringify from 'fast-stable-stringify';
+import prettier from 'prettier';
 
 const LOCALES = ['en'];
 
-function main() {
+function main(__dirname) {
   const localesRoot = path.resolve(__dirname, '..', 'bundle', '_locales');
 
   const files = LOCALES.map(function (locale) {
@@ -20,10 +18,10 @@ function main() {
 
   return Promise.all(
     files.map(([locale, filepath]) =>
-      readJSON(filepath).then(([messages, messagesContent]) => {
-        const {
-          countries,
-        } = require(`i18n-iso-countries/langs/${locale}.json`);
+      readJSON(filepath).then(async ([messages, messagesContent]) => {
+        const { default: lang } = await import(
+          `i18n-iso-countries/langs/${locale}.json`
+        );
 
         for (const [key] of Object.entries(messages)) {
           if (key.startsWith('country_name_')) {
@@ -31,7 +29,7 @@ function main() {
           }
         }
 
-        for (const [code, nameOrNames] of Object.entries(countries)) {
+        for (const [code, nameOrNames] of Object.entries(lang.countries)) {
           messages['country_name_' + code] = {
             message: extractCountryName(nameOrNames, { code }),
           };
@@ -49,7 +47,7 @@ function main() {
 
 function extractCountryName(country, { code }) {
   if (Array.isArray(country)) {
-    return country[1];
+    return country[0];
   }
 
   const split = country.split(',').map((s) => s.trim());
@@ -88,4 +86,10 @@ function assertIsSupportedLocale(locale) {
   assert(locale.length === 2);
 }
 
-main(process.argv.slice(2));
+async function getDirname() {
+  const url = await import('url');
+
+  return path.dirname(url.fileURLToPath(import.meta.url));
+}
+
+getDirname().then(main);

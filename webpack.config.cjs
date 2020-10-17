@@ -11,7 +11,7 @@ const { merge } = require('webpack-merge');
 
 const pkg = require('./package.json');
 
-module.exports = function (_, { mode, watch }) {
+module.exports = function (_, { watch }) {
   const bundlePath = path.resolve(__dirname, 'bundle');
   const popupHtmlPath = 'popup.html';
 
@@ -19,19 +19,40 @@ module.exports = function (_, { mode, watch }) {
 
   process.env.NODE_ENV = isDevelopment ? 'development' : 'production';
 
+  const devServer = {
+    contentBase: bundlePath,
+    port: 35727,
+    writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
+    disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
+  };
+
   const development = {
     mode: 'development',
     devtool: 'inline-cheap-module-source-map',
-    devServer: {
-      contentBase: bundlePath,
-      port: 35727,
-      writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
-      disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
+  };
+
+  const production = {
+    mode: 'production',
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+    ],
+    optimization: {
+      minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
     },
   };
 
   // https://ilin.dk/weblog/maxmind-in-browser
   const maxmindMocks = {
+    resolve: {
+      alias: {
+        net: path.resolve(
+          __dirname,
+          './node_modules/node-libs-browser/mock/net.js'
+        ),
+      },
+    },
     module: {
       rules: [
         {
@@ -40,7 +61,6 @@ module.exports = function (_, { mode, watch }) {
         },
       ],
     },
-    node: { net: 'empty' },
   };
 
   const typescriptRule = {
@@ -54,8 +74,6 @@ module.exports = function (_, { mode, watch }) {
 
   const common = merge(
     {
-      mode: mode || 'production',
-
       stats: { children: false },
       plugins: [new ForkTsCheckerWebpackPlugin()],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
@@ -71,22 +89,18 @@ module.exports = function (_, { mode, watch }) {
       },
     },
 
-    isDevelopment ? development : {}
+    isDevelopment ? development : production
   );
   if (!process.env.CI) {
     common.plugins.push(new webpack.ProgressPlugin());
   }
 
-  const cssProductionOptimization = {
-    optimization: {
-      minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
-    },
-  };
-
+  console.log(common.mode);
   return [
     merge(common, maxmindMocks, {
       entry: { background: './src/background' },
 
+      devServer,
       module: {
         rules: [typescriptRule],
       },
@@ -94,14 +108,14 @@ module.exports = function (_, { mode, watch }) {
         new ManifestPlugin({
           seed: {
             popupHtmlPath,
-            devServer: isDevelopment ? development.devServer : null,
+            devServer: isDevelopment ? devServer : null,
           },
           generate: manifestFactory,
         }),
       ],
     }),
 
-    merge(common, isDevelopment ? {} : cssProductionOptimization, {
+    merge(common, {
       entry: { popup: ['react-hot-loader/patch', './src/popup'] },
 
       resolve: {
@@ -122,9 +136,7 @@ module.exports = function (_, { mode, watch }) {
           {
             test: /\.css$/,
             use: [
-              isDevelopment
-                ? 'style-loader'
-                : { loader: MiniCssExtractPlugin.loader },
+              isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
               'css-loader',
             ],
           },
@@ -135,7 +147,7 @@ module.exports = function (_, { mode, watch }) {
                 loader: 'file-loader',
                 options: {
                   name: isDevelopment
-                    ? '[name].[hash:8].[ext]'
+                    ? '[name].[contenthash:8].[ext]'
                     : '[name].[ext]',
                 },
               },

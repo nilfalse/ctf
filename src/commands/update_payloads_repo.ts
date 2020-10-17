@@ -2,10 +2,7 @@ import { requests } from '../background/repo';
 import { CountryRequest } from '../lib/country_request';
 
 export class UpdatePayloadsRepoCommand {
-  constructor(public tabId: number, public request: CountryRequest | null) {
-    this.tabId = tabId;
-    this.request = request;
-  }
+  constructor(public tabId: number, public request: CountryRequest | null) {}
 
   execute() {
     if (this.request) {

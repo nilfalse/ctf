@@ -1,10 +1,7 @@
 import { TabDetails, tabDetails } from '../background/repo';
 
 export class UpdateTabDetailsCommand {
-  constructor(public tabId: number, public details: TabDetails | null) {
-    this.tabId = tabId;
-    this.details = details;
-  }
+  constructor(public tabId: number, public details: TabDetails | null) {}
 
   execute() {
     if (this.details) {
