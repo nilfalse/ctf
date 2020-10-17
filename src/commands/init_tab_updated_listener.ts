@@ -26,7 +26,7 @@ function handleTabUpdated(
 }
 
 export class InitTabUpdatedListenerCommand {
-  async execute() {
+  execute() {
     chrome.tabs.onUpdated.addListener(
       module.hot ? (...args) => handleTabUpdated(...args) : handleTabUpdated
     );

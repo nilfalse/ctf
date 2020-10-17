@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Airports Script filtering country-specific should skip 1`] = `
+"{ \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" } }
+"
+`;
+
+exports[`Airports Script filtering duplicate airports should skip 1`] = `
+"{ \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" } }
+"
+`;
+
+exports[`Airports Script filtering invalid IATA should skip 1`] = `
+"{ \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" } }
+"
+`;
+
+exports[`Airports Script filtering non-airports should skip 1`] = `
+"{ \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" } }
+"
+`;
+
+exports[`Airports Script filtering with numeric continent should keep the record w/o continent 1`] = `
+"{
+  \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" },
+  \\"NUMERIC\\": { \\"iso_country\\": \\"US\\", \\"iso_region\\": \\"US-LA\\" }
+}
+"
+`;
+
+exports[`Airports Script output formatting should pretty-print 1`] = `
+"{
+  \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" },
+  \\"IEV\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"UA\\", \\"iso_region\\": \\"UA-32\\" },
+  \\"KBP\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"UA\\", \\"iso_region\\": \\"UA-32\\" }
+}
+"
+`;
+
+exports[`Airports Script output when input is sorted alphabetically should output in the same order 1`] = `
+"{
+  \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" },
+  \\"IEV\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"UA\\", \\"iso_region\\": \\"UA-32\\" },
+  \\"KBP\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"UA\\", \\"iso_region\\": \\"UA-32\\" }
+}
+"
+`;
+
+exports[`Airports Script output when input is unsorted should output sorted 1`] = `
+"{
+  \\"CPH\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"DK\\", \\"iso_region\\": \\"DK-84\\" },
+  \\"IEV\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"UA\\", \\"iso_region\\": \\"UA-32\\" },
+  \\"KBP\\": { \\"continent\\": \\"EU\\", \\"iso_country\\": \\"UA\\", \\"iso_region\\": \\"UA-32\\" }
+}
+"
+`;

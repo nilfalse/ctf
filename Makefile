@@ -1,4 +1,4 @@
-NODEJS=node --unhandled-rejections=strict --experimental-json-modules
+NODEJS_BIN=node --unhandled-rejections=strict node_modules/.bin/
 
 .PHONY : all
 all : airports locales
@@ -18,7 +18,7 @@ fix :
 
 .PHONY : locales airports
 locales : node_modules
-	$(NODEJS) scripts/locales
+	./bin/locales.js
 airports : node_modules
 	$(MAKE) --no-print-directory --always-make data/airports.json
 
@@ -32,7 +32,7 @@ bundle/data/GeoLite2-Country.mmdb : data/maxmind/GeoLite2-Country.mmdb
 
 data : data/maxmind/GeoLite2-Country.mmdb
 data/airports.json :
-	$(NODEJS) scripts/airports > data/airports.json
+	./bin/airports.js > data/airports.json
 	ls -lAh data/airports.json
 data/maxmind/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
@@ -42,13 +42,13 @@ data/maxmind/GeoLite2-Country.mmdb :
 .PHONY : lint prettier eslint
 lint : prettier eslint
 prettier :
-	prettier --check .
+	$(NODEJS_BIN)prettier --check .
 eslint :
-	eslint .
+	$(NODEJS_BIN)eslint .
 
 .PHONY : test
 test :
-	jest --coverage
+	$(NODEJS_BIN)jest --coverage
 
 .PHONY : clean pristine
 clean :
@@ -56,7 +56,7 @@ clean :
 	- rm -f bundle/manifest.json bundle/*.woff bundle/*.svg bundle/*.css bundle/*.js bundle/popup.html
 pristine : clean
 	- rm -f cc-test-reporter
-	- jest --clearCache
+	- $(NODEJS_BIN)jest --clearCache
 	- rm -rf bundle/data node_modules data/maxmind
 
 .PHONY : node_modules
@@ -68,9 +68,9 @@ cc-test-reporter :
 	chmod +x $@
 .PHONY : ci coveralls codecov codeclimate
 coveralls :
-	coveralls < coverage/lcov.info
+	$(NODEJS_BIN)coveralls < coverage/lcov.info
 codecov :
-	codecov --disable=gcov
+	$(NODEJS_BIN)codecov --disable=gcov
 codeclimate : cc-test-reporter
 	./cc-test-reporter after-build --exit-code $$TRAVIS_TEST_RESULT
 ci : codecov coveralls codeclimate

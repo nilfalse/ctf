@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prestart": "make -j clean bundle/data",
-    "start": "webpack serve --watch --hot",
+    "start": "webpack serve --hot",
     "test": "jest"
   },
   "dependencies": {
@@ -108,13 +108,15 @@
     "verbose": true,
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "scripts/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/"
+      "bin/**/*.{js,jsx,ts,tsx}",
+      "!bin/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/**/__fixtures__/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/**/__harness__/**/*.{js,jsx,ts,tsx}"
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 57,
-        "statements": 57
+        "lines": 69,
+        "statements": 69
       }
     },
     "setupFiles": [

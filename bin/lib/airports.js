@@ -4,7 +4,7 @@ import stringify from 'fast-stable-stringify';
 import fetch from 'node-fetch';
 import prettier from 'prettier';
 
-function main() {
+export function main() {
   const url = 'https://ourairports.com/data/airports.csv';
 
   const codes = {};
@@ -31,7 +31,7 @@ function main() {
 
     for (const [reason, condition] of Object.entries(skipRules)) {
       if (condition) {
-        console.error(reason);
+        process.stderr.write(reason + '\n');
 
         return;
       }
@@ -47,23 +47,22 @@ function main() {
     codes[iata_code] = item;
   }
 
-  fetch(url).then((r) =>
-    r.body
-      .pipe(csv.createStream({ enclosedChar: '"' }))
-      .on('data', filterAirports)
-      .on('end', () => {
-        const output = prettier.format(stringify(codes), {
-          semi: false,
-          parser: 'json',
-        });
+  return new Promise((resolve, reject) => {
+    fetch(url).then(
+      (r) =>
+        r.body
+          .pipe(csv.createStream({ enclosedChar: '"' }))
+          .on('data', filterAirports)
+          .on('end', () => {
+            const output = prettier.format(stringify(codes), {
+              semi: false,
+              parser: 'json',
+            });
 
-        process.stdout.write(output);
-      })
-      .on('error', (err) => {
-        console.error(err);
-        process.exit(1);
-      })
-  );
+            resolve(output);
+          })
+          .on('error', reject),
+      reject
+    );
+  });
 }
-
-main(process.argv.slice(2));

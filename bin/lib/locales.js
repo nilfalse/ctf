@@ -1,17 +1,17 @@
 import assert from 'assert';
-import { promises as fs } from 'fs';
-import path from 'path';
+import * as fs from 'fs/promises';
+import * as path from 'path';
 
 import stringify from 'fast-stable-stringify';
 import prettier from 'prettier';
 
-const LOCALES = ['en'];
+import { LOCALES } from './locales.config.js';
 
-function main(__dirname) {
-  const localesRoot = path.resolve(__dirname, '..', 'bundle', '_locales');
+export function main(binPath) {
+  const localesRoot = path.resolve(binPath, '..', 'bundle', '_locales');
 
   const files = LOCALES.map(function (locale) {
-    assertIsSupportedLocale(locale);
+    assert(locale.length === 2);
 
     return [locale, path.resolve(localesRoot, locale, 'messages.json')];
   });
@@ -72,24 +72,12 @@ function print(json) {
   });
 }
 
-async function readJSON(filepath) {
+export async function readJSON(filepath) {
   const content = await fs.readFile(filepath, 'utf-8');
 
   return [JSON.parse(content), content];
 }
 
-function saveJSON(filepath, content) {
+export function saveJSON(filepath, content) {
   return fs.writeFile(filepath, content, 'utf-8');
 }
-
-function assertIsSupportedLocale(locale) {
-  assert(locale.length === 2);
-}
-
-async function getDirname() {
-  const url = await import('url');
-
-  return path.dirname(url.fileURLToPath(import.meta.url));
-}
-
-getDirname().then(main);

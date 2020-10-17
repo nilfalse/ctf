@@ -11,11 +11,11 @@ const { merge } = require('webpack-merge');
 
 const pkg = require('./package.json');
 
-module.exports = function (_, { watch }) {
+module.exports = function (_, { hot }) {
   const bundlePath = path.resolve(__dirname, 'bundle');
   const popupHtmlPath = 'popup.html';
 
-  const isDevelopment = watch;
+  const isDevelopment = hot;
 
   process.env.NODE_ENV = isDevelopment ? 'development' : 'production';
 
@@ -33,11 +33,6 @@ module.exports = function (_, { watch }) {
 
   const production = {
     mode: 'production',
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-      }),
-    ],
     optimization: {
       minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
     },
@@ -75,7 +70,12 @@ module.exports = function (_, { watch }) {
   const common = merge(
     {
       stats: { children: false },
-      plugins: [new ForkTsCheckerWebpackPlugin()],
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        }),
+        new ForkTsCheckerWebpackPlugin(),
+      ],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
       output: {
         filename: '[name].js',
@@ -158,7 +158,7 @@ module.exports = function (_, { watch }) {
       plugins: [
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
-          title: 'Capture The Flag Popup',
+          title: 'Popup',
           filename: popupHtmlPath,
           template: 'src/popup/template.html',
         }),
