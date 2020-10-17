@@ -110,13 +110,14 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "bin/**/*.{js,jsx,ts,tsx}",
       "!bin/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/**/__test__/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/**/__fixtures__/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/**/__harness__/**/*.{js,jsx,ts,tsx}"
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 69,
-        "statements": 69
+        "lines": 61,
+        "statements": 60
       }
     },
     "setupFiles": [
