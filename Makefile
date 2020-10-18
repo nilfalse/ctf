@@ -22,6 +22,10 @@ locales : node_modules
 airports : node_modules
 	$(MAKE) --no-print-directory --always-make data/airports.json
 
+.PHONY : icons
+icons : artwork/logo_icon.svg
+	for i in 32 48 128 256 512; do inkscape -w $$i -h $$i $< --export-filename bundle/icons/icon_$${i}px.png; done
+
 bundle/data : bundle/data/GeoLite2-Country.mmdb bundle/data/airports.json
 bundle/data/airports.json : data/airports.json
 	mkdir -p `dirname $@`

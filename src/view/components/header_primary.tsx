@@ -4,6 +4,7 @@ import logo from '../../../artwork/logo_text.svg';
 import { Match } from '../../heuristics';
 import { CountryRequest } from '../../lib/country_request';
 
+import { Logo } from './logo';
 import { Paragraph } from './typography';
 
 import './header_primary.css';
@@ -50,6 +51,7 @@ export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
 
   return (
     <div className="header-primary">
+      <Logo color="light" className="header-primary__icon" />
       <img
         src={logo}
         alt={chrome.i18n.getMessage('ext_name')}

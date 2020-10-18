@@ -16,14 +16,14 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
-    "@types/chrome": "^0.0.124",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@types/chrome": "^0.0.125",
     "@types/enzyme": "^3.10.7",
     "@types/jest": "^26.0.14",
-    "@types/react": "^16.9.52",
+    "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/webpack-env": "^1.15.3",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
@@ -40,7 +40,7 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
     "eslint": "^7.11.0",
-    "eslint-config-prettier": "^6.12.0",
+    "eslint-config-prettier": "^6.13.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
@@ -116,8 +116,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 61,
-        "statements": 60
+        "lines": 69,
+        "statements": 69
       }
     },
     "setupFiles": [
