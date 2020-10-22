@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "^16.13.0",
+    "@hot-loader/react-dom": "^17.0.0",
     "country-flag-emoji-json": "^1.0.2",
     "maxmind": "^4.3.0",
     "node-libs-browser": "^2.2.1",
