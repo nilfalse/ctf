@@ -1,5 +1,8 @@
 import { requests } from '../background/repo';
 import { error } from '../debug';
+import { render } from '../view/rendering';
+
+const defaultIconPromise = render('🏁');
 
 function reportErrorIfAny() {
   if (chrome.runtime.lastError) {
@@ -7,7 +10,7 @@ function reportErrorIfAny() {
   }
 }
 
-function handleTabUpdated(
+async function handleTabUpdated(
   tabId: number,
   changeInfo: chrome.tabs.TabChangeInfo,
   tab: chrome.tabs.Tab
@@ -19,6 +22,10 @@ function handleTabUpdated(
   if (!requests.has(tabId)) {
     chrome.pageAction.setPopup(
       { tabId, popup: 'popup.html' },
+      reportErrorIfAny
+    );
+    chrome.pageAction.setIcon(
+      { tabId, imageData: await defaultIconPromise },
       reportErrorIfAny
     );
     chrome.pageAction.show(tabId, reportErrorIfAny);

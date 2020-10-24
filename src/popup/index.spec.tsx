@@ -2,7 +2,6 @@ import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 
 import { PopupContent } from '../view/components/popup_content';
-import { Traceroute } from '../view/components/traceroute';
 import { CloudflareTrace } from '../view/components/traceroute/cloudflare';
 import { IPTrace } from '../view/components/traceroute/ip';
 
