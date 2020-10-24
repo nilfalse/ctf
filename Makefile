@@ -17,9 +17,9 @@ fix :
 	eslint --fix .
 
 .PHONY : locales airports
-locales : node_modules
+locales : ensure-deps
 	./bin/locales.js
-airports : node_modules
+airports : ensure-deps
 	$(MAKE) --no-print-directory --always-make data/airports.json
 
 .PHONY : icons
@@ -63,9 +63,10 @@ pristine : clean
 	- $(NODEJS_BIN)jest --clearCache
 	- rm -rf bundle/data node_modules data/maxmind
 
-.PHONY : node_modules
-node_modules :
-	npm install
+node_modules : package.json
+	npm install && touch node_modules
+.PHONY : ensure-deps
+ensure-deps : node_modules
 
 cc-test-reporter :
 	curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $@

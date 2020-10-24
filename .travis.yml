@@ -4,7 +4,8 @@ node_js:
   - node
 
 install:
-  - make --output-sync --jobs data node_modules cc-test-reporter
+  - yarn install --pure-lockfile
+  - make --output-sync --jobs data cc-test-reporter
 
 before_script:
   - ./cc-test-reporter before-build
