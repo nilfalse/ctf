@@ -29,20 +29,10 @@ module.exports = function (_, { hot }) {
   const development = {
     mode: 'development',
     devtool: 'inline-cheap-module-source-map',
-    plugins: [
-      new ForkTsCheckerWebpackPlugin({
-        typescript: {
-          configOverwrite: {
-            compilerOptions: { jsx: 'react-jsxdev' },
-          },
-        },
-      }),
-    ],
   };
 
   const production = {
     mode: 'production',
-    plugins: [new ForkTsCheckerWebpackPlugin()],
     optimization: {
       minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
     },
@@ -84,6 +74,7 @@ module.exports = function (_, { hot }) {
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
+        new ForkTsCheckerWebpackPlugin(),
       ],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },
       output: {

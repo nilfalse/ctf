@@ -9,5 +9,6 @@
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "esModuleInterop": true
-  }
+  },
+  "files": ["src/**/*.ts", "src/**/*.tsx"]
 }

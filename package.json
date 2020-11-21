@@ -50,7 +50,7 @@
     "eslint-plugin-standard": "^4.1.0",
     "fast-stable-stringify": "^1.0.0",
     "file-loader": "^6.2.0",
-    "fork-ts-checker-webpack-plugin": "^5.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.0.3",
     "html-webpack-plugin": "^4.5.0",
     "husky": "^4.3.0",
     "i18n-iso-countries": "^6.2.2",
