@@ -1,4 +1,5 @@
-NODEJS_BIN=node --unhandled-rejections=strict node_modules/.bin/
+NODEJS=node --unhandled-rejections=strict --experimental-json-modules
+NODEJS_BIN=${NODEJS} node_modules/.bin/
 
 .PHONY : all
 all : airports locales
@@ -9,16 +10,16 @@ build : bundle/data webpack
 
 .PHONY : webpack
 webpack : clean
-	webpack
+	$(NODEJS_BIN)webpack
 
 .PHONY : fix
 fix :
-	prettier --write .
-	eslint --fix .
+	$(NODEJS_BIN)prettier --write .
+	$(NODEJS_BIN)eslint --fix .
 
 .PHONY : locales airports
 locales : ensure-deps
-	./bin/locales.js
+	${NODEJS} ./bin/locales.js
 airports : ensure-deps
 	$(MAKE) --no-print-directory --always-make data/airports.json
 
@@ -36,7 +37,7 @@ bundle/data/GeoLite2-Country.mmdb : data/maxmind/GeoLite2-Country.mmdb
 
 data : data/maxmind/GeoLite2-Country.mmdb
 data/airports.json :
-	./bin/airports.js > data/airports.json
+	${NODEJS} ./bin/airports.js > data/airports.json
 	ls -lAh data/airports.json
 data/maxmind/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
@@ -64,7 +65,8 @@ pristine : clean
 	- rm -rf bundle/data node_modules data/maxmind
 
 node_modules : package.json
-	npm install && touch node_modules
+	yarn --frozen-lockfile || npm install --no-package-lock
+	touch node_modules
 .PHONY : ensure-deps
 ensure-deps : node_modules
 
