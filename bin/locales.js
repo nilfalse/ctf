@@ -1,4 +1,3 @@
-#!/usr/bin/env node --unhandled-rejections=strict --experimental-json-modules
 import path from 'path';
 import url from 'url';
 

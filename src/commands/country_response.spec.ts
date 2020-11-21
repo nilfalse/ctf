@@ -6,9 +6,9 @@ import { CountryResponseCommand } from './country_response';
 describe('Country Response Command', () => {
   describe('when executing', () => {
     const heuristicsModule = require('../heuristics');
-    let originalHeuristics: ReadonlyArray<(
-      req: CountryRequest
-    ) => ReadonlyArray<Match>>;
+    let originalHeuristics: ReadonlyArray<
+      (req: CountryRequest) => ReadonlyArray<Match>
+    >;
     let command: CountryResponseCommand;
 
     beforeEach(() => {
