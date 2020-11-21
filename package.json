@@ -9,11 +9,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "^16.13.0",
+    "@hot-loader/react-dom": "^17.0.0",
     "country-flag-emoji-json": "^1.0.2",
     "maxmind": "^4.3.1",
     "node-libs-browser": "^2.2.1",
-    "react": "^16.13.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",
@@ -23,11 +23,12 @@
     "@types/chrome": "^0.0.126",
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^26.0.15",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@types/webpack-env": "^1.15.3",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.3.1",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.1",
     "babel-preset-react-app": "^10.0.0",
@@ -37,7 +38,6 @@
     "css-loader": "^5.0.1",
     "csv-stream": "^0.2.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
@@ -60,7 +60,7 @@
     "null-loader": "^4.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "prettier": "^2.2.0",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
     "style-loader": "^2.0.0",
     "typescript": "^4.1.2",

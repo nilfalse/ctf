@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 import './sequence.css';
 
@@ -6,10 +6,7 @@ interface SequenceItemProps {
   isActive?: boolean;
 }
 
-export const SequenceItem: React.FC<SequenceItemProps> = ({
-  isActive,
-  children,
-}) => {
+export const SequenceItem: FC<SequenceItemProps> = ({ isActive, children }) => {
   const classNames = ['sequence__item'];
   if (isActive) {
     classNames.push('sequence__active');
@@ -18,7 +15,7 @@ export const SequenceItem: React.FC<SequenceItemProps> = ({
   return <li className={classNames.join(' ')}>{children}</li>;
 };
 
-export const Sequence: React.FC = ({ children }) => {
+export const Sequence: FC = ({ children }) => {
   return (
     <ul className="sequence sequence_animate sequence_success">{children}</ul>
   );

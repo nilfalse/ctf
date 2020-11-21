@@ -1,14 +1,11 @@
 module.exports = (api) => {
-  const presets = [
-    '@babel/preset-typescript',
-    ['@babel/preset-react', { runtime: 'automatic' }],
-  ];
+  const presets = ['@babel/preset-typescript'];
 
   const isDevelopment = api.env('development');
   if (!isDevelopment) {
     const isTest = api.env('test');
 
-    presets.unshift([
+    presets.push([
       '@babel/preset-env',
       {
         targets: isTest
@@ -17,6 +14,8 @@ module.exports = (api) => {
       },
     ]);
   }
+
+  presets.push(['@babel/preset-react', { runtime: 'automatic' }]);
 
   return {
     presets,

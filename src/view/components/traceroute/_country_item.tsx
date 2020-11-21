@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import * as emoji from '../../../lib/emoji';
 import { Paragraph } from '../typography';
@@ -37,7 +36,7 @@ interface TypographyProps {
   'data-flag': null | string;
 }
 
-export const CountryItem: React.FC<CountryItemProps> = ({
+export const CountryItem: FC<CountryItemProps> = ({
   countryCode,
   shouldRenderFlag = true,
   children,

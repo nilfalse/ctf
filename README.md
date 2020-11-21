@@ -63,10 +63,12 @@ make build
 Download and install dependencies:
 
 ```sh
-npm i && make bundle/data
+npm i
 ```
 
-Run the watch mode:
+Ensure your MaxMind license key is available in the environment (see Building instructions above).
+
+Then, run the watch mode:
 
 ```sh
 npm start

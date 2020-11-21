@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { AnchorHTMLAttributes, FC } from 'react';
 
 import './typography.css';
 
@@ -16,7 +16,7 @@ interface TypographyProps {
 const typographyFactory = ({
   tag,
   className: componentClassName,
-}: FactoryParams): React.FC<TypographyProps> => {
+}: FactoryParams): FC<TypographyProps> => {
   const Component = tag;
 
   return ({ variant, size, className, children, ...rest }) => {
@@ -42,15 +42,15 @@ const typographyFactory = ({
   };
 };
 
-export const Paragraph = typographyFactory({ tag: 'p' }) as React.FC<
-  TypographyProps & React.AnchorHTMLAttributes<HTMLParagraphElement>
+export const Paragraph = typographyFactory({ tag: 'p' }) as FC<
+  TypographyProps & AnchorHTMLAttributes<HTMLParagraphElement>
 >;
 
-export const Span = typographyFactory({ tag: 'span' }) as React.FC<
-  TypographyProps & React.AnchorHTMLAttributes<HTMLParagraphElement>
+export const Span = typographyFactory({ tag: 'span' }) as FC<
+  TypographyProps & AnchorHTMLAttributes<HTMLParagraphElement>
 >;
 
 export const Link = typographyFactory({
   tag: 'a',
   className: 'link',
-}) as React.FC<TypographyProps & React.AnchorHTMLAttributes<HTMLAnchorElement>>;
+}) as FC<TypographyProps & AnchorHTMLAttributes<HTMLAnchorElement>>;

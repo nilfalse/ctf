@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 import { assert } from '../../../debug';
 import { Match } from '../../../heuristics';
@@ -22,7 +22,7 @@ function assertIsCloudflareMatch(
   );
 }
 
-export const CloudflareTrace: React.FC<CloudflareTraceProps> = ({ match }) => {
+export const CloudflareTrace: FC<CloudflareTraceProps> = ({ match }) => {
   assertIsCloudflareMatch(match);
 
   const cacheStatus = match.extra.cacheStatus && (

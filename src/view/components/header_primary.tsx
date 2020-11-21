@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 import logo from '../../../artwork/logo_text.svg';
 import { Match } from '../../heuristics';
@@ -20,10 +20,7 @@ function getHost(url: string) {
   return host.startsWith('www.') ? host.substring(4) : host;
 }
 
-export const HeaderPrimary: React.FC<HeaderPrimaryProps> = ({
-  request,
-  matches,
-}) => {
+export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ request, matches }) => {
   if (matches.length === 0) {
     return (
       <div className="header-primary header-primary_empty">

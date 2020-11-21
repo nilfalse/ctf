@@ -1,5 +1,4 @@
 import { mount, ReactWrapper } from 'enzyme';
-import * as React from 'react';
 
 import { PopupContent } from '../view/components/popup_content';
 import { CloudflareTrace } from '../view/components/traceroute/cloudflare';

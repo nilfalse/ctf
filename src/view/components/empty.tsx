@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 import logo from '../../../artwork/logo_text.svg';
 
@@ -6,7 +6,7 @@ import { Paragraph } from './typography';
 
 import './empty.css';
 
-export const Empty: React.FC = () => {
+export const Empty: FC = () => {
   return (
     <div className="empty">
       <div className="empty__header">

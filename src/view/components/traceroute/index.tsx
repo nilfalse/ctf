@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 import { isKeyof } from '../../../common';
 import { Match } from '../../../heuristics';
@@ -21,7 +21,7 @@ interface TracerouteProps {
   matches: ReadonlyArray<Match>;
 }
 
-export const Traceroute: React.FC<TracerouteProps> = ({ request, matches }) => {
+export const Traceroute: FC<TracerouteProps> = ({ request, matches }) => {
   const items = [];
   let ipItem = null;
   for (const match of matches) {

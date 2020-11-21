@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 interface LogoProps {
   className?: string;
@@ -7,7 +7,7 @@ interface LogoProps {
   height?: number;
 }
 
-export const Logo: React.FC<LogoProps> = ({
+export const Logo: FC<LogoProps> = ({
   color = 'default',
   width,
   height,

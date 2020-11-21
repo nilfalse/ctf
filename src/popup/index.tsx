@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { render } from 'react-dom';
 
 import { PopupContent } from '../view/components/popup_content';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 import { assert } from '../../../debug';
 import { Match } from '../../../heuristics';
@@ -35,7 +35,7 @@ function getLink(ip: string) {
   return link.toString();
 }
 
-const CountryInfo: React.FC<{ match: Match | undefined }> = ({ match }) => {
+const CountryInfo: FC<{ match: Match | undefined }> = ({ match }) => {
   assertIsIPMatch(match);
 
   if (!match) {
@@ -66,7 +66,7 @@ const CountryInfo: React.FC<{ match: Match | undefined }> = ({ match }) => {
   );
 };
 
-const ServerInfo: React.FC<{ request: CountryRequestWithMandatoryIP }> = ({
+const ServerInfo: FC<{ request: CountryRequestWithMandatoryIP }> = ({
   request,
 }) => {
   const serverHeader = request.getHeader('server');
@@ -97,7 +97,7 @@ interface IPTraceProps {
   request: CountryRequest;
 }
 
-export const IPTrace: React.FC<IPTraceProps> = ({ match, request }) => {
+export const IPTrace: FC<IPTraceProps> = ({ match, request }) => {
   assertRequestHasIP(request);
 
   const link = getLink(request.ip);
