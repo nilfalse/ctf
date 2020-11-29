@@ -1,19 +1,19 @@
 import { Match } from '../heuristics';
 import { CountryRequest } from '../lib/country_request';
 
-import { CountryResponseCommand } from './country_response';
+import { CountryReplyCommand } from './country_reply';
 
-describe('Country Response Command', () => {
+describe('Country Reply Command', () => {
   describe('when executing', () => {
     const heuristicsModule = require('../heuristics');
     let originalHeuristics: ReadonlyArray<
       (req: CountryRequest) => ReadonlyArray<Match>
     >;
-    let command: CountryResponseCommand;
+    let command: CountryReplyCommand;
 
     beforeEach(() => {
       originalHeuristics = heuristicsModule.heuristics;
-      command = new CountryResponseCommand(1, {});
+      command = new CountryReplyCommand(1, {});
     });
 
     afterEach(() => {

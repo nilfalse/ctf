@@ -1,10 +1,11 @@
 import { publish } from '../background/app';
 import { requests } from '../background/repositories';
 import { error } from '../debug';
+import { CountryRequestParams } from '../lib/country_request';
 import * as xpc from '../lib/xpc';
 import { render } from '../rendering';
 
-import { CountryResponseCommand } from './country_response';
+import { CountryReplyCommand } from './country_reply';
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
 import { UpdateTabDetailsCommand } from './update_tab_details';
 
@@ -51,16 +52,18 @@ async function handleIncomingMessage(
   sendResponse(await xpc.handle(message));
 }
 
-function handleWebRequestCompleted(
-  payload: chrome.webRequest.WebResponseCacheDetails
-) {
+interface WebRequestPayload extends CountryRequestParams {
+  tabId: number;
+}
+
+function handleWebRequestCompleted(payload: WebRequestPayload) {
   const { tabId } = payload;
 
   if (tabId === -1) {
     return; // skip extension popups
   }
 
-  publish(new CountryResponseCommand(tabId, payload));
+  publish(new CountryReplyCommand(tabId, payload));
 }
 
 export class InitCommand {

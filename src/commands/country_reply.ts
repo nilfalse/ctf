@@ -4,7 +4,7 @@ import { CountryRequest, CountryRequestParams } from '../lib/country_request';
 
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
 
-export class CountryResponseCommand {
+export class CountryReplyCommand {
   request: CountryRequest;
 
   constructor(public tabId: number, payload: CountryRequestParams) {
