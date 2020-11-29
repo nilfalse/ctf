@@ -74,7 +74,7 @@ Then, run the watch mode:
 npm start
 ```
 
-<small>While it's building you may want to check out how to [load an unpacked extension](https://developer.chrome.com/extensions/faq#faq-dev-01) in Google Chrome.</small>
+<small>While it's building you may want to check out [how to load an unpacked extension](https://developer.chrome.com/extensions/faq#faq-dev-01) in Google Chrome.</small>
 
 Once it's built you will be able to load it from the `./bundle` directory.
 
@@ -82,9 +82,9 @@ Once it's built you will be able to load it from the `./bundle` directory.
 
 <small>TODO</small>
 
-## 👨‍💻 Author
+## 👨‍💻 Credits
 
-Yaroslav Ilin - https://ilin.dk
+Author: [Yaroslav Ilin](https://ilin.dk)
 
 ## 📄 LICENSE
 

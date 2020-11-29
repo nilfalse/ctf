@@ -1,7 +1,7 @@
 import { error } from '../debug';
 import { Match } from '../heuristics';
 import { fromISOCountryCode } from '../lib/emoji';
-import { render } from '../view/rendering';
+import { render } from '../rendering';
 
 function reportErrorIfAny() {
   if (chrome.runtime.lastError) {

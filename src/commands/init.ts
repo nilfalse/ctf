@@ -2,7 +2,7 @@ import { publish } from '../background/app';
 import { requests } from '../background/repositories';
 import { error } from '../debug';
 import * as xpc from '../lib/xpc';
-import { render } from '../view/rendering';
+import { render } from '../rendering';
 
 import { CountryResponseCommand } from './country_response';
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
