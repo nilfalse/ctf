@@ -29,24 +29,28 @@ export function subscribe<C extends Command>(
   });
 }
 
-export async function publish(command: Command) {
-  let result: any;
-  try {
-    result = await command.execute();
-  } catch (err) {
-    debug.error(err);
-    return;
+export function publish(command: Command) {
+  async function _publish(promise: Promise<unknown> | void) {
+    let result: unknown;
+    try {
+      result = await promise;
+    } catch (err) {
+      debug.error(err);
+      return;
+    }
+
+    return Promise.all(
+      observers.map(async function (observer) {
+        try {
+          if (command instanceof observer.commandCtor) {
+            return await observer.action(command, result);
+          }
+        } catch (err) {
+          debug.error(err);
+        }
+      })
+    );
   }
 
-  return Promise.all(
-    observers.map(async function (observer) {
-      try {
-        if (command instanceof observer.commandCtor) {
-          return await observer.action(command, result);
-        }
-      } catch (err) {
-        debug.error(err);
-      }
-    })
-  );
+  return _publish(command.execute());
 }

@@ -66,7 +66,7 @@ describe('App mediator', () => {
     it('should invoke all observers in parallel', () => {
       const FakeCommand = createCommandClass();
 
-      let done: () => void;
+      let done: (value?: unknown) => void;
       const spy1 = jest.fn().mockReturnValue(
         new Promise((resolve) => {
           done = resolve;
