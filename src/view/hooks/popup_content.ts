@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { TabDetails } from '../../background/repo';
+import { TabDetails } from '../../background/repositories';
 import * as xpc from '../../lib/xpc';
 
 import { useQueryParams } from './query_params';

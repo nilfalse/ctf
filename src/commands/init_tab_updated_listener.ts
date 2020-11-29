@@ -1,4 +1,4 @@
-import { requests } from '../background/repo';
+import { requests } from '../background/repositories';
 import { error } from '../debug';
 import { render } from '../view/rendering';
 
@@ -19,7 +19,7 @@ async function handleTabUpdated(
     return;
   }
 
-  if (!requests.has(tabId)) {
+  if (requests.fetch(tabId) === null) {
     chrome.pageAction.setPopup(
       { tabId, popup: 'popup.html' },
       reportErrorIfAny

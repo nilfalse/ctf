@@ -1,9 +1,9 @@
-import { tabDetails, TabDetails } from '../background/repo';
+import { tabDetails, TabDetails } from '../background/repositories';
 
 import { CountryRequest } from './country_request';
 
 function getTabDetails(tabId: number) {
-  return tabDetails.get(tabId) || null;
+  return tabDetails.fetch(tabId);
 }
 
 export async function handle(message: any) {
