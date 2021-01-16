@@ -1,5 +1,5 @@
 import { publish } from '../background/app';
-import { Match } from '../heuristics';
+import { Match } from '../interceptors';
 import { CountryRequest, CountryRequestParams } from '../lib/country_request';
 
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
@@ -19,17 +19,10 @@ export class CountryReplyCommand {
   }
 
   async _execute() {
-    const { heuristics } = await import(
-      /* webpackChunkName: "heuristics" */ '../heuristics'
+    const interceptors = await import(
+      /* webpackChunkName: "interceptors" */ '../interceptors'
     );
 
-    const matches = await Promise.all<ReadonlyArray<Match>>(
-      heuristics.map((interceptor) => interceptor.dispatch(this.request))
-    );
-
-    return matches
-      .flatMap((match) => match)
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score);
+    return interceptors.run(this.request);
   }
 }

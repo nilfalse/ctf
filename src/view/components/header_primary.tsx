@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import logo from '../../../artwork/logo_text.svg';
-import { Match } from '../../heuristics';
+import { Match } from '../../interceptors';
 import { CountryRequest } from '../../lib/country_request';
 
 import { Logo } from './logo';

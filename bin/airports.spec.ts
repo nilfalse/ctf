@@ -5,12 +5,12 @@ import { main } from './lib/airports.js';
 
 describe('Airports Script', () => {
   describe('download', () => {
-    const fetchMock = harness.fetch.stream(harness.csv.airports());
+    const fetch = harness.fetch.stream(harness.csv.airports());
 
     it('should fetch data from ourairports.com', () => {
       const testingSideEffect = main();
 
-      expect(fetchMock).toHaveBeenCalledWith(
+      expect(fetch.mock).toHaveBeenCalledWith(
         'https://ourairports.com/data/airports.csv'
       );
     });

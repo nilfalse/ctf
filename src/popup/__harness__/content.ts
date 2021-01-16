@@ -1,4 +1,4 @@
-import { Match } from '../../heuristics';
+import { Match } from '../../interceptors';
 import {
   CountryRequest,
   CountryRequestParams,

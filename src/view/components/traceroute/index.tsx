@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { isKeyof } from '../../../common';
-import { Match } from '../../../heuristics';
+import { Match } from '../../../interceptors';
 import { CountryRequest } from '../../../lib/country_request';
 import { Sequence, SequenceItem } from '../sequence';
 import { Paragraph } from '../typography';

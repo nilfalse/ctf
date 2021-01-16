@@ -8,11 +8,10 @@ jest.mock('../lib/airports');
 describe('Cloudflare interceptor', () => {
   describe('when dispatching', () => {
     describe('with no ray', () => {
-      it('should not report any matches', () => {
-        return expect(
+      it('should not report any matches', () =>
+        expect(
           cloudflare.dispatch(new CountryRequest({}))
-        ).resolves.toHaveLength(0);
-      });
+        ).resolves.toHaveLength(0));
     });
 
     describe('with an incorrect ray', () => {

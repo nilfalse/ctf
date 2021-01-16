@@ -1,5 +1,5 @@
 import { error } from '../debug';
-import { Match } from '../heuristics';
+import { Match } from '../interceptors';
 import { fromISOCountryCode } from '../lib/emoji';
 import { render } from '../rendering';
 

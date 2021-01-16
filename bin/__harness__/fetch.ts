@@ -1,24 +1,22 @@
 import { Readable } from 'stream';
 
-import fetch from 'node-fetch';
-
-jest.mock('node-fetch');
-
-const { Response } = jest.requireActual('node-fetch');
+import * as fetch from 'node-fetch';
 
 export function stream(content: string) {
-  const fetchMock = fetch.default as jest.Mock<typeof fetch.default>;
+  const ref = {
+    mock: null,
+  };
 
   beforeEach(() => {
     const body = Readable.from([Buffer.from(content)]);
-    const response = new Response(body);
+    const response = new fetch.Response(body);
 
-    fetchMock.mockReturnValue(Promise.resolve(response));
+    ref.mock = jest.spyOn(fetch, 'default').mockResolvedValue(response);
   });
 
-  afterEach(() => fetchMock.mockReset());
+  afterEach(() => ref.mock.mockReset());
 
-  afterAll(() => fetchMock.mockRestore());
+  afterAll(() => ref.mock.mockRestore());
 
-  return fetchMock;
+  return ref;
 }

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
 import { assert } from '../../../debug';
-import { Match } from '../../../heuristics';
-import { IPMatch } from '../../../heuristics/ip';
+import { Match } from '../../../interceptors';
+import { IPMatch } from '../../../interceptors/ip';
 import { CountryRequest } from '../../../lib/country_request';
 import { Link, Paragraph, Span } from '../typography';
 
