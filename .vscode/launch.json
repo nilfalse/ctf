@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Test current file (Jest)",
+
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": [
+        "--colors",
+        "--runInBand",
+        "--runTestsByPath",
+        "${relativeFile}"
+      ],
+
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+
+      "type": "node",
+      "request": "launch",
+      "disableOptimisticBPs": true
+    }
+  ]
+}
