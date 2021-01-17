@@ -1,6 +1,6 @@
 import { lookupUpperCase } from '../common';
-import * as airports from '../lib/airports';
 import { CountryRequest } from '../lib/country_request';
+import * as airports from '../services/airports';
 
 import { Match } from './_common';
 

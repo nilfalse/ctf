@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import * as emoji from '../../../lib/emoji';
+import * as emoji from '../../../services/emoji';
 import { Paragraph } from '../typography';
 
 interface CountryItemProps {

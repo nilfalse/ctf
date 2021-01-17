@@ -24,7 +24,7 @@ describe('Background controller', () => {
   });
 
   describe('initialization', () => {
-    beforeEach(controller.init);
+    beforeEach(controller.start);
 
     describe('of XPC', () => {
       it('should subscribe to messages', () => {

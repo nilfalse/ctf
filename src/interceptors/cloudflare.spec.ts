@@ -3,7 +3,7 @@ import { CountryRequest } from '../lib/country_request';
 
 import * as cloudflare from './cloudflare';
 
-jest.mock('../lib/airports');
+jest.mock('../services/airports');
 
 describe('Cloudflare interceptor', () => {
   describe('when dispatching', () => {

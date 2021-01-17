@@ -5,7 +5,7 @@ import { UpdateTabDetailsCommand } from '../commands/update_tab_details';
 
 import * as app from './app';
 
-export function init() {
+export function start() {
   app.subscribe(CountryReplyCommand, function ({ tabId, request }, matches) {
     app.publish(
       new UpdateTabDetailsCommand(tabId, {

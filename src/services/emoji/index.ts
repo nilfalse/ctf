@@ -1,4 +1,4 @@
-import { lookupUpperCase } from '../common';
+import { lookupUpperCase } from '../../common';
 
 export function fromISOCountryCode(code: string) {
   return import(

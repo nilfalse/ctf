@@ -1,5 +1,4 @@
 import { publish } from '../background/app';
-import { Match } from '../interceptors';
 import { CountryRequest, CountryRequestParams } from '../lib/country_request';
 
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';

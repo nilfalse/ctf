@@ -6,6 +6,6 @@ describe('Background script', () => {
   it('should initialize background controller', () => {
     const testingSideEffect = require('.');
 
-    expect(controller.init).toHaveBeenCalledTimes(1);
+    expect(controller.start).toHaveBeenCalledTimes(1);
   });
 });

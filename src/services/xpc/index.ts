@@ -1,6 +1,5 @@
-import { tabDetails, TabDetails } from '../background/repositories';
-
-import { CountryRequest } from './country_request';
+import { tabDetails, TabDetails } from '../../background/repositories';
+import { CountryRequest } from '../../lib/country_request';
 
 function getTabDetails(tabId: number) {
   return tabDetails.fetch(tabId);

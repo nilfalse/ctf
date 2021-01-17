@@ -1,12 +1,13 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-const originalModule = jest.requireActual('../geo');
+const originalModule = jest.requireActual('../../geo');
 
 const reader = fs
   .readFile(
     path.resolve(
       __dirname,
+      '..',
       '..',
       '..',
       '..',
@@ -17,6 +18,6 @@ const reader = fs
   )
   .then(originalModule.createReader);
 
-jest.spyOn(originalModule, 'load').mockReturnValue(reader);
+jest.spyOn(originalModule, 'load').mockImplementation(() => reader);
 
 module.exports = originalModule;

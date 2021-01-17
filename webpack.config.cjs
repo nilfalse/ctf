@@ -11,17 +11,18 @@ const { merge } = require('webpack-merge');
 
 const pkg = require('./package.json');
 
-module.exports = function (_, { hot }) {
+module.exports = function (env) {
   const bundlePath = path.resolve(__dirname, 'bundle');
   const popupHtmlPath = 'popup.html';
 
-  const isDevelopment = hot;
+  const isDevelopment = env.WEBPACK_SERVE;
 
   process.env.NODE_ENV = isDevelopment ? 'development' : 'production';
 
   const devServer = {
     contentBase: bundlePath,
     port: 35727,
+    hot: isDevelopment,
     writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
     disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
   };

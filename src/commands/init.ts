@@ -2,8 +2,8 @@ import { publish } from '../background/app';
 import { requests } from '../background/repositories';
 import { error } from '../debug';
 import { CountryRequestParams } from '../lib/country_request';
-import * as xpc from '../lib/xpc';
-import { render } from '../rendering';
+import { render } from '../services/rendering';
+import * as xpc from '../services/xpc';
 
 import { CountryReplyCommand } from './country_reply';
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';

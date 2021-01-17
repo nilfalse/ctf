@@ -41,7 +41,7 @@ data/airports.json :
 	ls -lAh data/airports.json
 data/maxmind/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
-	curl -v "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" | tar --strip-components 1 -xzv -C `dirname $@`
+	curl -vL "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" | tar --strip-components 1 -xzv -C `dirname $@`
 	ls -lAh `dirname $@`
 
 .PHONY : lint prettier eslint
