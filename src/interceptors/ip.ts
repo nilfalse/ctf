@@ -1,5 +1,5 @@
 import { CountryRequest } from '../lib/country_request';
-import * as maxmind from '../services/geo';
+import * as maxmind from '../services/geo/geo_service';
 
 import { Match } from './_common';
 

@@ -1,3 +1,5 @@
+// TODO https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas
+
 interface CanvasSize {
   width: number;
   height: number;

@@ -1,4 +1,4 @@
-import * as raster from './raster';
+import * as raster from './raster_service';
 
 describe('Raster rendering subsystem', () => {
   let createElementSpy: jest.SpyInstance;

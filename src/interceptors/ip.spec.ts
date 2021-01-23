@@ -2,7 +2,7 @@ import { CountryRequest } from '../lib/country_request';
 
 import * as ip from './ip';
 
-jest.mock('../services/geo');
+jest.mock('../services/geo/geo_service');
 
 describe('IP interceptor', () => {
   describe('when dispatching a request', () => {

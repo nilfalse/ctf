@@ -3,7 +3,7 @@ import * as common from '../util/common';
 
 import * as cloudflare from './cloudflare';
 
-jest.mock('../services/airports');
+jest.mock('../services/airports/airports_service');
 
 describe('Cloudflare interceptor', () => {
   describe('when dispatching', () => {

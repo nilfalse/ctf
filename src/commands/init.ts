@@ -1,7 +1,7 @@
 import { requests } from '../controllers/storage_controller';
 import { CountryRequestParams } from '../lib/country_request';
-import { render } from '../services/rendering';
-import * as xpc from '../services/xpc';
+import { render } from '../services/rendering/rendering_service';
+import * as xpc from '../services/xpc/xpc_service';
 import { error } from '../util/debug';
 import { publish } from '../util/mediator';
 

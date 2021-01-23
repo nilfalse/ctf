@@ -1,4 +1,4 @@
-import * as svg from './svg';
+import * as svg from './svg_service';
 
 describe('SVG rendering subsystem', () => {
   const sizes = [16, 32, 64];

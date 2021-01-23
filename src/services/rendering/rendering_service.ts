@@ -1,5 +1,5 @@
-import * as raster from './raster';
-import * as svg from './svg';
+import * as raster from '../raster/raster_service';
+import * as svg from '../svg/svg_service';
 
 export const sizes = [16, 32, 64, 128, 160] as const;
 

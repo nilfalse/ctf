@@ -1,10 +1,10 @@
-import * as raster from './raster';
-import * as svg from './svg';
+import * as raster from '../raster/raster_service';
+import * as svg from '../svg/svg_service';
 
-import { render } from '.';
+import { render } from './rendering_service';
 
-jest.mock('./raster');
-jest.mock('./svg');
+jest.mock('../raster/raster_service');
+jest.mock('../svg/svg_service');
 
 describe('Rendering subsystem', () => {
   const emoji = '🇩🇰';

@@ -1,4 +1,4 @@
-const originalModule = jest.requireActual('..');
+const originalModule = jest.requireActual('../airports_service');
 
 jest
   .spyOn(originalModule, 'load')

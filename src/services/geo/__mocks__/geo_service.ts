@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-const originalModule = jest.requireActual('../../geo');
+const originalModule = jest.requireActual('../geo_service');
 
 const reader = fs
   .readFile(

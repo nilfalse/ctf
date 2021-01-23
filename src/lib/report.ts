@@ -1,6 +1,6 @@
 import { Match } from '../interceptors';
-import { fromISOCountryCode } from '../services/emoji';
-import { render } from '../services/rendering';
+import { fromISOCountryCode } from '../services/emoji/emoji_service';
+import { render } from '../services/rendering/rendering_service';
 
 export class Report {
   constructor(public traceroute: ReadonlyArray<Match> = []) {}
