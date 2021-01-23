@@ -1,4 +1,4 @@
-import { requests } from '../background/repositories';
+import { requests } from '../controllers/storage_controller';
 import { CountryRequestParams } from '../lib/country_request';
 import { render } from '../services/rendering';
 import * as xpc from '../services/xpc';

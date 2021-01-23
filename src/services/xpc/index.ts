@@ -1,4 +1,4 @@
-import { tabDetails, TabDetails } from '../../background/repositories';
+import { tabDetails, TabDetails } from '../../controllers/storage_controller';
 import { CountryRequest } from '../../lib/country_request';
 
 function getTabDetails(tabId: number) {

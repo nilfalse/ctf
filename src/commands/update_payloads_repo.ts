@@ -1,4 +1,4 @@
-import { requests } from '../background/repositories';
+import { requests } from '../controllers/storage_controller';
 import { CountryRequest } from '../lib/country_request';
 
 export class UpdatePayloadsRepoCommand {

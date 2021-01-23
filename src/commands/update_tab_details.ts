@@ -1,4 +1,4 @@
-import { TabDetails, tabDetails } from '../background/repositories';
+import { TabDetails, tabDetails } from '../controllers/storage_controller';
 
 export class UpdateTabDetailsCommand {
   constructor(public tabId: number, public details: TabDetails | null) {}

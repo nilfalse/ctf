@@ -1,4 +1,4 @@
-import * as controller from './controller';
+import * as controller from './background_controller';
 
 describe('Background controller', () => {
   let browserMock: typeof chrome;

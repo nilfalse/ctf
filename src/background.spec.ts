@@ -1,6 +1,6 @@
-import * as controller from './background/controller';
+import * as controller from './controllers/background_controller';
 
-jest.mock('./background/controller');
+jest.mock('./controllers/background_controller');
 
 describe('Background script', () => {
   it('should initialize background controller', () => {
