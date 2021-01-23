@@ -1,5 +1,5 @@
-import * as common from '../common';
 import { CountryRequest } from '../lib/country_request';
+import * as common from '../util/common';
 
 import * as cloudflare from './cloudflare';
 

@@ -1,4 +1,4 @@
-import * as debug from '../debug';
+import * as debug from '../util/debug';
 
 export interface CountryRequestParams {
   url?: string;

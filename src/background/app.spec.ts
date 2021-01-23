@@ -1,8 +1,8 @@
-import * as debug from '../debug';
+import * as debug from '../util/debug';
 
 import * as app from './app';
 
-jest.mock('../debug');
+jest.mock('../util/debug');
 
 function resetObservers() {
   app.observers.length = 0;

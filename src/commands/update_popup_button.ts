@@ -1,5 +1,5 @@
-import { error } from '../debug';
 import { Report } from '../lib/report';
+import { error } from '../util/debug';
 
 function reportErrorIfAny() {
   if (chrome.runtime.lastError) {

@@ -1,5 +1,5 @@
 import * as backgroundController from './background/controller';
-import * as debug from './debug';
+import * as debug from './util/debug';
 
 debug.intro();
 

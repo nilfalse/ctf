@@ -1,14 +1,13 @@
 import { mount, ReactWrapper } from 'enzyme';
 
-import { PopupContent } from '../view/components/popup_content';
-import { CloudflareTrace } from '../view/components/traceroute/cloudflare';
-import { IPTrace } from '../view/components/traceroute/ip';
-
-import * as successCloudflareCPH from './__fixtures__/success_cloudflare-cph';
-import * as successCloudflarePoweredBy from './__fixtures__/success_cloudflare_poweredby';
-import * as successIPSwitzerland from './__fixtures__/success_ip-ch';
-import * as successIPNetherlandsUS from './__fixtures__/success_ip-nl-us';
-import * as harness from './__harness__';
+import * as successCloudflareCPH from './popup/__fixtures__/success_cloudflare-cph';
+import * as successCloudflarePoweredBy from './popup/__fixtures__/success_cloudflare_poweredby';
+import * as successIPSwitzerland from './popup/__fixtures__/success_ip-ch';
+import * as successIPNetherlandsUS from './popup/__fixtures__/success_ip-nl-us';
+import * as harness from './popup/__harness__';
+import { PopupContent } from './view/components/popup_content';
+import { CloudflareTrace } from './view/components/traceroute/cloudflare';
+import { IPTrace } from './view/components/traceroute/ip';
 
 describe('Popup', () => {
   describe('for a Switzerland-based website', () => {
