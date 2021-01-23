@@ -1,9 +1,9 @@
-import { publish } from '../background/app';
 import { requests } from '../background/repositories';
 import { CountryRequestParams } from '../lib/country_request';
 import { render } from '../services/rendering';
 import * as xpc from '../services/xpc';
 import { error } from '../util/debug';
+import { publish } from '../util/mediator';
 
 import { CountryReplyCommand } from './country_reply';
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';

@@ -1,6 +1,6 @@
-import { publish } from '../background/app';
 import { CountryRequest, CountryRequestParams } from '../lib/country_request';
 import { Report } from '../lib/report';
+import { publish } from '../util/mediator';
 
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
 

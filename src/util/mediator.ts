@@ -1,4 +1,4 @@
-import * as debug from '../util/debug';
+import * as debug from './debug';
 
 interface Command {
   execute(...args: unknown[]): Promise<unknown> | void;
