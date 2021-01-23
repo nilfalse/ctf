@@ -4,7 +4,7 @@ import * as harness from './__harness__';
 
 import * as interceptors from '.';
 
-describe('Country Reply Command', () => {
+describe('Interceptors', () => {
   let request: CountryRequest;
 
   beforeEach(() => {

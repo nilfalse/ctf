@@ -6,14 +6,14 @@ import { UpdateTabDetailsCommand } from '../commands/update_tab_details';
 import * as app from './app';
 
 export function start() {
-  app.subscribe(CountryReplyCommand, function ({ tabId, request }, matches) {
+  app.subscribe(CountryReplyCommand, function ({ tabId, request }, country) {
     app.publish(
       new UpdateTabDetailsCommand(tabId, {
         request,
-        matches,
+        matches: country.traceroute,
       })
     );
-    app.publish(new UpdatePopupButtonCommand(tabId, matches));
+    app.publish(new UpdatePopupButtonCommand(tabId, country));
   });
 
   app.publish(new InitCommand());

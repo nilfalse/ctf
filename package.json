@@ -116,8 +116,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 69.4,
-        "statements": 69.1
+        "lines": 68,
+        "statements": 68
       }
     },
     "setupFiles": [

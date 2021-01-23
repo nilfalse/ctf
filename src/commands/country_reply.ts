@@ -1,5 +1,6 @@
 import { publish } from '../background/app';
 import { CountryRequest, CountryRequestParams } from '../lib/country_request';
+import { Report } from '../lib/report';
 
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
 
@@ -22,6 +23,6 @@ export class CountryReplyCommand {
       /* webpackChunkName: "interceptors" */ '../interceptors'
     );
 
-    return interceptors.run(this.request);
+    return new Report(await interceptors.run(this.request));
   }
 }
