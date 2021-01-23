@@ -160,7 +160,7 @@ module.exports = function (env) {
         new HtmlWebpackPlugin({
           title: 'Popup',
           filename: popupHtmlPath,
-          template: 'src/popup/template.html',
+          template: 'src/popup.template.html',
         }),
       ],
     }),
