@@ -4,10 +4,6 @@ import { UpdatePopupButtonCommand } from '../commands/update_popup_button';
 import { UpdateTabDetailsCommand } from '../commands/update_tab_details';
 import * as mediator from '../util/mediator';
 
-import './network_controller';
-import './tab_controller';
-import './xpc_controller';
-
 export function start() {
   mediator.subscribe(
     CountryReplyCommand,
