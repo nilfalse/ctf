@@ -16,14 +16,14 @@ export const intro =
         // ignore in test & production
       };
 
-export function log(...msg: any) {
-  console.log(...msg);
+export function log(...args: Parameters<typeof console.log>) {
+  console.log(...args);
 }
 
-export function error(...msg: any) {
-  console.error(...msg);
+export function error(...args: Parameters<typeof console.error>) {
+  console.error(...args);
 }
 
-export function assert(condition: any, message?: string) {
-  console.assert(condition, message);
+export function assert(...args: Parameters<typeof console.assert>) {
+  console.assert(...args);
 }

@@ -110,9 +110,7 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "bin/**/*.{js,jsx,ts,tsx}",
       "!bin/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/**/__test__/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/**/__fixtures__/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/**/__harness__/**/*.{js,jsx,ts,tsx}"
+      "!<rootDir>/**/__test__/**/*.{js,jsx,ts,tsx}"
     ],
     "coverageThreshold": {
       "global": {

@@ -1,6 +1,6 @@
 export function isKeyof<T extends Record<string, unknown>>(
   obj: T,
-  possibleKey: keyof any
+  possibleKey: string | number | symbol
 ): possibleKey is keyof T {
   return possibleKey in obj;
 }
