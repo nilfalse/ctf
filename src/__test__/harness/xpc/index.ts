@@ -6,12 +6,16 @@ interface MockXPC {
   traceroute: ReadonlyArray<Match>;
 }
 
-export function popup(content: MockXPC, searchParamsStr = '?tab=123') {
+export function popup(
+  contentPromise: Promise<MockXPC>,
+  searchParamsStr = '?tab=123'
+) {
   const { location } = globalThis;
 
   const browser = stub();
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    const content = await contentPromise;
     browser.runtime.lastError = null;
     browser.runtime.sendMessage = jest
       .fn()

@@ -1,6 +1,25 @@
 import { Reader, CountryResponse } from 'maxmind';
 
-export function createReader(db: Buffer) {
+export let db: Reader<CountryResponse> | null = null;
+
+let databasePromise: Promise<void> | null = null;
+export function init() {
+  if (!databasePromise) {
+    databasePromise = _load()
+      .then(createReader)
+      .then((reader) => {
+        db = reader;
+      });
+  }
+
+  return databasePromise;
+}
+
+export function _load() {
+  return fetch('/data/GeoLite2-Country.mmdb').then(responseToBuffer);
+}
+
+function createReader(db: Buffer) {
   return new Reader<CountryResponse>(db);
 }
 
@@ -12,15 +31,4 @@ async function responseToBuffer(response: Response) {
   };
 
   return db;
-}
-
-let databasePromise: Promise<Reader<CountryResponse>> | null = null;
-export function load() {
-  if (!databasePromise) {
-    databasePromise = fetch('/data/GeoLite2-Country.mmdb')
-      .then(responseToBuffer)
-      .then(createReader);
-  }
-
-  return databasePromise;
 }

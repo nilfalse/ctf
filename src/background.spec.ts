@@ -1,10 +1,12 @@
 import * as harness from './__test__/harness';
 import * as controllers from './controllers';
 import * as airports from './services/airports/airports_service';
+import * as geo from './services/geo/geo_service';
 import * as debug from './util/debug';
 
 jest.mock('./controllers');
 jest.mock('./services/airports/airports_service');
+jest.mock('./services/geo/geo_service');
 
 describe('Background script', () => {
   describe('entrypoint', () => {
@@ -25,6 +27,7 @@ describe('Background script', () => {
   });
 
   describe('controllers', () => {
+    beforeAll(geo.init);
     beforeAll(airports.init);
 
     const browser = harness.browser.stub();

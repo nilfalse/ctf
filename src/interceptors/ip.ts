@@ -1,5 +1,5 @@
 import { Request } from '../lib/request';
-import * as maxmind from '../services/geo/geo_service';
+import { db } from '../services/geo/geo_service';
 
 import { Match } from './_common';
 
@@ -15,8 +15,7 @@ export async function dispatch({
     return [];
   }
 
-  const geoip = await maxmind.load();
-  const countryResponse = geoip.get(ip);
+  const countryResponse = db.get(ip);
   if (!countryResponse) {
     return [];
   }

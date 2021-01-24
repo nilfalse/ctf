@@ -1,10 +1,13 @@
 import { Request } from '../lib/request';
+import * as geo from '../services/geo/geo_service';
 
 import * as ip from './ip';
 
 jest.mock('../services/geo/geo_service');
 
 describe('IP interceptor', () => {
+  beforeAll(geo.init);
+
   describe('when dispatching a request', () => {
     describe('without ip field', () => {
       it('should not report any matches', () =>
