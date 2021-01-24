@@ -1,11 +1,9 @@
 import { requests } from '../controllers/storage_controller';
-import { CountryRequestParams } from '../lib/country_request';
 import { render } from '../services/rendering/rendering_service';
 import * as xpc from '../services/xpc/xpc_service';
 import { error } from '../util/debug';
 import { publish } from '../util/mediator';
 
-import { CountryReplyCommand } from './country_reply';
 import { UpdatePayloadsRepoCommand } from './update_payloads_repo';
 import { UpdateTabDetailsCommand } from './update_tab_details';
 
@@ -52,25 +50,10 @@ async function handleIncomingMessage(
   sendResponse(await xpc.handle(message));
 }
 
-interface WebRequestPayload extends CountryRequestParams {
-  tabId: number;
-}
-
-function handleWebRequestCompleted(payload: WebRequestPayload) {
-  const { tabId } = payload;
-
-  if (tabId === -1) {
-    return; // skip extension popups
-  }
-
-  publish(new CountryReplyCommand(tabId, payload));
-}
-
 export class InitCommand {
   execute() {
     this._subscribeXPC();
     this._subscribeToTabs();
-    this._subscribeToNetwork();
   }
 
   _subscribeXPC() {
@@ -89,19 +72,6 @@ export class InitCommand {
 
     chrome.tabs.onUpdated.addListener(
       module.hot ? (...args) => handleTabUpdated(...args) : handleTabUpdated
-    );
-  }
-
-  _subscribeToNetwork() {
-    chrome.webRequest.onCompleted.addListener(
-      module.hot
-        ? (res) => handleWebRequestCompleted(res)
-        : handleWebRequestCompleted,
-      {
-        urls: ['<all_urls>'],
-        types: ['main_frame'],
-      },
-      ['responseHeaders']
     );
   }
 }
