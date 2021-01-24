@@ -1,8 +1,10 @@
 import * as harness from './__test__/harness';
-import * as backgroundController from './controllers/background_controller';
+import * as controllers from './controllers';
+import * as airports from './services/airports/airports_service';
 import * as debug from './util/debug';
 
-jest.mock('./controllers/background_controller');
+jest.mock('./controllers');
+jest.mock('./services/airports/airports_service');
 
 describe('Background script', () => {
   describe('entrypoint', () => {
@@ -15,17 +17,19 @@ describe('Background script', () => {
       spy.mockRestore();
     });
 
-    it('should kick off background controller', () => {
+    it('should kick off controllers', () => {
       const testingSideEffect = require('./background');
 
-      expect(backgroundController.start).toHaveBeenCalledTimes(1);
+      expect(controllers.start).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('controllers', () => {
+    beforeAll(airports.init);
+
     const browser = harness.browser.stub();
 
-    beforeEach(jest.requireActual('./controllers/background_controller').start);
+    beforeEach(jest.requireActual('./controllers').start);
 
     it('should subscribe to network requests', () => {
       expect(browser.webRequest.onCompleted.addListener).toHaveBeenCalledTimes(

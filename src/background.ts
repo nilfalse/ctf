@@ -1,8 +1,6 @@
-import * as backgroundController from './controllers/background_controller';
+import * as controllers from './controllers';
 import * as debug from './util/debug';
-
-import './controllers';
 
 debug.intro();
 
-backgroundController.start();
+controllers.start();

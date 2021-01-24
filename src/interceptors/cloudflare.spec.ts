@@ -1,4 +1,5 @@
 import { Request } from '../lib/request';
+import * as airports from '../services/airports/airports_service';
 import * as common from '../util/common';
 
 import * as cloudflare from './cloudflare';
@@ -6,6 +7,8 @@ import * as cloudflare from './cloudflare';
 jest.mock('../services/airports/airports_service');
 
 describe('Cloudflare interceptor', () => {
+  beforeAll(airports.init);
+
   describe('when dispatching', () => {
     describe('with no ray', () => {
       it('should not report any matches', () =>

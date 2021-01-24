@@ -1,6 +1,5 @@
 import { Request } from '../lib/request';
 import * as airports from '../services/airports/airports_service';
-import { lookupUpperCase } from '../util/common';
 
 import { Match } from './_common';
 
@@ -38,7 +37,7 @@ export async function dispatch(
   }
 
   const [, iataCode] = ray;
-  const airport = lookupUpperCase(await airports.load(), iataCode);
+  const airport = airports.lookup(iataCode);
   if (!airport) {
     return [];
   }

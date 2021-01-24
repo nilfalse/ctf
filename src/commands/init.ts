@@ -1,5 +1,7 @@
+import * as airports from '../services/airports/airports_service';
+
 export class InitCommand {
-  execute() {
-    // noop
+  async execute() {
+    await airports.init();
   }
 }
