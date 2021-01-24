@@ -11,7 +11,7 @@ type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
   ? ElementType
   : never;
 
-type RenderingResult = {
+export type RenderingResult = {
   [key in ElementType<Size>]: ImageData;
 };
 

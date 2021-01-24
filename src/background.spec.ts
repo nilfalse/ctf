@@ -22,8 +22,8 @@ describe('Background script', () => {
     });
   });
 
-  describe('main controller', () => {
-    const browser = harness.browser.mock();
+  describe('controllers', () => {
+    const browser = harness.browser.stub();
 
     beforeEach(jest.requireActual('./controllers/background_controller').start);
 

@@ -3,7 +3,7 @@ export const state = 'success' as const;
 export const request = {
   url: 'https://ilin.dk/',
   ip: '104.27.165.61',
-  responseHeaders: [
+  headers: [
     {
       name: 'cf-ray',
       value: '5d5d5d5d5d5d5d5d-CPH',
@@ -27,7 +27,7 @@ export const request = {
   ],
 };
 
-export const matches = [
+export const traceroute = [
   {
     heuristic: 'cloudflare',
     score: 1,

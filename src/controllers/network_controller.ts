@@ -1,5 +1,5 @@
-import { CountryReplyCommand } from '../commands/country_reply';
 import { InitCommand } from '../commands/init';
+import { ReportReadyCommand } from '../commands/report_ready';
 import { CountryRequestParams } from '../lib/country_request';
 import * as mediator from '../util/mediator';
 
@@ -27,5 +27,5 @@ function handleWebRequestCompleted(payload: WebRequestPayload) {
     return; // skip extension popups
   }
 
-  mediator.publish(new CountryReplyCommand(tabId, payload));
+  mediator.publish(new ReportReadyCommand(tabId, payload));
 }

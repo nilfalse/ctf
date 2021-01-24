@@ -30,7 +30,7 @@
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": [
           "error",
-          { "functions": false }
+          { "functions": false, "classes": false }
         ],
 
         "no-useless-constructor": "off",

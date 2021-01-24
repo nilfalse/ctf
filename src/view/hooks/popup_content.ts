@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { TabDetails } from '../../controllers/storage_controller';
-import * as xpc from '../../services/xpc/xpc_service';
+import { Report } from '../../lib/report';
+import * as xpc from '../../services/xpc/xpc_popup_service';
 
 import { useQueryParams } from './query_params';
 
@@ -10,7 +10,7 @@ interface PopupContentInit {
 }
 interface PopupContentSuccess {
   state: 'success';
-  details: TabDetails | null;
+  report: Report | null;
 }
 interface PopupContentFailure {
   state: 'failure';
@@ -39,13 +39,13 @@ export function usePopupContent() {
       return;
     }
 
-    xpc.dispatch('getTabDetails', tabId).then(
-      (details) => {
+    xpc.dispatch('fetchReport', tabId).then(
+      (report) => {
         if (shouldIgnore) {
           return;
         }
         setResponse({
-          details,
+          report,
           state: 'success',
         });
       },

@@ -1,52 +1,30 @@
 import { InitCommand } from '../commands/init';
-import { UpdatePayloadsRepoCommand } from '../commands/update_payloads_repo';
-import { UpdateTabDetailsCommand } from '../commands/update_tab_details';
-import { requests } from '../controllers/storage_controller';
-import { render } from '../services/rendering/rendering_service';
-import { error } from '../util/debug';
+import { TabRemoveCommand } from '../commands/tab_remove';
+import { TabUpdateCommand } from '../commands/tab_update';
 import * as mediator from '../util/mediator';
 
-const defaultIconPromise = render('🏁');
-
 mediator.subscribe(InitCommand, function () {
-  chrome.tabs.onRemoved.addListener(
-    module.hot ? (...args) => handleTabClosed(...args) : handleTabClosed
-  );
+  const controller = new TabController();
 
-  chrome.tabs.onUpdated.addListener(
-    module.hot ? (...args) => handleTabUpdated(...args) : handleTabUpdated
-  );
+  chrome.tabs.onUpdated.addListener(controller.handleTabUpdated);
+
+  chrome.tabs.onRemoved.addListener(controller.handleTabRemoved);
 });
 
-function handleTabClosed(tabId: number, removeInfo: chrome.tabs.TabRemoveInfo) {
-  mediator.publish(new UpdatePayloadsRepoCommand(tabId, null));
-  mediator.publish(new UpdateTabDetailsCommand(tabId, null));
-}
+class TabController {
+  handleTabUpdated(
+    tabId: number,
+    changeInfo: chrome.tabs.TabChangeInfo,
+    tab: chrome.tabs.Tab
+  ) {
+    if (changeInfo.status !== 'loading') {
+      return;
+    }
 
-async function handleTabUpdated(
-  tabId: number,
-  changeInfo: chrome.tabs.TabChangeInfo,
-  tab: chrome.tabs.Tab
-) {
-  if (changeInfo.status !== 'loading') {
-    return;
+    return mediator.publish(new TabUpdateCommand(tabId));
   }
 
-  if (requests.fetch(tabId) === null) {
-    chrome.pageAction.setPopup(
-      { tabId, popup: 'popup.html' },
-      reportErrorIfAny
-    );
-    chrome.pageAction.setIcon(
-      { tabId, imageData: await defaultIconPromise },
-      reportErrorIfAny
-    );
-    chrome.pageAction.show(tabId, reportErrorIfAny);
-  }
-}
-
-function reportErrorIfAny() {
-  if (chrome.runtime.lastError) {
-    error(chrome.runtime.lastError);
+  handleTabRemoved(tabId: number, removeInfo: chrome.tabs.TabRemoveInfo) {
+    return mediator.publish(new TabRemoveCommand(tabId));
   }
 }

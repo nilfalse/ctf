@@ -10,10 +10,12 @@ import { CloudflareTrace } from './view/components/traceroute/cloudflare';
 import { IPTrace } from './view/components/traceroute/ip';
 
 describe('Popup', () => {
+  harness.browser.i18n();
+
   describe('for a Switzerland-based website', () => {
     let popup: ReactWrapper;
 
-    harness.popup.content(successIPSwitzerland);
+    harness.xpc.popup(successIPSwitzerland);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
@@ -36,7 +38,7 @@ describe('Popup', () => {
   describe('for a Netherlands-based website with legal entity in the US', () => {
     let popup: ReactWrapper;
 
-    harness.popup.content(successIPNetherlandsUS);
+    harness.xpc.popup(successIPNetherlandsUS);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
@@ -60,7 +62,7 @@ describe('Popup', () => {
   describe('for a Cloudflare-protected website', () => {
     let popup: ReactWrapper;
 
-    harness.popup.content(successCloudflareCPH);
+    harness.xpc.popup(successCloudflareCPH);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
@@ -91,7 +93,7 @@ describe('Popup', () => {
   describe('for a website behind Cloudflare with Powered By info exposed', () => {
     let popup: ReactWrapper;
 
-    harness.popup.content(successCloudflarePoweredBy);
+    harness.xpc.popup(successCloudflarePoweredBy);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);

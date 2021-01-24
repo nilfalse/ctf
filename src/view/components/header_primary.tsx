@@ -11,7 +11,7 @@ import './header_primary.css';
 
 interface HeaderPrimaryProps {
   request: CountryRequest;
-  matches: ReadonlyArray<Match>;
+  traceroute: ReadonlyArray<Match>;
 }
 
 function getHost(url: string) {
@@ -20,8 +20,11 @@ function getHost(url: string) {
   return host.startsWith('www.') ? host.substring(4) : host;
 }
 
-export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ request, matches }) => {
-  if (matches.length === 0) {
+export const HeaderPrimary: FC<HeaderPrimaryProps> = ({
+  request,
+  traceroute,
+}) => {
+  if (traceroute.length === 0) {
     return (
       <div className="header-primary header-primary_empty">
         <img
@@ -43,7 +46,7 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ request, matches }) => {
   }
 
   const country = chrome.i18n.getMessage(
-    'country_name_' + matches[0].isoCountry
+    'country_name_' + traceroute[0].isoCountry
   );
 
   return (

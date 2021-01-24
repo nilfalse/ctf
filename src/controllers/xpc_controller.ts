@@ -1,5 +1,5 @@
 import { InitCommand } from '../commands/init';
-import * as xpc from '../services/xpc/xpc_service';
+import * as xpc from '../services/xpc/xpc_background_service';
 import * as mediator from '../util/mediator';
 
 mediator.subscribe(InitCommand, function () {

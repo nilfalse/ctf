@@ -1,35 +1,26 @@
-import { Match } from '../interceptors';
-import { CountryRequest } from '../lib/country_request';
+import { ReportEmptyCommand } from '../commands/report_empty';
+import { ReportReadyCommand } from '../commands/report_ready';
+import { TabRemoveCommand } from '../commands/tab_remove';
+import { TabUpdateCommand } from '../commands/tab_update';
+import { Report } from '../lib/report';
+import * as storageService from '../services/storage/storage_service';
+import * as mediator from '../util/mediator';
 
-export interface TabDetails {
-  request: CountryRequest;
-  matches: ReadonlyArray<Match>;
-}
+mediator.subscribe(TabUpdateCommand, function ({ tabId }) {
+  let report = storageService.reports.fetch(tabId);
 
-class Repository<T> {
-  private _storage: Map<number, T>;
+  if (report === null) {
+    report = new Report();
+    storageService.reports.update(tabId, report);
 
-  constructor() {
-    this._storage = new Map();
+    mediator.publish(new ReportEmptyCommand(tabId));
   }
+});
 
-  update(id: number, value: T | null) {
-    if (value !== null) {
-      this._storage.set(id, value);
-    } else {
-      this._storage.delete(id);
-    }
-  }
+mediator.subscribe(ReportReadyCommand, function ({ tabId, report }) {
+  storageService.reports.update(tabId, report);
+});
 
-  fetch(id: number): T | null {
-    return this._storage.has(id) ? this._storage.get(id) : null;
-  }
-
-  isEmpty() {
-    return this._storage.size === 0;
-  }
-}
-
-export const requests = new Repository<CountryRequest>();
-
-export const tabDetails = new Repository<TabDetails>();
+mediator.subscribe(TabRemoveCommand, function ({ tabId }) {
+  storageService.reports.remove(tabId);
+});

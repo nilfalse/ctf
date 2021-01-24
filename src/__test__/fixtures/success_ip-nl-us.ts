@@ -3,13 +3,13 @@ export const state = 'success';
 export const request = {
   url: 'https://duckduckgo.com/',
   ip: '40.114.177.156',
-  responseHeaders: [
+  headers: [
     { name: 'status', value: '304' },
     { name: 'server', value: 'nginx' },
   ],
 };
 
-export const matches = [
+export const traceroute = [
   {
     heuristic: 'ip',
     score: 0.5,
@@ -18,4 +18,4 @@ export const matches = [
     continent: 'EU',
     extra: { registeredCountry: 'US' },
   },
-];
+] as const;

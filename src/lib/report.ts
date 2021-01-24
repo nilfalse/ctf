@@ -2,12 +2,18 @@ import { Match } from '../interceptors';
 import { fromISOCountryCode } from '../services/emoji/emoji_service';
 import { render } from '../services/rendering/rendering_service';
 
-export class Report {
-  constructor(public traceroute: ReadonlyArray<Match> = []) {}
+import { CountryRequest } from './country_request';
 
-  get isEmpty() {
-    return this.traceroute.length === 0;
-  }
+interface JSONSerializedReport {
+  request?: CountryRequest;
+  traceroute?: ReadonlyArray<Match>;
+}
+
+export class Report {
+  constructor(
+    public request?: CountryRequest,
+    public traceroute: ReadonlyArray<Match> = []
+  ) {}
 
   get name() {
     const [firstMatch] = this.traceroute;
@@ -27,5 +33,15 @@ export class Report {
 
   get icons() {
     return this.flag.then((flag) => render(flag.emoji));
+  }
+
+  get isEmpty() {
+    return this.traceroute.length === 0;
+  }
+
+  static fromJSON(json: JSONSerializedReport) {
+    const request = CountryRequest.fromJSON(json.request);
+
+    return new Report(request, json.traceroute);
   }
 }

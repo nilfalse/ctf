@@ -3,7 +3,7 @@ export const state = 'success';
 export const request = {
   url: 'https://peakon.com/',
   ip: '104.26.7.76',
-  responseHeaders: [
+  headers: [
     { name: 'x-powered-by', value: 'WP Engine' },
     { name: 'x-cacheable', value: 'SHORT' },
     { name: 'x-cache', value: 'HIT: 8' },
@@ -16,7 +16,7 @@ export const request = {
   ],
 };
 
-export const matches = [
+export const traceroute = [
   {
     heuristic: 'cloudflare',
     score: 1,
@@ -33,4 +33,4 @@ export const matches = [
     continent: 'NA',
     extra: null,
   },
-];
+] as const;

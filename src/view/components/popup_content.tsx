@@ -11,11 +11,11 @@ import { Traceroute } from './traceroute';
 export const _PopupContent: FC = () => {
   const popupResponse = usePopupContent();
 
-  if (popupResponse.state === 'success' && popupResponse.details) {
+  if (popupResponse.state === 'success' && popupResponse.report) {
     return (
       <>
-        <HeaderPrimary {...popupResponse.details} />
-        <Traceroute {...popupResponse.details} />
+        <HeaderPrimary {...popupResponse.report} />
+        <Traceroute {...popupResponse.report} />
       </>
     );
   } else {

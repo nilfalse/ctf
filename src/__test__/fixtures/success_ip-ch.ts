@@ -5,7 +5,7 @@ export const request = {
   ip: '185.70.41.35',
 };
 
-export const matches = [
+export const traceroute = [
   {
     heuristic: 'ip',
     score: 0.5,

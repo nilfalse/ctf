@@ -18,13 +18,13 @@ const traces = {
 
 interface TracerouteProps {
   request: CountryRequest;
-  matches: ReadonlyArray<Match>;
+  traceroute: ReadonlyArray<Match>;
 }
 
-export const Traceroute: FC<TracerouteProps> = ({ request, matches }) => {
+export const Traceroute: FC<TracerouteProps> = ({ request, traceroute }) => {
   const items = [];
   let ipItem = null;
-  for (const match of matches) {
+  for (const match of traceroute) {
     if (match.heuristic === 'ip') {
       ipItem = <IPTrace request={request} match={match} />;
     } else if (isKeyof(traces, match.heuristic)) {
