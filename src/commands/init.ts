@@ -1,6 +1,5 @@
 import { requests } from '../controllers/storage_controller';
 import { render } from '../services/rendering/rendering_service';
-import * as xpc from '../services/xpc/xpc_service';
 import { error } from '../util/debug';
 import { publish } from '../util/mediator';
 
@@ -42,27 +41,9 @@ async function handleTabUpdated(
   }
 }
 
-async function handleIncomingMessage(
-  message: unknown,
-  sender: chrome.runtime.MessageSender,
-  sendResponse: (response?: unknown) => void
-) {
-  sendResponse(await xpc.handle(message));
-}
-
 export class InitCommand {
   execute() {
-    this._subscribeXPC();
     this._subscribeToTabs();
-  }
-
-  _subscribeXPC() {
-    chrome.runtime.onMessage.addListener(
-      module.hot
-        ? (sender, payload, sendResponse) =>
-            handleIncomingMessage(sender, payload, sendResponse)
-        : handleIncomingMessage
-    );
   }
 
   _subscribeToTabs() {
