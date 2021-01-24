@@ -1,9 +1,9 @@
-import { Match } from '../../interceptors';
+import { Match } from '../../../interceptors';
 import {
   CountryRequest,
   CountryRequestParams,
-} from '../../lib/country_request';
-import * as popupContent from '../../view/hooks/popup_content';
+} from '../../../lib/country_request';
+import * as popupContent from '../../../view/hooks/popup_content';
 
 type HarnessContentParam =
   | popupContent.PopupContentInit

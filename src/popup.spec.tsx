@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme';
 
+import * as harness from './__test__/harness';
 import * as successCloudflareCPH from './popup/__fixtures__/success_cloudflare-cph';
 import * as successCloudflarePoweredBy from './popup/__fixtures__/success_cloudflare_poweredby';
 import * as successIPSwitzerland from './popup/__fixtures__/success_ip-ch';
 import * as successIPNetherlandsUS from './popup/__fixtures__/success_ip-nl-us';
-import * as harness from './popup/__harness__';
 import { PopupContent } from './view/components/popup_content';
 import { CloudflareTrace } from './view/components/traceroute/cloudflare';
 import { IPTrace } from './view/components/traceroute/ip';
@@ -13,12 +13,12 @@ describe('Popup', () => {
   describe('for a Switzerland-based website', () => {
     let popup: ReactWrapper;
 
-    harness.content(successIPSwitzerland);
+    harness.popup.content(successIPSwitzerland);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
 
-      return harness.render.popupDependencies(popup);
+      return harness.popup.render.popupDependencies(popup);
     });
 
     afterEach(() => {
@@ -36,12 +36,12 @@ describe('Popup', () => {
   describe('for a Netherlands-based website with legal entity in the US', () => {
     let popup: ReactWrapper;
 
-    harness.content(successIPNetherlandsUS);
+    harness.popup.content(successIPNetherlandsUS);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
 
-      return harness.render.popupDependencies(popup);
+      return harness.popup.render.popupDependencies(popup);
     });
 
     afterEach(() => {
@@ -60,12 +60,12 @@ describe('Popup', () => {
   describe('for a Cloudflare-protected website', () => {
     let popup: ReactWrapper;
 
-    harness.content(successCloudflareCPH);
+    harness.popup.content(successCloudflareCPH);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
 
-      return harness.render.popupDependencies(popup);
+      return harness.popup.render.popupDependencies(popup);
     });
 
     afterEach(() => {
@@ -91,12 +91,12 @@ describe('Popup', () => {
   describe('for a website behind Cloudflare with Powered By info exposed', () => {
     let popup: ReactWrapper;
 
-    harness.content(successCloudflarePoweredBy);
+    harness.popup.content(successCloudflarePoweredBy);
 
     beforeEach(async () => {
       popup = mount(<PopupContent />);
 
-      return harness.render.popupDependencies(popup);
+      return harness.popup.render.popupDependencies(popup);
     });
 
     afterEach(() => {

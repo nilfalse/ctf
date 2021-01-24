@@ -6,10 +6,8 @@ interface Airport {
   iso_region: string;
 }
 
-export let load = function () {
-  const dataPromise = fetch('/data/airports.json').then<{
-    [key: string]: Airport;
-  }>((r) => r.json());
+export let load = function (): Promise<Record<string, Airport>> {
+  const dataPromise = fetch('/data/airports.json').then((r) => r.json());
 
   load = () => dataPromise;
   return dataPromise;

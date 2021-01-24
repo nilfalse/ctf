@@ -1,6 +1,5 @@
+import * as harness from '../__test__/harness';
 import { CountryRequest } from '../lib/country_request';
-
-import * as harness from './__harness__';
 
 import * as interceptors from '.';
 
@@ -29,7 +28,7 @@ describe('Interceptors', () => {
   });
 
   describe('with some heuristics scoring zero', () => {
-    harness.heuristics.mock([
+    harness.interceptors.heuristics([
       [{ score: 0.0 }],
       [{ score: 0.5 }],
       [{ score: 0.000001 }],
@@ -44,7 +43,7 @@ describe('Interceptors', () => {
   });
 
   describe('with some heuristics returning more than 1 match', () => {
-    harness.heuristics.mock([
+    harness.interceptors.heuristics([
       [{ score: 0.0 }, { score: 0.000001 }],
       [{ score: 0.005 }, { score: 0.0 }],
       [{ score: 0.006 }, { score: 0.004 }],
@@ -60,7 +59,7 @@ describe('Interceptors', () => {
   });
 
   describe('with unsorted matches', () => {
-    harness.heuristics.mock([
+    harness.interceptors.heuristics([
       [{ score: 0.5 }],
       [{ score: 0.4 }],
       [{ score: 0.6 }],
