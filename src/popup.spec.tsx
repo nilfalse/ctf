@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme';
 
+import * as successCloudflareCPH from './__test__/fixtures/success_cloudflare-cph';
+import * as successCloudflarePoweredBy from './__test__/fixtures/success_cloudflare_poweredby';
+import * as successIPSwitzerland from './__test__/fixtures/success_ip-ch';
+import * as successIPNetherlandsUS from './__test__/fixtures/success_ip-nl-us';
 import * as harness from './__test__/harness';
-import * as successCloudflareCPH from './popup/__fixtures__/success_cloudflare-cph';
-import * as successCloudflarePoweredBy from './popup/__fixtures__/success_cloudflare_poweredby';
-import * as successIPSwitzerland from './popup/__fixtures__/success_ip-ch';
-import * as successIPNetherlandsUS from './popup/__fixtures__/success_ip-nl-us';
 import { PopupContent } from './view/components/popup_content';
 import { CloudflareTrace } from './view/components/traceroute/cloudflare';
 import { IPTrace } from './view/components/traceroute/ip';
