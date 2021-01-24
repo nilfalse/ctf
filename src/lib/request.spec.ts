@@ -1,22 +1,22 @@
-import { CountryRequest } from './country_request';
+import { Request } from './request';
 
 describe('Country Request', () => {
   describe('when no IP address is present', () => {
     it('should return null for ip', () => {
-      expect(new CountryRequest({}).ip).toBeNull();
+      expect(new Request({}).ip).toBeNull();
     });
   });
 
   describe('when no URL address is present', () => {
     it('should return null for url', () => {
-      expect(new CountryRequest({}).url).toBeNull();
+      expect(new Request({}).url).toBeNull();
     });
   });
 
   describe('when getting a header', () => {
     describe('if no headers were provided initially', () => {
       it('should return empty string', () => {
-        const request = new CountryRequest({});
+        const request = new Request({});
 
         expect(request.getHeader('Content-Disposition')).toBe('');
       });
@@ -24,7 +24,7 @@ describe('Country Request', () => {
 
     describe('if header does not exist', () => {
       it('should return empty string', () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [],
         });
 
@@ -34,7 +34,7 @@ describe('Country Request', () => {
 
     describe(`if header's value was not defined`, () => {
       it('should return empty string', () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [{ name: 'Content-Disposition' }],
         });
 
@@ -45,10 +45,10 @@ describe('Country Request', () => {
 
   describe('when getting existing proper header', () => {
     const headerValue = 'attachment; filename="filename.jpg"';
-    let request: CountryRequest;
+    let request: Request;
 
     beforeEach(() => {
-      request = new CountryRequest({
+      request = new Request({
         responseHeaders: [{ name: 'Content-Disposition', value: headerValue }],
       });
     });

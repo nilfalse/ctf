@@ -1,10 +1,10 @@
-import { CountryRequest } from '../lib/country_request';
+import { Request } from '../lib/request';
 
 import { heuristics, Match } from './heuristics';
 
 export * from './heuristics';
 
-export async function run(request: CountryRequest) {
+export async function run(request: Request) {
   const matches = await Promise.all<ReadonlyArray<Match>>(
     heuristics.map((interceptor) => interceptor.dispatch(request))
   );

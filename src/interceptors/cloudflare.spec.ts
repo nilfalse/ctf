@@ -1,4 +1,4 @@
-import { CountryRequest } from '../lib/country_request';
+import { Request } from '../lib/request';
 import * as common from '../util/common';
 
 import * as cloudflare from './cloudflare';
@@ -9,15 +9,13 @@ describe('Cloudflare interceptor', () => {
   describe('when dispatching', () => {
     describe('with no ray', () => {
       it('should not report any matches', () =>
-        expect(
-          cloudflare.dispatch(new CountryRequest({}))
-        ).resolves.toHaveLength(0));
+        expect(cloudflare.dispatch(new Request({}))).resolves.toHaveLength(0));
     });
 
     describe('with an incorrect ray', () => {
       describe('of less than two components', () => {
         it('should not report any matches', () => {
-          const request = new CountryRequest({
+          const request = new Request({
             responseHeaders: [{ name: 'cf-ray', value: 'CPH' }],
           });
 
@@ -27,7 +25,7 @@ describe('Cloudflare interceptor', () => {
 
       describe('of more than two components', () => {
         it('should not report any matches', () => {
-          const request = new CountryRequest({
+          const request = new Request({
             responseHeaders: [{ name: 'cf-ray', value: 'cache-cph20634-CPH' }],
           });
 
@@ -38,7 +36,7 @@ describe('Cloudflare interceptor', () => {
 
     describe('with a correct ray that contains non-existing IATA code', () => {
       it('should not report any matches', () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-ZZZ' }],
         });
 
@@ -47,10 +45,10 @@ describe('Cloudflare interceptor', () => {
     });
 
     describe('with a correct ray', () => {
-      let request: CountryRequest;
+      let request: Request;
 
       beforeEach(() => {
-        request = new CountryRequest({
+        request = new Request({
           responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-CPH' }],
         });
       });
@@ -81,11 +79,11 @@ describe('Cloudflare interceptor', () => {
     });
 
     describe('with a ray pointing to partial or missing data', () => {
-      let request: CountryRequest;
+      let request: Request;
       let spy: jest.SpyInstance;
 
       beforeEach(() => {
-        request = new CountryRequest({
+        request = new Request({
           responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-EKNM' }],
         });
 
@@ -133,7 +131,7 @@ describe('Cloudflare interceptor', () => {
     });
 
     it('should use the airport code from request', async () => {
-      const request = new CountryRequest({
+      const request = new Request({
         responseHeaders: [
           {
             name: 'cf-ray',
@@ -152,7 +150,7 @@ describe('Cloudflare interceptor', () => {
     });
 
     it('should find the airport regardless of letter case', async () => {
-      const request = new CountryRequest({
+      const request = new Request({
         responseHeaders: [
           {
             name: 'cf-ray',
@@ -170,7 +168,7 @@ describe('Cloudflare interceptor', () => {
     });
 
     it('should not find airport unless it exists', async () => {
-      const request = new CountryRequest({
+      const request = new Request({
         responseHeaders: [
           {
             name: 'cf-ray',
@@ -188,7 +186,7 @@ describe('Cloudflare interceptor', () => {
   describe('when scoring', () => {
     describe('and server is Cloudflare', () => {
       it('should give top score', async () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [
             { name: 'server', value: 'cloudflare' },
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
@@ -200,7 +198,7 @@ describe('Cloudflare interceptor', () => {
       });
 
       it('should ignore letter case', async () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [
             { name: 'server', value: 'CloudFlare' },
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
@@ -214,7 +212,7 @@ describe('Cloudflare interceptor', () => {
 
     describe('and server is not Cloudflare', () => {
       it('should give lower score', async () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [
             { name: 'server', value: 'Server' },
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
@@ -240,7 +238,7 @@ describe('Cloudflare interceptor', () => {
     describe('if present', () => {
       it('should report it back', async () => {
         for (const status of cacheStatuses) {
-          const request = new CountryRequest({
+          const request = new Request({
             responseHeaders: [
               { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
               { name: 'cf-cache-status', value: status },
@@ -255,7 +253,7 @@ describe('Cloudflare interceptor', () => {
 
     describe('if not present', () => {
       it('should not report it back', async () => {
-        const request = new CountryRequest({
+        const request = new Request({
           responseHeaders: [
             { name: 'cf-ray', value: '5beb64a95813569d-IAD' },
             { name: 'cf-cache-status', value: '' },

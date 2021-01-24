@@ -1,19 +1,19 @@
 import * as debug from '../util/debug';
 
-export interface CountryRequestParams {
+export interface RequestParameters {
   url?: string;
   ip?: string;
   responseHeaders?: chrome.webRequest.HttpHeader[];
 }
 
-export class CountryRequest {
+export class Request {
   url: string | null;
   ip: string | null;
   headers?: chrome.webRequest.HttpHeader[];
 
   protected _headersByName: Map<string, string>;
 
-  constructor({ url, ip, responseHeaders }: CountryRequestParams) {
+  constructor({ url, ip, responseHeaders }: RequestParameters) {
     this.url = url || null;
     this.ip = ip || null;
     this.headers = responseHeaders;
@@ -42,8 +42,8 @@ export class CountryRequest {
     };
   }
 
-  static fromJSON(json: CountryRequest) {
-    return new CountryRequest({
+  static fromJSON(json: Request) {
+    return new Request({
       url: json.url || undefined,
       ip: json.ip || undefined,
       responseHeaders: json.headers,

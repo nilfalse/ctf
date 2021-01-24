@@ -2,16 +2,16 @@ import { Match } from '../interceptors';
 import { fromISOCountryCode } from '../services/emoji/emoji_service';
 import { render } from '../services/rendering/rendering_service';
 
-import { CountryRequest } from './country_request';
+import { Request } from './request';
 
 interface JSONSerializedReport {
-  request?: CountryRequest;
+  request?: Request;
   traceroute?: ReadonlyArray<Match>;
 }
 
 export class Report {
   constructor(
-    public request?: CountryRequest,
+    public request?: Request,
     public traceroute: ReadonlyArray<Match> = []
   ) {}
 
@@ -40,7 +40,7 @@ export class Report {
   }
 
   static fromJSON(json: JSONSerializedReport) {
-    const request = CountryRequest.fromJSON(json.request);
+    const request = Request.fromJSON(json.request);
 
     return new Report(request, json.traceroute);
   }

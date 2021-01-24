@@ -1,13 +1,13 @@
 import * as harness from '../__test__/harness';
-import { CountryRequest } from '../lib/country_request';
+import { Request } from '../lib/request';
 
 import * as interceptors from '.';
 
 describe('Interceptors', () => {
-  let request: CountryRequest;
+  let request: Request;
 
   beforeEach(() => {
-    request = new CountryRequest({});
+    request = new Request({});
   });
 
   it('should pass the request through all heuristics', async () => {

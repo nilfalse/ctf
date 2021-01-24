@@ -1,4 +1,4 @@
-import { CountryRequest } from '../lib/country_request';
+import { Request } from '../lib/request';
 import * as airports from '../services/airports/airports_service';
 import { lookupUpperCase } from '../util/common';
 
@@ -6,7 +6,7 @@ import { Match } from './_common';
 
 type Ray = Readonly<[string, string]>;
 
-function getRay(request: CountryRequest) {
+function getRay(request: Request) {
   const header = request.getHeader('cf-ray');
 
   const ray: ReadonlyArray<string> = header.split('-');
@@ -14,7 +14,7 @@ function getRay(request: CountryRequest) {
   return ray.length === 2 ? (ray as Ray) : null;
 }
 
-function getScore(request: CountryRequest) {
+function getScore(request: Request) {
   const score =
     request.getHeader('server').toLowerCase() === 'cloudflare' ? 1.0 : 0.75;
 
@@ -30,7 +30,7 @@ export interface CloudflareMatch extends Match {
 }
 
 export async function dispatch(
-  request: CountryRequest
+  request: Request
 ): Promise<ReadonlyArray<CloudflareMatch>> {
   const ray = getRay(request);
   if (!ray) {

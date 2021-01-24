@@ -1,13 +1,13 @@
-import { CountryRequest, CountryRequestParams } from '../lib/country_request';
 import { Report } from '../lib/report';
+import { Request, RequestParameters } from '../lib/request';
 
 export class ReportReadyCommand {
-  request: CountryRequest;
-  public report: Report;
+  request: Request;
+  report: Report;
 
-  constructor(public tabId: number, payload: CountryRequestParams) {
+  constructor(public tabId: number, payload: RequestParameters) {
     this.tabId = tabId;
-    this.request = new CountryRequest(payload);
+    this.request = new Request(payload);
     this.report = null;
   }
 

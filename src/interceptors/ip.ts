@@ -1,4 +1,4 @@
-import { CountryRequest } from '../lib/country_request';
+import { Request } from '../lib/request';
 import * as maxmind from '../services/geo/geo_service';
 
 import { Match } from './_common';
@@ -10,7 +10,7 @@ export interface IPMatch extends Match {
 
 export async function dispatch({
   ip,
-}: CountryRequest): Promise<ReadonlyArray<IPMatch>> {
+}: Request): Promise<ReadonlyArray<IPMatch>> {
   if (!ip) {
     return [];
   }
