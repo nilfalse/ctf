@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Match } from '../../../interceptors';
 import { IPMatch } from '../../../interceptors/ip';
-import { CountryRequest } from '../../../lib/country_request';
+import { Request } from '../../../lib/request';
 import { assert } from '../../../util/debug';
 import { Link, Paragraph, Span } from '../typography';
 
@@ -10,7 +10,7 @@ import { CountryItem } from './_country_item';
 
 import './index.css';
 
-interface CountryRequestWithMandatoryIP extends CountryRequest {
+interface CountryRequestWithMandatoryIP extends Request {
   ip: string;
 }
 
@@ -21,7 +21,7 @@ function assertIsIPMatch(
 }
 
 function assertRequestHasIP(
-  request: CountryRequest
+  request: Request
 ): asserts request is CountryRequestWithMandatoryIP {
   assert(request.ip, 'Country Request does not contain any valid IP');
 }
@@ -94,7 +94,7 @@ const ServerInfo: FC<{ request: CountryRequestWithMandatoryIP }> = ({
 
 interface IPTraceProps {
   match?: Match;
-  request: CountryRequest;
+  request: Request;
 }
 
 export const IPTrace: FC<IPTraceProps> = ({ match, request }) => {

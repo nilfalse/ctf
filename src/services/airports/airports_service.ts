@@ -14,7 +14,7 @@ const airports: Record<string, Airport> = {};
 let ready = false;
 
 export function lookup(code: string) {
-  debug.assert(ready);
+  debug.assert(ready, 'Airports service lookup method was called before init');
 
   return lookupUpperCase(airports, code);
 }

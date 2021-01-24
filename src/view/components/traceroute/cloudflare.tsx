@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Match } from '../../../interceptors';
 import { CloudflareMatch } from '../../../interceptors/cloudflare';
-import { CountryRequest } from '../../../lib/country_request';
+import { Request } from '../../../lib/request';
 import { assert } from '../../../util/debug';
 import { Link, Paragraph, Span } from '../typography';
 
@@ -10,7 +10,7 @@ import { CountryItem } from './_country_item';
 
 interface CloudflareTraceProps {
   match: Match;
-  request: CountryRequest;
+  request: Request;
 }
 
 function assertIsCloudflareMatch(

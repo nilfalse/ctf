@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Popup for a Cloudflare-protected website should render country info for Cloudflare IP 1`] = `
+exports[`Popup when rendering for a Cloudflare-protected website should render country info for Cloudflare IP 1`] = `
 <div
   className="ip-trace"
 >
@@ -124,7 +124,7 @@ exports[`Popup for a Cloudflare-protected website should render country info for
 </div>
 `;
 
-exports[`Popup for a Cloudflare-protected website should show Cloudflare data center abbreviation 1`] = `
+exports[`Popup when rendering for a Cloudflare-protected website should show Cloudflare data center abbreviation 1`] = `
 <div
   className="cloudflare-trace"
 >
@@ -204,7 +204,7 @@ exports[`Popup for a Cloudflare-protected website should show Cloudflare data ce
 </div>
 `;
 
-exports[`Popup for a Netherlands-based website with legal entity in the US should render IP country info 1`] = `
+exports[`Popup when rendering for a Netherlands-based website with legal entity in the US should render IP country info 1`] = `
 <div
   className="ip-trace"
 >
@@ -339,7 +339,7 @@ exports[`Popup for a Netherlands-based website with legal entity in the US shoul
 </div>
 `;
 
-exports[`Popup for a Switzerland-based website should render IP country info 1`] = `
+exports[`Popup when rendering for a Switzerland-based website should render IP country info 1`] = `
 <div
   className="ip-trace"
 >
@@ -442,7 +442,7 @@ exports[`Popup for a Switzerland-based website should render IP country info 1`]
 </div>
 `;
 
-exports[`Popup for a website behind Cloudflare with Powered By info exposed should render country info for Cloudflare IP 1`] = `
+exports[`Popup when rendering for a website behind Cloudflare with Powered By info exposed should render country info for Cloudflare IP 1`] = `
 <div
   className="ip-trace"
 >
@@ -600,7 +600,7 @@ exports[`Popup for a website behind Cloudflare with Powered By info exposed shou
 </div>
 `;
 
-exports[`Popup for a website behind Cloudflare with Powered By info exposed should render the header value to the user 1`] = `
+exports[`Popup when rendering for a website behind Cloudflare with Powered By info exposed should render the header value to the user 1`] = `
 <div
   className="ip-trace"
 >
@@ -758,7 +758,7 @@ exports[`Popup for a website behind Cloudflare with Powered By info exposed shou
 </div>
 `;
 
-exports[`Popup for a website behind Cloudflare with Powered By info exposed should show Cloudflare data center abbreviation 1`] = `
+exports[`Popup when rendering for a website behind Cloudflare with Powered By info exposed should show Cloudflare data center abbreviation 1`] = `
 <div
   className="cloudflare-trace"
 >

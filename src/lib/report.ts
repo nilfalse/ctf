@@ -1,5 +1,5 @@
 import { Match } from '../interceptors';
-import { fromISOCountryCode } from '../services/emoji/emoji_service';
+import { flags } from '../services/emoji/emoji_service';
 import { render } from '../services/rendering/rendering_service';
 
 import { Request } from './request';
@@ -28,11 +28,11 @@ export class Report {
   }
 
   get flag() {
-    return fromISOCountryCode(this.iso);
+    return flags.lookup(this.iso);
   }
 
   get icons() {
-    return this.flag.then((flag) => render(flag.emoji));
+    return render(this.flag.emoji);
   }
 
   get isEmpty() {

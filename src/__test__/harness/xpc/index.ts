@@ -1,8 +1,8 @@
 import { Match } from '../../../interceptors';
-import { CountryRequestParams } from '../../../lib/country_request';
+import { RequestParameters } from '../../../lib/request';
 import { stub } from '../browser/stub';
 interface MockXPC {
-  request?: CountryRequestParams;
+  request?: RequestParameters;
   traceroute: ReadonlyArray<Match>;
 }
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Match } from '../../../interceptors';
-import { CountryRequest } from '../../../lib/country_request';
+import { Request } from '../../../lib/request';
 import { isKeyof } from '../../../util/common';
 import { Sequence, SequenceItem } from '../sequence';
 import { Paragraph } from '../typography';
@@ -17,7 +17,7 @@ const traces = {
 };
 
 interface TracerouteProps {
-  request: CountryRequest;
+  request: Request;
   traceroute: ReadonlyArray<Match>;
 }
 
