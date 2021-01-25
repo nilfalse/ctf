@@ -5,13 +5,14 @@ import * as fetch from 'node-fetch';
 export function stream(content: string) {
   const ref = {
     mock: null,
+    response: null,
   };
 
   beforeEach(() => {
     const body = Readable.from([Buffer.from(content)]);
-    const response = new fetch.Response(body);
+    ref.response = new fetch.Response(body);
 
-    ref.mock = jest.spyOn(fetch, 'default').mockResolvedValue(response);
+    ref.mock = jest.spyOn(fetch, 'default').mockResolvedValue(ref.response);
   });
 
   afterEach(() => ref.mock.mockReset());

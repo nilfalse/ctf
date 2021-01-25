@@ -2,7 +2,7 @@ NODEJS=node --unhandled-rejections=strict --experimental-json-modules
 NODEJS_BIN=${NODEJS} node_modules/.bin/
 
 .PHONY : all
-all : airports locales
+all : airports locales twemoji
 	$(MAKE) --no-print-directory build
 
 .PHONY : build
@@ -43,6 +43,13 @@ data/maxmind/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
 	curl -vL "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" | tar --strip-components 1 -xzv -C `dirname $@`
 	ls -lAh `dirname $@`
+
+.PHONY : twemoji
+twemoji :
+	- rm -rf bundle/assets/twemoji
+	mkdir -p bundle/assets/twemoji
+	time ${NODEJS} bin/twemoji.js
+	ls -lA bundle/assets/twemoji
 
 .PHONY : lint prettier eslint
 lint : prettier eslint

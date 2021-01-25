@@ -3,10 +3,8 @@ import * as debug from '../../util/debug';
 
 interface Airport {
   continent?: string;
-  // eslint-disable-next-line camelcase
-  iso_country: string;
-  // eslint-disable-next-line camelcase
-  iso_region: string;
+  iso_country: string; // eslint-disable-line camelcase
+  iso_region: string; // eslint-disable-line camelcase
 }
 
 const airports: Record<string, Airport> = {};
