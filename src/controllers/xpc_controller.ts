@@ -1,8 +1,8 @@
-import { InitCommand } from '../commands/init';
+import { BootCommand } from '../commands/boot';
 import * as xpc from '../services/xpc/xpc_background_service';
 import * as mediator from '../util/mediator';
 
-mediator.subscribe(InitCommand, function () {
+mediator.subscribe(BootCommand, function () {
   chrome.runtime.onMessage.addListener(
     module.hot
       ? (sender, payload, sendResponse) =>

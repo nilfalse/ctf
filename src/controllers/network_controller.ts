@@ -1,9 +1,9 @@
-import { InitCommand } from '../commands/init';
+import { BootCommand } from '../commands/boot';
 import { ReportReadyCommand } from '../commands/report_ready';
-import { CountryRequestParams } from '../lib/country_request';
+import { RequestParameters } from '../lib/request';
 import * as mediator from '../util/mediator';
 
-mediator.subscribe(InitCommand, function () {
+mediator.subscribe(BootCommand, function () {
   chrome.webRequest.onCompleted.addListener(
     module.hot
       ? (res) => handleWebRequestCompleted(res)
@@ -16,7 +16,7 @@ mediator.subscribe(InitCommand, function () {
   );
 });
 
-interface WebRequestPayload extends CountryRequestParams {
+interface WebRequestPayload extends RequestParameters {
   tabId: number;
 }
 

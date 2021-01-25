@@ -1,4 +1,4 @@
-import { InitCommand } from '../commands/init';
+import { BootCommand } from '../commands/boot';
 import * as mediator from '../util/mediator';
 
 import './network_controller';
@@ -9,5 +9,5 @@ import './storage_controller';
 import './action_controller';
 
 export function start() {
-  return mediator.publish(new InitCommand());
+  return mediator.publish(new BootCommand());
 }

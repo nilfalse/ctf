@@ -1,9 +1,9 @@
-import { InitCommand } from '../commands/init';
+import { BootCommand } from '../commands/boot';
 import { TabRemoveCommand } from '../commands/tab_remove';
 import { TabUpdateCommand } from '../commands/tab_update';
 import * as mediator from '../util/mediator';
 
-mediator.subscribe(InitCommand, function () {
+mediator.subscribe(BootCommand, function () {
   const controller = new TabController();
 
   chrome.tabs.onUpdated.addListener(controller.handleTabUpdated);

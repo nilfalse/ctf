@@ -28,7 +28,7 @@ export class Request {
   getHeader(headerName: string) {
     debug.assert(
       headerName.length > 0,
-      'Empty header name requested in CountryRequest.getHeader'
+      'Empty header name requested in Request.getHeader'
     );
 
     return this._headersByName.get(headerName.toLowerCase()) || '';
