@@ -1,4 +1,5 @@
 import { Match } from '../interceptors';
+import * as countryService from '../services/country/country_service';
 import { flags } from '../services/emoji/emoji_service';
 import { render } from '../services/rendering/rendering_service';
 
@@ -18,7 +19,7 @@ export class Report {
   get name() {
     const [firstMatch] = this.traceroute;
 
-    return chrome.i18n.getMessage('country_name_' + firstMatch.isoCountry);
+    return countryService.getName(firstMatch.isoCountry);
   }
 
   get iso() {
