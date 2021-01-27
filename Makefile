@@ -65,7 +65,7 @@ test :
 .PHONY : clean pristine
 clean :
 	- rm -rf bundle/hot coverage
-	- rm -f bundle/manifest.json bundle/*.woff bundle/*.svg bundle/*.css bundle/*.js bundle/popup.html
+	- rm -f bundle/manifest.json bundle/*.woff bundle/*.svg bundle/*.css bundle/*.js bundle/popup.html bundle/options.html
 pristine : clean
 	- rm -f cc-test-reporter
 	- $(NODEJS_BIN)jest --clearCache

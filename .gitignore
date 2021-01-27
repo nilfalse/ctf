@@ -7,6 +7,7 @@ coverage
 /bundle/data
 /bundle/manifest.json
 /bundle/popup.html
+/bundle/options.html
 /bundle/*.js
 /bundle/*.css
 /bundle/*.svg

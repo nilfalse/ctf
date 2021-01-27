@@ -14,6 +14,7 @@ const pkg = require('./package.json');
 module.exports = function (env) {
   const bundlePath = path.resolve(__dirname, 'bundle');
   const popupHtmlPath = 'popup.html';
+  const optionsHtmlPath = 'options.html';
 
   const isDevelopment = env.WEBPACK_SERVE;
 
@@ -96,28 +97,9 @@ module.exports = function (env) {
     common.plugins.push(new webpack.ProgressPlugin());
   }
 
-  console.log(common.mode);
-  return [
-    merge(common, maxmindMocks, {
-      entry: { background: './src/background' },
-
-      devServer,
-      module: {
-        rules: [typescriptRule],
-      },
-      plugins: [
-        new ManifestPlugin({
-          seed: {
-            popupHtmlPath,
-            devServer: isDevelopment ? devServer : null,
-          },
-          generate: manifestFactory,
-        }),
-      ],
-    }),
-
-    merge(common, {
-      entry: { popup: ['react-hot-loader/patch', './src/popup'] },
+  function createStaticEntryPoint(name, options = {}) {
+    return {
+      entry: { popup: ['react-hot-loader/patch', `./src/${name}`] },
 
       resolve: {
         alias: {
@@ -158,16 +140,57 @@ module.exports = function (env) {
       plugins: [
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
-          title: 'Popup',
-          filename: popupHtmlPath,
-          template: 'src/popup.template.html',
+          ...options,
+          template: `src/${name}.template.html`,
+        }),
+      ],
+    };
+  }
+
+  console.log(common.mode);
+  return [
+    merge(common, maxmindMocks, {
+      entry: { background: './src/background' },
+
+      devServer,
+      module: {
+        rules: [typescriptRule],
+      },
+      plugins: [
+        new ManifestPlugin({
+          seed: {
+            popupHtmlPath,
+            optionsHtmlPath,
+            devServer: isDevelopment ? devServer : null,
+          },
+          generate: manifestFactory,
         }),
       ],
     }),
+
+    merge(
+      common,
+      createStaticEntryPoint('popup', {
+        title: 'Popup',
+        filename: popupHtmlPath,
+      })
+    ),
+
+    merge(
+      common,
+      createStaticEntryPoint('options', {
+        title: 'Options',
+        filename: optionsHtmlPath,
+      })
+    ),
   ];
 };
 
-function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
+function manifestFactory(
+  { popupHtmlPath, optionsHtmlPath, devServer },
+  _,
+  entrypoints
+) {
   const icons = {
     32: 'icons/icon_32px.png',
     48: 'icons/icon_48px.png',
@@ -191,6 +214,10 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
       default_icon: icons,
       default_popup: popupHtmlPath,
       show_matches: ['<all_urls>'],
+    },
+    options_ui: {
+      page: optionsHtmlPath,
+      open_in_tab: false,
     },
 
     author,
