@@ -1,6 +1,6 @@
 import { Request } from './request';
 
-describe('Country Request', () => {
+describe('Request', () => {
   describe('when no IP address is present', () => {
     it('should return null for ip', () => {
       expect(new Request({}).ip).toBeNull();

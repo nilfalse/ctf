@@ -1,6 +1,6 @@
 import * as raster from './raster_service';
 
-describe('Raster rendering subsystem', () => {
+describe('Raster service', () => {
   let createElementSpy: jest.SpyInstance;
   beforeEach(() => {
     createElementSpy = jest.spyOn(document, 'createElement');

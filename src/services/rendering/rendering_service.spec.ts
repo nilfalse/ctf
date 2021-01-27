@@ -6,7 +6,7 @@ import { render } from './rendering_service';
 jest.mock('../raster/raster_service');
 jest.mock('../svg/svg_service');
 
-describe('Rendering subsystem', () => {
+describe('Rendering service', () => {
   const emoji = '🇩🇰';
 
   const contentSpy = jest.spyOn(svg, 'content');

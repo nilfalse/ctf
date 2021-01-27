@@ -1,9 +1,13 @@
-import * as airports from '../services/airports/airports_service';
-import * as emoji from '../services/emoji/emoji_service';
-import * as geo from '../services/geo/geo_service';
+import * as airportsService from '../services/airports/airports_service';
+import * as emojiService from '../services/emoji/emoji_service';
+import * as geoService from '../services/geo/geo_service';
 
 export class BootCommand {
   execute() {
-    return Promise.all([geo.init(), airports.init(), emoji.init()]);
+    return Promise.all([
+      geoService.init(),
+      airportsService.init(),
+      emojiService.init(),
+    ]);
   }
 }

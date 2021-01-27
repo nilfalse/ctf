@@ -1,6 +1,6 @@
 import * as svg from './svg_service';
 
-describe('SVG rendering subsystem', () => {
+describe('SVG service', () => {
   const sizes = [16, 32, 64];
   const emojis = {
     '🙃': 'an emoji',

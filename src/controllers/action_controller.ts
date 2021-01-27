@@ -23,7 +23,8 @@ mediator.subscribe(ReportReadyCommand, function ({ tabId, report }, icons) {
 
     chrome.pageAction.setIcon({ tabId, imageData: icons }, catchErr);
 
-    const title = report.name + '\n- ' + chrome.i18n.getMessage('ext_name');
+    const title =
+      report.countryName + '\n- ' + chrome.i18n.getMessage('ext_name');
     chrome.pageAction.setTitle({ tabId, title }, catchErr);
   }
 });

@@ -16,16 +16,14 @@ export class Report {
     public traceroute: ReadonlyArray<Match> = []
   ) {}
 
-  get name() {
-    const [firstMatch] = this.traceroute;
-
-    return countryService.getName(firstMatch.isoCountry);
-  }
-
   get iso() {
     const [firstMatch] = this.traceroute;
 
     return firstMatch.isoCountry;
+  }
+
+  get countryName() {
+    return countryService.getName(this.iso);
   }
 
   get flag() {

@@ -16,14 +16,8 @@ export const intro =
         // ignore in test & production
       };
 
-export function log(...args: Parameters<typeof console.log>) {
-  console.log(...args);
-}
+export const log = console.log.bind(globalThis);
 
-export function error(...args: Parameters<typeof console.error>) {
-  console.error(...args);
-}
+export const error = console.error.bind(globalThis);
 
-export function assert(...args: Parameters<typeof console.assert>) {
-  console.assert(...args);
-}
+export const assert = console.assert.bind(globalThis);

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import * as countryService from '../../../services/country/country_service';
 import { flags } from '../../../services/emoji/emoji_service';
 import { Paragraph } from '../typography';
 
@@ -19,7 +20,6 @@ export const CountryItem: FC<CountryItemProps> = ({
   shouldRenderFlag = true,
   children,
 }) => {
-  const country = chrome.i18n.getMessage('country_name_' + countryCode);
   const flag = flags.lookup(countryCode);
 
   const classNames = ['traceroute__country-item'];
@@ -44,7 +44,7 @@ export const CountryItem: FC<CountryItemProps> = ({
           <br />
         </>
       ) : null}
-      <strong>{country}</strong>
+      <strong>{countryService.getName(countryCode)}</strong>
     </Paragraph>
   );
 };
