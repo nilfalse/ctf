@@ -50,12 +50,12 @@ exports[`Popup when rendering for a Cloudflare-protected website should render c
         countryCode="US"
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
+          className="country-item country-item_emoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
             data-flag="🇺🇸"
           >
             Country:
@@ -144,12 +144,12 @@ exports[`Popup when rendering for a Cloudflare-protected website should show Clo
       countryCode="DK"
     >
       <Component
-        className="traceroute__country-item traceroute__country-item_flagged"
+        className="country-item country-item_emoji country-item_with-flag"
         data-flag="🇩🇰"
         size="xs"
       >
         <p
-          className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+          className="typography typography_xs country-item country-item_emoji country-item_with-flag"
           data-flag="🇩🇰"
         >
           <strong>
@@ -256,12 +256,12 @@ exports[`Popup when rendering for a Netherlands-based website with legal entity 
         countryCode="NL"
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
+          className="country-item country-item_emoji country-item_with-flag"
           data-flag="🇳🇱"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
             data-flag="🇳🇱"
           >
             Country:
@@ -277,12 +277,12 @@ exports[`Popup when rendering for a Netherlands-based website with legal entity 
         shouldRenderFlag={true}
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
+          className="country-item country-item_emoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
             data-flag="🇺🇸"
           >
             Legal registration:
@@ -391,12 +391,12 @@ exports[`Popup when rendering for a Switzerland-based website should render IP c
         countryCode="CH"
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
+          className="country-item country-item_emoji country-item_with-flag"
           data-flag="🇨🇭"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
             data-flag="🇨🇭"
           >
             Country:
@@ -412,13 +412,11 @@ exports[`Popup when rendering for a Switzerland-based website should render IP c
         shouldRenderFlag={false}
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
-          data-flag={null}
+          className="country-item country-item_emoji country-item_with-flag"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
-            data-flag={null}
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
           >
             Legal registration:
             <br />
@@ -492,12 +490,12 @@ exports[`Popup when rendering for a website behind Cloudflare with Powered By in
         countryCode="US"
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
+          className="country-item country-item_emoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
             data-flag="🇺🇸"
           >
             Country:
@@ -650,12 +648,12 @@ exports[`Popup when rendering for a website behind Cloudflare with Powered By in
         countryCode="US"
       >
         <Component
-          className="traceroute__country-item traceroute__country-item_flagged"
+          className="country-item country-item_emoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
         >
           <p
-            className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
             data-flag="🇺🇸"
           >
             Country:
@@ -778,12 +776,12 @@ exports[`Popup when rendering for a website behind Cloudflare with Powered By in
       countryCode="DE"
     >
       <Component
-        className="traceroute__country-item traceroute__country-item_flagged"
+        className="country-item country-item_emoji country-item_with-flag"
         data-flag="🇩🇪"
         size="xs"
       >
         <p
-          className="typography typography_xs traceroute__country-item traceroute__country-item_flagged"
+          className="typography typography_xs country-item country-item_emoji country-item_with-flag"
           data-flag="🇩🇪"
         >
           <strong>

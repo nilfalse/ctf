@@ -1,7 +1,7 @@
 import { Match } from '../interceptors';
 import * as countryService from '../services/country/country_service';
 import { flags } from '../services/emoji/emoji_service';
-import { render } from '../services/rendering/rendering_service';
+import * as renderingService from '../services/rendering/rendering_service';
 
 import { Request } from './request';
 
@@ -31,7 +31,7 @@ export class Report {
   }
 
   get icons() {
-    return render(this.flag.emoji);
+    return renderingService.render(this);
   }
 
   get isEmpty() {

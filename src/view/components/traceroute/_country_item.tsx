@@ -1,18 +1,15 @@
-import { FC } from 'react';
+import { FC, CSSProperties } from 'react';
 
 import * as countryService from '../../../services/country/country_service';
-import { flags } from '../../../services/emoji/emoji_service';
+import { flags, twemoji } from '../../../services/emoji/emoji_service';
+import * as preferenceService from '../../../services/preference/preference_service';
 import { Paragraph } from '../typography';
+
+import './_country_item.css';
 
 interface CountryItemProps {
   countryCode: string;
   shouldRenderFlag?: boolean;
-}
-
-interface TypographyProps {
-  size: 'xs';
-  className: string;
-  'data-flag': null | string;
 }
 
 export const CountryItem: FC<CountryItemProps> = ({
@@ -22,22 +19,13 @@ export const CountryItem: FC<CountryItemProps> = ({
 }) => {
   const flag = flags.lookup(countryCode);
 
-  const classNames = ['traceroute__country-item'];
-  if (flag) {
-    classNames.push('traceroute__country-item_flagged');
-  }
-
-  const typographyProps: TypographyProps = {
-    size: 'xs' as const,
-    className: classNames.join(' '),
-    'data-flag': null,
-  };
-  if (shouldRenderFlag) {
-    typographyProps['data-flag'] = flag.emoji;
-  }
-
   return (
-    <Paragraph {...typographyProps}>
+    <Paragraph
+      size="xs"
+      className={classNamesFactory(!!flag)}
+      style={stylesFactory({ countryCode, shouldRenderFlag })}
+      data-flag={shouldRenderFlag ? flag.emoji : undefined}
+    >
       {children ? (
         <>
           {children}
@@ -48,3 +36,31 @@ export const CountryItem: FC<CountryItemProps> = ({
     </Paragraph>
   );
 };
+
+function classNamesFactory(hasFlag: boolean) {
+  const classNames = [
+    'country-item',
+    `country-item_${preferenceService.getValue('render')}`,
+  ];
+  if (hasFlag) {
+    classNames.push('country-item_with-flag');
+  }
+
+  return classNames.join(' ');
+}
+
+function stylesFactory({
+  countryCode,
+  shouldRenderFlag,
+}: CountryItemProps): CSSProperties {
+  switch (preferenceService.getValue('render')) {
+    case 'twemoji':
+      return shouldRenderFlag
+        ? {
+            background: `url('${twemoji.getFilePath(countryCode)}') no-repeat`,
+          }
+        : undefined;
+    default:
+      return undefined;
+  }
+}

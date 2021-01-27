@@ -10,17 +10,3 @@
 .traceroute__nested {
   padding-left: 16px;
 }
-
-.traceroute__country-item_flagged {
-  position: relative;
-  padding-left: 48px;
-}
-.traceroute__country-item::before {
-  position: absolute;
-  left: 2px;
-  top: 50%;
-  transform: translateY(-50%);
-  content: attr(data-flag);
-  font-size: 36px;
-  line-height: 36px;
-}

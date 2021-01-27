@@ -1,3 +1,4 @@
+import { Report } from '../../lib/report';
 import * as raster from '../raster/raster_service';
 import * as svg from '../svg/svg_service';
 
@@ -7,7 +8,10 @@ jest.mock('../raster/raster_service');
 jest.mock('../svg/svg_service');
 
 describe('Rendering service', () => {
-  const emoji = '🇩🇰';
+  const report = {
+    iso: 'DK',
+    flag: { emoji: '🇩🇰' },
+  } as Report;
 
   const contentSpy = jest.spyOn(svg, 'content');
   const toDataURISpy = jest.spyOn(svg, 'toDataURI');
@@ -21,7 +25,7 @@ describe('Rendering service', () => {
 
   it('should create data URI with SVG content', async () => {
     contentSpy.mockReturnValue('<svg />');
-    await render(emoji);
+    await render(report);
 
     expect(svg.toDataURI).toHaveBeenCalledWith('<svg />');
     expect(svg.toDataURI).toHaveBeenCalledTimes(5);
@@ -29,7 +33,7 @@ describe('Rendering service', () => {
 
   it('should raster the data URI', async () => {
     toDataURISpy.mockReturnValue('data:image/svg+xml;base64,');
-    await render(emoji);
+    await render(report);
 
     expect(raster.toImageData).toHaveBeenCalledWith(
       'data:image/svg+xml;base64,',
@@ -42,7 +46,7 @@ describe('Rendering service', () => {
   });
 
   it('should produce all sizes at once', async () => {
-    const result = await render(emoji);
+    const result = await render(report);
 
     expect(result).toHaveProperty('16');
     expect(result).toHaveProperty('32');

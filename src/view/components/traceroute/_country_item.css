@@ -1,0 +1,17 @@
+.country-item_with-flag {
+  position: relative;
+  padding-left: 48px;
+}
+
+.country-item_with-flag.country-item_emoji::before {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: attr(data-flag);
+  font-size: 30px;
+}
+
+.country-item_twemoji {
+  background-size: 36px 36px;
+}

@@ -2,8 +2,8 @@ import * as preferencesService from './preference_service';
 
 describe('Preferences service', () => {
   describe('for the rendering preference', () => {
-    it('should return "twemoji"', () =>
-      expect(preferencesService.getValue('render')).toBe('twemoji'));
+    it('should return "emoji"', () =>
+      expect(preferencesService.getValue('render')).toBe('emoji'));
   });
 
   describe('for an unknown preference', () => {

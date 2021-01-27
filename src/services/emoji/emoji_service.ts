@@ -13,6 +13,19 @@ export const flags = {
   },
 };
 
+export const twemoji = {
+  getFilePath(code: string) {
+    if (ready) {
+      debug.assert(
+        Object.hasOwnProperty.call(flagsByCode, code.toUpperCase()),
+        `Unexpected countryCode "${code}" in emojiService.twemoji`
+      );
+    }
+
+    return `/assets/twemoji/${code.toLowerCase()}.svg`;
+  },
+};
+
 export let init = function () {
   const promise = import(
     'country-flag-emoji-json/json/flag-emojis-by-code.json'
