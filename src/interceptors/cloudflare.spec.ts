@@ -1,13 +1,13 @@
 import { Request } from '../lib/request';
-import * as airports from '../services/airports/airports_service';
+import * as airportService from '../services/airport/airport_service';
 import * as common from '../util/common';
 
 import * as cloudflare from './cloudflare';
 
-jest.mock('../services/airports/airports_service');
+jest.mock('../services/airport/airport_service');
 
 describe('Cloudflare interceptor', () => {
-  beforeAll(airports.init);
+  beforeAll(airportService.init);
 
   describe('when dispatching', () => {
     describe('with no ray', () => {

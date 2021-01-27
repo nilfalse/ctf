@@ -1,4 +1,4 @@
-import * as preferencesService from './preferences_service';
+import * as preferencesService from './preference_service';
 
 describe('Preferences service', () => {
   describe('for the rendering preference', () => {

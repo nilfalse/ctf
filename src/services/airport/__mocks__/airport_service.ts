@@ -1,4 +1,4 @@
-const originalModule = jest.requireActual('../airports_service');
+const originalModule = jest.requireActual('../airport_service');
 
 originalModule.rewire$_load(() =>
   Promise.resolve(require('../../../../data/airports.json'))

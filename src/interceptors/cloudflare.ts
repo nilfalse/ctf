@@ -1,5 +1,5 @@
 import { Request } from '../lib/request';
-import * as airports from '../services/airports/airports_service';
+import * as airportService from '../services/airport/airport_service';
 
 import { Match } from './_common';
 
@@ -37,7 +37,7 @@ export async function dispatch(
   }
 
   const [, iataCode] = ray;
-  const airport = airports.lookup(iataCode);
+  const airport = airportService.lookup(iataCode);
   if (!airport) {
     return [];
   }
