@@ -13,8 +13,11 @@ export type RenderingResult = {
   [key in ArrayElementType<Size>]: ImageData;
 };
 
-export async function render(report: Report) {
-  const images = await createDataURI(report);
+export async function render(
+  report: Report,
+  pref = preferenceService.getValue('render')
+) {
+  const images = await createDataURI(report, pref);
 
   const renders = await Promise.all(
     images.map(({ size, dataUri }) => {
@@ -30,8 +33,7 @@ export async function render(report: Report) {
   }, {} as RenderingResult);
 }
 
-async function createDataURI({ flag, iso }: Report) {
-  const pref = preferenceService.getValue('render');
+async function createDataURI({ flag, iso }: Report, pref: string) {
   switch (pref) {
     case 'emoji': {
       return emojiFactory(flag.emoji);

@@ -200,7 +200,7 @@ function manifestFactory({ popupHtmlPath, devServer }, _, entrypoints) {
 
     minimum_chrome_version: '36',
 
-    permissions: ['webRequest', '<all_urls>'],
+    permissions: ['webRequest', '<all_urls>', 'storage'],
 
     short_name: '__MSG_ext_short_name__',
     version_name: getVersionTag(),

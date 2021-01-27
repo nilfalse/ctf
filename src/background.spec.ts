@@ -2,6 +2,7 @@ import * as harness from './__test__/harness';
 import * as controllers from './controllers';
 import * as airportService from './services/airport/airport_service';
 import * as geoService from './services/geo/geo_service';
+import * as preferenceService from './services/preference/preference_service';
 import * as debug from './util/debug';
 
 jest.mock('./controllers');
@@ -31,6 +32,7 @@ describe('Background script', () => {
     beforeAll(airportService.init);
 
     const browser = harness.browser.stub();
+    harness.browser.storage();
 
     beforeEach(jest.requireActual('./controllers').start);
 
@@ -72,5 +74,10 @@ describe('Background script', () => {
         expect.any(Function)
       );
     });
+
+    it('should subscribe preference service to storage updates', () =>
+      expect(chrome.storage.onChanged.addListener).toHaveBeenCalledWith(
+        preferenceService.refresh
+      ));
   });
 });

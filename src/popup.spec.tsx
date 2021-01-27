@@ -30,8 +30,9 @@ describe('Popup', () => {
 
   describe('when rendering', () => {
     harness.browser.i18n();
+    harness.browser.storage();
 
-    beforeAll(() => jest.requireActual('./view').start());
+    beforeEach(() => jest.requireActual('./view').start());
 
     describe('for a Switzerland-based website', () => {
       harness.xpc.popup(import('./__test__/fixtures/success_ip-ch'));
