@@ -1,3 +1,4 @@
+import * as debug from '../../util/debug';
 import { getPlatform } from '../environment/environment_service';
 
 type Preferences = Record<string, string>;
@@ -21,11 +22,12 @@ export function getValue<T extends PreferenceKeys>(
 ): typeof _prefs[T];
 export function getValue(prefName: string): string;
 export function getValue(prefName: string) {
-  if (prefName in _prefs) {
-    return _prefs[prefName];
-  } else {
-    throw new Error(`Cannot retrieve unexpected "${prefName}" preference`);
-  }
+  debug.assert(
+    prefName in _prefs,
+    `Cannot retrieve unexpected "${prefName}" preference`
+  );
+
+  return _prefs[prefName];
 }
 
 export function set(prefs: Preferences) {
@@ -37,12 +39,12 @@ export function set(prefs: Preferences) {
     }
   }
 
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<Preferences>((resolve, reject) => {
     chrome.storage.sync.set(prefs, () => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
-        resolve();
+        resolve(Object.assign(_prefs, prefs));
       }
     });
   });

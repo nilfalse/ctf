@@ -2,7 +2,9 @@ import { FC } from 'react';
 
 import logo from '../../../artwork/logo_text.svg';
 import { Match } from '../../interceptors';
-import { CountryRequest } from '../../lib/country_request';
+import { Request } from '../../lib/request';
+import * as countryService from '../../services/country/country_service';
+import * as urlService from '../../services/url/url_service';
 
 import { Logo } from './logo';
 import { Paragraph } from './typography';
@@ -10,14 +12,8 @@ import { Paragraph } from './typography';
 import './header_primary.css';
 
 interface HeaderPrimaryProps {
-  request: CountryRequest;
+  request: Request;
   traceroute: ReadonlyArray<Match>;
-}
-
-function getHost(url: string) {
-  const host = new URL(url).hostname;
-
-  return host.startsWith('www.') ? host.substring(4) : host;
 }
 
 export const HeaderPrimary: FC<HeaderPrimaryProps> = ({
@@ -45,10 +41,6 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({
     );
   }
 
-  const country = chrome.i18n.getMessage(
-    'country_name_' + traceroute[0].isoCountry
-  );
-
   return (
     <div className="header-primary">
       <Logo color="light" className="header-primary__icon" />
@@ -61,7 +53,7 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({
 
       {request.url ? (
         <Paragraph size="xs" className="header-primary__host">
-          You loaded {getHost(request.url)} from
+          You loaded {urlService.getHost(request.url)} from
         </Paragraph>
       ) : null}
 
@@ -70,7 +62,7 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({
         size="l"
         className="header-primary__country"
       >
-        {country}
+        {countryService.getName(traceroute[0].isoCountry)}
       </Paragraph>
     </div>
   );

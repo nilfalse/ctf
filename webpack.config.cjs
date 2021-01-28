@@ -99,7 +99,7 @@ module.exports = function (env) {
 
   function createStaticEntryPoint(name, options = {}) {
     return {
-      entry: { popup: ['react-hot-loader/patch', `./src/${name}`] },
+      entry: { [name]: ['react-hot-loader/patch', `./src/${name}`] },
 
       resolve: {
         alias: {
