@@ -1,3 +1,4 @@
+import * as debug from '../../util/debug';
 import * as storageService from '../storage/storage_service';
 
 export async function handle(message: any) {
@@ -5,7 +6,7 @@ export async function handle(message: any) {
     case 'fetchReport':
       return fetchReport(message.payload);
     default:
-      throw new Error('Unexpected message type ' + message.type);
+      debug.never('Unexpected message type ' + message.type);
   }
 }
 

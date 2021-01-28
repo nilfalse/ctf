@@ -1,7 +1,5 @@
 import { Readable } from 'stream';
 
-import * as fetch from 'node-fetch';
-
 export function stream(content: string) {
   const ref = {
     mock: null,
@@ -9,6 +7,8 @@ export function stream(content: string) {
   };
 
   beforeEach(() => {
+    const fetch = jest.requireActual('node-fetch');
+
     const body = Readable.from([Buffer.from(content)]);
     ref.response = new fetch.Response(body);
 

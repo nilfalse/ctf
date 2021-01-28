@@ -18,6 +18,7 @@ export function stub() {
 
     Object.assign(globalThis.chrome, {
       runtime: {
+        getPlatformInfo: jest.fn().mockImplementation(async (fn) => fn({})),
         onMessage: { addListener: jest.fn() },
       },
       tabs: {

@@ -16,8 +16,11 @@ export const intro =
         // ignore in test & production
       };
 
-export const log = console.log.bind(globalThis);
+export const log: Console['log'] = console.log.bind(globalThis);
 
-export const error = console.error.bind(globalThis);
+export const error: Console['error'] = console.error.bind(globalThis);
 
-export const assert = console.assert.bind(globalThis);
+export const assert: Console['assert'] = console.assert.bind(globalThis);
+
+type AssertNever = (message: string) => never;
+export const never: AssertNever = console.assert.bind(globalThis, true);

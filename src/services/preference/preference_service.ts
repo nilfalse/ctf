@@ -1,12 +1,22 @@
+import { getPlatform } from '../environment/environment_service';
+
 type Preferences = Record<string, string>;
 
+type DefaultPreferences = typeof defaults;
+type PreferenceKeys = keyof DefaultPreferences;
+
+export type RenderPreference = 'emoji' | 'twemoji';
+
 const defaults = {
-  render: 'emoji' as 'emoji' | 'twemoji',
-} as const;
+  render: 'twemoji' as RenderPreference,
+};
 
-const _prefs: typeof defaults = Object.assign(Object.create(null), defaults);
+const _prefs: Readonly<DefaultPreferences> = Object.assign(
+  Object.create(null),
+  defaults
+);
 
-export function getValue<T extends keyof typeof _prefs>(
+export function getValue<T extends PreferenceKeys>(
   prefName: T
 ): typeof _prefs[T];
 export function getValue(prefName: string): string;
@@ -57,9 +67,18 @@ export function refresh(
 }
 
 export function init() {
+  return getPlatform().then(_init);
+}
+
+function _init({ os }: chrome.runtime.PlatformInfo) {
   return new Promise<void>((resolve) => {
-    chrome.storage.sync.get(Object.keys(_prefs), (result) => {
-      Object.assign(_prefs, defaults, result);
+    chrome.storage.sync.get(Object.keys(_prefs), (synced) => {
+      const conditionals: Partial<DefaultPreferences> = {};
+      if (os === 'mac') {
+        conditionals.render = 'emoji';
+      }
+
+      Object.assign(_prefs, defaults, conditionals, synced);
 
       resolve();
     });

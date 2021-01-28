@@ -33,7 +33,10 @@ export async function render(
   }, {} as RenderingResult);
 }
 
-async function createDataURI({ flag, iso }: Report, pref: string) {
+async function createDataURI(
+  { flag, iso }: Report,
+  pref: preferenceService.RenderPreference
+) {
   switch (pref) {
     case 'emoji': {
       return emojiFactory(flag.emoji);
@@ -42,11 +45,9 @@ async function createDataURI({ flag, iso }: Report, pref: string) {
       return twemojiFactory(iso);
     }
     default: {
-      debug.assert(
-        true,
+      debug.never(
         `Unexpected preference value "${pref}" while rendering data URI`
       );
-      break;
     }
   }
 }

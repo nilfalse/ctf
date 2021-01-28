@@ -5,7 +5,7 @@ import * as preferencesService from './preference_service';
 describe('Preferences service', () => {
   describe('when initializing', () => {
     harness.browser.storage({
-      render: 'nothing',
+      render: 'hello',
       fake: 'lol',
     });
 
@@ -20,7 +20,7 @@ describe('Preferences service', () => {
     });
 
     it('should override the default preferences with values from sync', () =>
-      expect(preferencesService.getValue('render')).toBe('nothing'));
+      expect(preferencesService.getValue('render')).toBe('hello'));
   });
 
   describe('when ready', () => {
@@ -38,23 +38,43 @@ describe('Preferences service', () => {
     describe('for a known preference', () => {
       describe('"render"', () => {
         describe('by default', () => {
-          harness.browser.storage();
+          describe('on mac', () => {
+            harness.browser.storage();
 
-          beforeEach(preferencesService.init);
+            beforeEach(() =>
+              jest
+                .spyOn(chrome.runtime, 'getPlatformInfo')
+                .mockImplementation(async (fn) =>
+                  fn({ os: 'mac' } as chrome.runtime.PlatformInfo)
+                )
+            );
 
-          it('should return "emoji"', () =>
-            expect(preferencesService.getValue('render')).toBe('emoji'));
+            beforeEach(preferencesService.init);
+
+            it('should return "emoji"', () => {
+              expect(preferencesService.getValue('render')).toBe('emoji');
+            });
+          });
+
+          describe('on other systems', () => {
+            harness.browser.storage();
+
+            beforeEach(preferencesService.init);
+
+            it('should return "twemoji"', () =>
+              expect(preferencesService.getValue('render')).toBe('twemoji'));
+          });
         });
 
-        describe('with sync value set to "twemoji"', () => {
+        describe('with sync value set to "sync"', () => {
           harness.browser.storage({
-            render: 'twemoji',
+            render: 'sync',
           });
 
           beforeEach(preferencesService.init);
 
-          it('should return "twemoji"', () =>
-            expect(preferencesService.getValue('render')).toBe('twemoji'));
+          it('should return "sync"', () =>
+            expect(preferencesService.getValue('render')).toBe('sync'));
         });
       });
     });
@@ -73,6 +93,16 @@ describe('Preferences service', () => {
         newPrefs,
         expect.any(Function)
       );
+    });
+
+    describe('when sync fails', () => {
+      it('should throw the error', () => {
+        chrome.runtime.lastError = new Error('Hello Kitty');
+
+        return expect(
+          preferencesService.set({ render: 'kitty' })
+        ).rejects.toThrow(new Error('Hello Kitty'));
+      });
     });
 
     describe('unknown preferences', () => {
@@ -96,7 +126,7 @@ describe('Preferences service', () => {
         'local'
       );
 
-      expect(preferencesService.getValue('render')).toBe('emoji');
+      expect(preferencesService.getValue('render')).toBe('twemoji');
     });
   });
 

@@ -1,0 +1,12 @@
+.options {
+  min-height: 260px;
+}
+
+.options__ruler {
+  background-color: #00bbff;
+  height: 2px;
+}
+
+.options__content {
+  padding: 16px;
+}

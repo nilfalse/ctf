@@ -1,3 +1,4 @@
+import * as harness from '../../__test__/harness';
 import { Report } from '../../lib/report';
 import * as raster from '../raster/raster_service';
 import * as svg from '../svg/svg_service';
@@ -17,6 +18,8 @@ describe('Rendering service', () => {
   const toDataURISpy = jest.spyOn(svg, 'toDataURI');
   const toImageDataSpy = jest.spyOn(raster, 'toImageData');
 
+  harness.fetch.stream('');
+
   afterEach(() => {
     contentSpy.mockReset();
     toDataURISpy.mockReset();
@@ -25,7 +28,7 @@ describe('Rendering service', () => {
 
   it('should create data URI with SVG content', async () => {
     contentSpy.mockReturnValue('<svg />');
-    await render(report);
+    await render(report, 'emoji');
 
     expect(svg.toDataURI).toHaveBeenCalledWith('<svg />');
     expect(svg.toDataURI).toHaveBeenCalledTimes(5);

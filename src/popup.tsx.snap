@@ -50,13 +50,23 @@ exports[`Popup when rendering for a Cloudflare-protected website should render c
         countryCode="US"
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/us.svg') no-repeat",
+            }
+          }
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
             data-flag="🇺🇸"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/us.svg') no-repeat",
+              }
+            }
           >
             Country:
             <br />
@@ -144,13 +154,23 @@ exports[`Popup when rendering for a Cloudflare-protected website should show Clo
       countryCode="DK"
     >
       <Component
-        className="country-item country-item_emoji country-item_with-flag"
+        className="country-item country-item_twemoji country-item_with-flag"
         data-flag="🇩🇰"
         size="xs"
+        style={
+          Object {
+            "background": "url('/assets/twemoji/dk.svg') no-repeat",
+          }
+        }
       >
         <p
-          className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+          className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
           data-flag="🇩🇰"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/dk.svg') no-repeat",
+            }
+          }
         >
           <strong>
             CPH
@@ -256,13 +276,23 @@ exports[`Popup when rendering for a Netherlands-based website with legal entity 
         countryCode="NL"
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           data-flag="🇳🇱"
           size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/nl.svg') no-repeat",
+            }
+          }
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
             data-flag="🇳🇱"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/nl.svg') no-repeat",
+              }
+            }
           >
             Country:
             <br />
@@ -277,13 +307,23 @@ exports[`Popup when rendering for a Netherlands-based website with legal entity 
         shouldRenderFlag={true}
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/us.svg') no-repeat",
+            }
+          }
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
             data-flag="🇺🇸"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/us.svg') no-repeat",
+              }
+            }
           >
             Legal registration:
             <br />
@@ -391,13 +431,23 @@ exports[`Popup when rendering for a Switzerland-based website should render IP c
         countryCode="CH"
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           data-flag="🇨🇭"
           size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/ch.svg') no-repeat",
+            }
+          }
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
             data-flag="🇨🇭"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/ch.svg') no-repeat",
+              }
+            }
           >
             Country:
             <br />
@@ -412,11 +462,11 @@ exports[`Popup when rendering for a Switzerland-based website should render IP c
         shouldRenderFlag={false}
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           size="xs"
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
           >
             Legal registration:
             <br />
@@ -490,13 +540,23 @@ exports[`Popup when rendering for a website behind Cloudflare with Powered By in
         countryCode="US"
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/us.svg') no-repeat",
+            }
+          }
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
             data-flag="🇺🇸"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/us.svg') no-repeat",
+              }
+            }
           >
             Country:
             <br />
@@ -648,13 +708,23 @@ exports[`Popup when rendering for a website behind Cloudflare with Powered By in
         countryCode="US"
       >
         <Component
-          className="country-item country-item_emoji country-item_with-flag"
+          className="country-item country-item_twemoji country-item_with-flag"
           data-flag="🇺🇸"
           size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/us.svg') no-repeat",
+            }
+          }
         >
           <p
-            className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
             data-flag="🇺🇸"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/us.svg') no-repeat",
+              }
+            }
           >
             Country:
             <br />
@@ -776,13 +846,23 @@ exports[`Popup when rendering for a website behind Cloudflare with Powered By in
       countryCode="DE"
     >
       <Component
-        className="country-item country-item_emoji country-item_with-flag"
+        className="country-item country-item_twemoji country-item_with-flag"
         data-flag="🇩🇪"
         size="xs"
+        style={
+          Object {
+            "background": "url('/assets/twemoji/de.svg') no-repeat",
+          }
+        }
       >
         <p
-          className="typography typography_xs country-item country-item_emoji country-item_with-flag"
+          className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
           data-flag="🇩🇪"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/de.svg') no-repeat",
+            }
+          }
         >
           <strong>
             FRA
