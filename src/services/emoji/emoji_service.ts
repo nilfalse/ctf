@@ -1,7 +1,9 @@
 import { lookupUpperCase } from '../../util/common';
 import * as debug from '../../util/debug';
 
-const flagsByCode = {} as typeof import('country-flag-emoji-json/json/flag-emojis-by-code.json');
+const flagsByCode: typeof import('country-flag-emoji-json/json/flag-emojis-by-code.json') = Object.create(
+  null
+);
 
 let ready = false;
 
@@ -17,7 +19,7 @@ export const twemoji = {
   getFilePath(code: string) {
     if (ready) {
       debug.assert(
-        Object.hasOwnProperty.call(flagsByCode, code.toUpperCase()),
+        code.toUpperCase() in flagsByCode,
         `Unexpected countryCode "${code}" in emojiService.twemoji`
       );
     }

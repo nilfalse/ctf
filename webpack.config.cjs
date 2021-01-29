@@ -88,6 +88,7 @@ module.exports = function (env) {
       },
       optimization: {
         runtimeChunk: { name: (entrypoint) => `${entrypoint.name}.runtime` },
+        namedModules: true,
       },
     },
 

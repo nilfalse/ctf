@@ -30,7 +30,7 @@ export const _OptionsContent: FC = () => {
         shouldUpdate = false;
       };
     },
-    [renderPref]
+    []
   );
 
   return (
