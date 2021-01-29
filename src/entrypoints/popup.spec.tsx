@@ -1,8 +1,8 @@
-import * as harness from './__test__/harness';
-import * as debug from './util/debug';
-import * as view from './view';
-import { CloudflareTrace } from './view/components/traceroute/cloudflare';
-import { IPTrace } from './view/components/traceroute/ip';
+import * as harness from '../__test__/harness';
+import * as debug from '../util/debug';
+import * as view from '../view';
+import { CloudflareTrace } from '../view/components/traceroute/cloudflare';
+import { IPTrace } from '../view/components/traceroute/ip';
 
 describe('Popup', () => {
   describe('when initializing', () => {
@@ -32,10 +32,10 @@ describe('Popup', () => {
     harness.browser.i18n();
     harness.browser.storage();
 
-    beforeEach(() => jest.requireActual('./view').start());
+    beforeEach(() => jest.requireActual('../view').start());
 
     describe('for a Switzerland-based website', () => {
-      harness.xpc.popup(import('./__test__/fixtures/success_ip-ch'));
+      harness.xpc.popup(import('../__test__/fixtures/success_ip-ch'));
       const ref = harness.popup.render();
 
       it('should render IP country info', () => {
@@ -47,7 +47,7 @@ describe('Popup', () => {
     });
 
     describe('for a Netherlands-based website with legal entity in the US', () => {
-      harness.xpc.popup(import('./__test__/fixtures/success_ip-nl-us'));
+      harness.xpc.popup(import('../__test__/fixtures/success_ip-nl-us'));
       const ref = harness.popup.render();
 
       it('should render IP country info', () => {
@@ -60,7 +60,7 @@ describe('Popup', () => {
     });
 
     describe('for a Cloudflare-protected website', () => {
-      harness.xpc.popup(import('./__test__/fixtures/success_cloudflare-cph'));
+      harness.xpc.popup(import('../__test__/fixtures/success_cloudflare-cph'));
       const ref = harness.popup.render();
 
       it('should render country info for Cloudflare IP', () => {
@@ -81,7 +81,7 @@ describe('Popup', () => {
 
     describe('for a website behind Cloudflare with Powered By info exposed', () => {
       harness.xpc.popup(
-        import('./__test__/fixtures/success_cloudflare_poweredby')
+        import('../__test__/fixtures/success_cloudflare_poweredby')
       );
       const ref = harness.popup.render();
 

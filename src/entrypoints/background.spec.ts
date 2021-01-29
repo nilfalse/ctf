@@ -1,13 +1,13 @@
-import * as harness from './__test__/harness';
-import * as controllers from './controllers';
-import * as airportService from './services/airport/airport_service';
-import * as geoService from './services/geo/geo_service';
-import * as preferenceService from './services/preference/preference_service';
-import * as debug from './util/debug';
+import * as harness from '../__test__/harness';
+import * as controllers from '../controllers';
+import * as airportService from '../services/airport/airport_service';
+import * as geoService from '../services/geo/geo_service';
+import * as preferenceService from '../services/preference/preference_service';
+import * as debug from '../util/debug';
 
-jest.mock('./controllers');
-jest.mock('./services/airport/airport_service');
-jest.mock('./services/geo/geo_service');
+jest.mock('../controllers');
+jest.mock('../services/airport/airport_service');
+jest.mock('../services/geo/geo_service');
 
 describe('Background script', () => {
   describe('entrypoint', () => {
@@ -34,7 +34,7 @@ describe('Background script', () => {
     const browser = harness.browser.stub();
     harness.browser.storage();
 
-    beforeEach(jest.requireActual('./controllers').start);
+    beforeEach(jest.requireActual('../controllers').start);
 
     it('should subscribe to network requests', () => {
       expect(browser.webRequest.onCompleted.addListener).toHaveBeenCalledTimes(
