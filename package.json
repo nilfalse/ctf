@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "capture-the-flag",
-  "version": "0.0.0",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "prestart": "make -j clean bundle/data",
