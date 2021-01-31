@@ -90,10 +90,21 @@ describe('Cloudflare interceptor', () => {
           responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-EKNM' }],
         });
 
-        spy = jest.spyOn(common, 'lookupUpperCase').mockReturnValue({
-          iso_country: 'EU',
-          iso_region: 'DK',
-        });
+        spy = jest
+          .spyOn(
+            common as {
+              // FIXME?
+              lookupUpperCase: (
+                dict: Record<string, airportService.Airport>,
+                key: string
+              ) => airportService.Airport;
+            },
+            'lookupUpperCase'
+          )
+          .mockReturnValue({
+            iso_country: 'EU',
+            iso_region: 'DK',
+          });
       });
 
       afterEach(() => {

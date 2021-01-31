@@ -10,11 +10,11 @@ interface PopupContentInit {
 }
 interface PopupContentSuccess {
   state: 'success';
-  report: Report | null;
+  report: Report;
 }
 interface PopupContentFailure {
   state: 'failure';
-  error: chrome.runtime.LastError;
+  error: Error;
 }
 
 type PopupContent =
@@ -44,10 +44,12 @@ export function usePopupContent() {
         if (shouldIgnore) {
           return;
         }
-        setResponse({
-          report,
-          state: 'success',
-        });
+        if (report) {
+          setResponse({
+            report,
+            state: 'success',
+          });
+        } // FIXME else throw a "Not Found"
       },
       (error) => {
         if (shouldIgnore) {

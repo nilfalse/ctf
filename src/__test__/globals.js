@@ -6,4 +6,4 @@ global.console.assert = assert;
 
 global.fetch = (...args) => fetch.default(...args);
 
-global.chrome = {};
+global.browser = {};

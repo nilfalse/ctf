@@ -52,7 +52,7 @@ function classNamesFactory(hasFlag: boolean) {
 function stylesFactory({
   countryCode,
   shouldRenderFlag,
-}: CountryItemProps): CSSProperties {
+}: CountryItemProps): CSSProperties | undefined {
   switch (preferenceService.getValue('render')) {
     case 'twemoji':
       return shouldRenderFlag

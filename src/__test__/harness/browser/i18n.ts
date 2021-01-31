@@ -1,19 +1,23 @@
+import { I18n } from 'webextension-polyfill-ts';
+
 import * as locale from '../../../../bundle/_locales/en/messages.json';
 
 import { stub } from './stub';
 
+type LocaleRecord = Record<string, { message: string }>;
+
 const i18nMock = {
-  getMessage: (key) => locale[key].message,
+  getMessage: (key: string) => (locale as LocaleRecord)[key].message,
 };
 
 export function i18n() {
   const browser = stub();
 
   beforeEach(() => {
-    browser.i18n = i18nMock as typeof chrome.i18n;
+    browser.i18n = i18nMock as I18n.Static;
   });
 
   afterEach(() => {
-    delete browser.i18n;
+    browser.i18n = (undefined as unknown) as I18n.Static;
   });
 }

@@ -9,7 +9,7 @@ describe('Popup', () => {
     let startSpy: jest.SpyInstance;
 
     beforeEach(() => {
-      startSpy = jest.spyOn(view, 'start').mockReturnValue(undefined);
+      startSpy = jest.spyOn(view, 'start').mockResolvedValue();
     });
 
     afterEach(() => {

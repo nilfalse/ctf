@@ -76,7 +76,7 @@ describe('Background script', () => {
     });
 
     it('should subscribe preference service to storage updates', () =>
-      expect(chrome.storage.onChanged.addListener).toHaveBeenCalledWith(
+      expect(browser.storage.onChanged.addListener).toHaveBeenCalledWith(
         preferenceService.refresh
       ));
   });

@@ -6,15 +6,25 @@ import * as renderingService from '../services/rendering/rendering_service';
 import { Request } from './request';
 
 interface JSONSerializedReport {
-  request?: Request;
+  request: Request;
   traceroute?: ReadonlyArray<Match>;
 }
 
 export class Report {
   constructor(
-    public request?: Request,
+    public request: Request,
     public traceroute: ReadonlyArray<Match> = []
   ) {}
+
+  get host() {
+    if (!this.request.url) {
+      return null;
+    }
+
+    const host = new URL(this.request.url).hostname;
+
+    return host.startsWith('www.') ? host.substring(4) : host;
+  }
 
   get iso() {
     const [firstMatch] = this.traceroute;

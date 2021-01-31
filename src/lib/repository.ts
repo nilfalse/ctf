@@ -6,7 +6,7 @@ export class Repository<T> {
   }
 
   fetch(id: number): T | null {
-    return this._storage.has(id) ? this._storage.get(id) : null;
+    return this._storage.has(id) ? (this._storage.get(id) as T) : null;
   }
 
   update(id: number, value: T) {

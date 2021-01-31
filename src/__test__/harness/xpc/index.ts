@@ -1,3 +1,5 @@
+import { Runtime } from 'webextension-polyfill-ts';
+
 import { Match } from '../../../interceptors';
 import { RequestParameters } from '../../../lib/request';
 import { stub } from '../browser/stub';
@@ -14,14 +16,10 @@ export function popup(
 
   const browser = stub();
 
-  beforeEach(async () => {
-    const content = await contentPromise;
-    browser.runtime.lastError = null;
-    browser.runtime.sendMessage = jest
-      .fn()
-      .mockImplementation((message, callback) => callback(content));
+  beforeEach(() => {
+    browser.runtime.sendMessage = jest.fn().mockReturnValue(contentPromise);
 
-    delete globalThis.location;
+    delete (globalThis as Partial<typeof globalThis>).location;
     globalThis.location = ({
       search: searchParamsStr,
     } as unknown) as Location;
@@ -30,7 +28,6 @@ export function popup(
   afterEach(() => {
     globalThis.location = location;
 
-    delete browser.runtime.lastError;
-    delete browser.runtime.sendMessage;
+    delete (browser.runtime as Partial<Runtime.Static>).sendMessage;
   });
 }

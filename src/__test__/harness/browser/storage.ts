@@ -1,3 +1,5 @@
+import { Storage } from 'webextension-polyfill-ts';
+
 import { stub } from './stub';
 
 type Preferences = Record<string, string>;
@@ -6,51 +8,42 @@ export function storage(prefs: Preferences = {}) {
   const browser = stub();
 
   const _prefs = JSON.parse(JSON.stringify(prefs));
-  const get = (
-    keys: string[] | null,
-    callback: (items: Preferences) => void
-  ) => {
+  const get = async (keys: string[] | null) => {
     if (keys === null) {
-      setImmediate(() => callback(_prefs));
+      return _prefs;
     } else if (Array.isArray(keys)) {
-      setImmediate(() =>
-        callback(
-          Object.fromEntries(
-            keys
-              .filter((key) => _prefs[key] !== undefined)
-              .map((key) => [key, _prefs[key]])
-          )
-        )
+      return Object.fromEntries(
+        keys
+          .filter((key) => _prefs[key] !== undefined)
+          .map((key) => [key, _prefs[key]])
       );
     }
   };
-  const set = (items: Preferences, callback: () => void) =>
-    setImmediate(() => {
-      Object.assign(prefs, items);
-      callback();
-    });
+  const set = async (items: Preferences) => {
+    Object.assign(prefs, items);
+  };
 
   beforeEach(() => {
-    function createArea(): Partial<chrome.storage.StorageArea> {
+    function createArea(): Partial<Storage.StorageArea> {
       return {
-        get: jest.fn().mockImplementation(get),
-        set: jest.fn().mockImplementation(set),
+        get: jest.fn(get),
+        set: jest.fn(set),
       };
     }
 
-    const onChanged: Pick<chrome.storage.StorageChangedEvent, 'addListener'> = {
+    const onChanged: Pick<Storage.Static['onChanged'], 'addListener'> = {
       addListener: jest.fn(),
     };
 
     browser.storage = {
-      local: createArea() as chrome.storage.LocalStorageArea,
-      sync: createArea() as chrome.storage.SyncStorageArea,
-      managed: createArea() as chrome.storage.StorageArea,
-      onChanged: onChanged as chrome.storage.StorageChangedEvent,
+      local: createArea() as Storage.Static['local'],
+      sync: createArea() as Storage.Static['sync'],
+      managed: createArea() as Storage.Static['managed'],
+      onChanged: onChanged as Storage.Static['onChanged'],
     };
   });
 
   afterEach(() => {
-    delete browser.storage;
+    browser.storage = (undefined as unknown) as Storage.Static;
   });
 }

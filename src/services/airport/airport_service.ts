@@ -1,7 +1,7 @@
 import { lookupUpperCase } from '../../util/common';
 import * as debug from '../../util/debug';
 
-interface Airport {
+export interface Airport {
   continent?: string;
   iso_country: string; // eslint-disable-line camelcase
   iso_region: string; // eslint-disable-line camelcase

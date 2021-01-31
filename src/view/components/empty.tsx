@@ -12,7 +12,7 @@ export const Empty: FC = () => {
       <div className="empty__header">
         <img
           src={logo}
-          alt={chrome.i18n.getMessage('ext_name')}
+          alt={browser.i18n.getMessage('ext_name')}
           className="empty__logo"
           aria-hidden={true}
         />

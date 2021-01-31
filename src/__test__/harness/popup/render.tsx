@@ -5,7 +5,7 @@ import { PopupContent } from '../../../view/components/popup_content';
 
 export function render() {
   const ref = {
-    popup: null as ReactWrapper | null,
+    popup: (null as unknown) as ReactWrapper,
   };
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ export function render() {
 
   afterEach(() => {
     ref.popup.unmount();
-    ref.popup = null;
+    ref.popup = (null as unknown) as ReactWrapper;
   });
 
   return ref;

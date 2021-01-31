@@ -20,9 +20,7 @@ export async function render(
   const images = await createDataURI(report, pref);
 
   const renders = await Promise.all(
-    images.map(({ size, dataUri }) => {
-      return raster.toImageData(dataUri, size);
-    })
+    images.map(({ dataUri, size }) => raster.toImageData(dataUri, size))
   );
 
   return renders.reduce((dict, img, idx) => {
@@ -45,7 +43,7 @@ async function createDataURI(
       return twemojiFactory(iso);
     }
     default: {
-      debug.never(
+      return debug.never(
         `Unexpected preference value "${pref}" while rendering data URI`
       );
     }

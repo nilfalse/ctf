@@ -1,5 +1,6 @@
+import { Runtime, Storage } from 'webextension-polyfill-ts';
+
 import * as debug from '../../util/debug';
-import { getPlatform } from '../environment/environment_service';
 
 type Preferences = Record<string, string>;
 
@@ -22,38 +23,43 @@ export function getValue<T extends PreferenceKeys>(
 ): typeof _prefs[T];
 export function getValue(prefName: string): string;
 export function getValue(prefName: string) {
-  debug.assert(
-    prefName in _prefs,
-    `Cannot retrieve unexpected "${prefName}" preference`
-  );
+  assertKnownPreference(prefName);
 
   return _prefs[prefName];
 }
 
-export function set(prefs: Preferences) {
+function assertKnownPreference(
+  prefName: string
+): asserts prefName is keyof typeof _prefs {
+  debug.assert(
+    prefName in _prefs,
+    `Cannot retrieve unexpected "${prefName}" preference`
+  );
+}
+
+export async function set(prefs: Preferences) {
   for (const key of Object.keys(prefs)) {
     if (!(key in _prefs)) {
-      return Promise.reject(
-        new Error(`Cannot set an unexpected "${key}" preference`)
-      );
+      throw new Error(`Cannot set an unexpected "${key}" preference`);
     }
   }
 
-  return new Promise<Preferences>((resolve, reject) => {
-    chrome.storage.sync.set(prefs, () => {
-      if (chrome.runtime.lastError) {
-        reject(chrome.runtime.lastError);
-      } else {
-        resolve(Object.assign(_prefs, prefs));
-      }
-    });
-  });
+  await browser.storage.sync.set(prefs);
+  return Object.assign(_prefs, prefs);
 }
 
 export function refresh(
-  changes: Record<string, chrome.storage.StorageChange>,
+  changes: Record<string, Storage.StorageChange>,
   namespace: 'sync' | 'local' | 'managed'
-) {
+): void;
+export function refresh(
+  changes: Record<string, Storage.StorageChange>,
+  namespace: string
+): void;
+export function refresh(
+  changes: Record<string, Storage.StorageChange>,
+  namespace: string
+): void {
   if (namespace !== 'sync') {
     return;
   }
@@ -68,21 +74,14 @@ export function refresh(
   );
 }
 
-export function init() {
-  return getPlatform().then(_init);
-}
+export async function init() {
+  const { os } = await browser.runtime.getPlatformInfo();
+  const synced = await browser.storage.sync.get(Object.keys(_prefs));
 
-function _init({ os }: chrome.runtime.PlatformInfo) {
-  return new Promise<void>((resolve) => {
-    chrome.storage.sync.get(Object.keys(_prefs), (synced) => {
-      const conditionals: Partial<DefaultPreferences> = {};
-      if (os === 'mac') {
-        conditionals.render = 'emoji';
-      }
+  const conditionals: Partial<DefaultPreferences> = {};
+  if (os === 'mac') {
+    conditionals.render = 'emoji';
+  }
 
-      Object.assign(_prefs, defaults, conditionals, synced);
-
-      resolve();
-    });
-  });
+  Object.assign(_prefs, defaults, conditionals, synced);
 }

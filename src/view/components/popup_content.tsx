@@ -14,7 +14,7 @@ export const _PopupContent: FC = () => {
   if (popupResponse.state === 'success' && popupResponse.report) {
     return (
       <>
-        <HeaderPrimary {...popupResponse.report} />
+        <HeaderPrimary report={popupResponse.report} />
         <Traceroute {...popupResponse.report} />
       </>
     );

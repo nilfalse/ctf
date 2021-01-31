@@ -5,6 +5,8 @@ export function isKeyof<T extends Record<string, unknown>>(
   return possibleKey in obj;
 }
 
+export function lookupUpperCase<T>(dict: Record<string, T>, key: string): T;
+export function lookupUpperCase<T>(dict: Record<string, T>, key: string): null;
 export function lookupUpperCase<T>(dict: Record<string, T>, key: string) {
   key = key.toUpperCase();
   if (isKeyof(dict, key)) {

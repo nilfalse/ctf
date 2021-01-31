@@ -1,13 +1,11 @@
-const harnessSetUp = Symbol('ctf_harness');
-
 export function stub() {
   let doubleInvocation = false;
 
   beforeEach(() => {
-    if (globalThis.chrome[harnessSetUp]) {
+    if (browser.ctfHarness) {
       doubleInvocation = true;
     } else {
-      globalThis.chrome[harnessSetUp] = true;
+      browser.ctfHarness = true;
     }
   });
 
@@ -16,9 +14,9 @@ export function stub() {
       return;
     }
 
-    Object.assign(globalThis.chrome, {
+    Object.assign(browser, {
       runtime: {
-        getPlatformInfo: jest.fn().mockImplementation(async (fn) => fn({})),
+        getPlatformInfo: jest.fn().mockResolvedValue({}),
         onMessage: { addListener: jest.fn() },
       },
       tabs: {
@@ -38,8 +36,8 @@ export function stub() {
       return;
     }
 
-    delete globalThis.chrome[harnessSetUp];
+    browser.ctfHarness = undefined;
   });
 
-  return globalThis.chrome;
+  return browser;
 }

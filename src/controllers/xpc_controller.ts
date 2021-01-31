@@ -1,20 +1,20 @@
+import { Runtime } from 'webextension-polyfill-ts';
+
 import { BootCommand } from '../commands/boot';
 import * as xpc from '../services/xpc/xpc_background_service';
 import * as mediator from '../util/mediator';
 
 mediator.subscribe(BootCommand, function () {
-  chrome.runtime.onMessage.addListener(
+  browser.runtime.onMessage.addListener(
     module.hot
-      ? (sender, payload, sendResponse) =>
-          handleIncomingMessage(sender, payload, sendResponse)
+      ? (sender, payload) => handleIncomingMessage(sender, payload)
       : handleIncomingMessage
   );
 });
 
 async function handleIncomingMessage(
   message: unknown,
-  sender: chrome.runtime.MessageSender,
-  sendResponse: (response?: unknown) => void
+  sender: Runtime.MessageSender
 ) {
-  sendResponse(await xpc.handle(message));
+  return xpc.handle(message);
 }

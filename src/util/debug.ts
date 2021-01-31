@@ -9,7 +9,7 @@ export const intro =
         console.log(
           '%c%s',
           'font-size: 15px',
-          chrome.runtime.getURL('popup.html')
+          browser.runtime.getURL('popup.html')
         );
       }
     : () => {
@@ -23,4 +23,4 @@ export const error: Console['error'] = console.error.bind(globalThis);
 export const assert: Console['assert'] = console.assert.bind(globalThis);
 
 type AssertNever = (message: string) => never;
-export const never: AssertNever = console.assert.bind(globalThis, true);
+export const never = console.assert.bind(globalThis, true) as AssertNever;

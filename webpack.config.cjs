@@ -76,6 +76,9 @@ module.exports = function (env) {
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
+        new webpack.ProvidePlugin({
+          browser: ['webextension-polyfill-ts', 'browser'],
+        }),
         new ForkTsCheckerWebpackPlugin(),
       ],
       resolve: { extensions: ['.tsx', '.ts', '.js'] },

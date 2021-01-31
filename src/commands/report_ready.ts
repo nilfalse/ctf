@@ -8,7 +8,7 @@ export class ReportReadyCommand {
   constructor(public tabId: number, payload: RequestParameters) {
     this.tabId = tabId;
     this.request = new Request(payload);
-    this.report = null;
+    this.report = new Report(this.request, []);
   }
 
   async execute() {

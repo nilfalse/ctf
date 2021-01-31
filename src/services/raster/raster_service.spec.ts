@@ -55,7 +55,7 @@ describe('Raster service', () => {
 
       const spy = jest.spyOn(image, 'src', 'set');
 
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         spy.mockImplementation((value) => {
           expect(value).toBe('http://localhost/');
 

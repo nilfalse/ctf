@@ -3,7 +3,6 @@ import { render } from '../services/rendering/rendering_service';
 
 const defaultIconPromise = render(
   {
-    iso: null,
     flag: {
       emoji: '🏁',
     },

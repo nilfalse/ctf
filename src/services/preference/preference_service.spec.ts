@@ -1,3 +1,5 @@
+import { Runtime } from 'webextension-polyfill-ts';
+
 import * as harness from '../../__test__/harness';
 
 import * as preferencesService from './preference_service';
@@ -12,11 +14,8 @@ describe('Preferences service', () => {
     beforeEach(preferencesService.init);
 
     it('should fetch only known preferences from sync', () => {
-      expect(chrome.storage.sync.get).toHaveBeenCalledWith(
-        ['render'],
-        expect.any(Function)
-      );
-      expect(chrome.storage.sync.get).toHaveBeenCalledTimes(1);
+      expect(browser.storage.sync.get).toHaveBeenCalledWith(['render']);
+      expect(browser.storage.sync.get).toHaveBeenCalledTimes(1);
     });
 
     it('should override the default preferences with values from sync', () =>
@@ -43,17 +42,14 @@ describe('Preferences service', () => {
 
             beforeEach(() =>
               jest
-                .spyOn(chrome.runtime, 'getPlatformInfo')
-                .mockImplementation(async (fn) =>
-                  fn({ os: 'mac' } as chrome.runtime.PlatformInfo)
-                )
+                .spyOn(browser.runtime, 'getPlatformInfo')
+                .mockResolvedValue({ os: 'mac' } as Runtime.PlatformInfo)
             );
 
             beforeEach(preferencesService.init);
 
-            it('should return "emoji"', () => {
-              expect(preferencesService.getValue('render')).toBe('emoji');
-            });
+            it('should return "emoji"', () =>
+              expect(preferencesService.getValue('render')).toBe('emoji'));
           });
 
           describe('on other systems', () => {
@@ -89,15 +85,14 @@ describe('Preferences service', () => {
       const newPrefs = { render: 'set' };
       await preferencesService.set(newPrefs);
 
-      expect(chrome.storage.sync.set).toHaveBeenCalledWith(
-        newPrefs,
-        expect.any(Function)
-      );
+      expect(browser.storage.sync.set).toHaveBeenCalledWith(newPrefs);
     });
 
     describe('when sync fails', () => {
       it('should throw the error', () => {
-        chrome.runtime.lastError = new Error('Hello Kitty');
+        jest
+          .spyOn(browser.storage.sync, 'set')
+          .mockRejectedValueOnce(new Error('Hello Kitty'));
 
         return expect(
           preferencesService.set({ render: 'kitty' })

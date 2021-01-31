@@ -1,15 +1,17 @@
+import { WebRequest } from 'webextension-polyfill-ts';
+
 import * as debug from '../util/debug';
 
 export interface RequestParameters {
   url?: string;
   ip?: string;
-  responseHeaders?: chrome.webRequest.HttpHeader[];
+  responseHeaders?: WebRequest.HttpHeaders;
 }
 
 export class Request {
   url: string | null;
   ip: string | null;
-  headers?: chrome.webRequest.HttpHeader[];
+  headers?: WebRequest.HttpHeaders;
 
   protected _headersByName: Map<string, string>;
 

@@ -10,20 +10,15 @@ export function dispatch(
   type: 'fetchReport',
   payload: number
 ): Promise<Report | null>;
-
 export function dispatch(type: string, payload?: any) {
-  return new Promise((resolve, reject) => {
-    const message = {
-      type,
-      payload,
-    };
+  const message = {
+    type,
+    payload,
+  };
 
-    chrome.runtime.sendMessage(message, (payload: any) => {
-      if (chrome.runtime.lastError) {
-        reject(chrome.runtime.lastError);
-      } else {
-        resolve(type in transformers ? transformers[type](payload) : payload);
-      }
-    });
-  });
+  return browser.runtime
+    .sendMessage(message)
+    .then((payload) =>
+      type in transformers ? transformers[type](payload) : payload
+    );
 }
