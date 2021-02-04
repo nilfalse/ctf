@@ -1,68 +1,23 @@
-import { Report } from '../../lib/report';
-import * as debug from '../../util/debug';
-import { twemoji } from '../emoji/emoji_service';
-import * as preferenceService from '../preference/preference_service';
 import * as raster from '../raster/raster_service';
-import * as svg from '../svg/svg_service';
 
-export const sizes = [16, 32, 64, 128, 160] as const;
+type RenderingInput = ReadonlyArray<{
+  size: number;
+  dataUri: string;
+}>;
 
-type Size = typeof sizes;
+export interface RenderingOutput {
+  [size: number]: ImageData;
+}
 
-export type RenderingResult = {
-  [key in ArrayElementType<Size>]: ImageData;
-};
-
-export async function render(
-  report: Report,
-  pref = preferenceService.getValue('render')
-) {
-  const images = await createDataURI(report, pref);
-
+export async function render(images: RenderingInput) {
   const renders = await Promise.all(
     images.map(({ dataUri, size }) => raster.toImageData(dataUri, size))
   );
 
-  return renders.reduce((dict, img, idx) => {
-    const size = sizes[idx];
+  return renders.reduce<RenderingOutput>((dict, img, idx) => {
+    const { size } = images[idx];
     dict[size] = img;
 
     return dict;
-  }, {} as RenderingResult);
-}
-
-async function createDataURI(
-  { flag, iso }: Report,
-  pref: preferenceService.RenderPreference
-) {
-  switch (pref) {
-    case 'emoji': {
-      return emojiFactory(flag.emoji);
-    }
-    case 'twemoji': {
-      return twemojiFactory(iso);
-    }
-    default: {
-      return debug.never(
-        `Unexpected preference value "${pref}" while rendering data URI`
-      );
-    }
-  }
-}
-
-function emojiFactory(emoji: string) {
-  return sizes.map((size) => ({
-    size,
-    dataUri: svg.toDataURI(svg.content(emoji, size)),
-  }));
-}
-
-async function twemojiFactory(countryCode: string) {
-  const content = await fetch(twemoji.getFilePath(countryCode));
-  const dataUri = svg.toDataURI(await content.text());
-
-  return sizes.map((size) => ({
-    size,
-    dataUri,
-  }));
+  }, {});
 }

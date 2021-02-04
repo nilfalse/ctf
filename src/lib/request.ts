@@ -27,6 +27,16 @@ export class Request {
       : new Map();
   }
 
+  get host() {
+    if (!this.url) {
+      return null;
+    }
+
+    const host = new URL(this.url).hostname;
+
+    return host.startsWith('www.') ? host.substring(4) : host;
+  }
+
   getHeader(headerName: string) {
     debug.assert(
       headerName.length > 0,

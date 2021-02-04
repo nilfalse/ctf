@@ -3,18 +3,18 @@ import { Report } from '../../lib/report';
 import * as raster from '../raster/raster_service';
 import * as svg from '../svg/svg_service';
 
-import { render } from './rendering_service';
+import { getIcon } from './icon_service';
 
 jest.mock('../raster/raster_service');
 jest.mock('../svg/svg_service');
 
-describe('Rendering service', () => {
+describe('Icon service', () => {
   const report = {
     iso: 'DK',
     flag: { emoji: '🇩🇰' },
   } as Report;
 
-  const contentSpy = jest.spyOn(svg, 'content');
+  const contentSpy = jest.spyOn(svg, 'char');
   const toDataURISpy = jest.spyOn(svg, 'toDataURI');
   const toImageDataSpy = jest.spyOn(raster, 'toImageData');
 
@@ -27,8 +27,10 @@ describe('Rendering service', () => {
   });
 
   it('should create data URI with SVG content', async () => {
+    toDataURISpy.mockReset();
     contentSpy.mockReturnValue('<svg />');
-    await render(report, 'emoji');
+
+    await getIcon(report, 'emoji');
 
     expect(svg.toDataURI).toHaveBeenCalledWith('<svg />');
     expect(svg.toDataURI).toHaveBeenCalledTimes(5);
@@ -36,7 +38,7 @@ describe('Rendering service', () => {
 
   it('should raster the data URI', async () => {
     toDataURISpy.mockReturnValue('data:image/svg+xml;base64,');
-    await render(report);
+    await getIcon(report);
 
     expect(raster.toImageData).toHaveBeenCalledWith(
       'data:image/svg+xml;base64,',
@@ -49,12 +51,16 @@ describe('Rendering service', () => {
   });
 
   it('should produce all sizes at once', async () => {
-    const result = await render(report);
+    const result = (await getIcon(report)) as {
+      imageData: {
+        [size: number]: ImageData;
+      };
+    };
 
-    expect(result).toHaveProperty('16');
-    expect(result).toHaveProperty('32');
-    expect(result).toHaveProperty('64');
-    expect(result).toHaveProperty('128');
-    expect(result).toHaveProperty('160');
+    expect(result.imageData).toHaveProperty('16');
+    expect(result.imageData).toHaveProperty('32');
+    expect(result.imageData).toHaveProperty('64');
+    expect(result.imageData).toHaveProperty('128');
+    expect(result.imageData).toHaveProperty('160');
   });
 });

@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import logo from '../../../artwork/logo_text.svg';
 import { Report } from '../../lib/report';
-import * as countryService from '../../services/country/country_service';
 
 import { Logo } from './logo';
 import { Paragraph } from './typography';
@@ -45,9 +44,9 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ report }) => {
         aria-hidden={true}
       />
 
-      {report.request.url ? (
+      {report.request.host ? (
         <Paragraph size="xs" className="header-primary__host">
-          You loaded {report.host} from
+          You loaded {report.request.host} from
         </Paragraph>
       ) : null}
 
@@ -56,7 +55,7 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ report }) => {
         size="l"
         className="header-primary__country"
       >
-        {countryService.getName(report.iso)}
+        {report.countryName}
       </Paragraph>
     </div>
   );

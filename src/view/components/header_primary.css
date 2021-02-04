@@ -1,4 +1,5 @@
 .header-primary {
+  max-width: 360px;
   padding: 16px 24px;
   background-color: #00bbff;
   color: rgba(255, 255, 255, 0.87);

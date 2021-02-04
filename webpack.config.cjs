@@ -237,6 +237,12 @@ function manifestFactory(
 
     short_name: '__MSG_ext_short_name__',
     version_name: getVersionTag(),
+
+    // browser_specific_settings: {
+    //   gecko: {
+    //     id: '{4f2a0a00-063e-4a7d-b92e-e352eb1c8424}',
+    //   },
+    // },
   };
 
   if (devServer) {

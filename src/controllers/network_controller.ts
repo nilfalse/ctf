@@ -5,10 +5,10 @@ import { ReportReadyCommand } from '../commands/report_ready';
 import * as mediator from '../util/mediator';
 
 mediator.subscribe(BootCommand, function () {
-  browser.webRequest.onCompleted.addListener(
+  browser.webRequest.onResponseStarted.addListener(
     module.hot
-      ? (res) => handleWebRequestCompleted(res)
-      : handleWebRequestCompleted,
+      ? (res) => handleWebResponseStarted(res)
+      : handleWebResponseStarted,
     {
       urls: ['<all_urls>'],
       types: ['main_frame'],
@@ -17,8 +17,12 @@ mediator.subscribe(BootCommand, function () {
   );
 });
 
-function handleWebRequestCompleted(payload: WebRequest.OnCompletedDetailsType) {
+function handleWebResponseStarted(
+  payload: WebRequest.OnResponseStartedDetailsType
+) {
   const { tabId } = payload;
+
+  // FIXME: handle `payload.ip === null` when `payload.fromCache === true`
 
   if (tabId === -1) {
     return; // skip extension popups

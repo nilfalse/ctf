@@ -24,7 +24,7 @@ export function stub() {
         onRemoved: { addListener: jest.fn() },
       },
       webRequest: {
-        onCompleted: { addListener: jest.fn() },
+        onResponseStarted: { addListener: jest.fn() },
       },
 
       pageAction: {},

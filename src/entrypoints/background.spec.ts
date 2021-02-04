@@ -37,11 +37,11 @@ describe('Background script', () => {
     beforeEach(jest.requireActual('../controllers').start);
 
     it('should subscribe to network requests', () => {
-      expect(browser.webRequest.onCompleted.addListener).toHaveBeenCalledTimes(
-        1
-      );
+      expect(
+        browser.webRequest.onResponseStarted.addListener
+      ).toHaveBeenCalledTimes(1);
 
-      expect(browser.webRequest.onCompleted.addListener).lastCalledWith(
+      expect(browser.webRequest.onResponseStarted.addListener).lastCalledWith(
         expect.any(Function),
         {
           urls: ['<all_urls>'],

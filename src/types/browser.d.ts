@@ -6,4 +6,6 @@ declare interface MockedBrowser extends Browser {
 
 declare global {
   const browser: MockedBrowser;
+
+  const InstallTrigger: unknown;
 }

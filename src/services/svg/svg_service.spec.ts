@@ -11,7 +11,7 @@ describe('SVG service', () => {
   describe('when producing content', () => {
     it('should use size of 256px by default', () => {
       const { documentElement } = new DOMParser().parseFromString(
-        svg.content('🏁'),
+        svg.char('🏁'),
         'image/svg+xml'
       );
 
@@ -26,7 +26,7 @@ describe('SVG service', () => {
         it('should output valid XML', () => {
           expect(
             new DOMParser().parseFromString(
-              svg.content(emoji, SIZE),
+              svg.char(emoji, SIZE),
               'image/svg+xml'
             ).documentElement.outerHTML
           ).toMatchSnapshot();
@@ -39,7 +39,7 @@ describe('SVG service', () => {
         for (const [emoji, description] of Object.entries(emojis)) {
           it(`should generate XML for ${description} containing viewBox, width & height of ${size}`, () => {
             const { documentElement } = new DOMParser().parseFromString(
-              svg.content(emoji, size),
+              svg.char(emoji, size),
               'image/svg+xml'
             );
 
@@ -62,7 +62,7 @@ describe('SVG service', () => {
       for (const [emoji] of Object.entries(emojis)) {
         describe(`with emoji ${emoji} of size ${size}px`, () => {
           it(`should generate expected URI`, () => {
-            const content = svg.content(emoji, size);
+            const content = svg.char(emoji, size);
             expect(svg.toDataURI(content)).toMatchSnapshot();
           });
         });

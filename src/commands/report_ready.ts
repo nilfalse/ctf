@@ -21,6 +21,6 @@ export class ReportReadyCommand {
       await interceptors.run(this.request)
     );
 
-    return this.report.icons;
+    return this.report.icon;
   }
 }

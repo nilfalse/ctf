@@ -1,7 +1,8 @@
 import { Match } from '../interceptors';
 import * as countryService from '../services/country/country_service';
 import { flags } from '../services/emoji/emoji_service';
-import * as renderingService from '../services/rendering/rendering_service';
+import * as iconService from '../services/icon/icon_service';
+import * as debug from '../util/debug';
 
 import { Request } from './request';
 
@@ -16,16 +17,6 @@ export class Report {
     public traceroute: ReadonlyArray<Match> = []
   ) {}
 
-  get host() {
-    if (!this.request.url) {
-      return null;
-    }
-
-    const host = new URL(this.request.url).hostname;
-
-    return host.startsWith('www.') ? host.substring(4) : host;
-  }
-
   get iso() {
     const [firstMatch] = this.traceroute;
 
@@ -33,15 +24,24 @@ export class Report {
   }
 
   get countryName() {
+    debug.assert(
+      !this.isEmpty,
+      'Cannot retrieve countryName for an empty report'
+    );
+
     return countryService.getName(this.iso);
   }
 
   get flag() {
+    debug.assert(!this.isEmpty, 'Cannot lookup flag from an empty report');
+
     return flags.lookup(this.iso);
   }
 
-  get icons() {
-    return renderingService.render(this);
+  get icon() {
+    return this.isEmpty
+      ? iconService.defaultIconPromise
+      : iconService.getIcon(this);
   }
 
   get isEmpty() {
