@@ -11,6 +11,7 @@ originalModule.rewire$_load(() =>
       '..',
       '..',
       '..',
+      '..',
       'data',
       'maxmind',
       'GeoLite2-Country.mmdb'

@@ -56,7 +56,7 @@
     },
 
     {
-      "files": ["scripts/**/*.js"],
+      "files": ["bin/**/*.js"],
       "rules": {
         "strict": ["error", "global"]
       }

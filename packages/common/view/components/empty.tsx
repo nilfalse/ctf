@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import logo from '../../../artwork/logo_text.svg';
+import logo from '../../../../artwork/logo_text.svg';
 
 import { Paragraph } from './typography';
 

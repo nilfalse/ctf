@@ -104,7 +104,10 @@ module.exports = function (env) {
   function createStaticEntryPoint(name, options = {}) {
     return {
       entry: {
-        [name]: ['react-hot-loader/patch', `./src/entrypoints/${name}`],
+        [name]: [
+          'react-hot-loader/patch',
+          `./packages/common/entrypoints/${name}`,
+        ],
       },
 
       resolve: {
@@ -147,7 +150,7 @@ module.exports = function (env) {
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
           ...options,
-          template: `src/entrypoints/${name}.template.html`,
+          template: `packages/common/entrypoints/${name}.template.html`,
         }),
       ],
     };
@@ -156,7 +159,7 @@ module.exports = function (env) {
   console.log(common.mode);
   return [
     merge(common, maxmindMocks, {
-      entry: { background: './src/entrypoints/background' },
+      entry: { background: './packages/common/entrypoints/background' },
 
       devServer,
       module: {
