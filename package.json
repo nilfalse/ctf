@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "capture-the-flag",
+  "name": "ctf",
   "version": "0.0.8",
   "type": "module",
   "scripts": {
@@ -112,6 +112,9 @@
     "verbose": true,
     "collectCoverageFrom": [
       "packages/**/*.{js,jsx,ts,tsx}",
+      "!packages/bundler/**/*.{js,jsx,ts,tsx}",
+      "!packages/bundler/*.{js,jsx,ts,tsx}",
+      "!packages/**/bundle/*.{js,jsx,ts,tsx}",
       "bin/**/*.{js,jsx,ts,tsx}",
       "!bin/*.{js,jsx,ts,tsx}",
       "!<rootDir>/**/__test__/**/*.{js,jsx,ts,tsx}"

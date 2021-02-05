@@ -10,7 +10,8 @@ build : bundle/data webpack
 
 .PHONY : webpack
 webpack : clean
-	$(NODEJS_BIN)webpack
+	yarn workspace firefox  webpack
+	yarn workspace chromium webpack
 
 .PHONY : fix
 fix :

@@ -13,4 +13,14 @@ coverage
 /bundle/*.svg
 /bundle/*.woff
 
+/packages/*/bundle/hot
+/packages/*/bundle/data
+/packages/*/bundle/manifest.json
+/packages/*/bundle/popup.html
+/packages/*/bundle/options.html
+/packages/*/bundle/*.js
+/packages/*/bundle/*.css
+/packages/*/bundle/*.svg
+/packages/*/bundle/*.woff
+
 /cc-test-reporter

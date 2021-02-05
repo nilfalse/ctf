@@ -1,0 +1,11 @@
+{
+  "private": "true",
+  "name": "firefox",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "webpack serve"
+  },
+  "dependencies": {
+    "bundler": "*"
+  }
+}

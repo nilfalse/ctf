@@ -1,6 +1,6 @@
 import { I18n } from 'webextension-polyfill-ts';
 
-import * as locale from '../../../../../bundle/_locales/en/messages.json';
+import * as locale from '../../../../bundle/content/_locales/en/messages.json';
 
 import { stub } from './stub';
 

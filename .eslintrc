@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["/bundle/**"],
+  "ignorePatterns": ["/packages/**/bundle/**"],
 
   "root": true,
   "extends": ["standard", "prettier"],

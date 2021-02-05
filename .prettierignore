@@ -1,4 +1,5 @@
-bundle/*
-!bundle/_locales
+packages/bundle/*
+packages/**/bundle
+!packages/bundle/content/_locales
 coverage/*
 data/*
