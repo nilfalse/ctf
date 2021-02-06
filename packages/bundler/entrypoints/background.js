@@ -9,7 +9,7 @@ class BackgroundEntrypoint extends BasicEntrypoint {
   get configuration() {
     return merge(this._maxmindMocks, this._devServer, {
       entry: {
-        background: `${this.bundle.commonPath}/entrypoints/background`,
+        background: `${this.bundle.runtimePath}/entrypoints/background`,
       },
 
       module: {

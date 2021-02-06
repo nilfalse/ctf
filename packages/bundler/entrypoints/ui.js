@@ -30,7 +30,7 @@ class UIEntrypoint extends ReactEntrypoint {
       basename,
       [
         'react-hot-loader/patch',
-        `${this.bundle.commonPath}/entrypoints/${basename}`,
+        `${this.bundle.runtimePath}/entrypoints/${basename}`,
       ],
     ];
   }
@@ -38,7 +38,7 @@ class UIEntrypoint extends ReactEntrypoint {
   _createHtml({ basename, filepath, ...options }) {
     return new HtmlWebpackPlugin({
       template: path.resolve(
-        this.bundle.commonPath,
+        this.bundle.runtimePath,
         'entrypoints',
         `${basename}.template.html`
       ),

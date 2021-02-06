@@ -6,7 +6,7 @@ class Bundle {
     this.entrypoints = [];
 
     this.rootPath = path.resolve(__dirname, '..', '..');
-    this.commonPath = path.resolve(this.rootPath, 'packages', 'common');
+    this.runtimePath = path.resolve(this.rootPath, 'packages', 'runtime');
     this.pkg = require(path.resolve(this.rootPath, 'package.json'));
   }
 

@@ -126,14 +126,14 @@
       }
     },
     "setupFiles": [
-      "<rootDir>/packages/common/__test__/enzyme.js",
-      "<rootDir>/packages/common/__test__/globals.js"
+      "<rootDir>/packages/runtime/__test__/enzyme.js",
+      "<rootDir>/packages/runtime/__test__/globals.js"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/packages/common/__test__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/packages/common/__test__/styleMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/packages/runtime/__test__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/packages/runtime/__test__/styleMock.js"
     },
-    "snapshotResolver": "<rootDir>/packages/common/__test__/snapshotResolver.cjs",
+    "snapshotResolver": "<rootDir>/packages/runtime/__test__/snapshotResolver.cjs",
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
