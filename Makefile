@@ -61,7 +61,7 @@ eslint :
 ci : outdated ci.firefox ci.chromium
 outdated :
 	- yarn outdated
-ci.firefox :
+ci.firefox : primary-deps
 	$(MAKE) --directory=packages/firefox ci
-ci.chromium :
+ci.chromium : primary-deps
 	$(MAKE) --directory=packages/chromium ci
