@@ -27,13 +27,6 @@ primary-deps : ensure-node-modules
 secondary-deps : ensure-node-modules
 	${MAKE} --directory=packages/bundle twemoji locales
 
-.PHONY : lint prettier eslint
-lint : prettier eslint
-prettier :
-	$(NODEJS_BIN)prettier --check .
-eslint :
-	$(NODEJS_BIN)eslint .
-
 .PHONY : test
 test :
 	$(NODEJS_BIN)jest --coverage
@@ -57,16 +50,13 @@ node_modules : package.json
 ensure-node-modules :
 	$(MAKE) --no-print-directory --always-make node_modules
 
-cc-test-reporter :
-	curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $@
-	chmod +x $@
-.PHONY : ci coveralls codecov codeclimate
-coveralls :
-	$(NODEJS_BIN)coveralls < coverage/lcov.info
-codecov :
-	$(NODEJS_BIN)codecov --disable=gcov
-codeclimate : cc-test-reporter
-	./cc-test-reporter after-build --exit-code $$TRAVIS_TEST_RESULT
-ci : codecov coveralls codeclimate
+.PHONY : lint prettier eslint
+lint : prettier eslint
+prettier :
+	$(NODEJS_BIN)prettier --check .
+eslint :
+	$(NODEJS_BIN)eslint .
+
+.PHONY : ci
+ci :
 	- npm outdated
-	ls -lAhR bundle

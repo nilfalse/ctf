@@ -1,5 +1,8 @@
 {
-  "ignorePatterns": ["/packages/**/bundle/**"],
+  "ignorePatterns": [
+    "/packages/firefox/bundle/**",
+    "/packages/chromium/bundle/**"
+  ],
 
   "root": true,
   "extends": ["standard", "prettier"],
