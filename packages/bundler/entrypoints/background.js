@@ -1,6 +1,6 @@
 const path = require('path');
 
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const { merge } = require('webpack-merge');
 
 const { BasicEntrypoint } = require('./_basic');
@@ -22,7 +22,7 @@ class BackgroundEntrypoint extends BasicEntrypoint {
     return [
       ...super.plugins,
 
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         seed: this.bundle,
         generate: (...args) => this.getManifestFactory().create(...args),
       }),

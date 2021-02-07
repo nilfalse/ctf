@@ -44,7 +44,7 @@ pristine : clean
 	- rm -rf node_modules
 
 node_modules : package.json
-	yarn --frozen-lockfile || npm install --no-package-lock
+	yarn --frozen-lockfile
 	touch node_modules
 .PHONY : ensure-node-modules
 ensure-node-modules :
@@ -61,7 +61,7 @@ eslint :
 ci : outdated ci.firefox ci.chromium
 outdated :
 	- yarn outdated
-ci.firefox : primary-deps
+ci.firefox : node_modules
 	$(MAKE) --directory=packages/firefox ci
-ci.chromium : primary-deps
+ci.chromium : node_modules
 	$(MAKE) --directory=packages/chromium ci

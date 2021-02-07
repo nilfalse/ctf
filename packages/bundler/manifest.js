@@ -47,10 +47,10 @@ class ManifestFactory {
   }
 
   _getVersionTag(pkg) {
-    const { TRAVIS_TAG, TRAVIS_COMMIT } = process.env;
-    const version = TRAVIS_TAG || pkg.version;
+    const { GITHUB_SHA } = process.env;
+    const { version } = pkg;
 
-    return TRAVIS_COMMIT && `${version} (${TRAVIS_COMMIT.substring(0, 8)})`;
+    return GITHUB_SHA && `${version} (${GITHUB_SHA.substring(0, 8)})`;
   }
 }
 
