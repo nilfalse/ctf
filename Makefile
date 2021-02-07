@@ -2,15 +2,18 @@ NODEJS=node --unhandled-rejections=strict --experimental-json-modules
 NODEJS_BIN=${NODEJS} node_modules/.bin/
 
 .PHONY : all
-all : airports locales twemoji
-	$(MAKE) --no-print-directory build
+all : primary-deps secondary-deps
 
-.PHONY : build
-build : bundle/data webpack
+.PHONY : firefox chromium
+firefox : clean primary-deps
+	yarn workspace firefox webpack serve
+chromium : clean primary-deps
+	yarn workspace chromium webpack serve
 
-.PHONY : webpack
-webpack : clean
-	yarn workspace firefox  webpack
+.PHONY : release.firefox release.chromium
+release.firefox : clean primary-deps
+	yarn workspace firefox webpack
+release.chromium : clean primary-deps
 	yarn workspace chromium webpack
 
 .PHONY : fix
@@ -18,39 +21,11 @@ fix :
 	$(NODEJS_BIN)prettier --write .
 	$(NODEJS_BIN)eslint --fix .
 
-.PHONY : locales airports
-locales : ensure-deps
-	${NODEJS} ./bin/locales.js
-airports : ensure-deps
-	$(MAKE) --no-print-directory --always-make data/airports.json
-
-.PHONY : icons
-icons : artwork/logo_icon.svg
-	for i in 32 48 128 256 512; do inkscape -w $$i -h $$i $< --export-filename bundle/icons/icon_$${i}px.png; done
-
-bundle/data : bundle/data/GeoLite2-Country.mmdb bundle/data/airports.json
-bundle/data/airports.json : data/airports.json
-	mkdir -p `dirname $@`
-	jq -c . < $^ > $@
-bundle/data/GeoLite2-Country.mmdb : data/maxmind/GeoLite2-Country.mmdb
-	mkdir -p `dirname $@`
-	cp $^ $@
-
-data : data/maxmind/GeoLite2-Country.mmdb
-data/airports.json :
-	${NODEJS} ./bin/airports.js > data/airports.json
-	ls -lAh data/airports.json
-data/maxmind/GeoLite2-Country.mmdb :
-	mkdir -p `dirname $@`
-	curl -vL "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" | tar --strip-components 1 -xzv -C `dirname $@`
-	ls -lAh `dirname $@`
-
-.PHONY : twemoji
-twemoji :
-	- rm -rf bundle/assets/twemoji
-	mkdir -p bundle/assets/twemoji
-	time ${NODEJS} bin/twemoji.js
-	ls -lA bundle/assets/twemoji
+.PHONY : primary-deps secondary-deps
+primary-deps : ensure-node-modules
+	${MAKE} --directory=packages/bundle
+secondary-deps : ensure-node-modules
+	${MAKE} --directory=packages/bundle twemoji locales
 
 .PHONY : lint prettier eslint
 lint : prettier eslint
@@ -65,18 +40,20 @@ test :
 
 .PHONY : clean pristine
 clean :
-	- rm -rf bundle/hot coverage
-	- rm -f bundle/manifest.json bundle/*.woff bundle/*.svg bundle/*.css bundle/*.js bundle/popup.html bundle/options.html
+	- rm -rf coverage packages/chromium/bundle/hot packages/firefox/bundle/hot
+	- rm -f packages/chromium/bundle/manifest.json packages/chromium/bundle/*.woff packages/chromium/bundle/*.svg packages/chromium/bundle/*.css packages/chromium/bundle/*.js packages/chromium/bundle/popup.html packages/chromium/bundle/options.html
+	- rm -f packages/firefox/bundle/manifest.json  packages/firefox/bundle/*.woff  packages/firefox/bundle/*.svg  packages/firefox/bundle/*.css  packages/firefox/bundle/*.js  packages/firefox/bundle/popup.html  packages/firefox/bundle/options.html
 pristine : clean
 	- rm -f cc-test-reporter
 	- $(NODEJS_BIN)jest --clearCache
-	- rm -rf bundle/data node_modules data/maxmind
+	${MAKE} --directory=packages/bundle pristine
+	- rm -rf node_modules
 
 node_modules : package.json
 	yarn --frozen-lockfile || npm install --no-package-lock
 	touch node_modules
-.PHONY : ensure-deps
-ensure-deps : node_modules
+.PHONY : ensure-node-modules
+ensure-node-modules : node_modules
 
 cc-test-reporter :
 	curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $@

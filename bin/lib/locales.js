@@ -7,9 +7,7 @@ import prettier from 'prettier';
 
 import { LOCALES } from './locales.config.js';
 
-export function main(binPath) {
-  const localesRoot = path.resolve(binPath, '..', 'bundle', '_locales');
-
+export function main(binPath, localesRoot) {
   const files = LOCALES.map(function (locale) {
     assert(locale.length === 2);
 

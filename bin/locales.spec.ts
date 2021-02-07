@@ -30,13 +30,16 @@ describe('Locales Script', () => {
 
       readSpy.mockResolvedValue('{}');
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(readSpy).toHaveBeenCalledTimes(2);
       expect(writeSpy).toHaveBeenCalledTimes(2);
 
       expect(writeSpy.mock.calls[0][0]).toBe(
-        '/home/user/fakeRoot/bundle/_locales/en/messages.json'
+        '/home/user/fakeRoot/packages/bundle/_locales/en/messages.json'
       );
       expect(JSON.parse(writeSpy.mock.calls[0][1] as string))
         .toMatchInlineSnapshot(`
@@ -48,7 +51,7 @@ describe('Locales Script', () => {
       `);
 
       expect(writeSpy.mock.calls[1][0]).toBe(
-        '/home/user/fakeRoot/bundle/_locales/es/messages.json'
+        '/home/user/fakeRoot/packages/bundle/_locales/es/messages.json'
       );
       expect(JSON.parse(writeSpy.mock.calls[1][1] as string))
         .toMatchInlineSnapshot(`
@@ -88,7 +91,10 @@ describe('Locales Script', () => {
 }
 `);
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(readSpy).toHaveBeenCalled();
       expect(writeSpy).not.toHaveBeenCalled();
@@ -110,7 +116,10 @@ describe('Locales Script', () => {
         })
       );
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(writeSpy).toHaveBeenCalledTimes(1);
       expect(JSON.parse(writeSpy.mock.calls[0][1] as string)).toStrictEqual({
@@ -136,7 +145,10 @@ describe('Locales Script', () => {
         })
       );
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(writeSpy).toHaveBeenCalledTimes(1);
       expect(JSON.parse(writeSpy.mock.calls[0][1] as string)).toStrictEqual({
@@ -156,7 +168,10 @@ describe('Locales Script', () => {
 
       readSpy.mockResolvedValue(`{}`);
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(writeSpy).toHaveBeenCalledTimes(1);
       expect(JSON.parse(writeSpy.mock.calls[0][1] as string)).toStrictEqual({
@@ -174,7 +189,10 @@ describe('Locales Script', () => {
 
       readSpy.mockResolvedValue(`{}`);
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(writeSpy).toHaveBeenCalledTimes(1);
       expect(JSON.parse(writeSpy.mock.calls[0][1] as string)).toStrictEqual({
@@ -192,7 +210,10 @@ describe('Locales Script', () => {
 
       readSpy.mockResolvedValue(`{}`);
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(writeSpy).toHaveBeenCalledTimes(1);
       expect(JSON.parse(writeSpy.mock.calls[0][1] as string)).toStrictEqual({
@@ -214,7 +235,10 @@ describe('Locales Script', () => {
 }
 `);
 
-      await script.main('/home/user/fakeRoot/bin');
+      await script.main(
+        '/home/user/fakeRoot/bin',
+        '/home/user/fakeRoot/packages/bundle/_locales'
+      );
 
       expect(writeSpy).toHaveBeenCalledTimes(1);
       expect(writeSpy.mock.calls[0][1]).toMatchInlineSnapshot(`

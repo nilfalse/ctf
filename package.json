@@ -4,8 +4,8 @@
   "version": "0.0.8",
   "type": "module",
   "scripts": {
-    "prestart": "make -j clean bundle/data",
-    "start": "webpack serve",
+    "prestart": "# make clean primary-deps",
+    "start": "# webpack serve",
     "test": "jest"
   },
   "workspaces": [
@@ -80,7 +80,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "make lint",
-      "pre-push": "make --jobs build test"
+      "pre-push": "make --jobs 2 test release.firefox release.chromium"
     }
   },
   "bundlewatch": {

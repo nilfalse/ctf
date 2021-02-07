@@ -6,8 +6,8 @@ import * as path from 'path';
 import flags from 'country-flag-emoji-json/json/flag-emojis-by-code.json';
 import fetch from 'node-fetch';
 
-export function main(binPath) {
-  const twemoji = new Twemoji(binPath);
+export function main(binPath, twemojiRoot) {
+  const twemoji = new Twemoji(twemojiRoot);
 
   return twemoji.download().catch((err) => {
     console.error(err);
@@ -17,15 +17,8 @@ export function main(binPath) {
 }
 
 class Twemoji {
-  constructor(binPath) {
-    this.binPath = binPath;
-    this.twemojiRoot = path.resolve(
-      binPath,
-      '..',
-      'bundle',
-      'assets',
-      'twemoji'
-    );
+  constructor(twemojiRoot) {
+    this.twemojiRoot = twemojiRoot;
 
     this.agent = new https.Agent({ keepAlive: true });
   }

@@ -31,9 +31,12 @@ describe('Twemoji Script', () => {
 
   describe('when downloading', () => {
     it('should fetch each country', async () => {
-      await expect(main('/home/fake/root/bin')).resolves.toHaveLength(
-        COUNTRY_COUNT
-      );
+      await expect(
+        main(
+          '/home/fake/root/bin',
+          '/home/fake/root/packages/bundle/content/assets/twemoji'
+        )
+      ).resolves.toHaveLength(COUNTRY_COUNT);
     });
 
     it('should fetch from CDN', async () => {
@@ -53,10 +56,13 @@ describe('Twemoji Script', () => {
     });
 
     it('should store flags in the designated directory', async () => {
-      await main('/home/fake/root/bin');
+      await main(
+        '/home/fake/root/bin',
+        '/home/fake/root/packages/bundle/content/assets/twemoji'
+      );
 
       expect(fs.createWriteStream).toHaveBeenCalledWith(
-        '/home/fake/root/bundle/assets/twemoji/dk.svg'
+        '/home/fake/root/packages/bundle/content/assets/twemoji/dk.svg'
       );
     });
   });
@@ -79,7 +85,10 @@ describe('Twemoji Script', () => {
         .mockReturnValue('Expectation Failed');
       jest.spyOn(fetch.response, 'status', 'get').mockReturnValue(417);
 
-      await main('/home/fake/root/bin');
+      await main(
+        '/home/fake/root/bin',
+        '/home/fake/root/packages/bundle/content/assets/twemoji'
+      );
 
       const spy = jest.spyOn(console, 'error');
       expect(spy).toHaveBeenCalledWith(expect.any(Error));
@@ -96,13 +105,19 @@ describe('Twemoji Script', () => {
         }),
       });
 
-      await main('/home/fake/root/bin');
+      await main(
+        '/home/fake/root/bin',
+        '/home/fake/root/packages/bundle/content/assets/twemoji'
+      );
 
       expect(consoleLogSpy).toHaveBeenCalledWith('  Content-Type: lol/boom');
     });
 
     it('should terminate the process with a failure code', async () => {
-      await main('/home/fake/root/bin');
+      await main(
+        '/home/fake/root/bin',
+        '/home/fake/root/packages/bundle/content/assets/twemoji'
+      );
 
       expect(process.exit).toHaveBeenCalledWith(1);
     });

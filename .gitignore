@@ -2,19 +2,9 @@ node_modules
 coverage
 .env
 
-/data/maxmind
-/bundle/hot
-/bundle/data
-/bundle/manifest.json
-/bundle/popup.html
-/bundle/options.html
-/bundle/*.js
-/bundle/*.css
-/bundle/*.svg
-/bundle/*.woff
-
+/packages/bundle/data/maxmind
+/packages/bundle/content/data
 /packages/*/bundle/hot
-/packages/*/bundle/data
 /packages/*/bundle/manifest.json
 /packages/*/bundle/popup.html
 /packages/*/bundle/options.html
