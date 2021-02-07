@@ -10,10 +10,10 @@ firefox : clean primary-deps
 chromium : clean primary-deps
 	yarn workspace chromium webpack serve
 
-.PHONY : release.firefox release.chromium
-release.firefox : clean primary-deps
-	yarn workspace firefox webpack
-release.chromium : clean primary-deps
+.PHONY : build.firefox build.chromium
+build.firefox : clean primary-deps
+	$(MAKE) --directory=packages/firefox bundle build
+build.chromium : clean primary-deps
 	yarn workspace chromium webpack
 
 .PHONY : fix
@@ -40,13 +40,14 @@ test :
 
 .PHONY : clean pristine
 clean :
-	- rm -rf coverage packages/chromium/bundle/hot packages/firefox/bundle/hot
+	- rm -rf coverage packages/chromium/bundle/hot
 	- rm -f packages/chromium/bundle/manifest.json packages/chromium/bundle/*.woff packages/chromium/bundle/*.svg packages/chromium/bundle/*.css packages/chromium/bundle/*.js packages/chromium/bundle/popup.html packages/chromium/bundle/options.html
-	- rm -f packages/firefox/bundle/manifest.json  packages/firefox/bundle/*.woff  packages/firefox/bundle/*.svg  packages/firefox/bundle/*.css  packages/firefox/bundle/*.js  packages/firefox/bundle/popup.html  packages/firefox/bundle/options.html
+	$(MAKE) --directory=packages/firefox clean
 pristine : clean
 	- rm -f cc-test-reporter
 	- $(NODEJS_BIN)jest --clearCache
 	${MAKE} --directory=packages/bundle pristine
+	$(MAKE) --directory=packages/firefox pristine
 	- rm -rf node_modules
 
 node_modules : package.json

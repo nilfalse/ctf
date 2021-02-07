@@ -4,6 +4,8 @@ coverage
 
 /packages/bundle/data/maxmind
 /packages/bundle/content/data
+/packages/firefox/bundle/assets
+/packages/firefox/bundle/data
 /packages/*/bundle/hot
 /packages/*/bundle/manifest.json
 /packages/*/bundle/popup.html

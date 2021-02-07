@@ -80,7 +80,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "make lint",
-      "pre-push": "make --jobs 2 test release.firefox release.chromium"
+      "pre-push": "make --jobs 2 test build.firefox build.chromium"
     }
   },
   "bundlewatch": {
