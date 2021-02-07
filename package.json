@@ -82,8 +82,8 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint --cache",
-    "*.{ts,tsx,js,jsx,css,md}": "prettier --check"
+    "*.{ts,tsx,js,jsx,cjs,mjs}": "eslint --cache",
+    "*.{ts,tsx,js,jsx,cjs,mjs,css,md}": "prettier --check"
   },
   "bundlewatch": {
     "files": [

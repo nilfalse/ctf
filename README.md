@@ -87,6 +87,8 @@ Once it's built you will be able to load it from the `./bundle` directory.
 
 Author: [Yaroslav Ilin](https://ilin.dk)
 
+The distribution of this extension includes [Twemoji](https://github.com/twitter/twemoji) - an emoji library maintained by Twitter.
+
 ## 📄 LICENSE
 
 <small>TODO</small>
