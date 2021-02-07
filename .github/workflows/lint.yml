@@ -1,0 +1,20 @@
+---
+name: Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Linting the codebase
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install node_modules
+        run: yarn --frozen-lockfile
+
+      - name: Run ESLint / Prettier
+        run: make --output-sync --jobs lint

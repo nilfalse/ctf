@@ -2,6 +2,7 @@
 
 Yet another browser extension showing country flags in the address bar.
 
+[![ESLint / Prettier](https://github.com/nilfalse/ctf/workflows/Lint/badge.svg)](https://github.com/nilfalse/ctf/actions?query=workflow%3ALint)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c81669d71480f9f1cac6/maintainability)](https://codeclimate.com/github/nilfalse/ctf)
 
 [![Browser address bar demo illustration](./artwork/omnibox.svg)](https://nilfalse.com/addons/ctf)
