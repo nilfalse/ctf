@@ -1,20 +1,19 @@
 ---
 name: Lint
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     name: Linting the codebase
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Install node_modules
-        run: yarn --frozen-lockfile
+        run: make --jobs node_modules
 
       - name: Run ESLint / Prettier
         run: make --output-sync --jobs lint

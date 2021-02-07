@@ -54,7 +54,8 @@ node_modules : package.json
 	yarn --frozen-lockfile || npm install --no-package-lock
 	touch node_modules
 .PHONY : ensure-node-modules
-ensure-node-modules : node_modules
+ensure-node-modules :
+	$(MAKE) --no-print-directory --always-make node_modules
 
 cc-test-reporter :
 	curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $@
