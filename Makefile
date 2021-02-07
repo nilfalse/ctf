@@ -14,7 +14,7 @@ chromium : clean primary-deps
 build.firefox : clean primary-deps
 	$(MAKE) --directory=packages/firefox bundle build
 build.chromium : clean primary-deps
-	yarn workspace chromium webpack
+	$(MAKE) --directory=packages/chromium build
 
 .PHONY : fix
 fix :
@@ -57,6 +57,11 @@ prettier :
 eslint :
 	$(NODEJS_BIN)eslint .
 
-.PHONY : ci
-ci :
-	- npm outdated
+.PHONY : ci outdated ci.firefox ci.chromium
+ci : outdated ci.firefox ci.chromium
+outdated :
+	- yarn outdated
+ci.firefox :
+	$(MAKE) --directory=packages/firefox ci
+ci.chromium :
+	$(MAKE) --directory=packages/chromium ci

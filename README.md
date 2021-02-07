@@ -1,4 +1,4 @@
-# Capture The Flag [![Build status shield](https://travis-ci.com/nilfalse/ctf.svg?branch=main)](https://travis-ci.com/nilfalse/ctf) [![Dependencies status shield](https://badges.depfu.com/badges/c5efc2f68546b6c7cc2a0b1c896b2cd6/overview.svg)](https://depfu.com/github/nilfalse/ctf) [![Coverage status shield](https://coveralls.io/repos/github/nilfalse/ctf/badge.svg)](https://coveralls.io/github/nilfalse/ctf)
+# Capture The Flag [![Build status](https://github.com/nilfalse/ctf/workflows/Build/badge.svg)](https://github.com/nilfalse/ctf/actions?query=workflow%3ABuild) [![Dependencies status shield](https://badges.depfu.com/badges/c5efc2f68546b6c7cc2a0b1c896b2cd6/overview.svg)](https://depfu.com/github/nilfalse/ctf) [![Coverage status shield](https://coveralls.io/repos/github/nilfalse/ctf/badge.svg)](https://coveralls.io/github/nilfalse/ctf)
 
 Yet another browser extension showing country flags in the address bar.
 
