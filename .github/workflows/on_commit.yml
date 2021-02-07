@@ -82,3 +82,5 @@ jobs:
 
       - name: Build Firefox & Chromium runtimes
         run: make --output-sync --jobs ci
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
