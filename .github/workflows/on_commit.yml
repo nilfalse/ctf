@@ -5,44 +5,77 @@ on: [push, pull_request]
 
 jobs:
   lint:
-    name: Lint
+    name: Linting
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            packages/bundle/data
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: Install node_modules
-        run: make --jobs node_modules
+        run: yarn --frozen-lockfile
 
       - name: Run ESLint / Prettier
         run: make --output-sync --jobs lint
 
-  test:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest]
-        node: ['14', '15']
+      - name: Install additional dependencies
+        run: make --jobs primary-deps
+        env:
+          MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
 
-    name: Unit-test on Node.js ${{ matrix.node }}
-    runs-on: ${{ matrix.platform }}
+  test:
+    name: Unit-testing
+    needs: lint
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Download Node.js ${{ matrix.node }}
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 14
 
-      - name: Install dependencies
-        run: make --jobs primary-deps
+      - name: Restore caches
+        uses: actions/cache@v2
         env:
-          MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            packages/bundle/data
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Run unit tests
-        run: make test
+        run: make --output-sync --jobs test
+        env:
+          MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
 
       - name: Upload coverage to Coveralls.io
         uses: coverallsapp/github-action@master
@@ -58,32 +91,40 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
   build:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest]
-        node: ['12', '14', '15']
-
-    name: Build on Node.js ${{ matrix.node }}
-    runs-on: ${{ matrix.platform }}
+    name: Building
+    needs: lint
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Download Node.js ${{ matrix.node }}
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 14
 
-      - name: Install dependencies
-        run: make --jobs primary-deps
+      - name: Restore caches
+        uses: actions/cache@v2
         env:
-          MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            packages/bundle/data
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Build Firefox & Chromium runtimes
         run: |
-          make outdated
+          make --output-sync --jobs outdated
           make --output-sync --jobs release
+        env:
+          MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
 
       - name: Bundlewatch
         uses: jackyef/bundlewatch-gh-action@master
@@ -91,7 +132,7 @@ jobs:
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
 
       - name: Update Release
-        if: github.ref == 'refs/heads/main' && matrix.node == '15'
+        if: github.ref == 'refs/heads/main' && matrix.node == '14'
         uses: johnwbyrd/update-release@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

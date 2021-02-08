@@ -22,7 +22,7 @@ secondary-deps : ensure-node-modules
 	${MAKE} --directory=packages/bundle twemoji locales
 
 .PHONY : test
-test :
+test : primary-deps
 	$(NODEJS_BIN)jest --coverage
 
 .PHONY : clean pristine
@@ -51,7 +51,7 @@ eslint :
 	$(NODEJS_BIN)eslint .
 
 .PHONY : outdated ci ci.firefox ci.chromium
-outdated :
+outdated : primary-deps
 	- yarn outdated
 release : release.firefox release.chromium
 release.firefox : node_modules
