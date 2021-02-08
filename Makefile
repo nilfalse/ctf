@@ -58,7 +58,7 @@ eslint :
 	$(NODEJS_BIN)eslint .
 
 .PHONY : ci outdated ci.firefox ci.chromium
-ci : outdated ci.firefox ci.chromium
+ci : ci.firefox ci.chromium
 outdated :
 	- yarn outdated
 ci.firefox : node_modules

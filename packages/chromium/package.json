@@ -6,32 +6,6 @@
     "start": "webpack serve"
   },
   "dependencies": {
-    "bundler": "*",
-    "bundlewatch": "^0.3.2"
-  },
-  "bundlewatch": {
-    "files": [
-      {
-        "path": "./bundle/**/*.html"
-      },
-      {
-        "path": "./bundle/**/*.js"
-      },
-      {
-        "path": "./bundle/**/*.json"
-      },
-      {
-        "path": "./bundle/**/*.svg"
-      },
-      {
-        "path": "./bundle/**/*.woff"
-      },
-      {
-        "path": "./bundle/**/*.mmdb"
-      }
-    ],
-    "ci": {
-      "repoBranchBase": "main"
-    }
+    "bundler": "*"
   }
 }

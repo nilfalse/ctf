@@ -6,5 +6,4 @@ build :
 	${NODEJS_BIN}webpack
 
 .PHONY : ci
-ci : build
-	${NODEJS_BIN}bundlewatch
+ci : bundle build

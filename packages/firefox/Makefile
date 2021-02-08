@@ -7,7 +7,6 @@ build :
 
 .PHONY : ci
 ci : bundle build
-	${NODEJS_BIN}bundlewatch
 
 bundle : bundle/data/airports.json bundle/data/GeoLite2-Country.mmdb bundle/assets
 bundle/assets : ../bundle/content/assets

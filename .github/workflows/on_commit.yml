@@ -5,7 +5,7 @@ on: [push, pull_request]
 
 jobs:
   lint:
-    name: Linting the codebase
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -81,6 +81,10 @@ jobs:
           MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
 
       - name: Build Firefox & Chromium runtimes
-        run: make --output-sync --jobs ci
-        env:
-          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+        run:
+          - make outdated
+          - make --output-sync --jobs ci
+
+      - uses: jackyef/bundlewatch-gh-action@master
+        with:
+          bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
