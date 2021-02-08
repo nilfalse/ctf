@@ -81,10 +81,18 @@ jobs:
           MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
 
       - name: Build Firefox & Chromium runtimes
-        run:
-          - make outdated
-          - make --output-sync --jobs ci
+        run: |
+          make outdated
+          make --output-sync --jobs release
 
       - uses: jackyef/bundlewatch-gh-action@master
         with:
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+
+      - name: Update release
+        if: github.ref == 'refs/heads/main'
+        uses: johnwbyrd/update-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release: unstable
+          files: packages/firefox/firefox.release.zip packages/chromium/chromium.release.zip

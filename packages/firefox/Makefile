@@ -5,8 +5,9 @@ NODEJS_BIN=${NODEJS} ../../node_modules/.bin/
 build :
 	${NODEJS_BIN}webpack
 
-.PHONY : ci
-ci : bundle build
+firefox.release.zip : bundle build
+	- rm $@
+	zip --recurse-paths $@ bundle
 
 bundle : bundle/data/airports.json bundle/data/GeoLite2-Country.mmdb bundle/assets
 bundle/assets : ../bundle/content/assets
@@ -22,6 +23,6 @@ bundle/data/GeoLite2-Country.mmdb : ../bundle/data/maxmind/GeoLite2-Country.mmdb
 .PHONY : clean pristine
 clean :
 	- rm -rf bundle/hot
-	- rm -f bundle/manifest.json  bundle/*.woff  bundle/*.svg  bundle/*.css  bundle/*.js  bundle/popup.html  bundle/options.html
+	- rm -f firefox.release.zip bundle/manifest.json bundle/*.woff bundle/*.svg bundle/*.css bundle/*.js bundle/popup.html bundle/options.html
 pristine : clean
-	- rm -rf  node_modules bundle/assets bundle/data
+	- rm -rf node_modules bundle/assets bundle/data

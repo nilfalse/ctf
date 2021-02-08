@@ -10,12 +10,6 @@ firefox : clean primary-deps
 chromium : clean primary-deps
 	yarn workspace chromium webpack serve
 
-.PHONY : build.firefox build.chromium
-build.firefox : clean primary-deps
-	$(MAKE) --directory=packages/firefox bundle build
-build.chromium : clean primary-deps
-	$(MAKE) --directory=packages/chromium build
-
 .PHONY : fix
 fix :
 	$(NODEJS_BIN)prettier --write .
@@ -33,11 +27,10 @@ test :
 
 .PHONY : clean pristine
 clean :
-	- rm -rf coverage packages/chromium/bundle/hot
-	- rm -f packages/chromium/bundle/manifest.json packages/chromium/bundle/*.woff packages/chromium/bundle/*.svg packages/chromium/bundle/*.css packages/chromium/bundle/*.js packages/chromium/bundle/popup.html packages/chromium/bundle/options.html
+	- rm -rf coverage
 	$(MAKE) --directory=packages/firefox clean
+	$(MAKE) --directory=packages/chromium clean
 pristine : clean
-	- rm -f cc-test-reporter
 	- $(NODEJS_BIN)jest --clearCache
 	${MAKE} --directory=packages/bundle pristine
 	$(MAKE) --directory=packages/firefox pristine
@@ -57,11 +50,11 @@ prettier :
 eslint :
 	$(NODEJS_BIN)eslint .
 
-.PHONY : ci outdated ci.firefox ci.chromium
-ci : ci.firefox ci.chromium
+.PHONY : outdated ci ci.firefox ci.chromium
 outdated :
 	- yarn outdated
-ci.firefox : node_modules
-	$(MAKE) --directory=packages/firefox ci
-ci.chromium : node_modules
-	$(MAKE) --directory=packages/chromium ci
+release : release.firefox release.chromium
+release.firefox : node_modules
+	$(MAKE) --directory=packages/firefox firefox.release.zip
+release.chromium : node_modules
+	$(MAKE) --directory=packages/chromium chromium.release.zip
