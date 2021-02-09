@@ -139,8 +139,9 @@
         "path": "./packages/**/bundle/**/*.mmdb"
       }
     ],
-    "ci": {
-      "repoBranchBase": "main"
-    }
+    "trackBranches": [
+      "main"
+    ],
+    "repoBranchBase": "main"
   }
 }

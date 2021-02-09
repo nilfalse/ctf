@@ -50,11 +50,16 @@ prettier :
 eslint :
 	$(NODEJS_BIN)eslint .
 
-.PHONY : outdated ci ci.firefox ci.chromium
+.PHONY : outdated build build.firefox build.chromium
 outdated : primary-deps
 	- yarn outdated
-release : release.firefox release.chromium
-release.firefox : node_modules
-	$(MAKE) --directory=packages/firefox firefox.release.zip
-release.chromium : node_modules
-	$(MAKE) --directory=packages/chromium chromium.release.zip
+build : build.firefox build.chromium
+build.firefox : node_modules
+	$(MAKE) --directory=packages/firefox bundle build
+build.chromium : node_modules
+	$(MAKE) --directory=packages/chromium build
+
+packages/firefox/firefox.zip : node_modules
+	$(MAKE) --directory=packages/firefox firefox.zip
+packages/chromium/chromium.zip : node_modules
+	$(MAKE) --directory=packages/chromium chromium.zip

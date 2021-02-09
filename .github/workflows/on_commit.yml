@@ -120,21 +120,77 @@ jobs:
             ${{ runner.os }}-
 
       - name: Build Firefox & Chromium runtimes
-        run: |
-          make --output-sync --jobs outdated
-          make --output-sync --jobs release
+        run: make --output-sync --jobs outdated build
         env:
           MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
+
+      - name: Save Firefox artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firefox-bundle
+          path: packages/firefox/bundle/
+          if-no-files-found: error
+
+      - name: Save Chromium artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: chromium-bundle
+          path: packages/chromium/bundle/
+          if-no-files-found: error
 
       - name: Bundlewatch
         uses: jackyef/bundlewatch-gh-action@master
         with:
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
 
+  publish:
+    name: Publishing
+    if: github.ref == 'refs/heads/main'
+    needs: [test, build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Restore caches
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            packages/bundle/data
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Download Firefox bundle
+        uses: actions/download-artifact@v2
+        with:
+          name: firefox-bundle
+
+      - name: Download Chromium bundle
+        uses: actions/download-artifact@v2
+        with:
+          name: chromium-bundle
+
+      - name: Zip
+        run: |
+          ls -R
+          make --output-sync --jobs packages/firefox/firefox.zip packages/chromium/chromium.zip
+
       - name: Update Release
-        if: github.ref == 'refs/heads/main' && matrix.node == '14'
         uses: johnwbyrd/update-release@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release: unstable
-          files: packages/firefox/firefox.release.zip packages/chromium/chromium.release.zip
+          files: packages/firefox/firefox.zip packages/chromium/chromium.zip
