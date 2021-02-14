@@ -12,10 +12,14 @@ interface JSONSerializedReport {
 }
 
 export class Report {
+  private _icon: ReturnType<typeof iconService.getIcon> | null;
+
   constructor(
     public request: Request,
     public traceroute: ReadonlyArray<Match> = []
-  ) {}
+  ) {
+    this._icon = null;
+  }
 
   get iso() {
     const [firstMatch] = this.traceroute;
@@ -39,13 +43,24 @@ export class Report {
   }
 
   get icon() {
-    return this.isEmpty
-      ? iconService.defaultIconPromise
-      : iconService.getIcon(this);
+    if (!this._icon) {
+      this._icon = this.isEmpty
+        ? iconService.defaultIconPromise
+        : iconService.getIcon(this);
+    }
+
+    return this._icon;
   }
 
   get isEmpty() {
     return this.traceroute.length === 0;
+  }
+
+  toJSON() {
+    return {
+      request: this.request,
+      traceroute: this.traceroute,
+    };
   }
 
   static fromJSON(json: JSONSerializedReport) {

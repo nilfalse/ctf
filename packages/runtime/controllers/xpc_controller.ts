@@ -7,12 +7,12 @@ import * as mediator from '../util/mediator';
 mediator.subscribe(BootCommand, function () {
   browser.runtime.onMessage.addListener(
     module.hot
-      ? (sender, payload) => handleIncomingMessage(sender, payload)
+      ? (payload, sender) => handleIncomingMessage(payload, sender)
       : handleIncomingMessage
   );
 });
 
-async function handleIncomingMessage(
+function handleIncomingMessage(
   message: unknown,
   sender: Runtime.MessageSender
 ) {

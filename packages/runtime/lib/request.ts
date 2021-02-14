@@ -1,5 +1,6 @@
 import { WebRequest } from 'webextension-polyfill-ts';
 
+import * as dnsService from '../services/dns/dns_service';
 import * as debug from '../util/debug';
 
 export interface RequestParameters {
@@ -28,13 +29,7 @@ export class Request {
   }
 
   get host() {
-    if (!this.url) {
-      return null;
-    }
-
-    const host = new URL(this.url).hostname;
-
-    return host.startsWith('www.') ? host.substring(4) : host;
+    return this.url ? getHost(this.url) : null;
   }
 
   getHeader(headerName: string) {
@@ -61,4 +56,31 @@ export class Request {
       responseHeaders: json.headers,
     });
   }
+
+  static async fromWebRequest(payload: RequestParameters) {
+    if (!payload.ip) {
+      // try to fixup the missing IP field in Firefox
+      if (payload.url) {
+        const host = getHost(payload.url);
+        const ips = (await dnsService.offline(host)) as string[] | undefined[];
+
+        debug.log(
+          `Fixing up the missing IP for '${host}' with [${ips.join(', ')}]`
+        );
+
+        return new Request({
+          ...payload,
+          ip: ips[0],
+        });
+      }
+    }
+
+    return new Request(payload);
+  }
+}
+
+function getHost(url: string) {
+  const host = new URL(url).hostname;
+
+  return host.startsWith('www.') ? host.substring(4) : host;
 }

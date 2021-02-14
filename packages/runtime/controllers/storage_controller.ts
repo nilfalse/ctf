@@ -24,7 +24,7 @@ mediator.subscribe(TabUpdateCommand, function ({ tabId }) {
   }
 });
 
-mediator.subscribe(ReportReadyCommand, function ({ tabId, report }) {
+mediator.subscribe(ReportReadyCommand, function ({ tabId }, report) {
   storageService.reports.update(tabId, report);
 });
 

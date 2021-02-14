@@ -1,7 +1,7 @@
 import * as debug from '../../util/debug';
 import * as storageService from '../storage/storage_service';
 
-export async function handle(message: any) {
+export function handle(message: any) {
   switch (message.type) {
     case 'fetchReport':
       return fetchReport(message.payload);
@@ -11,5 +11,7 @@ export async function handle(message: any) {
 }
 
 function fetchReport(tabId: number) {
-  return storageService.reports.fetch(tabId);
+  const report = storageService.reports.fetch(tabId);
+
+  return Promise.resolve(report ? report.toJSON() : null);
 }

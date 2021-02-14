@@ -1,26 +1,13 @@
-import { Report } from '../lib/report';
-import { Request, RequestParameters } from '../lib/request';
+import { RequestParameters } from '../lib/request';
+import * as reportService from '../services/report/report_service';
+import * as debug from '../util/debug';
 
 export class ReportReadyCommand {
-  request: Request;
-  report: Report;
-
-  constructor(public tabId: number, payload: RequestParameters) {
-    this.tabId = tabId;
-    this.request = new Request(payload);
-    this.report = new Report(this.request, []);
+  constructor(public tabId: number, public payload: RequestParameters) {
+    debug.log(`Tab#${tabId}: Collecting new report`, payload);
   }
 
-  async execute() {
-    const interceptors = await import(
-      /* webpackChunkName: "interceptors" */ '../interceptors'
-    );
-
-    this.report = new Report(
-      this.request,
-      await interceptors.run(this.request)
-    );
-
-    return this.report.icon;
+  execute() {
+    return reportService.collect(this.payload);
   }
 }

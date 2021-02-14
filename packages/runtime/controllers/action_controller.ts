@@ -10,25 +10,22 @@ mediator.subscribe(ReportEmptyCommand, async function ({ tabId }, defaultIcon) {
   ]);
 });
 
-mediator.subscribe(
-  ReportReadyCommand,
-  async function ({ tabId, report }, icon) {
-    const promises = [
-      browser.pageAction.setPopup({ tabId, popup: 'popup.html?tab=' + tabId }),
-      browser.pageAction.show(tabId),
-    ];
+mediator.subscribe(ReportReadyCommand, async function ({ tabId }, report) {
+  const promises = [
+    browser.pageAction.setPopup({ tabId, popup: 'popup.html?tab=' + tabId }),
+    browser.pageAction.show(tabId),
+  ];
 
-    if (!report.isEmpty) {
-      // FIXME: implement localhost detection
+  // FIXME: implement localhost detection
+  if (!report.isEmpty) {
+    const icon = await report.icon;
 
-      promises.push(browser.pageAction.setIcon({ tabId, ...icon }));
+    promises.push(browser.pageAction.setIcon({ tabId, ...icon }));
 
-      const title = `${browser.i18n.getMessage('ext_name')}:
-${report.countryName}
-`;
-      browser.pageAction.setTitle({ tabId, title });
-    }
-
-    await Promise.all(promises);
+    const title =
+      browser.i18n.getMessage('ext_name') + ':\n' + report.countryName;
+    browser.pageAction.setTitle({ tabId, title });
   }
-);
+
+  await Promise.all(promises);
+});

@@ -10,12 +10,16 @@ class FirefoxBundle extends bundler.Bundle {
 
 class FirefoxManifestFactory extends bundler.ManifestFactory {
   create(bundle, _, entrypoints) {
+    const manifest = super.create(bundle, _, entrypoints);
+
     return {
-      ...super.create(bundle, _, entrypoints),
+      ...manifest,
+
+      permissions: ['dns', ...manifest.permissions],
 
       browser_specific_settings: {
         gecko: {
-          id: '{4f2a0a00-063e-4a7d-b92e-e352eb1c8424}',
+          id: '@ctf',
         },
       },
     };

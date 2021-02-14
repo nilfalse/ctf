@@ -22,9 +22,7 @@ function handleWebResponseStarted(
 ) {
   const { tabId } = payload;
 
-  // FIXME: handle `payload.ip === null` when `payload.fromCache === true`
-
-  if (tabId === -1) {
+  if (tabId === browser.tabs.TAB_ID_NONE) {
     return; // skip extension popups
   }
 

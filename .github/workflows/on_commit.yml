@@ -177,16 +177,16 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: firefox-bundle
+          path: packages/firefox/bundle/
 
       - name: Download Chromium bundle
         uses: actions/download-artifact@v2
         with:
           name: chromium-bundle
+          path: packages/chromium/bundle/
 
       - name: Zip
-        run: |
-          ls -R
-          make --output-sync --jobs packages/firefox/firefox.zip packages/chromium/chromium.zip
+        run: make --output-sync --jobs packages/firefox/firefox.zip packages/chromium/chromium.zip
 
       - name: Update Release
         uses: johnwbyrd/update-release@v1.0.0

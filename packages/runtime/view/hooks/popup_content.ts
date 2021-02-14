@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Report } from '../../lib/report';
 import * as xpc from '../../services/xpc/xpc_popup_service';
+import * as debug from '../../util/debug';
 
 import { useQueryParams } from './query_params';
 
@@ -33,8 +34,6 @@ export function usePopupContent() {
   useEffect(() => {
     let shouldIgnore = false;
 
-    setResponse({ state: null });
-
     if (!tabId) {
       return;
     }
@@ -44,6 +43,7 @@ export function usePopupContent() {
         if (shouldIgnore) {
           return;
         }
+
         if (report) {
           setResponse({
             report,
@@ -52,9 +52,12 @@ export function usePopupContent() {
         } // FIXME else throw a "Not Found"
       },
       (error) => {
+        debug.error(error);
+
         if (shouldIgnore) {
           return;
         }
+
         setResponse({
           state: 'failure',
           error,
