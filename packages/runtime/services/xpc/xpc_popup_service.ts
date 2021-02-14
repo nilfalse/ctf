@@ -10,6 +10,10 @@ export function dispatch(
   type: 'fetchReport',
   payload: number
 ): Promise<Report | null>;
+export function dispatch(
+  type: string,
+  payload: unknown
+): Promise<Report | null>;
 export function dispatch(type: string, payload?: unknown) {
   const promise = browser.runtime.sendMessage({
     type,

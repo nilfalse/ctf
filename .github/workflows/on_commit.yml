@@ -78,14 +78,17 @@ jobs:
           MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
 
       - name: Upload coverage to Coveralls.io
+        if: ${{ always() }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload coverage to Codecov.io
+        if: ${{ always() }}
         uses: codecov/codecov-action@v1
 
       - name: Upload report to Code Climate
+        if: ${{ always() }}
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}

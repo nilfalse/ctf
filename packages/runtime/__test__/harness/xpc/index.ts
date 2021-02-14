@@ -3,13 +3,14 @@ import { Runtime } from 'webextension-polyfill-ts';
 import { Match } from '../../../interceptors';
 import { RequestParameters } from '../../../lib/request';
 import { stub } from '../browser/stub';
+
 interface MockXPC {
   request?: RequestParameters;
   traceroute: ReadonlyArray<Match>;
 }
 
 export function popup(
-  contentPromise: Promise<MockXPC>,
+  contentPromise: Promise<MockXPC | null>,
   searchParamsStr = '?tab=123'
 ) {
   const { location } = globalThis;
