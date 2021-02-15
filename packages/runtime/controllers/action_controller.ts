@@ -1,5 +1,6 @@
 import { ReportEmptyCommand } from '../commands/report_empty';
 import { ReportReadyCommand } from '../commands/report_ready';
+import * as debug from '../util/debug';
 import * as mediator from '../util/mediator';
 
 mediator.subscribe(ReportEmptyCommand, async function ({ tabId }, defaultIcon) {
@@ -8,6 +9,8 @@ mediator.subscribe(ReportEmptyCommand, async function ({ tabId }, defaultIcon) {
     browser.pageAction.setIcon({ tabId, ...defaultIcon }),
     browser.pageAction.show(tabId),
   ]);
+
+  debug.log(`Tab#${tabId}: Empty Report command done`);
 });
 
 mediator.subscribe(ReportReadyCommand, async function ({ tabId }, report) {
@@ -28,4 +31,6 @@ mediator.subscribe(ReportReadyCommand, async function ({ tabId }, report) {
   }
 
   await Promise.all(promises);
+
+  debug.log(`Tab#${tabId}: Report Ready command done`);
 });

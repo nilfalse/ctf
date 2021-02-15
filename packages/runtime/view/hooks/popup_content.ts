@@ -34,12 +34,16 @@ export function usePopupContent() {
   useEffect(() => {
     let shouldIgnore = false;
 
+    debug.log(`Popup::Tab#${tab}: Fetching report`);
+
     if (!tabId) {
       return;
     }
 
     xpc.dispatch('fetchReport', tabId).then(
       (report) => {
+        debug.log(`Popup::Tab#${tab}: Report has been fetched`, report);
+
         if (shouldIgnore) {
           return;
         }
