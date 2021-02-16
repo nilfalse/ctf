@@ -14,10 +14,10 @@ export async function render(images: RenderingInput) {
     images.map(({ dataUri, size }) => raster.toImageData(dataUri, size))
   );
 
-  return renders.reduce<RenderingOutput>((dict, img, idx) => {
+  return renders.reduce((dict, img, idx) => {
     const { size } = images[idx];
     dict[size] = img;
 
     return dict;
-  }, {});
+  }, {} as RenderingOutput);
 }

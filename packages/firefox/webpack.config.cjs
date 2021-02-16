@@ -15,6 +15,11 @@ class FirefoxManifestFactory extends bundler.ManifestFactory {
     return {
       ...manifest,
 
+      page_action: {
+        ...manifest.page_action,
+        show_matches: undefined,
+      },
+
       permissions: ['dns', ...manifest.permissions],
 
       browser_specific_settings: {
