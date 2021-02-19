@@ -1,13 +1,9 @@
-import { RequestParameters } from '../lib/request';
-import * as reportService from '../services/report/report_service';
-import * as debug from '../util/debug';
+import { Report } from '../lib/report';
 
 export class ReportReadyCommand {
-  constructor(public tabId: number, public payload: RequestParameters) {
-    debug.log(`Tab#${tabId}: Collecting new report`, payload);
-  }
+  constructor(public tabId: number, public report: Report) {}
 
   execute() {
-    return reportService.collect(this.payload);
+    // noop
   }
 }

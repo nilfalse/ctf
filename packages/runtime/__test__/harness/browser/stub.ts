@@ -20,6 +20,7 @@ export function stub() {
         onMessage: { addListener: jest.fn() },
       },
       tabs: {
+        onActivated: { addListener: jest.fn() },
         onUpdated: { addListener: jest.fn() },
         onRemoved: { addListener: jest.fn() },
       },

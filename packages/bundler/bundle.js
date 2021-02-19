@@ -30,7 +30,7 @@ class Bundle {
     if (this.isDevelopment) {
       return {
         contentBase: this.path,
-        port: 35727,
+        port: getRandomInt(10001, 65535),
         hot: this.isDevelopment,
         writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
         disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
@@ -72,6 +72,14 @@ class Bundle {
 
     return this.entrypoints.map((entrypoint) => entrypoint.build());
   }
+}
+
+/**
+ * @param {number} min
+ * @param {number} max
+ */
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 module.exports.Bundle = Bundle;

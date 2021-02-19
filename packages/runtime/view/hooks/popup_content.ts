@@ -28,13 +28,15 @@ export function usePopupContent() {
     state: null,
   });
 
+  const TAG = location.search;
+
   const { tab } = useQueryParams();
   const tabId = typeof tab === 'string' ? parseInt(tab) : null;
 
   useEffect(() => {
     let shouldIgnore = false;
 
-    debug.log(`Popup::Tab#${tab}: Fetching report`);
+    debug.log(`Popup${TAG}: Fetching report`);
 
     if (!tabId) {
       return;
@@ -42,7 +44,7 @@ export function usePopupContent() {
 
     xpc.dispatch('fetchReport', tabId).then(
       (report) => {
-        debug.log(`Popup::Tab#${tab}: Report has been fetched`, report);
+        debug.log(`Popup${TAG}: Report has been fetched`, report);
 
         if (shouldIgnore) {
           return;

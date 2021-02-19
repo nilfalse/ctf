@@ -1,39 +1,52 @@
-import { ReportEmptyCommand } from '../commands/report_empty';
-import { ReportReadyCommand } from '../commands/report_ready';
-import { supportsHiddenAction } from '../services/env/env_service';
+import { ActionRefreshCommand } from '../commands/action_refresh';
+import { Icon } from '../services/icon/icon_service';
+import * as iconService from '../services/icon/icon_service';
+import * as storageService from '../services/storage/storage_service';
 import * as debug from '../util/debug';
 import * as mediator from '../util/mediator';
 
-mediator.subscribe(ReportEmptyCommand, async function ({ tabId }, defaultIcon) {
-  if (!supportsHiddenAction) {
-    await Promise.all([
-      browser.pageAction.setPopup({ tabId, popup: 'popup.html' }),
-      browser.pageAction.setIcon({ tabId, ...defaultIcon }),
-      browser.pageAction.show(tabId),
-    ]);
+export interface ActionRefreshPayload {
+  popup: string;
+  icon: Icon | null;
+  title: string | null;
+}
+
+mediator.subscribe(ActionRefreshCommand, async function ({ tabId }) {
+  const report = storageService.reports.fetch(tabId);
+
+  const action: ActionRefreshPayload = {
+    popup: 'popup.html?tab=' + tabId,
+    icon: null,
+    title: null,
+  };
+
+  if (report === null || report.isEmpty) {
+    action.icon = await iconService.defaultIconPromise;
+  } else {
+    // FIXME: implement localhost detection
+    action.icon = await report.icon;
+
+    action.title =
+      browser.i18n.getMessage('ext_name') + ':\n' + report.countryName;
   }
 
-  debug.log(`Tab#${tabId}: Empty Report command done`);
+  await refresh(tabId, action);
+  debug.log(`Tab#${tabId}: ActionRefresh done`);
 });
 
-mediator.subscribe(ReportReadyCommand, async function ({ tabId }, report) {
-  const promises = [
-    browser.pageAction.setPopup({ tabId, popup: 'popup.html?tab=' + tabId }),
-    browser.pageAction.show(tabId),
-  ];
-
-  // FIXME: implement localhost detection
-  if (!report.isEmpty) {
-    promises.push(
-      report.icon.then((icon) => browser.pageAction.setIcon({ tabId, ...icon }))
-    );
-
-    const title =
-      browser.i18n.getMessage('ext_name') + ':\n' + report.countryName;
+async function refresh(
+  tabId: number,
+  { popup, icon, title }: ActionRefreshPayload
+) {
+  if (title) {
     browser.pageAction.setTitle({ tabId, title });
   }
 
+  const promises = [];
+  if (popup) {
+    promises.push(browser.pageAction.setPopup({ tabId, popup }));
+  }
+  promises.push(browser.pageAction.setIcon({ tabId, ...icon }));
+  promises.push(browser.pageAction.show(tabId));
   await Promise.all(promises);
-
-  debug.log(`Tab#${tabId}: Report Ready command done`);
-});
+}

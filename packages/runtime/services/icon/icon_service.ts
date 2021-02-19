@@ -6,6 +6,8 @@ import * as preferenceService from '../preference/preference_service';
 import * as renderingService from '../rendering/rendering_service';
 import * as svg from '../svg/svg_service';
 
+export type Icon = Unwrap<ReturnType<typeof getIcon>>;
+
 export const sizes = [16, 32, 64, 128, 160] as const;
 
 export const defaultIconPromise = createImageData((size: number) =>

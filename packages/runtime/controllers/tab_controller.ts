@@ -1,12 +1,14 @@
 import { Tabs } from 'webextension-polyfill-ts';
 
+import { ActionRefreshCommand } from '../commands/action_refresh';
 import { BootCommand } from '../commands/boot';
 import { TabRemoveCommand } from '../commands/tab_remove';
-import { TabUpdateCommand } from '../commands/tab_update';
 import * as mediator from '../util/mediator';
 
 mediator.subscribe(BootCommand, function () {
   const controller = new TabController();
+
+  browser.tabs.onActivated.addListener(controller.handleTabActivated);
 
   browser.tabs.onUpdated.addListener(controller.handleTabUpdated);
 
@@ -14,6 +16,10 @@ mediator.subscribe(BootCommand, function () {
 });
 
 class TabController {
+  handleTabActivated({ tabId }: Tabs.OnActivatedActiveInfoType) {
+    return mediator.publish(new ActionRefreshCommand(tabId));
+  }
+
   handleTabUpdated(
     tabId: number,
     changeInfo: Tabs.OnUpdatedChangeInfoType,
@@ -23,7 +29,7 @@ class TabController {
       return;
     }
 
-    return mediator.publish(new TabUpdateCommand(tabId));
+    return mediator.publish(new ActionRefreshCommand(tabId));
   }
 
   handleTabRemoved(tabId: number, removeInfo: Tabs.OnRemovedRemoveInfoType) {

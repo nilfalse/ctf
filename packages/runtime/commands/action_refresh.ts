@@ -1,4 +1,4 @@
-export class TabUpdateCommand {
+export class ActionRefreshCommand {
   constructor(public tabId: number) {}
 
   execute() {
