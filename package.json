@@ -75,7 +75,7 @@
   },
   "keywords": [],
   "author": "Yaroslav",
-  "license": "UNLICENSED",
+  "license": "MPL-2.0",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
