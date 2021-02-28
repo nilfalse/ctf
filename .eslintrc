@@ -22,10 +22,7 @@
       "files": ["**/*.ts", "**/*.tsx"],
       "parser": "@typescript-eslint/parser",
       "plugins": ["@typescript-eslint"],
-      "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint"
-      ],
+      "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
       "rules": {
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -43,7 +40,7 @@
 
     {
       "files": ["**/*.jsx", "**/*.tsx"],
-      "extends": ["plugin:react-hooks/recommended", "prettier/react"]
+      "extends": ["plugin:react-hooks/recommended", "prettier"]
     },
 
     {
