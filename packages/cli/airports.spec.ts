@@ -1,7 +1,7 @@
 import csvStream from 'csv-stream';
 
 import * as harness from './__harness__';
-import { main } from './lib/airports.js';
+import { main } from './airports.js';
 
 describe('Airports Script', () => {
   describe('download', () => {

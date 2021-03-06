@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { Body } from 'node-fetch';
 
 import * as harness from './__harness__';
-import { main } from './lib/twemoji.js';
+import { main } from './twemoji.js';
 
 jest.mock('fs');
 
@@ -18,9 +18,10 @@ describe('Twemoji Script', () => {
     consoleLogSpy = jest
       .spyOn(globalThis.console, 'log')
       .mockReturnValue(undefined);
-    responsePipeSpy = jest
-      .spyOn(fetch.response.body, 'pipe')
-      .mockReturnValue(undefined);
+    if (fetch.response)
+      responsePipeSpy = jest
+        .spyOn(fetch.response.body, 'pipe')
+        .mockReturnValue(undefined);
   });
 
   afterEach(() => {

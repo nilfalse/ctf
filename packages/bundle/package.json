@@ -1,0 +1,9 @@
+{
+  "private": "true",
+  "name": "bundle",
+  "version": "0.0.0",
+  "type": "module",
+  "devDependencies": {
+    "cli": "*"
+  }
+}

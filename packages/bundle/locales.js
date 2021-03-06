@@ -1,7 +1,7 @@
 import path from 'path';
 import url from 'url';
 
-import { main } from './lib/locales.js';
+import { main } from 'cli/locales.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 

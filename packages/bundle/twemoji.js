@@ -1,7 +1,7 @@
 import path from 'path';
 import url from 'url';
 
-import { main } from './lib/twemoji.js';
+import { main } from 'cli/twemoji.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 

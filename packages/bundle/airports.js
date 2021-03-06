@@ -1,4 +1,4 @@
-import { main } from './lib/airports.js';
+import { main } from 'cli/airports.js';
 
 main(process.argv.slice(2)).then(
   (output) => process.stdout.write(output),

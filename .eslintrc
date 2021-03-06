@@ -8,7 +8,6 @@
   "extends": ["standard", "prettier"],
 
   "rules": {
-    "semi": ["error", "always"],
     "import/order": [
       "error",
       { "alphabetize": { "order": "asc" }, "newlines-between": "always" }
@@ -56,7 +55,7 @@
     },
 
     {
-      "files": ["bin/**/*.js"],
+      "files": ["**/*.js"],
       "rules": {
         "strict": ["error", "global"]
       }

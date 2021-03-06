@@ -1,5 +1,6 @@
-packages/bundle/*
-packages/**/bundle
+packages/bundle/content/*
+packages/bundle/data/*
 !packages/bundle/content/_locales
+packages/firefox/bundle
+packages/chromium/bundle
 coverage/*
-data/*

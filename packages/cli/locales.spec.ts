@@ -1,10 +1,10 @@
 import fs from 'fs';
 
-import * as config from './lib/locales.config.js';
-import * as script from './lib/locales.js';
+import * as config from './locales.config.js';
+import * as script from './locales.js';
 
 jest.createMockFromModule('fs');
-jest.mock('./lib/locales.config');
+jest.mock('./locales.config');
 
 describe('Locales Script', () => {
   const readSpy = jest.spyOn(fs.promises, 'readFile');
