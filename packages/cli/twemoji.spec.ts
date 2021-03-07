@@ -18,10 +18,9 @@ describe('Twemoji Script', () => {
     consoleLogSpy = jest
       .spyOn(globalThis.console, 'log')
       .mockReturnValue(undefined);
-    if (fetch.response)
-      responsePipeSpy = jest
-        .spyOn(fetch.response.body, 'pipe')
-        .mockReturnValue(undefined);
+    responsePipeSpy = jest
+      .spyOn(fetch.response.body, 'pipe')
+      .mockReturnValue(undefined);
   });
 
   afterEach(() => {
