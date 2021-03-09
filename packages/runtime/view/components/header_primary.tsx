@@ -1,9 +1,8 @@
 import { FC } from 'react';
 
-import logo from '../../../../artwork/logo_text.svg';
 import { Report } from '../../lib/report';
 
-import { Logo } from './logo';
+import { Logo, LogoText } from './logo';
 import { Paragraph } from './typography';
 
 import './header_primary.css';
@@ -13,15 +12,11 @@ interface HeaderPrimaryProps {
 }
 
 export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ report }) => {
-  if (report.traceroute.length === 0) {
+  if (report.isEmpty) {
     return (
       <div className="header-primary header-primary_empty">
-        <img
-          src={logo}
-          alt={browser.i18n.getMessage('ext_name')}
-          className="header-primary__logo"
-          aria-hidden={true}
-        />
+        <Logo color="light" className="header-primary__icon" />
+        <LogoText className="header-primary__logo" />
 
         <Paragraph
           variant="handwriting"
@@ -37,12 +32,7 @@ export const HeaderPrimary: FC<HeaderPrimaryProps> = ({ report }) => {
   return (
     <div className="header-primary">
       <Logo color="light" className="header-primary__icon" />
-      <img
-        src={logo}
-        alt={browser.i18n.getMessage('ext_name')}
-        className="header-primary__logo"
-        aria-hidden={true}
-      />
+      <LogoText className="header-primary__logo" />
 
       {report.request.host ? (
         <Paragraph size="xs" className="header-primary__host">

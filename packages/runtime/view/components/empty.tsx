@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
-import logo from '../../../../artwork/logo_text.svg';
-
+import { Logo, LogoText } from './logo';
 import { Paragraph } from './typography';
 
 import './empty.css';
@@ -10,22 +9,21 @@ export const Empty: FC = () => {
   return (
     <div className="empty">
       <div className="empty__header">
-        <img
-          src={logo}
-          alt={browser.i18n.getMessage('ext_name')}
-          className="empty__logo"
-          aria-hidden={true}
-        />
+        <Logo color="light" className="header-primary__icon" />
+        <LogoText className="empty__logo header-primary__logo" />
 
         <Paragraph size="s" className="empty__info">
-          This tab didn't provide any information.
+          We could not capture anything on this tab.
         </Paragraph>
       </div>
 
       <div className="empty__intro">
         <Paragraph variant="light" size="xs">
-          It possibly uses a technology like ServiceWokers to reduce internet
-          requests so we couldn't catch any.
+          No requests seem to have been made on this tab.
+        </Paragraph>
+        <Paragraph variant="light" size="xs">
+          This could be, for example, due to the tab using ServiceWokers
+          technology which reduces internet traffic.
         </Paragraph>
       </div>
     </div>
