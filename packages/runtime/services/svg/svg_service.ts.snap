@@ -2,36 +2,36 @@
 
 exports[`SVG service when producing content for a country flag emoji should output valid XML 1`] = `
 "<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 128 128\\" width=\\"128\\" height=\\"128\\">
-  <text y=\\".85em\\" font-size=\\"128\\">🇩🇰</text>
+  <text x=\\"50%\\" y=\\"50%\\" font-size=\\"128\\" dominant-baseline=\\"central\\" text-anchor=\\"middle\\">🇩🇰</text>
 </svg>"
 `;
 
 exports[`SVG service when producing content for a flag emoji should output valid XML 1`] = `
 "<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 128 128\\" width=\\"128\\" height=\\"128\\">
-  <text y=\\".85em\\" font-size=\\"128\\">🏁</text>
+  <text x=\\"50%\\" y=\\"50%\\" font-size=\\"128\\" dominant-baseline=\\"central\\" text-anchor=\\"middle\\">🏁</text>
 </svg>"
 `;
 
 exports[`SVG service when producing content for an emoji should output valid XML 1`] = `
 "<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 128 128\\" width=\\"128\\" height=\\"128\\">
-  <text y=\\".85em\\" font-size=\\"128\\">🙃</text>
+  <text x=\\"50%\\" y=\\"50%\\" font-size=\\"128\\" dominant-baseline=\\"central\\" text-anchor=\\"middle\\">🙃</text>
 </svg>"
 `;
 
-exports[`SVG service when producing data URI with emoji 🇩🇰 of size 16px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSIxNiI+8J+HqfCfh7A8L3RleHQ+Cjwvc3ZnPgo="`;
+exports[`SVG service when producing data URI with emoji 🇩🇰 of size 16px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIxNiIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfh6nwn4ewPC90ZXh0Pgo8L3N2Zz4K"`;
 
-exports[`SVG service when producing data URI with emoji 🇩🇰 of size 32px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSIzMiI+8J+HqfCfh7A8L3RleHQ+Cjwvc3ZnPgo="`;
+exports[`SVG service when producing data URI with emoji 🇩🇰 of size 32px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIzMiIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfh6nwn4ewPC90ZXh0Pgo8L3N2Zz4K"`;
 
-exports[`SVG service when producing data URI with emoji 🇩🇰 of size 64px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSI2NCI+8J+HqfCfh7A8L3RleHQ+Cjwvc3ZnPgo="`;
+exports[`SVG service when producing data URI with emoji 🇩🇰 of size 64px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSI2NCIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfh6nwn4ewPC90ZXh0Pgo8L3N2Zz4K"`;
 
-exports[`SVG service when producing data URI with emoji 🏁 of size 16px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSIxNiI+8J+PgTwvdGV4dD4KPC9zdmc+Cg=="`;
+exports[`SVG service when producing data URI with emoji 🏁 of size 16px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIxNiIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfj4E8L3RleHQ+Cjwvc3ZnPgo="`;
 
-exports[`SVG service when producing data URI with emoji 🏁 of size 32px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSIzMiI+8J+PgTwvdGV4dD4KPC9zdmc+Cg=="`;
+exports[`SVG service when producing data URI with emoji 🏁 of size 32px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIzMiIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfj4E8L3RleHQ+Cjwvc3ZnPgo="`;
 
-exports[`SVG service when producing data URI with emoji 🏁 of size 64px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSI2NCI+8J+PgTwvdGV4dD4KPC9zdmc+Cg=="`;
+exports[`SVG service when producing data URI with emoji 🏁 of size 64px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSI2NCIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfj4E8L3RleHQ+Cjwvc3ZnPgo="`;
 
-exports[`SVG service when producing data URI with emoji 🙃 of size 16px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSIxNiI+8J+ZgzwvdGV4dD4KPC9zdmc+Cg=="`;
+exports[`SVG service when producing data URI with emoji 🙃 of size 16px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIxNiIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfmYM8L3RleHQ+Cjwvc3ZnPgo="`;
 
-exports[`SVG service when producing data URI with emoji 🙃 of size 32px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSIzMiI+8J+ZgzwvdGV4dD4KPC9zdmc+Cg=="`;
+exports[`SVG service when producing data URI with emoji 🙃 of size 32px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIzMiIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfmYM8L3RleHQ+Cjwvc3ZnPgo="`;
 
-exports[`SVG service when producing data URI with emoji 🙃 of size 64px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB5PSIuODVlbSIgZm9udC1zaXplPSI2NCI+8J+ZgzwvdGV4dD4KPC9zdmc+Cg=="`;
+exports[`SVG service when producing data URI with emoji 🙃 of size 64px should generate expected URI 1`] = `"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSI2NCIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfmYM8L3RleHQ+Cjwvc3ZnPgo="`;
