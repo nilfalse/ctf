@@ -15,11 +15,13 @@ fix :
 	$(NODEJS_BIN)prettier --write .
 	$(NODEJS_BIN)eslint --fix .
 
-.PHONY : primary-deps secondary-deps
-primary-deps : ensure-node-modules
+.PHONY : primary-deps secondary-deps landing-deps
+primary-deps : ensure-node-modules landing-deps
 	${MAKE} --directory=packages/bundle
 secondary-deps : ensure-node-modules
 	${MAKE} --directory=packages/bundle twemoji locales
+landing-deps :
+	${MAKE} --directory=packages/landing build
 
 .PHONY : test
 test : primary-deps
@@ -32,6 +34,7 @@ clean :
 	$(MAKE) --directory=packages/chromium clean
 pristine : clean
 	- $(NODEJS_BIN)jest --clearCache
+	$(MAKE) --directory=packages/landing clean
 	${MAKE} --directory=packages/bundle pristine
 	$(MAKE) --directory=packages/firefox pristine
 	- rm -rf node_modules

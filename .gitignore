@@ -2,6 +2,7 @@ node_modules
 coverage
 .env
 
+/packages/landing/data
 /packages/bundle/data/maxmind
 /packages/bundle/content/data
 /packages/firefox/bundle/assets
