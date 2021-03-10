@@ -15,13 +15,13 @@ fix :
 	$(NODEJS_BIN)prettier --write .
 	$(NODEJS_BIN)eslint --fix .
 
-.PHONY : primary-deps secondary-deps landing-deps
+.PHONY : primary-deps secondary-deps
 primary-deps : ensure-node-modules landing-deps
 	${MAKE} --directory=packages/bundle
 secondary-deps : ensure-node-modules
 	${MAKE} --directory=packages/bundle twemoji locales
 landing-deps :
-	${MAKE} --directory=packages/landing build
+	${MAKE} --directory=packages/landing deps
 
 .PHONY : test
 test : primary-deps
@@ -53,10 +53,12 @@ prettier :
 eslint :
 	$(NODEJS_BIN)eslint .
 
-.PHONY : outdated build build.firefox build.chromium
+.PHONY : outdated build build.landing build.firefox build.chromium
 outdated : primary-deps
 	- yarn outdated
 build : build.firefox build.chromium
+build.landing : landing-deps
+	$(MAKE) --directory=packages/landing build
 build.firefox : node_modules
 	$(MAKE) --directory=packages/firefox bundle build
 build.chromium : node_modules

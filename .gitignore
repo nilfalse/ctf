@@ -3,6 +3,7 @@ coverage
 .env
 
 /packages/landing/data
+/packages/landing/public/GeoLite2-Country.mmdb
 /packages/landing/build
 /packages/bundle/data/maxmind
 /packages/bundle/content/data
