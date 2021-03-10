@@ -1,9 +1,12 @@
 .PHONY : serve
-serve :
-	python3 -m http.server
+serve : build
+	(cd build && python3 -m http.server)
 
 .PHONY : build
 build : data/GeoLite2-Country.mmdb
+	SKIP_PREFLIGHT_CHECK=true yarn react-scripts build
+	yarn react-snap
+	cp data/GeoLite2-Country.mmdb build/
 
 data/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`

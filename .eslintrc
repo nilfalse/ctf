@@ -1,5 +1,6 @@
 {
   "ignorePatterns": [
+    "/packages/landing/build/**",
     "/packages/firefox/bundle/**",
     "/packages/chromium/bundle/**"
   ],
