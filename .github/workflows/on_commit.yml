@@ -115,8 +115,9 @@ jobs:
           path: |
             ~/.npm
             node_modules
+            packages/landing/data
             packages/bundle/data
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}-v2
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
