@@ -1,15 +1,19 @@
-.PHONY : serve
-serve : build
+.PHONY : preview
+preview : build
 	(cd build && python3 -m http.server)
+
+.PHONY : well-known
+well-known :
+	(cd well-known-location && python3 -m http.server)
 
 .PHONY : build
 build : deps
 	SKIP_PREFLIGHT_CHECK=true yarn react-scripts build
-	# yarn react-snap
+	yarn react-snap
 
 .PHONY : deps
 deps : data/GeoLite2-Country.mmdb
-	cp data/GeoLite2-Country.mmdb public/
+	cp data/GeoLite2-Country.mmdb well-known-location/
 
 data/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
@@ -18,4 +22,4 @@ data/GeoLite2-Country.mmdb :
 
 .PHONY : clean
 clean :
-	- rm -rf data
+	- rm -rf build well-known-location/GeoLite2-Country.mmdb data

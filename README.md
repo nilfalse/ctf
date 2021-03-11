@@ -1,4 +1,4 @@
-<img src="./artwork/logo_icon.svg" alt="Capture The Flag Logo" width="110px" align="left" />
+[<img src="./artwork/logo_icon.svg" alt="Capture The Flag Logo" width="110px" align="left" />](https://nilfalse.com/addons/ctf)
 
 # [Capture The Flag](https://nilfalse.com/addons/ctf)
 
