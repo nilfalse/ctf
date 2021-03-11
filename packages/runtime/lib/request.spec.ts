@@ -1,3 +1,5 @@
+import * as dnsService from '../services/dns/dns_service';
+
 import { Request } from './request';
 
 describe('Request', () => {
@@ -68,6 +70,28 @@ describe('Request', () => {
     describe('by lower case name', () => {
       it('should return the same value', () => {
         expect(request.getHeader('content-disposition')).toBe(headerValue);
+      });
+    });
+  });
+
+  describe('when instantiating from a Web Request', () => {
+    describe('with missing IP (Firefox-only)', () => {
+      it('should try to restore it using DNS service', async () => {
+        const dnsSpy = jest
+          .spyOn(dnsService, 'offline')
+          .mockResolvedValue([
+            '195.64.225.67',
+            '2a02:2540:1000:300:a11:2718:0:1',
+          ]);
+        const request = await Request.fromWebRequest({
+          url: 'https://www.ix.net.ua/en',
+        });
+
+        expect(dnsSpy).toHaveBeenCalledWith('ix.net.ua');
+        expect(request).toHaveProperty('ip', '195.64.225.67');
+        expect(dnsSpy).toHaveBeenCalledTimes(1);
+
+        dnsSpy.mockRestore();
       });
     });
   });

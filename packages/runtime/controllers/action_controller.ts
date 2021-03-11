@@ -20,7 +20,7 @@ mediator.subscribe(ActionRefreshCommand, async function ({ tabId }) {
     title: null,
   };
 
-  if (report === null || report.isEmpty) {
+  if (report === null) {
     action.icon = await iconService.defaultIconPromise;
   } else {
     // FIXME: implement localhost detection
@@ -42,11 +42,9 @@ async function refresh(
     browser.pageAction.setTitle({ tabId, title });
   }
 
-  const promises = [];
-  if (popup) {
-    promises.push(browser.pageAction.setPopup({ tabId, popup }));
-  }
-  promises.push(browser.pageAction.setIcon({ tabId, ...icon }));
-  promises.push(browser.pageAction.show(tabId));
-  await Promise.all(promises);
+  await Promise.all([
+    browser.pageAction.setPopup({ tabId, popup }),
+    browser.pageAction.setIcon({ tabId, ...icon }),
+    browser.pageAction.show(tabId),
+  ]);
 }
