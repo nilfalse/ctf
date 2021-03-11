@@ -45,10 +45,6 @@ class BasicEntrypoint {
       new ForkTsCheckerWebpackPlugin(),
     ];
 
-    if (!process.env.CI) {
-      plugins.push(new webpack.ProgressPlugin());
-    }
-
     return plugins;
   }
 

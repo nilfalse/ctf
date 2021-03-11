@@ -2,7 +2,7 @@ NODEJS=node --unhandled-rejections=strict --experimental-json-modules
 NODEJS_BIN=${NODEJS} node_modules/.bin/
 
 .PHONY : all
-all : primary-deps secondary-deps
+all : build
 
 .PHONY : firefox chromium
 firefox : clean primary-deps
@@ -18,8 +18,6 @@ fix :
 .PHONY : primary-deps secondary-deps
 primary-deps : ensure-node-modules landing-deps
 	${MAKE} --directory=packages/bundle
-secondary-deps : ensure-node-modules
-	${MAKE} --directory=packages/bundle twemoji locales
 landing-deps :
 	${MAKE} --directory=packages/landing deps
 
@@ -59,7 +57,7 @@ outdated : primary-deps
 build : build.firefox build.chromium
 build.landing : landing-deps
 	$(MAKE) --directory=packages/landing build
-build.firefox : node_modules
+build.firefox : node_modules primary-deps
 	$(MAKE) --directory=packages/firefox bundle build
 build.chromium : node_modules
 	$(MAKE) --directory=packages/chromium build
