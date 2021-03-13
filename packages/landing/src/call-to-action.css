@@ -1,0 +1,25 @@
+.call-to-action {
+  display: inline-block;
+  border-radius: 4px;
+  color: #fff;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.call-to-action_primary {
+  background-color: #00a1fe;
+}
+.call-to-action_primary:hover,
+.call-to-action_primary:active {
+  background-color: #00b0ff;
+}
+
+.call-to-action_secondary {
+  color: #0060df;
+  border: 2px solid #0060df;
+}
+.call-to-action_secondary:hover,
+.call-to-action_secondary:active {
+  color: #00b0ff;
+  border-color: #00b0ff;
+}

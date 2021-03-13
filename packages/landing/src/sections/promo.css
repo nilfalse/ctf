@@ -1,0 +1,25 @@
+.promo-section {
+  background: linear-gradient(125deg, #00bdff 0%, #00b0ff 100%);
+  color: #fff;
+}
+
+.promo-section__headline {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 8px 16px 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.promo-section__omnidemo {
+  display: none;
+}
+
+@media only screen and (min-width: 560px) {
+  .promo-section__omnidemo {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+}

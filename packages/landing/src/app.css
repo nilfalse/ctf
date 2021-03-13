@@ -1,17 +1,19 @@
 .app {
-}
-
-.app-header {
-  background-color: #282c34;
+  box-sizing: border-box;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding-top: 88px;
 }
 
-.app-link {
-  color: #61dafb;
+.app__section {
+  padding: 24px 32px;
+}
+
+.app__download {
+  display: none;
+}
+
+@media only screen and (min-width: 360px) {
+  .app__download {
+    display: block;
+  }
 }

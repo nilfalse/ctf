@@ -1,36 +1,28 @@
+import { CallToAction } from './call-to-action';
+import { Header } from './header';
+import { DownloadSection } from './sections/download';
+import { FeaturesSection } from './sections/features';
+import { Hero } from './sections/hero';
+import { PromoSection } from './sections/promo';
+
 import './app.css';
 
 export function App() {
   return (
     <div className="app">
-      <header className="app-header">
-        <p>Capture The Flag</p>
-        <small>Install extension:</small>
+      <Header>
+        <CallToAction href="#download" className="app__download">
+          Download
+        </CallToAction>
+      </Header>
 
-        <ul>
-          <li>
-            <a
-              className="app-link"
-              href="https://addons.mozilla.org/firefox/addon/ctf/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Firefox
-            </a>
-          </li>
+      <Hero className="app__section" />
 
-          <li>
-            <a
-              className="app-link"
-              href="https://chrome.google.com/webstore/detail/plmbleiamgcdnenigiocddjjgacgfgjb"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Chrome
-            </a>
-          </li>
-        </ul>
-      </header>
+      <FeaturesSection className="app__section" />
+
+      <PromoSection className="app__section" />
+
+      <DownloadSection className="app__section" />
     </div>
   );
 }

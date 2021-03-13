@@ -1,0 +1,56 @@
+.download-section {
+  background-color: #fff;
+  color: #696969;
+}
+
+.download-section__headline {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0.4rem 0;
+  text-align: center;
+}
+
+.download-section__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.download-section__list-item {
+  display: block;
+}
+
+.download-section__platform {
+  padding: 32px;
+  padding-top: 140px;
+  text-align: center;
+
+  background-position: center 8px;
+  background-repeat: no-repeat;
+}
+.download-section__platform_firefox {
+  background-image: url(../icons/icon_firefox.png);
+}
+.download-section__platform_chromium {
+  background-image: url(../icons/icon_chrome.png);
+}
+
+.download-section__text {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+@media only screen and (min-width: 560px) {
+  .download-section__headline {
+    padding: 1rem 0 2rem;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .download-section__platforms {
+    display: flex;
+  }
+
+  .download-section__platform {
+    width: 50%;
+  }
+}

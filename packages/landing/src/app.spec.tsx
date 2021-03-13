@@ -9,9 +9,9 @@ describe('Landing App', () => {
     expect(app.children().text()).toContain('Capture The Flag');
   });
 
-  it('should offer to install extension', () => {
+  it('should offer to download extension', () => {
     const app = mount(<App />);
 
-    expect(app.children().text()).toContain('Install extension');
+    expect(app.children().text()).toContain("Download It's free");
   });
 });

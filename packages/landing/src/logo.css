@@ -1,0 +1,25 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo__image {
+  height: 32px;
+}
+
+.logo__wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.logo__text {
+  height: 12px;
+  padding-top: 5px;
+}
+
+.logo__aux {
+  color: #aaa;
+  font-size: 0.8rem;
+  text-align: right;
+}

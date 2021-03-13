@@ -7,12 +7,14 @@ well-known :
 	(cd well-known-location && python3 -m http.server)
 
 .PHONY : build
-build : deps
+build :
 	SKIP_PREFLIGHT_CHECK=true yarn react-scripts build
 	yarn react-snap
 
 .PHONY : deps
-deps : data/GeoLite2-Country.mmdb
+deps : well-known-location/GeoLite2-Country.mmdb
+
+well-known-location/GeoLite2-Country.mmdb : data/GeoLite2-Country.mmdb
 	cp data/GeoLite2-Country.mmdb well-known-location/
 
 data/GeoLite2-Country.mmdb :
