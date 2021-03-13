@@ -6,9 +6,9 @@ on:
     branches:
       - main
 
-name: Build and Render
 jobs:
   build-and-render:
+    name: Build and Render
     runs-on: ubuntu-latest
 
     steps:
