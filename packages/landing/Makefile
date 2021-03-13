@@ -6,7 +6,7 @@ preview : www
 www : build
 	yarn react-snap
 .PHONY : cdn
-cdn : deps build
+cdn : deps
 	cp cdn_overrides/* build
 .PHONY : build
 build :
