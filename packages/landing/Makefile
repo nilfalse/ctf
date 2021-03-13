@@ -1,21 +1,23 @@
 .PHONY : preview
-preview : build
+preview : www
 	(cd build && python3 -m http.server)
 
-.PHONY : well-known
-well-known :
-	(cd well-known-location && python3 -m http.server)
-
+.PHONY : www
+www : build
+	yarn react-snap
+.PHONY : cdn
+cdn : deps build
+	cp cdn_overrides/* build
+	curl -v $$POST_DEPLOY_HOOK
 .PHONY : build
 build :
-	SKIP_PREFLIGHT_CHECK=true yarn react-scripts build
-	yarn react-snap
+	SKIP_PREFLIGHT_CHECK=true PUBLIC_URL=https://ctf.pages.dev yarn react-scripts build
 
 .PHONY : deps
-deps : well-known-location/GeoLite2-Country.mmdb
+deps : cdn_overrides/GeoLite2-Country.mmdb
 
-well-known-location/GeoLite2-Country.mmdb : data/GeoLite2-Country.mmdb
-	cp data/GeoLite2-Country.mmdb well-known-location/
+cdn_overrides/GeoLite2-Country.mmdb : data/GeoLite2-Country.mmdb
+	cp data/GeoLite2-Country.mmdb cdn_overrides/
 
 data/GeoLite2-Country.mmdb :
 	mkdir -p `dirname $@`
@@ -24,4 +26,4 @@ data/GeoLite2-Country.mmdb :
 
 .PHONY : clean
 clean :
-	- rm -rf build well-known-location/GeoLite2-Country.mmdb data
+	- rm -rf build cdn_overrides/GeoLite2-Country.mmdb data
