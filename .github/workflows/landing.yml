@@ -1,0 +1,41 @@
+---
+name: Landing
+
+on:
+  push:
+    branches:
+      - main
+
+name: Build and Render
+on: [push]
+jobs:
+  build-and-render:
+    name: Building
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            node_modules
+            packages/landing/data
+            packages/bundle/data
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}-v3
+
+      - name: Install and Build 🔧
+        run: |
+          yarn --frozen-lockfile
+          (cd packages/landing && make --output-sync --jobs www)
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: packages/landing
+          single-commit: true

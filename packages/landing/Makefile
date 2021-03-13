@@ -8,7 +8,6 @@ www : build
 .PHONY : cdn
 cdn : deps build
 	cp cdn_overrides/* build
-	curl -v $$POST_DEPLOY_HOOK
 .PHONY : build
 build :
 	SKIP_PREFLIGHT_CHECK=true PUBLIC_URL=https://ctf.pages.dev yarn react-scripts build
