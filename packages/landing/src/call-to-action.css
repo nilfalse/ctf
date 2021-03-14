@@ -4,6 +4,10 @@
   color: #fff;
   padding: 12px;
   text-decoration: none;
+
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .call-to-action_primary {

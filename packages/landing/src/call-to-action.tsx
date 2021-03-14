@@ -1,13 +1,14 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 
 import './call-to-action.css';
 
 interface CallToActionProps {
   variant?: 'secondary';
-  href: string;
+  href?: string;
   target?: '_blank';
   className?: string;
   rel?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
 }
 
 export const CallToAction: FC<CallToActionProps> = ({
@@ -16,6 +17,7 @@ export const CallToAction: FC<CallToActionProps> = ({
   target,
   className,
   rel,
+  onClick,
   children,
 }) => {
   const classNames = [
@@ -26,9 +28,23 @@ export const CallToAction: FC<CallToActionProps> = ({
     classNames.push(className);
   }
 
-  return (
-    <a href={href} target={target} className={classNames.join(' ')} rel={rel}>
-      {children}
-    </a>
-  );
+  if (href != null) {
+    return (
+      <a
+        href={href}
+        onClick={onClick}
+        target={target}
+        className={classNames.join(' ')}
+        rel={rel}
+      >
+        {children}
+      </a>
+    );
+  } else {
+    return (
+      <button onClick={onClick} className={classNames.join(' ')}>
+        {children}
+      </button>
+    );
+  }
 };

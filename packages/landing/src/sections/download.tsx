@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { CallToAction } from '../call-to-action';
 import { Container } from '../container';
+import { webstores } from '../data';
 
 import './download.css';
 
@@ -28,7 +29,7 @@ export const DownloadSection: FC<DownloadSectionProps> = ({ className }) => {
               <CallToAction
                 variant="secondary"
                 className="download-section__link"
-                href="https://addons.mozilla.org/firefox/addon/ctf/"
+                href={webstores.mozilla}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -45,7 +46,7 @@ export const DownloadSection: FC<DownloadSectionProps> = ({ className }) => {
               <CallToAction
                 variant="secondary"
                 className="download-section__link"
-                href="https://chrome.google.com/webstore/detail/plmbleiamgcdnenigiocddjjgacgfgjb"
+                href={webstores.google}
                 target="_blank"
                 rel="noopener noreferrer"
               >

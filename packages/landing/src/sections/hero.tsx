@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { CallToAction } from '../call-to-action';
 import { Container } from '../container';
+import { InstallAction } from '../install_action';
 import popup from '../popup.png';
 
 import './hero.css';
@@ -28,13 +28,11 @@ export const Hero: FC<HeroProps> = ({ className }) => {
               computer.
             </p>
             <p className="hero__p">
-              Get to really know who you share your data with.
+              Make informed decisions who to share your data with.
             </p>
 
             <div className="hero__cta-wrapper">
-              <CallToAction href="#download">
-                <span className="hero__cta-bold">Download</span> It's free
-              </CallToAction>
+              <InstallAction />
             </div>
             <p className="hero__insignificant">
               Available for Firefox &amp; Chromium-based web browsers.

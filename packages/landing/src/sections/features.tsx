@@ -47,7 +47,7 @@ export const FeaturesSection: FC<FeaturesSectionProps> = ({ className }) => {
           />
         </div>
         <p className="features-section__text features-section__text_insignificant">
-          * support for Amazon&nbsp;CloudFront and Fastly is expected soon
+          * support for Amazon&nbsp;CloudFront and Fastly coming soon
         </p>
       </Container>
     </section>
