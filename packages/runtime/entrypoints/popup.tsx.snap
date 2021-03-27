@@ -1,5 +1,232 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Popup when rendering for a CloudFront-enabled website should render country info for CloudFront Edge IP 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        143.204.202.99
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=143.204.202.99"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=143.204.202.99"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "NA",
+        "extra": Object {
+          "registeredCountry": "US",
+        },
+        "heuristic": "ip",
+        "isoCountry": "US",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="US"
+      >
+        <Component
+          className="country-item country-item_twemoji country-item_with-flag"
+          data-flag="🇺🇸"
+          size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/us.svg') no-repeat",
+            }
+          }
+        >
+          <p
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
+            data-flag="🇺🇸"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/us.svg') no-repeat",
+              }
+            }
+          >
+            Country:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+      <CountryItem
+        countryCode="US"
+        shouldRenderFlag={false}
+      >
+        <Component
+          className="country-item country-item_twemoji country-item_with-flag"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
+          >
+            Legal registration:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": Array [
+          Object {
+            "name": "Server",
+            "value": "Apache",
+          },
+          Object {
+            "name": "X-Cache",
+            "value": "Miss from cloudfront",
+          },
+          Object {
+            "name": "Via",
+            "value": "1.1 1764af62d635a1a6ee51aabc37405452.cloudfront.net (CloudFront)",
+          },
+          Object {
+            "name": "X-Amz-Cf-Pop",
+            "value": "FRA53-C1",
+          },
+          Object {
+            "name": "X-Amz-Cf-Id",
+            "value": "XXWLOSXVpyCPH_qWH_e61SK44oFpgwRyAst9DnHWCKlxjC8Dm6f7uw==",
+          },
+        ],
+        "ip": "143.204.202.99",
+        "url": "https://www.workday.com/",
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <Component
+        size="xs"
+      >
+        <p
+          className="typography typography_xs"
+        >
+          Server Software: 
+          <Component
+            variant="mono"
+          >
+            <span
+              className="typography typography_mono"
+            >
+              Apache
+            </span>
+          </Component>
+        </p>
+      </Component>
+    </div>
+  </ServerInfo>
+</div>
+`;
+
+exports[`Popup when rendering for a CloudFront-enabled website should show CloudFront POP abbreviation 1`] = `
+<div
+  className="cloudfront-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      AWS CloudFront routed through
+    </p>
+  </Component>
+  <div
+    className="traceroute__nested"
+  >
+    <CountryItem
+      countryCode="DE"
+    >
+      <Component
+        className="country-item country-item_twemoji country-item_with-flag"
+        data-flag="🇩🇪"
+        size="xs"
+        style={
+          Object {
+            "background": "url('/assets/twemoji/de.svg') no-repeat",
+          }
+        }
+      >
+        <p
+          className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
+          data-flag="🇩🇪"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/de.svg') no-repeat",
+            }
+          }
+        >
+          <strong>
+            FRA
+          </strong>
+           data center in
+          <br />
+          <strong>
+            Germany
+          </strong>
+        </p>
+      </Component>
+    </CountryItem>
+    <Component
+      size="xs"
+      variant="light"
+    >
+      <p
+        className="typography typography_light typography_xs"
+      >
+        Cache: 
+        <Component
+          variant="mono"
+        >
+          <span
+            className="typography typography_mono"
+          >
+            Miss from cloudfront
+          </span>
+        </Component>
+      </p>
+    </Component>
+  </div>
+</div>
+`;
+
 exports[`Popup when rendering for a Cloudflare-protected website should render country info for Cloudflare IP 1`] = `
 <div
   className="ip-trace"

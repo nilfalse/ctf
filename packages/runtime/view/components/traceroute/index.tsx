@@ -7,6 +7,7 @@ import { Sequence, SequenceItem } from '../sequence';
 import { Paragraph } from '../typography';
 
 import { CloudflareTrace } from './cloudflare';
+import { CloudFrontTrace } from './cloudfront';
 import { IPTrace } from './ip';
 
 import './index.css';
@@ -14,6 +15,7 @@ import './index.css';
 const traces = {
   ip: IPTrace,
   cloudflare: CloudflareTrace,
+  cloudfront: CloudFrontTrace,
 };
 
 interface TracerouteProps {

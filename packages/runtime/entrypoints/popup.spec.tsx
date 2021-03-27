@@ -2,6 +2,7 @@ import * as harness from '../__test__/harness';
 import * as debug from '../util/debug';
 import * as view from '../view';
 import { CloudflareTrace } from '../view/components/traceroute/cloudflare';
+import { CloudFrontTrace } from '../view/components/traceroute/cloudfront';
 import { IPTrace } from '../view/components/traceroute/ip';
 
 describe('Popup', () => {
@@ -106,6 +107,26 @@ describe('Popup', () => {
         expect(cloudflareTrace.text()).toContain('Germany');
         expect(cloudflareTrace.text()).toContain('FRA');
         expect(cloudflareTrace).toMatchSnapshot();
+      });
+    });
+
+    describe('for a CloudFront-enabled website', () => {
+      harness.xpc.popup(import('../__test__/fixtures/success_cloudfront-fra'));
+      const ref = harness.popup.render();
+
+      it('should render country info for CloudFront Edge IP', () => {
+        const iptrace = ref.popup.find(IPTrace);
+
+        expect(iptrace.text()).toContain('United States of America');
+        expect(iptrace.children()).toMatchSnapshot();
+      });
+
+      it('should show CloudFront POP abbreviation', () => {
+        const cloudfrontTrace = ref.popup.find(CloudFrontTrace).children();
+
+        expect(cloudfrontTrace.text()).toContain('Germany');
+        expect(cloudfrontTrace.text()).toContain('FRA');
+        expect(cloudfrontTrace).toMatchSnapshot();
       });
     });
   });

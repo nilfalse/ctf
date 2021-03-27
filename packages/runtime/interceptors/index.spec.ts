@@ -20,7 +20,7 @@ describe('Interceptors', () => {
     for (const mock of interceptors.heuristics) {
       expect(mock.dispatch).toHaveBeenCalledWith(request);
     }
-    expect(interceptors.heuristics).toHaveLength(2);
+    expect(interceptors.heuristics).toHaveLength(3);
 
     for (const spy of spies) {
       spy.mockRestore();
