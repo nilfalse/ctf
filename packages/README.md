@@ -24,7 +24,11 @@ In order to deliver the best experince to the user the extension requires some e
 
 ### Landing
 
-The marketing websites are currently being developed under the `landing` umbrella.
+The marketing website is currently being developed under the `landing` umbrella.
+
+### CDN
+
+Microsite that goes to Cloudflare Pages utilizing their presense around the globe within milliseconds to the user in order to dynamically deliver GeoIP database over the last mile without the need to release new extension version.
 
 ### Command-Line Interface
 

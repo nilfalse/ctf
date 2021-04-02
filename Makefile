@@ -16,10 +16,8 @@ fix :
 	$(NODEJS_BIN)eslint --fix .
 
 .PHONY : primary-deps secondary-deps
-primary-deps : ensure-node-modules landing-deps
+primary-deps : ensure-node-modules
 	${MAKE} --directory=packages/bundle
-landing-deps :
-	${MAKE} --directory=packages/landing deps
 
 .PHONY : test
 test : primary-deps
@@ -32,6 +30,7 @@ clean :
 	$(MAKE) --directory=packages/chromium clean
 pristine : clean
 	- $(NODEJS_BIN)jest --clearCache
+	$(MAKE) --directory=packages/cdn clean
 	$(MAKE) --directory=packages/landing clean
 	${MAKE} --directory=packages/bundle pristine
 	$(MAKE) --directory=packages/firefox pristine
@@ -51,12 +50,10 @@ prettier :
 eslint :
 	$(NODEJS_BIN)eslint .
 
-.PHONY : outdated build build.landing build.firefox build.chromium
+.PHONY : outdated build build.firefox build.chromium
 outdated : primary-deps
 	- yarn outdated
 build : build.firefox build.chromium
-build.landing : landing-deps
-	$(MAKE) --directory=packages/landing build
 build.firefox : node_modules primary-deps
 	$(MAKE) --directory=packages/firefox bundle build
 build.chromium : node_modules

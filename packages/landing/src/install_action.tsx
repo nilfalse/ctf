@@ -23,25 +23,24 @@ export const InstallAction: FC = () => {
     }
   }, []);
 
-  if (impl === 'firefox') {
-    return (
-      <CallToAction onClick={addToFirefox}>
-        <span className="hero__cta-bold">Add to Firefox</span> It's free
-      </CallToAction>
-    );
+  switch (impl) {
+    case 'firefox':
+      return (
+        <CallToAction onClick={addToFirefox}>
+          <span className="hero__cta-bold">Add to Firefox</span> It's free
+        </CallToAction>
+      );
+    case 'chromium':
+      return (
+        <CallToAction href={webstores.google} target="_blank" rel="noopener">
+          <span className="hero__cta-bold">Add to Chrome</span> It's free
+        </CallToAction>
+      );
+    default:
+      return (
+        <CallToAction href="#download" rel="noopener">
+          <span className="hero__cta-bold">Download</span> It's free
+        </CallToAction>
+      );
   }
-
-  if (impl === 'chromium') {
-    return (
-      <CallToAction href={webstores.google} target="_blank">
-        <span className="hero__cta-bold">Add to Chrome</span> It's free
-      </CallToAction>
-    );
-  }
-
-  return (
-    <CallToAction href="#download">
-      <span className="hero__cta-bold">Download</span> It's free
-    </CallToAction>
-  );
 };

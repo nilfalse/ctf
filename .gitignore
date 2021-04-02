@@ -2,8 +2,8 @@ node_modules
 coverage
 .env
 
-/packages/landing/data
-/packages/landing/cdn_overrides/GeoLite2-Country.mmdb
+/packages/cdn/data
+/packages/cdn/www/GeoLite2-Country.mmdb
 /packages/landing/build
 /packages/bundle/data/maxmind
 /packages/bundle/content/data

@@ -1,4 +1,4 @@
-import { useEffect, useState, FC } from 'react';
+import { useEffect, useLayoutEffect, useState, FC } from 'react';
 
 import { Container } from './container';
 import { Logo } from './logo';
@@ -8,7 +8,11 @@ import './header.css';
 export const Header: FC = ({ children }) => {
   const classNames = ['header'];
 
-  const [isShadowed, setShadow] = useState(false);
+  const [isShadowed, setShadow] = useState(true);
+
+  useLayoutEffect(() => {
+    setShadow(false);
+  }, []);
 
   useEffect(() => {
     const onScroll: EventListener = (e) => {

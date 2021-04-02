@@ -8,9 +8,21 @@ import './logo.css';
 export const Logo: FC = ({ children }) => {
   return (
     <div className="logo">
-      <img src={logo} alt="Logo" className="logo__image" />
+      <img
+        src={logo}
+        alt="Logo"
+        className="logo__image"
+        width="32px"
+        height="32px"
+      />
       <span className="logo__wrapper">
-        <img src={text} alt="Capture The Flag" className="logo__text" />
+        <img
+          src={text}
+          alt="Capture The Flag"
+          className="logo__text"
+          width="140px"
+          height="17px"
+        />
 
         <span className="logo__aux">{children}</span>
       </span>
