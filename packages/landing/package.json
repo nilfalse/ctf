@@ -9,9 +9,6 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
-  "devDependencies": {
-    "react-snap": "^1.23.0"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

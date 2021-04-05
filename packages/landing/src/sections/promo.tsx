@@ -21,8 +21,7 @@ export const PromoSection: FC<PromoSectionProps> = ({ className }) => {
           />
         </div>
         <p className="promo-section__headline">
-          Capture The Flag — privacy-focused browser extension to determine
-          website country.
+          Capture The Flag — privacy-focused cloud insights.
         </p>
       </Container>
     </section>

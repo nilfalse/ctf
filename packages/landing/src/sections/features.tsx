@@ -4,6 +4,7 @@ import { Container } from '../container';
 import amazon from '../icons/amazon.svg';
 import cloudflare from '../icons/cloudflare.svg';
 import fastly from '../icons/fastly.svg';
+import devActivity from '../undraw_developer_activity_bv83.svg';
 
 import './features.css';
 
@@ -47,8 +48,27 @@ export const FeaturesSection: FC<FeaturesSectionProps> = ({ className }) => {
           />
         </div>
         <p className="features-section__text features-section__text_insignificant">
-          * support for Amazon&nbsp;CloudFront and Fastly coming soon
+          * support for Fastly coming soon
         </p>
+
+        <h2 className="features-section__headline">Open Source to the bone</h2>
+        <div className="features-section__oss">
+          <p className="features-section__text">
+            We love Open Source! The source code of the extension is{' '}
+            <a
+              target="_blank"
+              href="https://github.com/nilfalse/ctf"
+              rel="noopener"
+            >
+              100% Open Source Software
+            </a>{' '}
+            and you are free to use, inspect and share this software with
+            anyone.
+          </p>
+          <div className="features-section__illustration">
+            <img src={devActivity} alt="Developer activity illustration" />
+          </div>
+        </div>
       </Container>
     </section>
   );

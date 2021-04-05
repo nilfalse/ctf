@@ -37,31 +37,33 @@
   padding: 8px;
 }
 
-.hero__decoration {
-  position: absolute;
-}
-
-.hero__decoration1 {
-  background-color: #ffce00;
-  left: -11px;
-  top: -13px;
-  width: 110px;
-  height: 110px;
-}
-
-.hero__decoration2 {
-  border: 4px solid #1fcd8e;
-  right: -33px;
-  bottom: -19px;
-  width: 128px;
-  height: 88px;
-}
-
 .hero__popup-demo {
   position: relative;
   border: 1px solid #b6b6b6;
   background: linear-gradient(0deg, #f3f5f7 67%, #51baf9 67%);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media only screen and (min-width: 375px) {
+  .hero__decoration {
+    position: absolute;
+  }
+
+  .hero__decoration1 {
+    background-color: #ffce00;
+    left: -11px;
+    top: -13px;
+    width: 110px;
+    height: 110px;
+  }
+
+  .hero__decoration2 {
+    border: 4px solid #1fcd8e;
+    right: -33px;
+    bottom: -19px;
+    width: 128px;
+    height: 88px;
+  }
 }
 
 @media only screen and (min-width: 720px) {
