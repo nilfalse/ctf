@@ -54,7 +54,7 @@ export const FeaturesSection: FC<FeaturesSectionProps> = ({ className }) => {
         <h2 className="features-section__headline">Open Source to the bone</h2>
         <div className="features-section__oss">
           <p className="features-section__text">
-            We love Open Source! The source code of the extension is{' '}
+            The source code of the extension is{' '}
             <a
               target="_blank"
               href="https://github.com/nilfalse/ctf"

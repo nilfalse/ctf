@@ -39,13 +39,13 @@
   padding-top: 1rem;
 }
 
-@media only screen and (min-width: 560px) {
+@media only screen and (min-width: 576px) {
   .download-section__headline {
     padding: 1rem 0 2rem;
   }
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 768px) {
   .download-section__platforms {
     display: flex;
   }

@@ -41,6 +41,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem 0;
 }
 
 .features-section__oss .features-section__text {
@@ -48,10 +49,17 @@
   padding: 0 1.4rem 1.4rem;
 }
 
-@media only screen and (min-width: 560px) {
+@media only screen and (min-width: 576px) {
   .features-section__networks {
     display: flex;
     flex-direction: row;
+  }
+
+  .features-section__oss {
+    padding-top: 0;
+  }
+  .features-section__oss .features-section__text {
+    padding: 1rem 0 3rem;
   }
 
   .features-section__headline {
@@ -63,13 +71,19 @@
   }
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 768px) {
   .features-section__oss {
     flex-direction: row;
+    padding: 2rem 0;
   }
 
   .features-section__oss .features-section__text {
-    max-width: 50%;
-    padding-bottom: 0;
+    padding: 0 1rem 0 0;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .features-section__oss .features-section__text {
+    padding-right: 3rem;
   }
 }
