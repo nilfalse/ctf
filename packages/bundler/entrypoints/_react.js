@@ -25,16 +25,12 @@ class ReactEntrypoint extends BasicEntrypoint {
           },
           {
             test: /\.(woff|svg)$/,
-            use: [
-              {
-                loader: 'file-loader',
-                options: {
-                  name: this.bundle.isDevelopment
-                    ? '[name].[contenthash:8].[ext]'
-                    : '[name].[ext]',
-                },
-              },
-            ],
+            type: 'asset/resource',
+            generator: {
+              filename: this.bundle.isDevelopment
+                ? '[name].[contenthash:8][ext]'
+                : '[name][ext]',
+            },
           },
         ],
       },

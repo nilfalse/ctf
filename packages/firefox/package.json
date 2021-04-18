@@ -3,6 +3,7 @@
   "name": "firefox",
   "version": "0.0.0",
   "scripts": {
+    "prestart": "make clean bundle",
     "start": "webpack serve"
   },
   "dependencies": {

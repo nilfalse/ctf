@@ -3,6 +3,7 @@
   "name": "chromium",
   "version": "0.0.0",
   "scripts": {
+    "prestart": "make clean",
     "start": "webpack serve"
   },
   "dependencies": {

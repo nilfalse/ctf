@@ -21,15 +21,13 @@ class BasicEntrypoint {
         plugins: this.plugins,
         resolve: { extensions: ['.tsx', '.ts', '.js'] },
         output: {
-          filename: '[name].js',
           chunkFilename: '[name].chunk.js',
           path: this.bundle.path,
-          hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
-          hotUpdateMainFilename: 'hot/[hash].hot-update.json',
+          hotUpdateChunkFilename: 'hot/chunk~[id]~[hash].js',
+          hotUpdateMainFilename: 'hot/main_[runtime]_[hash].json',
         },
         optimization: {
-          runtimeChunk: { name: (entrypoint) => `${entrypoint.name}.runtime` },
-          namedModules: true,
+          runtimeChunk: true,
         },
       },
       this.configuration,

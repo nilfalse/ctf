@@ -1,5 +1,6 @@
 const path = require('path');
 
+const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const { merge } = require('webpack-merge');
 
@@ -34,7 +35,6 @@ class BackgroundEntrypoint extends BasicEntrypoint {
   }
 
   get _maxmindMocks() {
-    // https://ilin.dk/weblog/maxmind-in-browser
     return {
       resolve: {
         alias: {
@@ -47,6 +47,11 @@ class BackgroundEntrypoint extends BasicEntrypoint {
           ),
         },
       },
+      plugins: [
+        new webpack.ProvidePlugin({
+          Buffer: ['buffer', 'Buffer'],
+        }),
+      ],
       module: {
         rules: [
           {

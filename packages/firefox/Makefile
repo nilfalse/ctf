@@ -2,14 +2,14 @@ NODEJS=node --unhandled-rejections=strict --experimental-json-modules
 NODEJS_BIN=${NODEJS} ../../node_modules/.bin/
 
 .PHONY : build
-build :
+build : bundle
 	${NODEJS_BIN}webpack
 
-firefox.zip : bundle
+firefox.zip : bundle bundle/manifest.json
 	- rm $@
 	zip --recurse-paths $@ bundle
 
-bundle : bundle/manifest.json bundle/data/airports.json bundle/data/GeoLite2-Country.mmdb bundle/assets
+bundle : bundle/data/airports.json bundle/data/GeoLite2-Country.mmdb bundle/assets
 bundle/manifest.json :
 	$(MAKE) --no-print-directory build
 bundle/assets : ../bundle/content/assets
