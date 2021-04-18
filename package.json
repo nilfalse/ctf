@@ -6,7 +6,9 @@
     "test": "jest --watch",
     "start": "npm-run-all --print-label --parallel firefox chromium",
     "firefox": "yarn workspace firefox start",
-    "chromium": "yarn workspace chromium start"
+    "chromium": "yarn workspace chromium start",
+    "pre-commit": "lint-staged",
+    "prepare": "husky install"
   },
   "workspaces": [
     "packages/*"
@@ -51,7 +53,7 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.1",
     "html-webpack-plugin": "^4.5.1",
-    "husky": "^5.2.0",
+    "husky": "^6.0.0",
     "i18n-iso-countries": "^6.7.0",
     "jest": "^26.6.3",
     "lint-staged": "10.5.4",
@@ -75,11 +77,6 @@
   "keywords": [],
   "author": "Yaroslav Ilin",
   "license": "MPL-2.0",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,cjs,mjs}": "eslint --cache",
     "*.{ts,tsx,js,jsx,cjs,mjs,css,md}": "prettier --check"
