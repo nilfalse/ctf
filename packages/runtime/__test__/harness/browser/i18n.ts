@@ -18,6 +18,6 @@ export function i18n() {
   });
 
   afterEach(() => {
-    browser.i18n = (undefined as unknown) as I18n.Static;
+    browser.i18n = undefined as unknown as I18n.Static;
   });
 }

@@ -1,6 +1,5 @@
-type ArrayElementType<
-  T extends ReadonlyArray<unknown>
-> = T extends ReadonlyArray<infer ElementType> ? ElementType : never;
+type ArrayElementType<T extends ReadonlyArray<unknown>> =
+  T extends ReadonlyArray<infer ElementType> ? ElementType : never;
 
 type Unwrap<T> = T extends Promise<infer U>
   ? U

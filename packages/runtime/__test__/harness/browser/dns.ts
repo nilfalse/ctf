@@ -16,6 +16,6 @@ export function dns(mock: DnsMock) {
   });
 
   afterEach(() => {
-    browser.dns = (undefined as unknown) as Dns.Static;
+    browser.dns = undefined as unknown as Dns.Static;
   });
 }

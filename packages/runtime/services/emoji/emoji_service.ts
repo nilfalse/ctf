@@ -1,9 +1,8 @@
 import { isKeyof, lookupUpperCase } from '../../util/common';
 import * as debug from '../../util/debug';
 
-const flagsByCode: typeof import('country-flag-emoji-json/json/flag-emojis-by-code.json') = Object.create(
-  null
-);
+const flagsByCode: typeof import('country-flag-emoji-json/json/flag-emojis-by-code.json') =
+  Object.create(null);
 
 let ready = false;
 

@@ -16,10 +16,8 @@ export function main() {
     const { iata_code, iso_country, iso_region } = airport;
 
     const skipRules = {
-      [`Skipping duplicate IAIA ${iata_code}`]: Object.prototype.hasOwnProperty.call(
-        codes,
-        iata_code
-      ),
+      [`Skipping duplicate IAIA ${iata_code}`]:
+        Object.prototype.hasOwnProperty.call(codes, iata_code),
 
       [`Skipping invalid IAIA ${iata_code}`]:
         !/[A-Z]+/.test(iata_code) || /[^A-Z0-9]+/.test(iata_code),

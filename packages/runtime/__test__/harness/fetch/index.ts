@@ -2,7 +2,7 @@ import { Readable } from 'stream';
 
 export function stream(content: string) {
   const ref = {
-    mock: (null as unknown) as jest.SpyInstance<unknown, unknown[]>,
+    mock: null as unknown as jest.SpyInstance<unknown, unknown[]>,
     response: null,
   };
 

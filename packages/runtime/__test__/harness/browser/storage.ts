@@ -44,6 +44,6 @@ export function storage(prefs: Preferences = {}) {
   });
 
   afterEach(() => {
-    browser.storage = (undefined as unknown) as Storage.Static;
+    browser.storage = undefined as unknown as Storage.Static;
   });
 }

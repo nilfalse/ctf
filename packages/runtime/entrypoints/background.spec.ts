@@ -323,7 +323,7 @@ function prepareTabUpdate(tabId: number, status = 'loading') {
     await tabUpdatedCallback(
       tabId,
       { status } as Tabs.OnUpdatedChangeInfoType,
-      (null as unknown) as Tabs.Tab
+      null as unknown as Tabs.Tab
     );
   });
 

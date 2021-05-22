@@ -15,7 +15,7 @@ fix :
 	$(NODEJS_BIN)prettier --write .
 	$(NODEJS_BIN)eslint --fix .
 
-.PHONY : primary-deps secondary-deps
+.PHONY : primary-deps
 primary-deps : ensure-node-modules
 	${MAKE} --directory=packages/bundle
 

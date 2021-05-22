@@ -4,9 +4,11 @@ import { CallToAction } from './call-to-action';
 import { firefoxDownloadURL, webstores } from './data';
 
 function addToFirefox() {
-  return (InstallTrigger as {
-    install: (trigger: Record<string, unknown>) => boolean;
-  }).install({
+  return (
+    InstallTrigger as {
+      install: (trigger: Record<string, unknown>) => boolean;
+    }
+  ).install({
     'Capture The Flag': firefoxDownloadURL,
   });
 }

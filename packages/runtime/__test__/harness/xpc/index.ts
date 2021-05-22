@@ -21,9 +21,9 @@ export function popup(
     browser.runtime.sendMessage = jest.fn().mockReturnValue(contentPromise);
 
     delete (globalThis as Partial<typeof globalThis>).location;
-    globalThis.location = ({
+    globalThis.location = {
       search: searchParamsStr,
-    } as unknown) as Location;
+    } as unknown as Location;
   });
 
   afterEach(() => {

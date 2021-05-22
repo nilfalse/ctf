@@ -52,13 +52,13 @@ class Bundle {
   }
 
   get production() {
-    const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
     const TerserJSPlugin = require('terser-webpack-plugin');
+    const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
     return {
       mode: 'production',
       optimization: {
-        minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
+        minimizer: [new TerserJSPlugin(), new CssMinimizerPlugin()],
       },
     };
   }
