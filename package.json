@@ -17,7 +17,7 @@
     "@hot-loader/react-dom": "^17.0.1",
     "buffer": "^6.0.3",
     "country-flag-emoji-json": "^1.0.2",
-    "maxmind": "^4.3.1",
+    "maxmind": "^4.3.2",
     "node-libs-browser": "^2.2.1",
     "react": "^17.0.2",
     "webextension-polyfill": "^0.8.0"
