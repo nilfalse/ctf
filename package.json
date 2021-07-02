@@ -23,7 +23,7 @@
     "webextension-polyfill": "^0.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.5",
+    "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
@@ -32,8 +32,8 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "@types/webpack-env": "^1.16.0",
-    "@typescript-eslint/eslint-plugin": "^4.26.1",
-    "@typescript-eslint/parser": "^4.26.1",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.28.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "babel-jest": "^27.0.2",
     "babel-loader": "^8.2.2",
@@ -55,7 +55,7 @@
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "html-webpack-plugin": "^5.3.1",
     "husky": "^6.0.0",
-    "i18n-iso-countries": "^6.7.0",
+    "i18n-iso-countries": "^6.8.0",
     "jest": "^27.0.4",
     "lint-staged": "11.0.0",
     "mini-css-extract-plugin": "^1.6.0",
