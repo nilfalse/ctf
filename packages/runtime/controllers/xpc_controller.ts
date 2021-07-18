@@ -14,7 +14,7 @@ mediator.subscribe(BootCommand, function () {
 
 function handleIncomingMessage(
   message: unknown,
-  sender: Runtime.MessageSender
+  _sender: Runtime.MessageSender
 ) {
   return xpc.handle(message);
 }

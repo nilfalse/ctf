@@ -1,4 +1,4 @@
-import { Runtime, Storage } from 'webextension-polyfill-ts';
+import { Storage } from 'webextension-polyfill-ts';
 
 import * as debug from '../../util/debug';
 

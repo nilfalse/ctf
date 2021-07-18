@@ -21,7 +21,7 @@ describe('Landing Page Web Vitals', () => {
       });
 
       const callback = jest.fn();
-      jest.spyOn(webVitals, 'getTTFB').mockImplementation((onReport) => {
+      jest.spyOn(webVitals, 'getTTFB').mockImplementation((_onReport) => {
         done(null);
       });
       reportWebVitals(callback);

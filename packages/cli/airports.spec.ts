@@ -8,7 +8,7 @@ describe('Airports Script', () => {
     const fetch = harness.fetch.stream(harness.csv.airports());
 
     it('should fetch data from ourairports.com', () => {
-      const testingSideEffect = main();
+      const ignoredPromise = main();
 
       expect(fetch.mock).toHaveBeenCalledWith(
         'https://ourairports.com/data/airports.csv'

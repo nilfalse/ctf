@@ -93,7 +93,6 @@ describe('Cloudflare interceptor', () => {
         spy = jest
           .spyOn(
             common as {
-              // FIXME?
               lookupUpperCase: (
                 dict: Record<string, airportService.Airport>,
                 key: string

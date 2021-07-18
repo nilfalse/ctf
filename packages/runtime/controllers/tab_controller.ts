@@ -23,7 +23,7 @@ class TabController {
   handleTabUpdated(
     tabId: number,
     changeInfo: Tabs.OnUpdatedChangeInfoType,
-    tab: Tabs.Tab
+    _tab: Tabs.Tab
   ) {
     if (changeInfo.status !== 'loading') {
       return;
@@ -32,7 +32,7 @@ class TabController {
     return mediator.publish(new ActionRefreshCommand(tabId));
   }
 
-  handleTabRemoved(tabId: number, removeInfo: Tabs.OnRemovedRemoveInfoType) {
+  handleTabRemoved(tabId: number, _removeInfo: Tabs.OnRemovedRemoveInfoType) {
     return mediator.publish(new TabRemoveCommand(tabId));
   }
 }

@@ -221,7 +221,7 @@ describe('Amazon CloudFront interceptor', () => {
   });
 
   describe('when scoring', () => {
-    describe('and the Via header contains reference to cloudfront.net', () => {
+    describe('when the Via header contains reference to cloudfront.net', () => {
       it('should give the top score', async () => {
         const request = new Request({
           responseHeaders: [
@@ -261,7 +261,7 @@ describe('Amazon CloudFront interceptor', () => {
       });
     });
 
-    describe('and the Via header is absent', () => {
+    describe('when the Via header is absent', () => {
       it('should score lower', async () => {
         const request = new Request({
           responseHeaders: [{ name: 'X-Amz-Cf-Pop', value: 'CPH50-C1' }],
@@ -272,7 +272,7 @@ describe('Amazon CloudFront interceptor', () => {
       });
     });
 
-    describe('and the Via header does not mention CloudFront', () => {
+    describe('when the Via header does not mention CloudFront', () => {
       it('should score lower', async () => {
         const request = new Request({
           responseHeaders: [
@@ -305,7 +305,7 @@ describe('Amazon CloudFront interceptor', () => {
       });
     });
 
-    describe('if not present', () => {
+    describe('if empty', () => {
       it('should not report it back', async () => {
         const request = new Request({
           responseHeaders: [

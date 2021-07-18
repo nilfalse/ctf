@@ -4,7 +4,7 @@ import { Match } from '../../../interceptors';
 import { CloudFrontMatch } from '../../../interceptors/cloudfront';
 import { Request } from '../../../lib/request';
 import { assert } from '../../../util/debug';
-import { Link, Paragraph, Span } from '../typography';
+import { Paragraph, Span } from '../typography';
 
 import { CountryItem } from './_country_item';
 

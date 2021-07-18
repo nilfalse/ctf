@@ -20,7 +20,7 @@ describe('Popup', () => {
     it('should print the debug introduction', () => {
       const debugSpy = jest.spyOn(debug, 'intro');
 
-      const testingSideEffect = jest.requireActual('./popup');
+      const ignored = jest.requireActual('./popup');
 
       expect(debugSpy).toHaveBeenCalledTimes(1);
       expect(startSpy).toHaveBeenCalledTimes(1);

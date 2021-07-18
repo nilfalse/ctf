@@ -11,7 +11,7 @@ export const Header: FC = ({ children }) => {
   const [isShadowed, setShadow] = useState(false);
 
   useEffect(() => {
-    const onScroll: EventListener = (e) => {
+    const onScroll: EventListener = (_evt) => {
       setShadow(document.documentElement.scrollTop > 0);
     };
     window.addEventListener('scroll', onScroll);

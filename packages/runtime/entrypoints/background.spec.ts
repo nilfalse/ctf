@@ -29,14 +29,14 @@ describe('Background script', () => {
     it('should print the debug introduction', () => {
       const spy = jest.spyOn(debug, 'intro');
 
-      const testingSideEffect = require('./background');
+      const ignored = require('./background');
 
       expect(spy).toHaveBeenCalledTimes(1);
       spy.mockRestore();
     });
 
     it('should kick off controllers', () => {
-      const testingSideEffect = require('./background');
+      const ignored = require('./background');
 
       expect(controllers.start).toHaveBeenCalledTimes(1);
     });
