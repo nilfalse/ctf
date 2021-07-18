@@ -25,15 +25,15 @@ describe('Amazon CloudFront interceptor', () => {
           return expect(cloudfront.dispatch(request)).resolves.toHaveLength(0);
         });
       });
-    });
 
-    describe('with a correct POP that contains non-existing IATA code', () => {
-      it('should not report any matches', () => {
-        const request = new Request({
-          responseHeaders: [{ name: 'X-Amz-Cf-Pop', value: 'ZZZ3-C1' }],
+      describe("with IATA code that doesn't exist", () => {
+        it('should not report any matches', () => {
+          const request = new Request({
+            responseHeaders: [{ name: 'X-Amz-Cf-Pop', value: 'ZZZ3-C1' }],
+          });
+
+          return expect(cloudfront.dispatch(request)).resolves.toHaveLength(0);
         });
-
-        return expect(cloudfront.dispatch(request)).resolves.toHaveLength(0);
       });
     });
 

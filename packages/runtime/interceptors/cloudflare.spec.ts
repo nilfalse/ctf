@@ -35,15 +35,17 @@ describe('Cloudflare interceptor', () => {
           return expect(cloudflare.dispatch(request)).resolves.toHaveLength(0);
         });
       });
-    });
 
-    describe('with a correct ray that contains non-existing IATA code', () => {
-      it('should not report any matches', () => {
-        const request = new Request({
-          responseHeaders: [{ name: 'cf-ray', value: '5be31a7c0944d875-ZZZ' }],
+      describe("with IATA code that doesn't exist", () => {
+        it('should not report any matches', () => {
+          const request = new Request({
+            responseHeaders: [
+              { name: 'cf-ray', value: '5be31a7c0944d875-ZZZ' },
+            ],
+          });
+
+          return expect(cloudflare.dispatch(request)).resolves.toHaveLength(0);
         });
-
-        return expect(cloudflare.dispatch(request)).resolves.toHaveLength(0);
       });
     });
 
