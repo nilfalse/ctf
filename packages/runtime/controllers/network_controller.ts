@@ -9,7 +9,9 @@ import * as mediator from '../util/mediator';
 mediator.subscribe(BootCommand, function () {
   browser.webRequest.onResponseStarted.addListener(
     module.hot
-      ? (res) => handleWebResponseStarted(res)
+      ? (res) => {
+          void handleWebResponseStarted(res);
+        }
       : handleWebResponseStarted,
     {
       urls: ['<all_urls>'],

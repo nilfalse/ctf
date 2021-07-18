@@ -17,8 +17,10 @@ export function lookup(code: string) {
   return lookupUpperCase(airports, code);
 }
 
-export let _load = function (): Promise<Record<string, Airport>> {
-  const dataPromise = fetch('/data/airports.json').then((r) => r.json());
+export let _load = function () {
+  const dataPromise = fetch('/data/airports.json').then<
+    Record<string, Airport>
+  >((r) => r.json());
 
   _load = () => dataPromise;
   return dataPromise;

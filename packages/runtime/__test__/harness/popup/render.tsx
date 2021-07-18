@@ -9,7 +9,7 @@ export function render() {
   };
 
   beforeEach(() => {
-    ref.popup = mount(<PopupContent />);
+    ref.popup = mount(<PopupContent />) as ReactWrapper;
 
     return act(async () => {
       await new Promise((resolve) => setTimeout(resolve));

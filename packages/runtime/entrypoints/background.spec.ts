@@ -17,7 +17,9 @@ jest.mock('../services/env/env_service', () => ({
   supportsActionSVG: true,
 }));
 jest.mock('../services/icon/icon_service', () => {
-  const original = jest.requireActual('../services/icon/icon_service');
+  const original = jest.requireActual<{
+    defaultIconPromise: Promise<unknown>;
+  }>('../services/icon/icon_service');
   return {
     ...original,
     defaultIconPromise: Promise.resolve({ path: 'DEFAULT_ICON' }),
@@ -29,14 +31,14 @@ describe('Background script', () => {
     it('should print the debug introduction', () => {
       const spy = jest.spyOn(debug, 'intro');
 
-      const ignored = require('./background');
+      void require('./background');
 
       expect(spy).toHaveBeenCalledTimes(1);
       spy.mockRestore();
     });
 
     it('should kick off controllers', () => {
-      const ignored = require('./background');
+      void require('./background');
 
       expect(controllers.start).toHaveBeenCalledTimes(1);
     });
@@ -49,7 +51,11 @@ describe('Background script', () => {
     const browser = harness.browser.stub();
     harness.browser.storage({ render: 'twemoji' });
 
-    beforeEach(jest.requireActual('../controllers').start);
+    beforeEach(
+      jest.requireActual<{
+        start: () => Promise<void>;
+      }>('../controllers').start
+    );
 
     it('should subscribe to network requests', () => {
       expect(
@@ -98,7 +104,7 @@ describe('Background script', () => {
     describe('when response headers become available', () => {
       let responseStartedCallback: (
         details: WebRequest.OnResponseStartedDetailsType
-      ) => void;
+      ) => Promise<void> | void;
 
       harness.browser.i18n();
       harness.browser.pageAction();
@@ -271,6 +277,7 @@ describe('Background script', () => {
             );
 
             jest.spyOn(storageService.reports, 'remove');
+            // eslint-disable-next-line @typescript-eslint/await-thenable
             await tabRemovedCallback(tabId, {} as Tabs.OnRemovedRemoveInfoType);
           });
 
@@ -298,6 +305,7 @@ function prepareTabActivated(tabId: number, payload?: Record<string, unknown>) {
       );
     }
 
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     await tabActivatedCallback({
       tabId,
     } as Tabs.OnActivatedActiveInfoType);
@@ -320,6 +328,7 @@ function prepareTabUpdate(tabId: number, status = 'loading') {
       })
     );
 
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     await tabUpdatedCallback(
       tabId,
       { status } as Tabs.OnUpdatedChangeInfoType,

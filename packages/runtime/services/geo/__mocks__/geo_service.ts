@@ -1,7 +1,10 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-const originalModule = jest.requireActual('../geo_service');
+const originalModule = jest.requireActual<{
+  // eslint-disable-next-line camelcase
+  rewire$_load: (loader: () => Promise<unknown>) => void;
+}>('../geo_service');
 
 originalModule.rewire$_load(() =>
   fs.readFile(

@@ -16,11 +16,12 @@ mediator.subscribe(BootCommand, function () {
 });
 
 class TabController {
-  handleTabActivated({ tabId }: Tabs.OnActivatedActiveInfoType) {
-    return mediator.publish(new ActionRefreshCommand(tabId));
+  handleTabActivated(this: void, { tabId }: Tabs.OnActivatedActiveInfoType) {
+    void mediator.publish(new ActionRefreshCommand(tabId));
   }
 
   handleTabUpdated(
+    this: void,
     tabId: number,
     changeInfo: Tabs.OnUpdatedChangeInfoType,
     _tab: Tabs.Tab
@@ -29,10 +30,14 @@ class TabController {
       return;
     }
 
-    return mediator.publish(new ActionRefreshCommand(tabId));
+    void mediator.publish(new ActionRefreshCommand(tabId));
   }
 
-  handleTabRemoved(tabId: number, _removeInfo: Tabs.OnRemovedRemoveInfoType) {
-    return mediator.publish(new TabRemoveCommand(tabId));
+  handleTabRemoved(
+    this: void,
+    tabId: number,
+    _removeInfo: Tabs.OnRemovedRemoveInfoType
+  ) {
+    void mediator.publish(new TabRemoveCommand(tabId));
   }
 }

@@ -6,4 +6,6 @@ import { PopupContent } from '../view/components/popup_content';
 
 debug.intro();
 
-start(() => render(<PopupContent />, document.getElementById('react-root')));
+void start(() =>
+  render(<PopupContent />, document.getElementById('react-root'))
+);

@@ -41,7 +41,9 @@ export async function getIcon(
 
     default: {
       return debug.never(
-        `Unexpected preference value "${pref}" while rendering data URI`
+        `Unexpected preference value "${
+          pref as string
+        }" while rendering data URI`
       );
     }
   }

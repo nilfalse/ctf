@@ -16,7 +16,7 @@ export const _OptionsContent: FC = () => {
     (evt) => {
       let shouldUpdate = true;
 
-      preferenceService
+      void preferenceService
         .set({
           render: evt.currentTarget.value,
         })

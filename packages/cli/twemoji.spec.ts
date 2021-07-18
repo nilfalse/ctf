@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import { Body } from 'node-fetch';
+import { Body, Headers } from 'node-fetch';
 
 import * as harness from './__harness__';
 import { main } from './twemoji.js';
@@ -99,11 +99,13 @@ describe('Twemoji Script', () => {
     });
 
     it('should log headers of the failed response', async () => {
+      type Logger = (value: string, name: string) => void;
+
       jest.spyOn(fetch.response, 'headers', 'get').mockReturnValue({
-        forEach: jest.fn().mockImplementation((logger) => {
+        forEach: jest.fn().mockImplementation((logger: Logger) => {
           logger('lol/boom', 'Content-Type');
         }),
-      });
+      } as unknown as Headers);
 
       await main(
         '/home/fake/root/bin',

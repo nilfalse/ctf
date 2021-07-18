@@ -14,7 +14,7 @@ export class Request {
   ip: string | null;
   headers?: WebRequest.HttpHeaders;
 
-  protected _headersByName: Map<string, string>;
+  protected _headersByName: Map<string, string | undefined>;
 
   constructor({ url, ip, responseHeaders }: RequestParameters) {
     this.url = url || null;
@@ -25,7 +25,7 @@ export class Request {
       ? new Map(
           responseHeaders.map(({ name, value }) => [name.toLowerCase(), value])
         )
-      : new Map();
+      : new Map<string, string>();
   }
 
   get host() {

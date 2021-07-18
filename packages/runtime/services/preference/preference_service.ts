@@ -13,10 +13,10 @@ const defaults = {
   render: 'twemoji' as RenderPreference,
 };
 
-const _prefs: Readonly<DefaultPreferences> = Object.assign(
+const _prefs = Object.assign(
   Object.create(null),
   defaults
-);
+) as Readonly<DefaultPreferences>;
 
 export function getValue<T extends PreferenceKeys>(
   prefName: T

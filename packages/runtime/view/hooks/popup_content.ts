@@ -57,7 +57,7 @@ export function usePopupContent() {
           });
         } // FIXME else throw a "Not Found"
       },
-      (error) => {
+      (error: Error) => {
         debug.error(error);
 
         if (shouldIgnore) {

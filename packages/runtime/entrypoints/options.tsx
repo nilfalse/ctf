@@ -6,4 +6,6 @@ import { OptionsContent } from '../view/components/options_content';
 
 debug.intro();
 
-start(() => render(<OptionsContent />, document.getElementById('react-root')));
+void start(() =>
+  render(<OptionsContent />, document.getElementById('react-root'))
+);

@@ -14,8 +14,8 @@ function createCommandClass<T>() {
       this.arg = arg;
     }
 
-    async execute() {
-      return this.arg;
+    execute() {
+      return Promise.resolve(this.arg);
     }
   };
 }
@@ -73,7 +73,7 @@ describe('App mediator', () => {
       );
       app.subscribe(FakeCommand, spy1);
 
-      const spy2 = jest.fn(async () => done());
+      const spy2 = jest.fn(() => Promise.resolve().then(done));
       app.subscribe(FakeCommand, spy2);
 
       return app.publish(new FakeCommand());

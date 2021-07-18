@@ -1,12 +1,17 @@
 import * as debug from '../../util/debug';
 import * as storageService from '../storage/storage_service';
 
-export function handle(message: any) {
+export interface Message {
+  type: string;
+  payload: unknown;
+}
+
+export function handle(message: Message) {
   switch (message.type) {
     case 'fetchReport':
-      return fetchReport(message.payload);
+      return fetchReport(message.payload as number);
     default:
-      debug.never('Unexpected message type ' + message.type);
+      debug.never(`Unexpected message type "${message.type}"`);
   }
 }
 

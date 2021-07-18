@@ -15,7 +15,7 @@ mediator.subscribe(ActionRefreshCommand, async function ({ tabId }) {
   const report = storageService.reports.fetch(tabId);
 
   const action: ActionRefreshPayload = {
-    popup: 'popup.html?tab=' + tabId,
+    popup: 'popup.html?tab=' + tabId.toString(),
     icon: null,
     title: null,
   };

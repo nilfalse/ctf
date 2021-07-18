@@ -20,7 +20,7 @@ describe('Popup', () => {
     it('should print the debug introduction', () => {
       const debugSpy = jest.spyOn(debug, 'intro');
 
-      const ignored = jest.requireActual('./popup');
+      void jest.requireActual('./popup');
 
       expect(debugSpy).toHaveBeenCalledTimes(1);
       expect(startSpy).toHaveBeenCalledTimes(1);
@@ -33,7 +33,13 @@ describe('Popup', () => {
     harness.browser.i18n();
     harness.browser.storage();
 
-    beforeEach(() => jest.requireActual('../view').start());
+    beforeEach(() =>
+      jest
+        .requireActual<{
+          start: () => Promise<unknown>;
+        }>('../view')
+        .start()
+    );
 
     describe('for a Switzerland-based website', () => {
       harness.xpc.popup(import('../__test__/fixtures/success_ip-ch'));

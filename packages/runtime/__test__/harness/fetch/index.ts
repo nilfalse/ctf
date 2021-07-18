@@ -2,12 +2,14 @@ import { Readable } from 'stream';
 
 export function stream(content: string) {
   const ref = {
-    mock: null as unknown as jest.SpyInstance<unknown, unknown[]>,
-    response: null,
+    mock: null as unknown as jest.SpyInstance<
+      Promise<import('node-fetch').Response>
+    >,
+    response: null as unknown as import('node-fetch').Response,
   };
 
   beforeEach(() => {
-    const fetch = jest.requireActual('node-fetch');
+    const fetch = jest.requireActual<typeof import('node-fetch')>('node-fetch');
 
     const body = Readable.from([Buffer.from(content)]);
     ref.response = new fetch.Response(body);

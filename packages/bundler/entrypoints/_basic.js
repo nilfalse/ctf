@@ -40,7 +40,11 @@ class BasicEntrypoint {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       }),
-      new ForkTsCheckerWebpackPlugin(),
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          configFile: path.resolve(this.bundle.rootPath, 'tsconfig.build.json'),
+        },
+      }),
     ];
 
     return plugins;

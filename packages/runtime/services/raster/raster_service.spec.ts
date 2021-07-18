@@ -62,7 +62,7 @@ describe('Raster service', () => {
           resolve();
         });
 
-        raster.toImageData('http://localhost/', 16);
+        void raster.toImageData('http://localhost/', 16);
       });
     });
 

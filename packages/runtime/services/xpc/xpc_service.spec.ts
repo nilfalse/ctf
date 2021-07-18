@@ -1,5 +1,6 @@
 import * as harness from '../../__test__/harness';
 import { Report } from '../../lib/report';
+import { Repository } from '../../lib/repository';
 import { Request } from '../../lib/request';
 
 import * as xpcBackgroundService from './xpc_background_service';
@@ -8,7 +9,9 @@ import * as xpcPopupService from './xpc_popup_service';
 describe('XPC service', () => {
   describe('Background part', () => {
     describe('fetchReport', () => {
-      const storageService = require('../storage/storage_service');
+      const storageService = require('../storage/storage_service') as {
+        reports: Repository<Report>;
+      };
       const report = new Report(new Request({ url: 'fake' }));
 
       beforeEach(() => {

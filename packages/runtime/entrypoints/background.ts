@@ -3,4 +3,4 @@ import * as debug from '../util/debug';
 
 debug.intro();
 
-controllers.start();
+void controllers.start();

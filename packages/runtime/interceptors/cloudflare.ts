@@ -28,6 +28,7 @@ export interface CloudflareMatch extends Match {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export async function dispatch(
   request: Request
 ): Promise<ReadonlyArray<CloudflareMatch>> {

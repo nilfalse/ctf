@@ -8,6 +8,7 @@ export interface IPMatch extends Match {
   extra: { registeredCountry: string } | null;
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export async function dispatch({
   ip,
 }: Request): Promise<ReadonlyArray<IPMatch>> {

@@ -7,7 +7,12 @@ export function heuristics(
     rewire$heuristics,
     restore,
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-  } = require('../../../interceptors/heuristics');
+  } = require<{
+    rewire$heuristics: (
+      mocks: ReadonlyArray<{ dispatch: unknown }>
+    ) => Promise<void>;
+    restore: () => Promise<void>;
+  }>('../../../interceptors/heuristics');
 
   beforeEach(() =>
     rewire$heuristics(
