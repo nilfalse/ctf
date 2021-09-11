@@ -8756,9 +8756,9 @@ mini-css-extract-plugin@0.11.3:
     webpack-sources "^1.1.0"
 
 mini-css-extract-plugin@^2.2.0:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.2.2.tgz#df22f16bf43173050c6d652fa7d035318c310e04"
-  integrity sha512-eUjQ/q1rQIeHWgIx7ny/DNgXHcMXHdBwgrZQK7Ev8dbR+HxhroFM2Cb6kMiswOYaq05IRJhPuQqXWUABIjjA3g==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.3.0.tgz#87515f185533752944d753ac7216fc876779dafe"
+  integrity sha512-uzWaOwC+gJrnKbr23J1ZRWx/Wd9W9Ce1mKPlsBGBV/r8zG7/G7oKMxGmxbI65pVGbae2cR7CUx9Ulk0HQt8BfQ==
   dependencies:
     schema-utils "^3.1.0"
 
@@ -13221,10 +13221,10 @@ webpack-manifest-plugin@2.2.0:
     object.entries "^1.1.0"
     tapable "^1.0.0"
 
-webpack-manifest-plugin@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/webpack-manifest-plugin/-/webpack-manifest-plugin-3.2.0.tgz#28290be3005f27867b2c7d8c52c01d0c7876033d"
-  integrity sha512-68b94EUjHrvUy+um+lmkIKHyfsFkJFDr+7s/GqLIhTSB6i9QzprQph8XOYnJU7ANqTyYr5g5Ng/DrAH0g3wjog==
+webpack-manifest-plugin@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/webpack-manifest-plugin/-/webpack-manifest-plugin-4.0.2.tgz#a7ee46219a6c820a5cdae0f7ddb7cb04837448fb"
+  integrity sha512-Ld6j05pRblXAVoX8xdXFDsc/s97cFnR1FOmQawhTSlp6F6aeU1Jia5aqTmDpkueaAz8g9sXpgSOqmEgVAR61Xw==
   dependencies:
     tapable "^2.0.0"
     webpack-sources "^2.2.0"
