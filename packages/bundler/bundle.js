@@ -8,6 +8,8 @@ class Bundle {
     this.rootPath = path.resolve(__dirname, '..', '..');
     this.runtimePath = path.resolve(this.rootPath, 'packages', 'runtime');
     this.pkg = require(path.resolve(this.rootPath, 'package.json'));
+
+    this._devPort = null;
   }
 
   get path() {
@@ -27,13 +29,21 @@ class Bundle {
   }
 
   get devServer() {
+    if (!this._devPort) {
+      this._devPort = getRandomInt(10001, 65535);
+    }
+
     if (this.isDevelopment) {
       return {
-        contentBase: this.path,
-        port: getRandomInt(10001, 65535),
+        static: {
+          directory: this.path,
+        },
+        port: this._devPort,
         hot: this.isDevelopment,
-        writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
-        disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
+        devMiddleware: {
+          writeToDisk: true, // https://github.com/webpack/webpack-dev-server/issues/62#issuecomment-488549135
+        },
+        allowedHosts: 'all', // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449845801
       };
     } else {
       return null;

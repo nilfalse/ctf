@@ -23,11 +23,13 @@ class BasicEntrypoint {
         output: {
           chunkFilename: '[name].chunk.js',
           path: this.bundle.path,
-          hotUpdateChunkFilename: 'hot/chunk~[id]~[hash].js',
-          hotUpdateMainFilename: 'hot/main_[runtime]_[hash].json',
+          hotUpdateChunkFilename: 'hot/chunk~[id]~[chunkhash].js',
+          hotUpdateMainFilename: 'hot/main_[runtime]_[fullhash].json',
         },
         optimization: {
-          runtimeChunk: true,
+          runtimeChunk: {
+            name: (entrypoint) => `${entrypoint.name}.runtime`,
+          },
         },
       },
       this.configuration,
