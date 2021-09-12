@@ -3,6 +3,7 @@ import * as debug from '../util/debug';
 import * as view from '../view';
 import { CloudflareTrace } from '../view/components/traceroute/cloudflare';
 import { CloudFrontTrace } from '../view/components/traceroute/cloudfront';
+import { FastlyTrace } from '../view/components/traceroute/fastly';
 import { IPTrace } from '../view/components/traceroute/ip';
 
 describe('Popup', () => {
@@ -133,6 +134,26 @@ describe('Popup', () => {
         expect(cloudfrontTrace.text()).toContain('Germany');
         expect(cloudfrontTrace.text()).toContain('FRA');
         expect(cloudfrontTrace).toMatchSnapshot();
+      });
+    });
+
+    describe('for a Fastly-accelerated website', () => {
+      harness.xpc.popup(import('../__test__/fixtures/success_fastly-cph'));
+      const ref = harness.popup.render();
+
+      it('should render country info for Fastly node IP', () => {
+        const iptrace = ref.popup.find(IPTrace);
+
+        expect(iptrace.text()).toContain('United States of America');
+        expect(iptrace.children()).toMatchSnapshot();
+      });
+
+      it('should show Fastly POP abbreviation', () => {
+        const fastlyTrace = ref.popup.find(FastlyTrace).children();
+
+        expect(fastlyTrace.text()).toContain('Denmark');
+        expect(fastlyTrace.text()).toContain('CPH');
+        expect(fastlyTrace).toMatchSnapshot();
       });
     });
   });

@@ -8,6 +8,7 @@ import { Paragraph } from '../typography';
 
 import { CloudflareTrace } from './cloudflare';
 import { CloudFrontTrace } from './cloudfront';
+import { FastlyTrace } from './fastly';
 import { IPTrace } from './ip';
 
 import './index.css';
@@ -16,6 +17,7 @@ const traces = {
   ip: IPTrace,
   cloudflare: CloudflareTrace,
   cloudfront: CloudFrontTrace,
+  fastly: FastlyTrace,
 };
 
 interface TracerouteProps {

@@ -23,7 +23,7 @@ class BasicEntrypoint {
         output: {
           chunkFilename: '[name].chunk.js',
           path: this.bundle.path,
-          hotUpdateChunkFilename: 'hot/chunk~[id]~[chunkhash].js',
+          hotUpdateChunkFilename: 'hot/chunk~[id]~[fullhash].js',
           hotUpdateMainFilename: 'hot/main_[runtime]_[fullhash].json',
         },
         optimization: {

@@ -451,6 +451,224 @@ exports[`Popup when rendering for a Cloudflare-protected website should show Clo
 </div>
 `;
 
+exports[`Popup when rendering for a Fastly-accelerated website should render country info for Fastly node IP 1`] = `
+<div
+  className="ip-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      You connected to IP 
+      <strong>
+        151.101.1.195
+      </strong>
+       
+      <Component
+        href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=151.101.1.195"
+        size="xs"
+        target="_blank"
+        variant="light"
+      >
+        <a
+          className="typography typography_light typography_xs link"
+          href="https://apps.db.ripe.net/db-web-ui/query?source=GRS&bflag=true&searchtext=151.101.1.195"
+          target="_blank"
+        >
+          lookup
+        </a>
+      </Component>
+    </p>
+  </Component>
+  <CountryInfo
+    match={
+      Object {
+        "continent": "NA",
+        "extra": Object {
+          "registeredCountry": "US",
+        },
+        "heuristic": "ip",
+        "isoCountry": "US",
+        "isoRegion": null,
+        "score": 0.5,
+      }
+    }
+  >
+    <div
+      className="traceroute__nested"
+    >
+      <CountryItem
+        countryCode="US"
+      >
+        <Component
+          className="country-item country-item_twemoji country-item_with-flag"
+          data-flag="🇺🇸"
+          size="xs"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/us.svg') no-repeat",
+            }
+          }
+        >
+          <p
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
+            data-flag="🇺🇸"
+            style={
+              Object {
+                "background": "url('/assets/twemoji/us.svg') no-repeat",
+              }
+            }
+          >
+            Country:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+      <CountryItem
+        countryCode="US"
+        shouldRenderFlag={false}
+      >
+        <Component
+          className="country-item country-item_twemoji country-item_with-flag"
+          size="xs"
+        >
+          <p
+            className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
+          >
+            Legal registration:
+            <br />
+            <strong>
+              United States of America
+            </strong>
+          </p>
+        </Component>
+      </CountryItem>
+    </div>
+  </CountryInfo>
+  <ServerInfo
+    request={
+      Object {
+        "headers": Array [
+          Object {
+            "name": "x-served-by",
+            "value": "cache-cph20643-CPH",
+          },
+          Object {
+            "name": "x-cache",
+            "value": "MISS",
+          },
+          Object {
+            "name": "x-cache-hits",
+            "value": "0",
+          },
+          Object {
+            "name": "x-fastly-request-id",
+            "value": "d252eca9b9d3a9449ecff9e552be6dd9f561a360",
+          },
+        ],
+        "ip": "151.101.1.195",
+        "url": "https://example.com/",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Popup when rendering for a Fastly-accelerated website should show Fastly POP abbreviation 1`] = `
+<div
+  className="fastly-trace"
+>
+  <Component
+    size="s"
+  >
+    <p
+      className="typography typography_s"
+    >
+      Fastly rerouted through
+    </p>
+  </Component>
+  <div
+    className="traceroute__nested"
+  >
+    <CountryItem
+      countryCode="DK"
+    >
+      <Component
+        className="country-item country-item_twemoji country-item_with-flag"
+        data-flag="🇩🇰"
+        size="xs"
+        style={
+          Object {
+            "background": "url('/assets/twemoji/dk.svg') no-repeat",
+          }
+        }
+      >
+        <p
+          className="typography typography_xs country-item country-item_twemoji country-item_with-flag"
+          data-flag="🇩🇰"
+          style={
+            Object {
+              "background": "url('/assets/twemoji/dk.svg') no-repeat",
+            }
+          }
+        >
+          <strong>
+            CPH
+          </strong>
+           data center in
+          <br />
+          <strong>
+            Denmark
+          </strong>
+        </p>
+      </Component>
+    </CountryItem>
+    <Component
+      size="xs"
+      variant="light"
+    >
+      <p
+        className="typography typography_light typography_xs"
+      >
+        Cache Status was 
+        <Component
+          variant="mono"
+        >
+          <span
+            className="typography typography_mono"
+          >
+            HIT
+          </span>
+        </Component>
+         (
+        <Component
+          href="https://developer.fastly.com/learning/concepts/shielding/#debugging"
+          size="xs"
+          target="_blank"
+          title="What does \\"Cache status\\" mean?"
+          variant="light"
+        >
+          <a
+            className="typography typography_light typography_xs link"
+            href="https://developer.fastly.com/learning/concepts/shielding/#debugging"
+            target="_blank"
+            title="What does \\"Cache status\\" mean?"
+          >
+            ?
+          </a>
+        </Component>
+        )
+      </p>
+    </Component>
+  </div>
+</div>
+`;
+
 exports[`Popup when rendering for a Netherlands-based website with legal entity in the US should render IP country info 1`] = `
 <div
   className="ip-trace"
