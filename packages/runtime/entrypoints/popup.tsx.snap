@@ -642,7 +642,7 @@ exports[`Popup when rendering for a Fastly-accelerated website should show Fastl
           <span
             className="typography typography_mono"
           >
-            HIT
+            MISS
           </span>
         </Component>
          (
