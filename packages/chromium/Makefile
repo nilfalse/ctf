@@ -7,7 +7,7 @@ build :
 
 chromium.zip : build
 	- rm $@
-	zip --recurse-paths $@ bundle
+	cd bundle && zip --recurse-paths ../$@ .
 
 .PHONY : clean pristine
 clean :

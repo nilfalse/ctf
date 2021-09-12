@@ -7,7 +7,7 @@ build : bundle
 
 firefox.zip : bundle bundle/manifest.json
 	- rm $@
-	zip --recurse-paths $@ bundle
+	cd bundle && zip --recurse-paths ../$@ .
 
 bundle : bundle/data/airports.json bundle/data/GeoLite2-Country.mmdb bundle/assets
 bundle/manifest.json :
