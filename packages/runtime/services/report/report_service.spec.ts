@@ -45,8 +45,9 @@ describe('Report service', () => {
       });
 
       expect(report).toHaveProperty('flag', {
-        code: 'DK',
         emoji: '🇩🇰',
+        image:
+          'https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/DK.svg',
         name: 'Denmark',
         unicode: 'U+1F1E9 U+1F1F0',
       });

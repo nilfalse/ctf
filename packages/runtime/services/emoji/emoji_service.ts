@@ -3,7 +3,7 @@ import * as debug from '../../util/debug';
 
 const flagsByCode = Object.create(
   null
-) as typeof import('country-flag-emoji-json/json/flag-emojis-by-code.json');
+) as typeof import('country-flag-emoji-json/dist/by-code.json');
 
 let ready = false;
 
@@ -39,13 +39,13 @@ export const twemoji = {
 };
 
 export let init = function () {
-  const promise = import(
-    'country-flag-emoji-json/json/flag-emojis-by-code.json'
-  ).then((flags) => {
-    ready = true;
+  const promise = import('country-flag-emoji-json/dist/by-code.json').then(
+    (flags) => {
+      ready = true;
 
-    return Object.assign(flagsByCode, flags.default);
-  });
+      return Object.assign(flagsByCode, flags.default);
+    }
+  );
 
   init = () => promise;
   return promise;

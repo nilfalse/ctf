@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as https from 'https';
 import * as path from 'path';
 
-import flags from 'country-flag-emoji-json/json/flag-emojis-by-code.json';
+import flags from 'country-flag-emoji-json/dist/by-code.json';
 import fetch from 'node-fetch';
 
 export function main(binPath, twemojiRoot) {
@@ -24,7 +24,9 @@ class Twemoji {
   }
 
   get flags() {
-    return Object.values(flags).map((flag) => new TwemojiFlag(flag));
+    return Object.entries(flags).map(
+      ([code, flag]) => new TwemojiFlag(code, flag)
+    );
   }
 
   download() {
@@ -55,7 +57,7 @@ class Twemoji {
 }
 
 class TwemojiFlag {
-  constructor({ unicode, code }) {
+  constructor(code, { unicode }) {
     this.unicode = unicode;
 
     this.countryCode = code.toLowerCase();

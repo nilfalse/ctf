@@ -7,7 +7,7 @@ import { main } from './twemoji.js';
 
 jest.mock('fs');
 
-const COUNTRY_COUNT = 258;
+const COUNTRY_COUNT = 261;
 
 describe('Twemoji Script', () => {
   const fetch = harness.fetch.stream('SVG CONTENT');
@@ -30,8 +30,8 @@ describe('Twemoji Script', () => {
   });
 
   describe('when downloading', () => {
-    it('should fetch each country', async () => {
-      await expect(
+    it('should fetch each country', () => {
+      return expect(
         main(
           '/home/fake/root/bin',
           '/home/fake/root/packages/bundle/content/assets/twemoji'
