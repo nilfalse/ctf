@@ -47,9 +47,6 @@ export const FeaturesSection: FC<FeaturesSectionProps> = ({ className }) => {
             className="features-section__network"
           />
         </div>
-        <p className="features-section__text features-section__text_insignificant">
-          * support for Fastly coming soon
-        </p>
 
         <h2 className="features-section__headline">Open Source to the bone</h2>
         <div className="features-section__oss">
