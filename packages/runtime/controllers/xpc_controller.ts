@@ -7,7 +7,8 @@ import * as mediator from '../util/mediator';
 mediator.subscribe(BootCommand, function () {
   browser.runtime.onMessage.addListener(
     module.hot
-      ? (payload, sender) => handleIncomingMessage(payload, sender)
+      ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        (payload, sender) => handleIncomingMessage(payload, sender)
       : handleIncomingMessage
   );
 });

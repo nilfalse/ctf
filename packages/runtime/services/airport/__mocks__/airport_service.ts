@@ -1,5 +1,4 @@
 const originalModule = jest.requireActual<{
-  // eslint-disable-next-line camelcase
   rewire$_load: (loader: () => Promise<unknown>) => void;
 }>('../airport_service');
 
