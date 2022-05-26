@@ -23,8 +23,8 @@
     "webextension-polyfill": "^0.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.7",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@types/enzyme": "^3.10.12",
