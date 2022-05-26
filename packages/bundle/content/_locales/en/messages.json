@@ -117,13 +117,13 @@
     "message": "Cocos (Keeling) Islands"
   },
   "country_name_CD": {
-    "message": "Congo"
+    "message": "Democratic Republic of the Congo"
   },
   "country_name_CF": {
     "message": "Central African Republic"
   },
   "country_name_CG": {
-    "message": "Congo"
+    "message": "Republic of the Congo"
   },
   "country_name_CH": {
     "message": "Switzerland"
@@ -141,7 +141,7 @@
     "message": "Cameroon"
   },
   "country_name_CN": {
-    "message": "China"
+    "message": "People's Republic of China"
   },
   "country_name_CO": {
     "message": "Colombia"
@@ -252,7 +252,7 @@
     "message": "Greenland"
   },
   "country_name_GM": {
-    "message": "Gambia"
+    "message": "Republic of The Gambia"
   },
   "country_name_GN": {
     "message": "Guinea"
@@ -321,7 +321,7 @@
     "message": "Iraq"
   },
   "country_name_IR": {
-    "message": "Iran"
+    "message": "Islamic Republic of Iran"
   },
   "country_name_IS": {
     "message": "Iceland"
@@ -429,7 +429,7 @@
     "message": "Marshall Islands"
   },
   "country_name_MK": {
-    "message": "North Macedonia"
+    "message": "The Republic of North Macedonia"
   },
   "country_name_ML": {
     "message": "Mali"
@@ -684,7 +684,7 @@
     "message": "Taiwan, Province of China"
   },
   "country_name_TZ": {
-    "message": "Tanzania"
+    "message": "United Republic of Tanzania"
   },
   "country_name_UA": {
     "message": "Ukraine"
