@@ -44,7 +44,7 @@
     "bundlewatch": "^0.3.3",
     "chrome-types": "^0.1.286",
     "css-loader": "^6.7.1",
-    "css-minimizer-webpack-plugin": "^4.0.0",
+    "css-minimizer-webpack-plugin": "^8.0.0",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "eslint": "^8.13.0",
