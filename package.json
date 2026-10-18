@@ -1,0 +1,39 @@
+{
+  "name": "ctf",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fmt": "prettier --write ."
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "prettier": "^3.9.10"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=26",
+      "onFail": "error"
+    }
+  },
+  "keywords": [],
+  "author": "nilfalse",
+  "homepage": "https://nilfalse.com/addons/ctf",
+  "license": "MPL-2.0",
+  "prettier": {
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "<BUILTIN_MODULES>",
+      "<THIRD_PARTY_MODULES>",
+      "^~(?!.*\\.css(?:\\?.*)?$)(.+)$",
+      "^(?:\\.{1,2}/)(?!\\+)(?!.*\\.css(?:\\?.*)?$).*",
+      "^\\./\\+.*$",
+      "\\.css(?:\\?.*)?$"
+    ],
+    "importOrderSeparation": true,
+    "singleQuote": true
+  }
+}
