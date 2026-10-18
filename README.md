@@ -27,6 +27,11 @@ npm run build    # one-off production build into dist/
 npm run fmt      # format with Prettier
 ```
 
+### Loading the extension
+
+- **Chromium:** open `chrome://extensions`, enable _Developer mode_, click _Load unpacked_ and select `dist/`.
+- **Firefox:** open `about:debugging#/runtime/this-firefox`, click _Load Temporary Add-on…_ and select `dist/manifest.json`.
+
 ## 👨‍💻 Author
 
 [nilfalse](https://nilfalse.com)

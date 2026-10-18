@@ -18,8 +18,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "paths": {
+      "~/*": ["../*"]
+    }
   },
+  "files": ["types.moz.d.ts"],
   "include": ["../**/*"],
-  "exclude": ["../vite.config.ts", "../build/"]
+  "exclude": [
+    "../vite.config.ts",
+    "plugins/",
+    "types.chromium.d.ts",
+    "../webext"
+  ]
 }

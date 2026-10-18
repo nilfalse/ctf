@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 27.5 640 640">
+  <style>
+    /*
+     * Colors match Firefox's own toolbar icons: --toolbarbutton-icon-fill is
+     * light-dark(--color-gray-70, --color-gray-0), i.e. #5b5b66 / #fbfbfe.
+     * https://searchfox.org/mozilla-central/source/toolkit/themes/shared/design-system/dist/tokens-shared.css
+     * Browser UI variables are not reachable from an SVG image, so they are
+     * hardcoded here.
+     */
+    :root { color-scheme: light dark; }
+    path { fill: light-dark(#5b5b66, #fbfbfe); }
+  </style>
+  <path d="M560 300V116H120l172 524L72 300 0 55h640v306H308l-26-61 278 1v-1z"/>
+</svg>
