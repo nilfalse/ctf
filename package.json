@@ -4,11 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "vite --configLoader native build --watch",
+    "build": "vite build --configLoader native",
     "fmt": "prettier --write ."
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "prettier": "^3.9.10"
+    "@types/node": "^26",
+    "prettier": "^3.9.10",
+    "typescript": "^7",
+    "vite": "^8.3.4"
   },
   "devEngines": {
     "runtime": {
