@@ -5,13 +5,14 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 ## Code
 
 - `lib/q.ts`: per-tab promise queue.
+- `lib/airports.ts`: IATA code to country, downloaded from ctf.pages.dev into `storage.local` on install.
 
 ## Conventions
 
 - **Features, never browsers.** Flags are `FEATURE_*`, named after a capability. The `-moz.ts`, `-chromium.ts` and `*.moz.ts` filenames only decide which tsconfig (`build/tsconfig.{moz,chromium}.json`) type-checks a file. Runtime and build branching is by feature and gets dead-code eliminated. Mention browser names only as evidence.
 - **Thin platform layer:** everything that touches `browser.*` lives in `webext/`. `lib/` holds logic and imports `webext/` only for I/O. `browser` is the global from `build/types.*.d.ts`.
 - **Small, independent modules.** No defensive layers without a concrete failure they prevent.
-- **Code style:** Node ≥ 26, TypeScript 7 (`erasableSyntaxOnly`, so no enums or parameter properties), `~/` path alias, Prettier with single quotes and sorted imports (`npm run fmt`). Tests use the Vitest `test.extend` fixture style with Arrange/Act/Assert comments (see `lib/q.spec.ts`).
+- **Code style:** Node ≥ 26, TypeScript 7 (`erasableSyntaxOnly`, so no enums or parameter properties), `~/` path alias, Prettier with single quotes and sorted imports (`npm run fmt`). Build-time helper: `with { type: 'macro' }` (unplugin-macros). Tests use the Vitest `test.extend` fixture style with Arrange/Act/Assert comments (see `lib/q.spec.ts`).
 
 ## Permissions
 

@@ -28,6 +28,14 @@ npm run fmt      # format with Prettier
 npm test         # run unit tests with Vitest
 ```
 
+### Environment variables
+
+Read at build time by `npm start` / `npm run build`:
+
+| Variable | Default                  | Effect                                            |
+| -------- | ------------------------ | ------------------------------------------------- |
+| `CDN`    | `https://ctf.pages.dev/` | Base URL of the datasets; keep the trailing slash |
+
 ### Loading the extension
 
 - **Chromium:** open `chrome://extensions`, enable _Developer mode_, click _Load unpacked_ and select `dist/`.

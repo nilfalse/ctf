@@ -13,9 +13,11 @@
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^26",
     "@types/webextension-polyfill": "^0.12.6",
+    "@webext-core/fake-browser": "^2.0.1",
     "chrome-types": "^0.1.457",
     "prettier": "^3.9.10",
     "typescript": "^7",
+    "unplugin-macros": "^0.23.3",
     "vite": "^8.3.4",
     "vitest": "^5.0.5"
   },
