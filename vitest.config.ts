@@ -6,6 +6,7 @@ export default defineConfig({
     include: ['**/*.spec.ts'],
     setupFiles: ['@webext-core/fake-browser/auto'],
     restoreMocks: true,
+    mockReset: true,
     unstubGlobals: true,
     env: { CDN: 'https://cdn.test/base/' },
   },

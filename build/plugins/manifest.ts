@@ -59,7 +59,8 @@ export default function (opts: Options): Plugin {
           preferred_environment: ['service_worker'],
         },
 
-        permissions: ['storage'],
+        permissions: ['webRequest', 'storage'],
+        host_permissions: ['*://*/*'],
 
         author: pkg.author,
         browser_specific_settings: {

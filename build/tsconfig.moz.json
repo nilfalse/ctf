@@ -23,5 +23,5 @@
   },
   "files": ["types.moz.d.ts"],
   "include": ["../webext"],
-  "exclude": ["../webext/*chromium.ts"]
+  "exclude": ["../**/*chromium.ts"]
 }

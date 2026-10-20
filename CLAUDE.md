@@ -6,6 +6,7 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 
 - `lib/q.ts`: per-tab promise queue.
 - `lib/airports.ts`: IATA code to country, downloaded from ctf.pages.dev into `storage.local` on install.
+- `lib/clouds/`: CDN hops (cloud, POP, country) inferred from response headers. Cloudflare only so far.
 
 ## Conventions
 
