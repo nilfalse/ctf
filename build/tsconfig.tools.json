@@ -19,5 +19,10 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["../vite.config.ts", "plugins/"]
+  "include": [
+    "../vite.config.ts",
+    "../vitest.config.ts",
+    "plugins/",
+    "../**/*.spec.ts"
+  ]
 }

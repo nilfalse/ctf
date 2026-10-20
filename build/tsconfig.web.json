@@ -30,6 +30,7 @@
     "../vite.config.ts",
     "plugins/",
     "types.chromium.d.ts",
+    "../**/*.spec.ts",
     "../webext"
   ]
 }

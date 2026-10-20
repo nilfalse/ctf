@@ -25,6 +25,7 @@ npm i
 npm start        # build in watch mode into dist/
 npm run build    # one-off production build into dist/
 npm run fmt      # format with Prettier
+npm test         # run unit tests with Vitest
 ```
 
 ### Loading the extension
