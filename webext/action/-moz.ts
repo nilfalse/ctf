@@ -9,3 +9,7 @@ export /* @inline */ function setIcon(tabId: number, icon: Path | IconData) {
     imageData: (icon as IconData).imageData as PageAction.ImageDataType,
   });
 }
+
+export /* @inline */ function setPopup(tabId: number, popup: string) {
+  return browser.pageAction!.setPopup({ tabId, popup });
+}

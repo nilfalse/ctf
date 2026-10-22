@@ -7,6 +7,8 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 - `lib/q.ts`: per-tab promise queue.
 - `lib/airports.ts`: IATA code to country, downloaded from ctf.pages.dev into `storage.local` on install.
 - `lib/clouds/`: CDN hops (cloud, POP, country) inferred from response headers. Cloudflare only so far.
+- `lib/country.ts`: country names (from `_locales`) and flag emoji.
+- `popup/`: `Popup.tsx` is a pure view, prerendered to `popup.html` at build time; `popup.runtime.tsx` hydrates it and reads the report from the search params that the background puts in the popup URL (`lib/itinerary/codec.ts`).
 
 ## Conventions
 
@@ -14,6 +16,7 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 - **Thin platform layer:** everything that touches `browser.*` lives in `webext/`. `lib/` holds logic and imports `webext/` only for I/O. `browser` is the global from `build/types.*.d.ts`.
 - **Small, independent modules.** No defensive layers without a concrete failure they prevent.
 - **Code style:** Node ≥ 26, TypeScript 7 (`erasableSyntaxOnly`, so no enums or parameter properties), `~/` path alias, Prettier with single quotes and sorted imports (`npm run fmt`). Build-time helper: `with { type: 'macro' }` (unplugin-macros). Tests use the Vitest `test.extend` fixture style with Arrange/Act/Assert comments (see `lib/q.spec.ts`).
+- **One-liner tests:** a test that is a single `expect(…)` call is written as that one call, without Arrange/Act/Assert, and in `*.spec.ts` files any arrow function with a single statement as its body drops its `{ }` (see `lib/itinerary/itinerary.spec.ts`).
 
 ## Permissions
 

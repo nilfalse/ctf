@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+
 import type { Plugin } from 'vite';
 import type Moz from 'webextension-polyfill';
 
@@ -7,11 +9,16 @@ import { getChunk } from './_util.ts';
 interface Options {
   backgroundScript?: string;
   backgroundWorker?: string;
+  popup: string;
 }
 
 export default function (opts: Options): Plugin {
   return {
     name: 'manifest',
+
+    applyToEnvironment(environment) {
+      return environment.name === 'client';
+    },
 
     generateBundle(_options, bundle) {
       const backgroundScript =
@@ -20,6 +27,8 @@ export default function (opts: Options): Plugin {
       const backgroundWorker =
         opts.backgroundWorker &&
         getChunk(bundle, opts.backgroundWorker).fileName;
+      const popup = bundle[opts.popup];
+      assert(popup, `Cannot find "${opts.popup}" in the final bundle`);
 
       const { GITHUB_SHA } = process.env;
 
@@ -46,10 +55,12 @@ export default function (opts: Options): Plugin {
 
         page_action: {
           default_icon: 'icons/page_action.svg',
+          default_popup: popup.fileName,
           show_matches: ['<all_urls>'],
         },
         action: {
           default_icon: icons,
+          default_popup: popup.fileName,
         },
 
         background: {

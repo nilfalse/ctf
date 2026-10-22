@@ -5,6 +5,7 @@
     "lib": ["ES2025", "DOM"],
     "module": "esnext",
     "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -13,6 +14,7 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "jsx": "react-jsx",
 
     /* Linting */
     "noUnusedLocals": true,
@@ -30,6 +32,7 @@
     "../vite.config.ts",
     "plugins/",
     "types.chromium.d.ts",
+    "../**/*.prerender.tsx",
     "../webext"
   ]
 }

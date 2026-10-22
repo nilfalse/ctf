@@ -22,10 +22,11 @@ Requires Node.js **26 or newer**.
 
 ```sh
 npm i
+npm test         # run unit tests with Vitest
 npm start        # build in watch mode into dist/
 npm run build    # one-off production build into dist/
 npm run fmt      # format with Prettier
-npm test         # run unit tests with Vitest
+npm run popup    # watch popup UI in the browser via Vite dev server
 ```
 
 ### Environment variables

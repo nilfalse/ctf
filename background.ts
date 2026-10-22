@@ -1,9 +1,8 @@
 import * as airports from '~/lib/airports.ts';
-import * as clouds from '~/lib/clouds/index.ts';
+import * as history from '~/lib/history.ts';
+import * as itinerary from '~/lib/itinerary/index.ts';
 import * as q from '~/lib/q.ts';
 import * as action from '~/webext/action/index.ts';
-import * as dns from '~/webext/dns.moz.ts';
-import * as mem from '~/webext/mem.ts';
 import * as net from '~/webext/net.ts';
 import * as runtime from '~/webext/runtime.ts';
 import * as tabs from '~/webext/tabs.ts';
@@ -12,13 +11,10 @@ net.listen(function (response) {
   console.log(`Tab#${response.tabId}: HTTP`, response);
 
   q.enqueue(response.tabId, async function () {
-    if (typeof browser.dns === 'object' && !response.ip) {
-      const { hostname } = new URL(response.url);
-      response.ip = await dns.resolve(hostname);
-      console.log(`Tab#${response.tabId}: IP`, response.ip);
-    }
+    const url = new URL(response.url);
 
-    await mem.write(`r:${response.tabId}`, response);
+    const it = await itinerary.of(url, response);
+    await history.remember(`r:${response.tabId}`, url.origin, it);
   });
 });
 
@@ -26,13 +22,17 @@ tabs.onLoading(function (tabId, url) {
   console.log(`Tab#${tabId}: loading`, url);
 
   q.conflate(tabId, async function () {
-    const response = await mem.read<net.Payload>(`r:${tabId}`);
+    const { origin } = new URL(url);
 
-    const hops = await clouds.infer(response?.responseHeaders);
-    console.log(`Tab#${tabId}: hops`, hops);
+    const it = await history.retain(`r:${tabId}`, origin);
+    if (!it) {
+      return;
+    }
 
-    const country = hops.find((hop) => hop.country)?.country;
-    if (!country || country === 'ZZ') {
+    await action.setPopup(tabId, `/popup.html?${itinerary.toSearchParams(it)}`);
+
+    const country = it.hops.find((hop) => hop.country !== 'ZZ')?.country;
+    if (!country) {
       return;
     }
 
@@ -44,7 +44,7 @@ tabs.onLoading(function (tabId, url) {
 
 tabs.onClosed(function (tabId) {
   console.log(`Tab#${tabId}: closed`);
-  q.enqueue(tabId, () => mem.erase(`r:${tabId}`));
+  q.enqueue(tabId, () => history.forget(`r:${tabId}`));
   q.unqueue(tabId);
 });
 

@@ -4,23 +4,31 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "vitest",
     "start": "vite --configLoader native build --watch",
     "build": "vite build --configLoader native",
     "fmt": "prettier --write .",
-    "test": "vitest"
+    "popup": "vite dev --open popup.html"
+  },
+  "dependencies": {
+    "react": "^19",
+    "react-dom": "^19"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^26",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@types/webextension-polyfill": "^0.12.6",
+    "@vitejs/plugin-react": "^6.1.2",
     "@webext-core/fake-browser": "^2.0.1",
-    "chrome-types": "^0.1.457",
+    "chrome-types": "^0.1.458",
     "http-z": "^8.1.1",
     "outdent": "^0.8.0",
     "prettier": "^3.9.10",
     "typescript": "^7",
     "unplugin-macros": "^0.23.3",
-    "vite": "^8.3.4",
+    "vite": "^8.3.5",
     "vitest": "^5.0.5"
   },
   "devEngines": {

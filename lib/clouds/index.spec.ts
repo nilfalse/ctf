@@ -3,6 +3,7 @@ import { outdent } from 'outdent';
 import { expect, it, vi } from 'vitest';
 
 import * as airports from '~/lib/airports.ts';
+import { toHeaderMap } from '~/lib/http.ts';
 
 import * as clouds from './index.ts';
 
@@ -23,7 +24,7 @@ it('should infer the Cloudflare POP and its cache status', async () => {
   vi.mocked(airports.locate).mockResolvedValue({ KBP: 'UA' });
 
   // Act
-  const hops = await clouds.infer(headers);
+  const hops = await clouds.infer(toHeaderMap(headers));
 
   // Assert
   expect(hops).toEqual([
@@ -43,7 +44,7 @@ it('should infer no cache status when Cloudflare reports none', async () => {
   vi.mocked(airports.locate).mockResolvedValue({ CPH: 'DK' });
 
   // Act
-  const hops = await clouds.infer(headers);
+  const hops = await clouds.infer(toHeaderMap(headers));
 
   // Assert
   expect(hops).toEqual([
@@ -64,7 +65,7 @@ it('should infer a hop per cf-ray in order', async () => {
   vi.mocked(airports.locate).mockResolvedValue({ KBP: 'UA', CPH: 'DK' });
 
   // Act
-  const hops = await clouds.infer(headers);
+  const hops = await clouds.infer(toHeaderMap(headers));
 
   // Assert
   expect(airports.locate).toHaveBeenCalledExactlyOnceWith(['KBP', 'CPH']);
@@ -85,7 +86,7 @@ it('should fall back to ZZ for an unknown POP', async () => {
   vi.mocked(airports.locate).mockResolvedValue({});
 
   // Act
-  const hops = await clouds.infer(headers);
+  const hops = await clouds.infer(toHeaderMap(headers));
 
   // Assert
   expect(hops).toEqual([

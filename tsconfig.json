@@ -3,6 +3,7 @@
   "references": [
     { "path": "./build/tsconfig.web.json" },
     { "path": "./build/tsconfig.tools.json" },
+    { "path": "./build/tsconfig.prerender.json" },
     { "path": "./build/tsconfig.moz.json" },
     { "path": "./build/tsconfig.chromium.json" }
   ]
