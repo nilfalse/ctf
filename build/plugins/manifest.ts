@@ -30,7 +30,12 @@ export default function (opts: Options): Plugin {
       const popup = bundle[opts.popup];
       assert(popup, `Cannot find "${opts.popup}" in the final bundle`);
 
-      const { GITHUB_SHA } = process.env;
+      const { GITHUB_SHA, FEATURE_PAGE_ACTION, FEATURE_DNS } = process.env;
+
+      const permissions: Moz.Manifest.Permission[] = ['webRequest', 'storage'];
+      if (FEATURE_DNS === '1') {
+        permissions.push('dns');
+      }
 
       const icons = {
         32: 'icons/logo_32px.png',
@@ -53,15 +58,22 @@ export default function (opts: Options): Plugin {
         description: '__MSG_EXT_DESCRIPTION__',
         icons,
 
-        page_action: {
-          default_icon: 'icons/page_action.svg',
-          default_popup: popup.fileName,
-          show_matches: ['<all_urls>'],
-        },
-        action: {
-          default_icon: icons,
-          default_popup: popup.fileName,
-        },
+        // When FEATURE_PAGE_ACTION is unset both keys are emitted.
+        page_action:
+          FEATURE_PAGE_ACTION === '0'
+            ? undefined
+            : {
+                default_icon: 'icons/page_action.svg',
+                default_popup: popup.fileName,
+                show_matches: ['<all_urls>'],
+              },
+        action:
+          FEATURE_PAGE_ACTION === '1'
+            ? undefined
+            : {
+                default_icon: icons,
+                default_popup: popup.fileName,
+              },
 
         background: {
           type: 'module',
@@ -70,7 +82,7 @@ export default function (opts: Options): Plugin {
           preferred_environment: ['service_worker'],
         },
 
-        permissions: ['webRequest', 'storage'],
+        permissions,
         host_permissions: ['*://*/*'],
 
         author: pkg.author,

@@ -23,12 +23,14 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@webext-core/fake-browser": "^2.0.1",
     "chrome-types": "^0.1.458",
+    "compilecat": "^0.0.10",
     "http-z": "^8.1.1",
     "outdent": "^0.8.0",
     "prettier": "^3.9.10",
     "typescript": "^7",
     "unplugin-macros": "^0.23.3",
     "vite": "^8.3.5",
+    "vite-plugin-checker": "^0.14.5",
     "vitest": "^5.0.5"
   },
   "devEngines": {

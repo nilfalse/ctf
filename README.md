@@ -31,11 +31,14 @@ npm run popup    # watch popup UI in the browser via Vite dev server
 
 ### Environment variables
 
-Read at build time by `npm start` / `npm run build`:
+Read at build time by `npm start` / `npm run build`. Each flag names a browser capability or a bugfix.
 
-| Variable | Default                  | Effect                                            |
-| -------- | ------------------------ | ------------------------------------------------- |
-| `CDN`    | `https://ctf.pages.dev/` | Base URL of the datasets; keep the trailing slash |
+| Variable              | Values                             | Effect                                                                                                   |
+| --------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `CDN`                 | `https://ctf.pages.dev/` (default) | Base URL of the datasets; keep the trailing slash                                                        |
+| `FEATURE_PAGE_ACTION` | `0`, `1`                           | `1` to use `pageAction` or `0` for browser `action`; unset emits both in manifest and detects at runtime |
+| `FEATURE_RELOAD_URL`  | `1`                                | On tab loading use `changeInfo.url` or `tab.url`                                                         |
+| `FEATURE_DNS`         | `1`                                | Responses without an IP are resolved through DNS; adds the `dns` permission (Firefox API)                |
 
 ### Loading the extension
 
