@@ -1,8 +1,8 @@
 import * as airports from '~/lib/airports.ts';
+import * as ensign from '~/lib/ensign.ts';
 import * as history from '~/lib/history.ts';
 import * as itinerary from '~/lib/itinerary/index.ts';
 import * as q from '~/lib/q.ts';
-import * as action from '~/webext/action/index.ts';
 import * as net from '~/webext/net.ts';
 import * as runtime from '~/webext/runtime.ts';
 import * as tabs from '~/webext/tabs.ts';
@@ -16,34 +16,34 @@ net.listen(function (response) {
     const it = await itinerary.of(url, response);
     await history.remember(`r:${response.tabId}`, url.origin, it);
   });
+
+  if (import.meta.env.FEATURE_EVENTS_OUT_OF_ORDER) {
+    q.conflate(response.tabId, async () => {
+      console.log(`Tab#${response.tabId}: conflate out of order`);
+      const { origin } = new URL(response.url);
+
+      const it = await history.retain(`r:${response.tabId}`, origin);
+      console.log(`Tab#${response.tabId}: itinerary`, it);
+      await ensign.hoist(response.tabId, it);
+    });
+  }
 });
 
 tabs.onLoading(function (tabId, url) {
   console.log(`Tab#${tabId}: loading`, url);
 
-  q.conflate(tabId, async function () {
-    const { origin } = new URL(url);
+  q.conflate(tabId, async () => {
+    console.log(`Tab#${tabId}: conflate`);
 
-    const it = await history.retain(`r:${tabId}`, origin);
-    if (!it) {
-      return;
-    }
-
-    await action.setPopup(tabId, `/popup.html?${itinerary.toSearchParams(it)}`);
-
-    const country = it.hops.find((hop) => hop.country !== 'ZZ')?.country;
-    if (!country) {
-      return;
-    }
-
-    await action.setIcon(tabId, {
-      path: `https://flagcdn.com/w40/${country.toLowerCase()}.png`,
-    });
+    const it = await history.retain(`r:${tabId}`, new URL(url).origin);
+    console.log(`Tab#${tabId}: itinerary`, it);
+    await ensign.hoist(tabId, it);
   });
 });
 
 tabs.onClosed(function (tabId) {
   console.log(`Tab#${tabId}: closed`);
+
   q.enqueue(tabId, () => history.forget(`r:${tabId}`));
   q.unqueue(tabId);
 });

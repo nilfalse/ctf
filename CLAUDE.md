@@ -8,6 +8,9 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 - `lib/airports.ts`: IATA code to country, downloaded from ctf.pages.dev into `storage.local` on install.
 - `lib/clouds/`: CDN hops (cloud, POP, country) inferred from response headers. Cloudflare only so far.
 - `lib/country.ts`: country names (from `_locales`) and flag emoji.
+- `lib/itinerary/`: a response turned into an itinerary (IP, hops, `Server`, `X-Powered-By`) by `factory.ts`; `codec.ts` encodes it as search params and back.
+- `lib/history.ts`: per-tab LRU of itineraries keyed by origin, in `storage.session`.
+- `lib/ensign.ts`: `hoist()` sets the tab's popup URL and icon from an itinerary. `background.ts` calls it with the tab's history on `loading`, and with `FEATURE_EVENTS_OUT_OF_ORDER` also after each response.
 - `popup/`: `Popup.tsx` is a pure view, prerendered to `popup.html` at build time; `popup.runtime.tsx` hydrates it and reads the report from the search params that the background puts in the popup URL (`lib/itinerary/codec.ts`).
 
 ## Conventions

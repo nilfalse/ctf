@@ -1,8 +1,6 @@
 import fetch from '~/webext/fetch/index.ts';
 import * as repository from '~/webext/repository.ts';
 
-const URL = 'datasets/airports.json';
-
 export function locate(codes: string[]) {
   return repository.findByIds<TwoUppercaseLetters>(codes);
 }
@@ -13,7 +11,9 @@ export async function populate() {
     region: string;
   }
 
-  const dataset = await fetch<Record<ThreeUppercaseLetters, Airport>>(URL);
+  const dataset = await fetch<Record<ThreeUppercaseLetters, Airport>>(
+    'datasets/airports.json',
+  );
 
   const map = Object.fromEntries(
     Object.entries(dataset).map(([k, v]) => [k, v.country]),

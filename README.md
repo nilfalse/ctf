@@ -31,19 +31,20 @@ npm run popup    # watch popup UI in the browser via Vite dev server
 
 ### Environment variables
 
-Read at build time by `npm start` / `npm run build`. Each flag names a browser capability or a bugfix.
+Read at build time by `npm start` / `npm run build`. Each flag names a browser capability or a quirk. The `FEATURE_*` flags are also set in `.env.[mode]` file; the shell environment takes precedence. A flag is on when set to any non-empty value; empty or unset is off.
 
-| Variable              | Values                             | Effect                                                                                                   |
-| --------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `CDN`                 | `https://ctf.pages.dev/` (default) | Base URL of the datasets; keep the trailing slash                                                        |
-| `FEATURE_PAGE_ACTION` | `0`, `1`                           | `1` to use `pageAction` or `0` for browser `action`; unset emits both in manifest and detects at runtime |
-| `FEATURE_RELOAD_URL`  | `1`                                | On tab loading use `changeInfo.url` or `tab.url`                                                         |
-| `FEATURE_DNS`         | `1`                                | Responses without an IP are resolved through DNS; adds the `dns` permission (Firefox API)                |
+| Variable                      | Effect                                                                                                                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CDN`                         | Base URL of the datasets (defaults to `https://ctf.pages.dev/`); keep the trailing slash                                                                                                   |
+| `FEATURE_PAGE_ACTION`         | Any non-empty value enables `pageAction` or set to empty for browser `action`; unset emits both in manifest and detects at runtime                                                         |
+| `FEATURE_TAB_URL`             | Whether the [`tabs.onUpdated` listener](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated#parameters) will get the URL from `tab` or `changeInfo`. |
+| `FEATURE_DNS`                 | Firefox delivers cached responses without an IP; query offline DNS using the `dns` permission in this case                                                                                 |
+| `FEATURE_EVENTS_OUT_OF_ORDER` | Firefox in some cases delivers `webRequest` event after `tabs.onLoading`; enable this feature to update the omnibar action from both events                                                |
 
 ### Loading the extension
 
-- **Chromium:** open `chrome://extensions`, enable _Developer mode_, click _Load unpacked_ and select `dist/`.
 - **Firefox:** open `about:debugging#/runtime/this-firefox`, click _Load Temporary Add-on…_ and select `dist/manifest.json`.
+- **Chromium:** open `chrome://extensions`, enable _Developer mode_, click _Load unpacked_ and select `dist/`.
 
 ## 👨‍💻 Author
 

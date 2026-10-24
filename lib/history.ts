@@ -2,7 +2,7 @@ import type { Itinerary } from '~/lib/itinerary/interfaces.ts';
 import { LRU } from '~/lib/lru.ts';
 import * as mem from '~/webext/mem.ts';
 
-type Snapshot = [string, Itinerary][];
+interface Snapshot extends ReadonlyArray<[string, Itinerary]> {}
 
 const MAX = 10;
 

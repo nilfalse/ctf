@@ -28,7 +28,7 @@ export class LRU<K, V> extends Map<K, V> {
     return super.set(k, v);
   }
 
-  static of<K, V>(max: number, entries?: [K, V][]) {
+  static of<K, V>(max: number, entries?: ReadonlyArray<[K, V]>) {
     const cache = new LRU<K, V>(max);
 
     if (entries) {

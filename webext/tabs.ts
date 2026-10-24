@@ -13,10 +13,10 @@ export function onLoading(cb: (tabId: number, tab: string) => unknown) {
      * - Firefox also sends it with complete, but only in two cases, and neither is needed in our extension:
      *   - Same-document navigations (pushState, replaceState, hash changes, back after pushState) don't reset the tab and can't change the origin.
      *   - Error pages (connection refused, DNS failure, blocked port) have no response. Skipping them leaves the default flag, which is arguably more correct than the origin's earlier report.
-     * - One field per browser: wherever change.url exists, tab.url has the same value (all observed events in Chromium). So FEATURE_RELOAD_URL simply picks the field.
+     * - One field per browser: wherever change.url exists, tab.url has the same value (all observed events in Chromium). So FEATURE_TAB_URL simply picks the field.
      * - Firefox's stale tab.url never gets used. It only appears in loading events without change.url, and with the flag off those are skipped.
      */
-    const url = import.meta.env.FEATURE_RELOAD_URL ? tab.url : change.url;
+    const url = import.meta.env.FEATURE_TAB_URL ? tab.url : change.url;
     if (!url) {
       return;
     }

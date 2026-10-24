@@ -4,15 +4,19 @@ import type { Plugin } from 'vite';
 import type Moz from 'webextension-polyfill';
 
 import pkg from '../../package.json' with { type: 'json' };
+import features from '../features.ts';
 import { getChunk } from './_util.ts';
 
 interface Options {
+  env: Record<string, string | undefined>;
   backgroundScript?: string;
   backgroundWorker?: string;
   popup: string;
 }
 
 export default function (opts: Options): Plugin {
+  const feature = features(opts.env);
+
   return {
     name: 'manifest',
 
@@ -30,10 +34,10 @@ export default function (opts: Options): Plugin {
       const popup = bundle[opts.popup];
       assert(popup, `Cannot find "${opts.popup}" in the final bundle`);
 
-      const { GITHUB_SHA, FEATURE_PAGE_ACTION, FEATURE_DNS } = process.env;
+      const { GITHUB_SHA } = process.env;
 
       const permissions: Moz.Manifest.Permission[] = ['webRequest', 'storage'];
-      if (FEATURE_DNS === '1') {
+      if (feature('DNS')) {
         permissions.push('dns');
       }
 
@@ -60,7 +64,7 @@ export default function (opts: Options): Plugin {
 
         // When FEATURE_PAGE_ACTION is unset both keys are emitted.
         page_action:
-          FEATURE_PAGE_ACTION === '0'
+          feature('PAGE_ACTION') === false
             ? undefined
             : {
                 default_icon: 'icons/page_action.svg',
@@ -68,7 +72,7 @@ export default function (opts: Options): Plugin {
                 show_matches: ['<all_urls>'],
               },
         action:
-          FEATURE_PAGE_ACTION === '1'
+          feature('PAGE_ACTION') === true
             ? undefined
             : {
                 default_icon: icons,
