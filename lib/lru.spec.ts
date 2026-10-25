@@ -3,15 +3,9 @@ import { describe, expect, test } from 'vitest';
 import { LRU } from './lru.ts';
 
 // `lru` holds a, b, c (oldest first) and is full.
-const it = test.extend<{ lru: LRU<string, number | undefined> }>({
-  lru: async ({}, use) =>
-    use(
-      new LRU<string, number | undefined>(3)
-        .set('a', 1)
-        .set('b', 2)
-        .set('c', 3),
-    ),
-});
+const it = test.extend('lru', async () =>
+  new LRU<string, number | undefined>(3).set('a', 1).set('b', 2).set('c', 3),
+);
 
 describe('set', () => {
   it('should evict the least recently used entry when full', ({ lru }) => {

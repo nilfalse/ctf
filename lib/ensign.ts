@@ -8,12 +8,14 @@ export async function hoist(tabId: number, it: Itinerary | undefined) {
     return;
   }
 
-  await action.setPopup(tabId, `/popup.html?${itinerary.toSearchParams(it)}`);
+  const promises: Promise<unknown>[] = [
+    action.setPopup(tabId, `/popup.html?${itinerary.toSearchParams(it)}`),
+  ];
 
   const iso = it.hops.find((hop) => hop.country !== 'ZZ')?.country;
-  if (!iso) {
-    return;
+  if (iso) {
+    promises.push(icons.flag(iso).then((icon) => action.setIcon(tabId, icon)));
   }
 
-  await action.setIcon(tabId, await icons.flag(iso));
+  await Promise.all(promises);
 }

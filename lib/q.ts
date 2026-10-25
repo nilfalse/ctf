@@ -1,39 +1,39 @@
-const queue: Map<number, Promise<unknown>> = new Map();
+const _queue: Map<number, Promise<unknown>> = new Map();
 export function enqueue<T>(key: number, factory: () => Promise<T>) {
-  const inflight = queue.get(key) ?? Promise.resolve();
+  const inflight = _queue.get(key) ?? Promise.resolve();
 
   const next = inflight.then(factory).catch(console.error);
-  queue.set(key, next);
+  _queue.set(key, next);
   return next;
 }
 
-const pending: Map<number, () => Promise<unknown>> = new Map();
+const _pending: Map<number, () => Promise<unknown>> = new Map();
 // Runs `factory` once nothing is left enqueued for `key`. A newer call
 // replaces it if it hasn't started yet; a running one is never cancelled.
 export function conflate<T>(key: number, factory: () => Promise<T>) {
-  if (!pending.has(key)) {
-    settle(key);
+  if (!_pending.has(key)) {
+    _settle(key);
   }
 
-  pending.set(key, factory);
+  _pending.set(key, factory);
 }
 
 export function unqueue(key: number) {
-  queue.delete(key);
-  pending.delete(key);
+  _queue.delete(key);
+  _pending.delete(key);
 }
 
-function settle(key: number) {
+function _settle(key: number) {
   const self = enqueue(key, async function () {
-    if (!pending.has(key)) {
+    if (!_pending.has(key)) {
       return; // unqueued
     }
-    if (queue.get(key) !== self) {
-      return settle(key); // work was enqueued behind us: go last again
+    if (_queue.get(key) !== self) {
+      return _settle(key); // work was enqueued behind us: go last again
     }
 
-    const factory = pending.get(key)!;
-    pending.delete(key);
+    const factory = _pending.get(key)!;
+    _pending.delete(key);
     return factory();
   });
 }

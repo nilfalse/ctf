@@ -1,20 +1,19 @@
 import { fakeBrowser } from '@webext-core/fake-browser';
-import type { Mock } from 'vitest';
 import { test, beforeEach, describe, expect, vi } from 'vitest';
 
 import * as airports from './airports.ts';
 
 beforeEach(fakeBrowser.reset);
 
-type Response = (body: unknown, init?: ResponseInit) => Mock<typeof fetch>;
-const it = test.extend<{ mock: Response }>({
-  mock: async ({}, use) =>
-    use(function (body, init) {
-      const fetch = vi.fn(async () => Response.json(body, init));
-      vi.stubGlobal('fetch', fetch);
-      return fetch;
-    }),
-});
+const it = test.extend(
+  'mock',
+  async () =>
+    function (body: unknown, init?: ResponseInit) {
+      const stub = vi.fn<typeof fetch>(async () => Response.json(body, init));
+      vi.stubGlobal('fetch', stub);
+      return stub;
+    },
+);
 
 describe('populate', () => {
   it('should store the country of each airport', async ({ mock }) => {

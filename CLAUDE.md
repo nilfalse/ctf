@@ -13,7 +13,8 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 - `lib/ensign.ts`: `hoist()` sets the tab's popup URL and icon from an itinerary. The icon comes from `lib/icons.ts`. `background.ts` calls it with the tab's history on `loading`, with `FEATURE_EVENTS_OUT_OF_ORDER` also after each response, and for every open tab when the `icons` preference changes.
 - `lib/icons.ts`: `flag()` picks the action icon for a country by the `icons` preference: `twemoji` (the default) is the Twemoji SVG on ctf.pages.dev, `native` is the flag emoji in an SVG data URL (`lib/svg.ts`).
 - `popup/`: `Popup.tsx` is a pure view, prerendered to `popup.html` at build time; `popup.runtime.tsx` hydrates it and reads the report from the search params that the background puts in the popup URL (`lib/itinerary/codec.ts`).
-- `webext/prefs.ts`: `storage.sync` wrapper.
+- `lib/prefs.ts`: the `Defaults` class declares every preference with its type and default (a deprecated one as an optional `declare` field, which emits nothing). `Prefs` extends it: `init()` assigns one bulk `storage.sync` read onto the instance, and `save(k, v)` assigns `v` and removes the key if `v` is the default (so a default is never stored, and saving `undefined` deletes a deprecated key) or sets it otherwise. `webext/prefs/storage.ts` has the `/* @inline */` `get`, `set`, `remove` and `onChanged`; `webext/prefs/listener.ts` has `heed()`, which `background.ts` imports directly.
+- `lib/migration.ts`: `migrate()` runs on install and update and moves data left by older versions; each step must be a no-op once done. So far it runs `Prefs.migrate()` on the cached `prefs()` instance, which turns ctf-legacy's `render: 'emoji'` into `icons: 'native'` except on Windows (no flag emoji there), leaves `icons` unset otherwise, and removes `render`. Unknown keys are kept, because `storage.sync` is shared with the user's browsers, which may run other versions.
 
 ## Conventions
 

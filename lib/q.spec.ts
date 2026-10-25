@@ -1,5 +1,4 @@
-import type { Mock } from 'vitest';
-import { afterEach, test, beforeEach, describe, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as q from './q.ts';
 
@@ -16,20 +15,18 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-// `log` records when each task starts (`+`) and ends (`-`), so one assertion
-// covers both order and overlap.
-type Task = (name: string, ms?: number) => Mock<() => Promise<void>>;
-const it = test.extend<{ log: string[]; task: Task }>({
-  log: async ({}, use) => use([]),
-  task: async ({ log }, use) =>
-    use((name, ms = 10) =>
-      vi.fn(async () => {
-        log.push(`${name}+`);
-        await sleep(ms);
-        log.push(`${name}-`);
-      }),
-    ),
-});
+const it = test
+  .extend('log', (): string[] => [])
+  .extend(
+    'task',
+    ({ log }) =>
+      (name: string, ms = 10) =>
+        vi.fn(async () => {
+          log.push(`${name}+`);
+          await sleep(ms);
+          log.push(`${name}-`);
+        }),
+  );
 
 describe('enqueue', () => {
   it('should run tasks one by one', async ({ log, task }) => {
