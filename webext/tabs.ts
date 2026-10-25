@@ -27,6 +27,13 @@ export function onLoading(cb: (tabId: number, tab: string) => unknown) {
   return browser.tabs.onUpdated.addListener(handleUpdated);
 }
 
+export async function query() {
+  const tabs = await browser.tabs.query({});
+
+  type Tab = { id: number; url: string };
+  return tabs.filter((t) => t.id && t.url) as ReadonlyArray<Tab>;
+}
+
 export /* @inline */ function onClosed(cb: (tabId: number) => unknown) {
   return browser.tabs.onRemoved.addListener(cb);
 }

@@ -4,6 +4,7 @@ import * as history from '~/lib/history.ts';
 import * as itinerary from '~/lib/itinerary/index.ts';
 import * as q from '~/lib/q.ts';
 import * as net from '~/webext/net.ts';
+import * as prefs from '~/webext/prefs.ts';
 import * as runtime from '~/webext/runtime.ts';
 import * as tabs from '~/webext/tabs.ts';
 
@@ -39,6 +40,17 @@ tabs.onLoading(function (tabId, url) {
     console.log(`Tab#${tabId}: itinerary`, it);
     await ensign.hoist(tabId, it);
   });
+});
+
+prefs.heed('icons', async function () {
+  for (const { id, url } of await tabs.query()) {
+    q.conflate(id, async () => {
+      console.log(`Tab#${id}: conflate due to prefs`);
+
+      const it = await history.retain(`r:${id}`, new URL(url).origin);
+      await ensign.hoist(id, it);
+    });
+  }
 });
 
 tabs.onClosed(function (tabId) {

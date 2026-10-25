@@ -10,8 +10,10 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 - `lib/country.ts`: country names (from `_locales`) and flag emoji.
 - `lib/itinerary/`: a response turned into an itinerary (IP, hops, `Server`, `X-Powered-By`) by `factory.ts`; `codec.ts` encodes it as search params and back.
 - `lib/history.ts`: per-tab LRU of itineraries keyed by origin, in `storage.session`.
-- `lib/ensign.ts`: `hoist()` sets the tab's popup URL and icon from an itinerary. `background.ts` calls it with the tab's history on `loading`, and with `FEATURE_EVENTS_OUT_OF_ORDER` also after each response.
+- `lib/ensign.ts`: `hoist()` sets the tab's popup URL and icon from an itinerary. The icon comes from `lib/icons.ts`. `background.ts` calls it with the tab's history on `loading`, with `FEATURE_EVENTS_OUT_OF_ORDER` also after each response, and for every open tab when the `icons` preference changes.
+- `lib/icons.ts`: `flag()` picks the action icon for a country by the `icons` preference: `twemoji` (the default) is the Twemoji SVG on ctf.pages.dev, `native` is the flag emoji in an SVG data URL (`lib/svg.ts`).
 - `popup/`: `Popup.tsx` is a pure view, prerendered to `popup.html` at build time; `popup.runtime.tsx` hydrates it and reads the report from the search params that the background puts in the popup URL (`lib/itinerary/codec.ts`).
+- `webext/prefs.ts`: `storage.sync` wrapper.
 
 ## Conventions
 
