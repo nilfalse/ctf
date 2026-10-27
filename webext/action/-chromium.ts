@@ -10,6 +10,10 @@ export /* @inline */ function setIcon(tabId: number, icon: Path | IconData) {
   });
 }
 
+export /* @inline */ function setTitle(tabId: number, title: string) {
+  return browser.action.setTitle({ tabId, title });
+}
+
 export /* @inline */ function setPopup(tabId: number, popup: string) {
   return browser.action.setPopup({ tabId, popup });
 }

@@ -6,7 +6,7 @@ import * as migration from '~/lib/migration.ts';
 import * as q from '~/lib/q.ts';
 import * as net from '~/webext/net.ts';
 import * as prefs from '~/webext/prefs/listener.ts';
-import * as runtime from '~/webext/runtime.ts';
+import * as runtime from '~/webext/runtime/hooks.ts';
 import * as tabs from '~/webext/tabs.ts';
 
 net.listen(function (response) {

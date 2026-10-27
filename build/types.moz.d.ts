@@ -1,7 +1,6 @@
-import type Moz from 'webextension-polyfill';
+/// <reference types="chrome-types/no-browser" />
+import type { Browser } from 'webextension-polyfill';
 
 declare global {
-  const browser: Moz.Browser;
+  const browser: Browser;
 }
-
-export {};

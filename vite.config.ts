@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import compilecat from 'compilecat/vite';
+import type { InputOption } from 'rolldown';
 import macros from 'unplugin-macros/vite';
 import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
@@ -14,6 +15,15 @@ export default defineConfig(({ mode }) => {
   const envPrefix = 'FEATURE_';
   const env = loadEnv(mode, import.meta.dirname, envPrefix);
   const feature = features(env);
+
+  const input: InputOption = {
+    background: './background.ts',
+    popup: './popup/popup.runtime.tsx',
+  };
+  if (feature('TOOLBAR_SVG') === false) {
+    // the only way to render SVG on canvas in Chromium is DOM
+    input.offscreen = './offscreen.html';
+  }
 
   const define: Record<string, string> = {
     'typeof browser.dns': JSON.stringify(
@@ -53,19 +63,16 @@ export default defineConfig(({ mode }) => {
 
       manifest({
         env,
-        backgroundScript: './background.ts',
-        backgroundWorker: './background.ts',
+        background: './background.ts',
         popup: 'popup.html',
       }),
     ],
 
-    input: {
-      background: './background.ts',
-      popup: './popup/popup.runtime.tsx',
-    },
+    input,
     build: {
       target: ['chrome148', 'firefox121'],
       assetsDir: '.',
+      modulePreload: { polyfill: false },
       minify: false,
       rolldownOptions: {
         output: {

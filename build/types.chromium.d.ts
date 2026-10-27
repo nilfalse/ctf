@@ -1,8 +1,10 @@
 /// <reference types="chrome-types" />
-import type Moz from 'webextension-polyfill';
+import type { PageAction } from 'webextension-polyfill';
 
 declare global {
-  const browser: typeof chrome & Partial<Pick<Moz.Browser, 'pageAction'>>;
+  namespace browser {
+    const pageAction: PageAction | undefined;
+  }
 }
 
 export {};

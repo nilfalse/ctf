@@ -23,7 +23,7 @@
     "@types/webextension-polyfill": "^0.12.6",
     "@vitejs/plugin-react": "^6.1.2",
     "@webext-core/fake-browser": "^2.0.1",
-    "chrome-types": "^0.1.458",
+    "chrome-types": "^0.1.460",
     "compilecat": "^0.0.10",
     "http-z": "^8.1.1",
     "outdent": "^0.8.0",

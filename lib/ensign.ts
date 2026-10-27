@@ -1,9 +1,11 @@
+import * as country from '~/lib/country.ts';
 import * as icons from '~/lib/icons.ts';
 import * as itinerary from '~/lib/itinerary/index.ts';
 import type { Itinerary } from '~/lib/itinerary/interfaces.ts';
 import * as action from '~/webext/action/index.ts';
+import { _ } from '~/webext/i18n.ts';
 
-export async function hoist(tabId: number, it: Itinerary | undefined) {
+export function hoist(tabId: number, it: Itinerary | undefined) {
   if (!it) {
     return;
   }
@@ -14,8 +16,15 @@ export async function hoist(tabId: number, it: Itinerary | undefined) {
 
   const iso = it.hops.find((hop) => hop.country !== 'ZZ')?.country;
   if (iso) {
-    promises.push(icons.flag(iso).then((icon) => action.setIcon(tabId, icon)));
+    promises.push(
+      action.setTitle(
+        tabId,
+        _('EXT_NAME') + ':\n' + country.name(iso),
+      ) as Promise<unknown>,
+
+      icons.flag(iso).then((icon) => action.setIcon(tabId, icon)),
+    );
   }
 
-  await Promise.all(promises);
+  return Promise.all(promises);
 }

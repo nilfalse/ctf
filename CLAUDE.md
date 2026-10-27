@@ -4,17 +4,17 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 
 ## Code
 
-- `lib/q.ts`: per-tab promise queue.
 - `lib/airports.ts`: IATA code to country, downloaded from ctf.pages.dev into `storage.local` on install.
 - `lib/clouds/`: CDN hops (cloud, POP, country) inferred from response headers. Cloudflare only so far.
 - `lib/country.ts`: country names (from `_locales`) and flag emoji.
-- `lib/itinerary/`: a response turned into an itinerary (IP, hops, `Server`, `X-Powered-By`) by `factory.ts`; `codec.ts` encodes it as search params and back.
+- `lib/ensign.ts`: sets a tab's icon and popup URL from an itinerary.
 - `lib/history.ts`: per-tab LRU of itineraries keyed by origin, in `storage.session`.
-- `lib/ensign.ts`: `hoist()` sets the tab's popup URL and icon from an itinerary. The icon comes from `lib/icons.ts`. `background.ts` calls it with the tab's history on `loading`, with `FEATURE_EVENTS_OUT_OF_ORDER` also after each response, and for every open tab when the `icons` preference changes.
-- `lib/icons.ts`: `flag()` picks the action icon for a country by the `icons` preference: `twemoji` (the default) is the Twemoji SVG on ctf.pages.dev, `native` is the flag emoji in an SVG data URL (`lib/svg.ts`).
-- `popup/`: `Popup.tsx` is a pure view, prerendered to `popup.html` at build time; `popup.runtime.tsx` hydrates it and reads the report from the search params that the background puts in the popup URL (`lib/itinerary/codec.ts`).
-- `lib/prefs.ts`: the `Defaults` class declares every preference with its type and default (a deprecated one as an optional `declare` field, which emits nothing). `Prefs` extends it: `init()` assigns one bulk `storage.sync` read onto the instance, and `save(k, v)` assigns `v` and removes the key if `v` is the default (so a default is never stored, and saving `undefined` deletes a deprecated key) or sets it otherwise. `webext/prefs/storage.ts` has the `/* @inline */` `get`, `set`, `remove` and `onChanged`; `webext/prefs/listener.ts` has `heed()`, which `background.ts` imports directly.
-- `lib/migration.ts`: `migrate()` runs on install and update and moves data left by older versions; each step must be a no-op once done. So far it runs `Prefs.migrate()` on the cached `prefs()` instance, which turns ctf-legacy's `render: 'emoji'` into `icons: 'native'` except on Windows (no flag emoji there), leaves `icons` unset otherwise, and removes `render`. Unknown keys are kept, because `storage.sync` is shared with the user's browsers, which may run other versions.
+- `lib/icons.ts`: the flag icon, by the `icons` preference. With `FEATURE_TOOLBAR_SVG` disabled the toolbar takes no SVG, so `offscreen/` draws it into `ImageData` on an offscreen page, because decoding SVG needs a DOM.
+- `lib/itinerary/`: a response turned into an itinerary; `codec.ts` encodes it as search params and back.
+- `lib/migration.ts`: runs on install and update; each step must be a no-op once done. Unknown keys are kept, because `storage.sync` is shared with the user's other browsers, which may run other versions.
+- `lib/prefs.ts`: every preference and its default is declared in `Defaults`; a default is never stored.
+- `lib/q.ts`: per-tab promise queue.
+- `popup/`: prerendered at build time; it reads its data from the popup URL's search params, not from messages.
 
 ## Conventions
 
@@ -26,7 +26,7 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 
 ## Permissions
 
-- There is **no `tabs` permission** and none is to be added. Only `webRequest`, `storage` and `host_permissions: ["*://*/*"]` (plus `dns` with `FEATURE_DNS=1`). `tab.url` and `changeInfo.url` are therefore absent for URLs no host pattern covers, such as `about:blank`.
+- There is **no `tabs` permission** and none is to be added. Only `webRequest`, `storage` and `host_permissions: ["*://*/*"]` (plus `dns` with `FEATURE_DNS`, and `offscreen` with `FEATURE_TOOLBAR_SVG` disabled). `tab.url` and `changeInfo.url` are therefore absent for URLs no host pattern covers, such as `about:blank`.
 
 ## Commands
 

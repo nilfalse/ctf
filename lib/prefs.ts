@@ -1,8 +1,8 @@
 import * as storage from '~/webext/prefs/storage.ts';
-import * as runtime from '~/webext/runtime.ts';
+import * as runtime from '~/webext/runtime/info.ts';
 
 // Lazy
-export const prefs = () => (_cache ??= new Prefs().init());
+export const prefs = () => (_prefs ??= new Prefs().init());
 
 class Defaults {
   icons: 'native' | 'twemoji' = 'twemoji';
@@ -41,6 +41,6 @@ class Prefs extends Defaults {
   }
 }
 
-let _cache: Promise<Prefs> | undefined;
+let _prefs: Promise<Prefs> | undefined;
 // Register on import
-storage.onChanged(() => (_cache = undefined));
+storage.onChanged(() => (_prefs = undefined));

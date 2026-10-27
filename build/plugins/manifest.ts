@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import * as fs from 'node:fs/promises';
 
 import type { Plugin } from 'vite';
 import type Moz from 'webextension-polyfill';
@@ -9,8 +10,7 @@ import { getChunk } from './_util.ts';
 
 interface Options {
   env: Record<string, string | undefined>;
-  backgroundScript?: string;
-  backgroundWorker?: string;
+  background: string;
   popup: string;
 }
 
@@ -24,13 +24,8 @@ export default function (opts: Options): Plugin {
       return environment.name === 'client';
     },
 
-    generateBundle(_options, bundle) {
-      const backgroundScript =
-        opts.backgroundScript &&
-        getChunk(bundle, opts.backgroundScript).fileName;
-      const backgroundWorker =
-        opts.backgroundWorker &&
-        getChunk(bundle, opts.backgroundWorker).fileName;
+    async generateBundle(_options, bundle) {
+      const background = getChunk(bundle, opts.background).fileName;
       const popup = bundle[opts.popup];
       assert(popup, `Cannot find "${opts.popup}" in the final bundle`);
 
@@ -39,6 +34,9 @@ export default function (opts: Options): Plugin {
       const permissions: Moz.Manifest.Permission[] = ['webRequest', 'storage'];
       if (feature('DNS')) {
         permissions.push('dns');
+      }
+      if (feature('TOOLBAR_SVG') === false) {
+        permissions.push('offscreen');
       }
 
       const icons = {
@@ -79,11 +77,17 @@ export default function (opts: Options): Plugin {
                 default_popup: popup.fileName,
               },
 
+        // When FEATURE_SERVICE_WORKER is unset both keys are emitted.
         background: {
           type: 'module',
-          service_worker: backgroundWorker,
-          scripts: backgroundScript ? [backgroundScript] : undefined,
-          preferred_environment: ['service_worker'],
+          service_worker:
+            feature('SERVICE_WORKER') === false ? undefined : background,
+          scripts:
+            feature('SERVICE_WORKER') === true ? undefined : [background],
+          preferred_environment:
+            feature('SERVICE_WORKER') === undefined
+              ? ['service_worker']
+              : undefined,
         },
 
         permissions,
@@ -97,6 +101,14 @@ export default function (opts: Options): Plugin {
 
       const source = JSON.stringify(manifest, null, 2);
       this.emitFile({ type: 'asset', fileName: 'manifest.json', source });
+
+      if (feature('PAGE_ACTION') !== false) {
+        this.emitFile({
+          type: 'asset',
+          fileName: 'icons/page_action.svg',
+          source: await fs.readFile('./assets/page_action.svg'),
+        });
+      }
     },
   };
 }
