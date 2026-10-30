@@ -24,41 +24,42 @@ describe('populate', () => {
     });
 
     // Act
-    await airports.populate();
+    await airports.loadAirports();
 
     // Assert
     expect(fetch).toHaveBeenCalledExactlyOnceWith(
       new URL('https://cdn.test/base/datasets/airports.json'),
+      { signal: expect.any(AbortSignal) },
     );
     expect(await fakeBrowser.storage.local.get()).toEqual({
-      CPH: 'DK',
-      KBP: 'UA',
+      iata_CPH: 'DK',
+      iata_KBP: 'UA',
     });
   });
 
   it('should overwrite previously stored airports', async ({ mock }) => {
     // Arrange
-    await fakeBrowser.storage.local.set({ CPH: 'DK', ARN: 'DK' });
+    await fakeBrowser.storage.local.set({ iata_CPH: 'DK', iata_ARN: 'DK' });
     mock({ ARN: { country: 'SE', region: 'AB' } });
 
     // Act
-    await airports.populate();
+    await airports.loadAirports();
 
     // Assert
     expect(await fakeBrowser.storage.local.get()).toEqual({
-      CPH: 'DK',
-      ARN: 'SE',
+      iata_CPH: 'DK',
+      iata_ARN: 'SE',
     });
   });
 
   it('should log error when the download fails', async ({ mock }) => {
     // Arrange
-    await fakeBrowser.storage.local.set({ CPH: 'DK', ARN: 'DK' });
+    await fakeBrowser.storage.local.set({ iata_CPH: 'DK', iata_ARN: 'DK' });
     const err = vi.spyOn(console, 'error').mockImplementation(() => {});
     mock(null, { status: 503 });
 
     // Act
-    const result = airports.populate();
+    const result = airports.loadAirports();
 
     // Assert
     await expect(result).rejects.toThrow('HTTP fetch failed');
@@ -66,8 +67,8 @@ describe('populate', () => {
       expect.objectContaining({ status: 503 }),
     );
     expect(await fakeBrowser.storage.local.get()).toEqual({
-      CPH: 'DK',
-      ARN: 'DK',
+      iata_CPH: 'DK',
+      iata_ARN: 'DK',
     });
   });
 });
@@ -80,7 +81,7 @@ describe('locate', () => {
       KBP: { country: 'UA', region: '32' },
       NRT: { country: 'JP', region: '12' },
     });
-    await airports.populate();
+    await airports.loadAirports();
 
     // Act
     const result = await airports.locate(['CPH', 'NRT']);
@@ -92,7 +93,7 @@ describe('locate', () => {
   it('should omit unknown airports', async ({ mock }) => {
     // Arrange
     mock({ CPH: { country: 'DK', region: '84' } });
-    await airports.populate();
+    await airports.loadAirports();
 
     // Act
     const result = await airports.locate(['CPH', 'XXX']);

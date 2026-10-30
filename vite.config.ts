@@ -8,6 +8,7 @@ import svgr from 'vite-plugin-svgr';
 
 import features from './build/features.ts';
 import manifest from './build/plugins/manifest.ts';
+import { MINIMUM_CHROME_VERSION } from './build/plugins/manifest.ts';
 import prerender from './build/plugins/prerender.ts';
 import { prerenderOutDir } from './build/plugins/prerender.ts';
 
@@ -70,11 +71,13 @@ export default defineConfig(({ mode }) => {
 
     input,
     build: {
-      target: ['chrome148', 'firefox121'],
+      target: ['chrome' + MINIMUM_CHROME_VERSION, 'firefox121'],
       assetsDir: '.',
       modulePreload: { polyfill: false },
       minify: false,
       rolldownOptions: {
+        // mmdb-lib uses Node's global Buffer
+        transform: { inject: { Buffer: ['buffer', 'Buffer'] } },
         output: {
           chunkFileNames(chunk) {
             return chunk.name === 'rolldown-runtime'

@@ -4,6 +4,12 @@ import type { Itinerary } from '~/lib/itinerary/interfaces.ts';
 export function toSearchParams(i: Itinerary) {
   const search = new URLSearchParams({ h: i.hostname, ip: i.ip });
 
+  if (i.country != null) {
+    search.append('c', i.country);
+  }
+  if (i.registered != null) {
+    search.append('r', i.registered);
+  }
   if (i.server != null) {
     search.append('s', i.server);
   }
@@ -45,6 +51,8 @@ export function fromSearchParams(s: string): Itinerary | null {
   return {
     hostname: params.get('h')!,
     ip: params.get('ip')!,
+    country: params.get('c') as TwoUppercaseLetters,
+    registered: params.get('r') as TwoUppercaseLetters,
     hops,
     server: params.get('s'),
     powered: params.get('p'),

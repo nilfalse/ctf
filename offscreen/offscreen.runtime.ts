@@ -1,9 +1,9 @@
 import * as raster from '~/lib/raster.ts';
-import { onMessage } from '~/webext/runtime/message.ts';
+import { on } from '~/webext/runtime/message.ts';
 
 import type { Intent, Outcome } from './interfaces.ts';
 
-onMessage('raster', function ({ url, sizes }: Intent): Promise<Outcome> {
+on('raster', function ({ url, sizes }: Intent): Promise<Outcome> {
   return raster
     .rasterize(url, sizes)
     .then((images) => images.map(({ data }) => Array.from(data)))

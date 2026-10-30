@@ -8,6 +8,8 @@ describe('toSearchParams', () => {
       toSearchParams({
         hostname: 'example.com',
         ip: '192.0.2.1',
+        country: 'DK',
+        registered: 'NL',
         server: 'cloudflare',
         powered: 'WP Engine Headless Platform',
         hops: [
@@ -26,14 +28,16 @@ describe('toSearchParams', () => {
         ],
       }).toString(),
     ).toBe(
-      'h=example.com&ip=192.0.2.1&s=cloudflare&p=WP+Engine+Headless+Platform&hop=cf.KBP.UA.HIT&hop=cf.CPH.DK',
+      'h=example.com&ip=192.0.2.1&c=DK&r=NL&s=cloudflare&p=WP+Engine+Headless+Platform&hop=cf.KBP.UA.HIT&hop=cf.CPH.DK',
     ));
 
-  it('should omit parameters for missing server and powered-by', () =>
+  it('should omit optional parameters when missing', () =>
     expect(
       toSearchParams({
         hostname: 'example.com',
         ip: '192.0.2.1',
+        country: null,
+        registered: null,
         hops: [],
         server: null,
         powered: null,
@@ -45,11 +49,13 @@ describe('fromSearchParams', () => {
   it('should decode', () =>
     expect(
       fromSearchParams(
-        '?h=example.com&ip=192.0.2.1&s=cloudflare&p=WP+Engine+Headless+Platform&hop=cf.KBP.UA.HIT&hop=cf.CPH.DK',
+        '?h=example.com&ip=192.0.2.1&c=DK&r=NL&s=cloudflare&p=WP+Engine+Headless+Platform&hop=cf.KBP.UA.HIT&hop=cf.CPH.DK',
       ),
     ).toStrictEqual({
       hostname: 'example.com',
       ip: '192.0.2.1',
+      country: 'DK',
+      registered: 'NL',
       server: 'cloudflare',
       powered: 'WP Engine Headless Platform',
       hops: [

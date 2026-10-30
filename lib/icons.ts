@@ -4,7 +4,7 @@ import * as svg from '~/lib/svg.ts';
 import * as offscreen from '~/offscreen/offscreen.api.ts';
 import type { IconData, Path } from '~/webext/action/index.ts';
 
-import { baseHost } from '../webext/fetch/const.ts' with { type: 'macro' };
+import { BASE_URL } from '../const.ts' with { type: 'macro' };
 
 const _SIZES = [64, 32, 16];
 
@@ -17,7 +17,7 @@ export async function flag(iso: TwoUppercaseLetters): Promise<Path | IconData> {
       url = svg.toDataURL(svg.char(country.emoji(iso)));
       break;
     case 'twemoji':
-      url = `${baseHost}assets/twemoji/${iso}.svg`;
+      url = `${BASE_URL}assets/twemoji/${iso}.svg`;
       break;
   }
 

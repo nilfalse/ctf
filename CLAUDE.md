@@ -11,6 +11,7 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 - `lib/history.ts`: per-tab LRU of itineraries keyed by origin, in `storage.session`.
 - `lib/icons.ts`: the flag icon, by the `icons` preference. With `FEATURE_TOOLBAR_SVG` disabled the toolbar takes no SVG, so `offscreen/` draws it into `ImageData` on an offscreen page, because decoding SVG needs a DOM.
 - `lib/itinerary/`: a response turned into an itinerary; `codec.ts` encodes it as search params and back.
+- `lib/maxmind.ts`: IP → country from MaxMind GeoLite2 on ctf.pages.dev, cached in Cache Storage.
 - `lib/migration.ts`: runs on install and update; each step must be a no-op once done. Unknown keys are kept, because `storage.sync` is shared with the user's other browsers, which may run other versions.
 - `lib/prefs.ts`: every preference and its default is declared in `Defaults`; a default is never stored.
 - `lib/q.ts`: per-tab promise queue.

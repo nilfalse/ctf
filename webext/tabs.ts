@@ -8,7 +8,7 @@ export function onLoading(cb: (tabId: number, tab: string) => unknown) {
       return;
     }
 
-    /**
+    /*
      * - Chromium only ever sends change.url with loading.
      * - Firefox also sends it with complete, but only in two cases, and neither is needed in our extension:
      *   - Same-document navigations (pushState, replaceState, hash changes, back after pushState) don't reset the tab and can't change the origin.
@@ -17,11 +17,9 @@ export function onLoading(cb: (tabId: number, tab: string) => unknown) {
      * - Firefox's stale tab.url never gets used. It only appears in loading events without change.url, and with the flag off those are skipped.
      */
     const url = import.meta.env.FEATURE_TAB_URL ? tab.url : change.url;
-    if (!url) {
-      return;
+    if (url) {
+      return cb(tabId, url);
     }
-
-    return cb(tabId, url);
   }
 
   return browser.tabs.onUpdated.addListener(handleUpdated);

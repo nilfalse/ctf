@@ -25,6 +25,7 @@ export default function ({ itinerary, _ = String }: Props) {
     <main>
       <h1>{itinerary.hostname}</h1>
       {itinerary.ip && <p>IP: {itinerary.ip}</p>}
+      {itinerary.country && <p>Country: {_(itinerary.country)}</p>}
       {itinerary.server && <p>Server: {itinerary.server}</p>}
       {itinerary.powered && <p>Powered by: {itinerary.powered}</p>}
 

@@ -1,8 +1,8 @@
-import * as airports from '~/lib/airports.ts';
+import { loadAirports } from '~/lib/airports.ts';
 import * as ensign from '~/lib/ensign.ts';
 import * as history from '~/lib/history.ts';
 import * as itinerary from '~/lib/itinerary/index.ts';
-import * as migration from '~/lib/migration.ts';
+import { migrate } from '~/lib/migration.ts';
 import * as q from '~/lib/q.ts';
 import * as net from '~/webext/net.ts';
 import * as prefs from '~/webext/prefs/listener.ts';
@@ -64,5 +64,5 @@ tabs.onClosed(function (tabId) {
 runtime.onInstalled(async function () {
   console.log('Capture The Flag: installed');
 
-  await Promise.all([airports.populate(), migration.migrate()]);
+  await Promise.all([migrate(), loadAirports()]);
 });

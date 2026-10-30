@@ -8,7 +8,7 @@ export /* @inline */ function sendMessage<I extends Intent, O>(
   return browser.runtime.sendMessage(message);
 }
 
-export /* @inline */ function onMessage<O, I extends Intent>(
+export /* @inline */ function on<O, I extends Intent>(
   t: I['target'],
   cb: (message: I) => Promise<O>,
 ) {

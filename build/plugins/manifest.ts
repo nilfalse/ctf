@@ -14,6 +14,10 @@ interface Options {
   popup: string;
 }
 
+// chrome148: browser.* namespace
+// chrome150: offscreen.hasDocument
+export const MINIMUM_CHROME_VERSION = '150';
+
 export default function (opts: Options): Plugin {
   const feature = features(opts.env);
 
@@ -97,6 +101,7 @@ export default function (opts: Options): Plugin {
         browser_specific_settings: {
           gecko: { id: '@ctf' },
         },
+        minimum_chrome_version: MINIMUM_CHROME_VERSION,
       };
 
       const source = JSON.stringify(manifest, null, 2);

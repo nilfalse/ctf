@@ -2,10 +2,11 @@ import * as _ from '~/lib/_.ts';
 import * as clouds from '~/lib/clouds/index.ts';
 import { toHeaderMap } from '~/lib/http.ts';
 import type { Itinerary } from '~/lib/itinerary/interfaces.ts';
+import * as maxmind from '~/lib/maxmind.ts';
 import * as dns from '~/webext/dns.moz.ts';
 import type * as net from '~/webext/net.ts';
 
-export async function of(url: URL, response: net.Payload) {
+export async function of(url: URL, response: net.Payload): Promise<Itinerary> {
   let ip = response.ip;
   if (typeof browser.dns === 'object' && !response.ip) {
     ip = await dns.resolve(url.hostname);
@@ -13,14 +14,20 @@ export async function of(url: URL, response: net.Payload) {
   }
 
   const headers = toHeaderMap(response.responseHeaders);
-  const hops = await clouds.infer(headers);
+  const [whereabout, hops] = await Promise.all([
+    maxmind.whereabouts(ip!),
+    clouds.infer(headers),
+  ]);
+  console.log(`Tab#${response.tabId}: whereabouts`, whereabout);
   console.log(`Tab#${response.tabId}: hops`, hops);
 
   return {
     hostname: url.hostname,
     ip: ip!,
+    country: whereabout.country,
+    registered: whereabout.registered,
     hops,
     server: _.first(headers.get('server')),
     powered: _.first(headers.get('x-powered-by')),
-  } as Itinerary;
+  };
 }

@@ -1,4 +1,7 @@
 {
+  "COUNTRY_AC": {
+    "message": "Ascension Island"
+  },
   "COUNTRY_AD": {
     "message": "Andorra"
   },
@@ -9,7 +12,7 @@
     "message": "Afghanistan"
   },
   "COUNTRY_AG": {
-    "message": "Antigua and Barbuda"
+    "message": "Antigua & Barbuda"
   },
   "COUNTRY_AI": {
     "message": "Anguilla"
@@ -48,7 +51,7 @@
     "message": "Azerbaijan"
   },
   "COUNTRY_BA": {
-    "message": "Bosnia and Herzegovina"
+    "message": "Bosnia & Herzegovina"
   },
   "COUNTRY_BB": {
     "message": "Barbados"
@@ -75,19 +78,19 @@
     "message": "Benin"
   },
   "COUNTRY_BL": {
-    "message": "Saint Barthélemy"
+    "message": "St. Barthélemy"
   },
   "COUNTRY_BM": {
     "message": "Bermuda"
   },
   "COUNTRY_BN": {
-    "message": "Brunei Darussalam"
+    "message": "Brunei"
   },
   "COUNTRY_BO": {
     "message": "Bolivia"
   },
   "COUNTRY_BQ": {
-    "message": "Bonaire"
+    "message": "Caribbean Netherlands"
   },
   "COUNTRY_BR": {
     "message": "Brazil"
@@ -117,19 +120,19 @@
     "message": "Cocos (Keeling) Islands"
   },
   "COUNTRY_CD": {
-    "message": "Democratic Republic of the Congo"
+    "message": "Congo - Kinshasa"
   },
   "COUNTRY_CF": {
     "message": "Central African Republic"
   },
   "COUNTRY_CG": {
-    "message": "Republic of the Congo"
+    "message": "Congo - Brazzaville"
   },
   "COUNTRY_CH": {
     "message": "Switzerland"
   },
   "COUNTRY_CI": {
-    "message": "Cote d'Ivoire"
+    "message": "Côte d’Ivoire"
   },
   "COUNTRY_CK": {
     "message": "Cook Islands"
@@ -141,10 +144,16 @@
     "message": "Cameroon"
   },
   "COUNTRY_CN": {
-    "message": "People's Republic of China"
+    "message": "China"
   },
   "COUNTRY_CO": {
     "message": "Colombia"
+  },
+  "COUNTRY_CP": {
+    "message": "Clipperton Island"
+  },
+  "COUNTRY_CQ": {
+    "message": "Sark"
   },
   "COUNTRY_CR": {
     "message": "Costa Rica"
@@ -165,10 +174,13 @@
     "message": "Cyprus"
   },
   "COUNTRY_CZ": {
-    "message": "Czech Republic"
+    "message": "Czechia"
   },
   "COUNTRY_DE": {
     "message": "Germany"
+  },
+  "COUNTRY_DG": {
+    "message": "Diego Garcia"
   },
   "COUNTRY_DJ": {
     "message": "Djibouti"
@@ -184,6 +196,9 @@
   },
   "COUNTRY_DZ": {
     "message": "Algeria"
+  },
+  "COUNTRY_EA": {
+    "message": "Ceuta & Melilla"
   },
   "COUNTRY_EC": {
     "message": "Ecuador"
@@ -206,6 +221,9 @@
   "COUNTRY_ET": {
     "message": "Ethiopia"
   },
+  "COUNTRY_EU": {
+    "message": "European Union"
+  },
   "COUNTRY_FI": {
     "message": "Finland"
   },
@@ -213,7 +231,7 @@
     "message": "Fiji"
   },
   "COUNTRY_FK": {
-    "message": "Falkland Islands (Malvinas)"
+    "message": "Falkland Islands"
   },
   "COUNTRY_FM": {
     "message": "Micronesia"
@@ -252,7 +270,7 @@
     "message": "Greenland"
   },
   "COUNTRY_GM": {
-    "message": "Republic of The Gambia"
+    "message": "Gambia"
   },
   "COUNTRY_GN": {
     "message": "Guinea"
@@ -267,7 +285,7 @@
     "message": "Greece"
   },
   "COUNTRY_GS": {
-    "message": "South Georgia and the South Sandwich Islands"
+    "message": "South Georgia & South Sandwich Islands"
   },
   "COUNTRY_GT": {
     "message": "Guatemala"
@@ -282,10 +300,10 @@
     "message": "Guyana"
   },
   "COUNTRY_HK": {
-    "message": "Hong Kong"
+    "message": "Hong Kong SAR China"
   },
   "COUNTRY_HM": {
-    "message": "Heard Island and McDonald Islands"
+    "message": "Heard & McDonald Islands"
   },
   "COUNTRY_HN": {
     "message": "Honduras"
@@ -298,6 +316,9 @@
   },
   "COUNTRY_HU": {
     "message": "Hungary"
+  },
+  "COUNTRY_IC": {
+    "message": "Canary Islands"
   },
   "COUNTRY_ID": {
     "message": "Indonesia"
@@ -321,7 +342,7 @@
     "message": "Iraq"
   },
   "COUNTRY_IR": {
-    "message": "Islamic Republic of Iran"
+    "message": "Iran"
   },
   "COUNTRY_IS": {
     "message": "Iceland"
@@ -357,7 +378,7 @@
     "message": "Comoros"
   },
   "COUNTRY_KN": {
-    "message": "Saint Kitts and Nevis"
+    "message": "St. Kitts & Nevis"
   },
   "COUNTRY_KP": {
     "message": "North Korea"
@@ -375,13 +396,13 @@
     "message": "Kazakhstan"
   },
   "COUNTRY_LA": {
-    "message": "Lao People's Democratic Republic"
+    "message": "Laos"
   },
   "COUNTRY_LB": {
     "message": "Lebanon"
   },
   "COUNTRY_LC": {
-    "message": "Saint Lucia"
+    "message": "St. Lucia"
   },
   "COUNTRY_LI": {
     "message": "Liechtenstein"
@@ -420,7 +441,7 @@
     "message": "Montenegro"
   },
   "COUNTRY_MF": {
-    "message": "Saint Martin (French part)"
+    "message": "St. Martin"
   },
   "COUNTRY_MG": {
     "message": "Madagascar"
@@ -429,19 +450,19 @@
     "message": "Marshall Islands"
   },
   "COUNTRY_MK": {
-    "message": "The Republic of North Macedonia"
+    "message": "North Macedonia"
   },
   "COUNTRY_ML": {
     "message": "Mali"
   },
   "COUNTRY_MM": {
-    "message": "Myanmar"
+    "message": "Myanmar (Burma)"
   },
   "COUNTRY_MN": {
     "message": "Mongolia"
   },
   "COUNTRY_MO": {
-    "message": "Macao"
+    "message": "Macao SAR China"
   },
   "COUNTRY_MP": {
     "message": "Northern Mariana Islands"
@@ -537,16 +558,16 @@
     "message": "Poland"
   },
   "COUNTRY_PM": {
-    "message": "Saint Pierre and Miquelon"
+    "message": "St. Pierre & Miquelon"
   },
   "COUNTRY_PN": {
-    "message": "Pitcairn"
+    "message": "Pitcairn Islands"
   },
   "COUNTRY_PR": {
     "message": "Puerto Rico"
   },
   "COUNTRY_PS": {
-    "message": "State of Palestine"
+    "message": "Palestinian Territories"
   },
   "COUNTRY_PT": {
     "message": "Portugal"
@@ -561,7 +582,7 @@
     "message": "Qatar"
   },
   "COUNTRY_RE": {
-    "message": "Reunion"
+    "message": "Réunion"
   },
   "COUNTRY_RO": {
     "message": "Romania"
@@ -570,7 +591,7 @@
     "message": "Serbia"
   },
   "COUNTRY_RU": {
-    "message": "Russian Federation"
+    "message": "Russia"
   },
   "COUNTRY_RW": {
     "message": "Rwanda"
@@ -594,13 +615,13 @@
     "message": "Singapore"
   },
   "COUNTRY_SH": {
-    "message": "Saint Helena"
+    "message": "St. Helena"
   },
   "COUNTRY_SI": {
     "message": "Slovenia"
   },
   "COUNTRY_SJ": {
-    "message": "Svalbard and Jan Mayen"
+    "message": "Svalbard & Jan Mayen"
   },
   "COUNTRY_SK": {
     "message": "Slovakia"
@@ -624,22 +645,25 @@
     "message": "South Sudan"
   },
   "COUNTRY_ST": {
-    "message": "Sao Tome and Principe"
+    "message": "São Tomé & Príncipe"
   },
   "COUNTRY_SV": {
     "message": "El Salvador"
   },
   "COUNTRY_SX": {
-    "message": "Sint Maarten (Dutch part)"
+    "message": "Sint Maarten"
   },
   "COUNTRY_SY": {
-    "message": "Syrian Arab Republic"
+    "message": "Syria"
   },
   "COUNTRY_SZ": {
     "message": "Eswatini"
   },
+  "COUNTRY_TA": {
+    "message": "Tristan da Cunha"
+  },
   "COUNTRY_TC": {
-    "message": "Turks and Caicos Islands"
+    "message": "Turks & Caicos Islands"
   },
   "COUNTRY_TD": {
     "message": "Chad"
@@ -675,16 +699,16 @@
     "message": "Türkiye"
   },
   "COUNTRY_TT": {
-    "message": "Trinidad and Tobago"
+    "message": "Trinidad & Tobago"
   },
   "COUNTRY_TV": {
     "message": "Tuvalu"
   },
   "COUNTRY_TW": {
-    "message": "Taiwan, Province of China"
+    "message": "Taiwan"
   },
   "COUNTRY_TZ": {
-    "message": "United Republic of Tanzania"
+    "message": "Tanzania"
   },
   "COUNTRY_UA": {
     "message": "Ukraine"
@@ -693,10 +717,13 @@
     "message": "Uganda"
   },
   "COUNTRY_UM": {
-    "message": "United States Minor Outlying Islands"
+    "message": "U.S. Outlying Islands"
+  },
+  "COUNTRY_UN": {
+    "message": "United Nations"
   },
   "COUNTRY_US": {
-    "message": "United States of America"
+    "message": "United States"
   },
   "COUNTRY_UY": {
     "message": "Uruguay"
@@ -705,10 +732,10 @@
     "message": "Uzbekistan"
   },
   "COUNTRY_VA": {
-    "message": "Holy See (Vatican City State)"
+    "message": "Vatican City"
   },
   "COUNTRY_VC": {
-    "message": "Saint Vincent and the Grenadines"
+    "message": "St. Vincent & Grenadines"
   },
   "COUNTRY_VE": {
     "message": "Venezuela"
@@ -726,7 +753,7 @@
     "message": "Vanuatu"
   },
   "COUNTRY_WF": {
-    "message": "Wallis and Futuna"
+    "message": "Wallis & Futuna"
   },
   "COUNTRY_WS": {
     "message": "Samoa"
@@ -748,6 +775,9 @@
   },
   "COUNTRY_ZW": {
     "message": "Zimbabwe"
+  },
+  "COUNTRY_ZZ": {
+    "message": "Unknown Region"
   },
   "EXT_DESCRIPTION": {
     "message": "Capture The Flag — privacy-focused browser extension to determine website country."

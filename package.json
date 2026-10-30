@@ -11,6 +11,8 @@
     "popup": "vite dev --open popup.html"
   },
   "dependencies": {
+    "buffer": "^6.0.3",
+    "mmdb-lib": "^3.0.3",
     "react": "^19",
     "react-dom": "^19"
   },
