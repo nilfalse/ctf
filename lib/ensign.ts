@@ -10,21 +10,15 @@ export function hoist(tabId: number, it: Itinerary | undefined) {
     return;
   }
 
-  const promises: Promise<unknown>[] = [
+  const iso =
+    it.hops.find((h) => h.country !== 'ZZ')?.country ||
+    it.country ||
+    it.registered ||
+    'ZZ';
+
+  return Promise.all([
     action.setPopup(tabId, `/popup.html?${itinerary.toSearchParams(it)}`),
-  ];
-
-  const iso = it.hops.find((hop) => hop.country !== 'ZZ')?.country;
-  if (iso) {
-    promises.push(
-      action.setTitle(
-        tabId,
-        _('EXT_NAME') + ':\n' + country.name(iso),
-      ) as Promise<unknown>,
-
-      icons.flag(iso).then((icon) => action.setIcon(tabId, icon)),
-    );
-  }
-
-  return Promise.all(promises);
+    action.setTitle(tabId, _('TITLE', [_('EXT_NAME'), country.name(iso)])),
+    icons.flag(iso).then((icon) => action.setIcon(tabId, icon)),
+  ]);
 }

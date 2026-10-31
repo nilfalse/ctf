@@ -1,6 +1,6 @@
 export interface Hop {
-  cloud: 'cloudflare';
-  pop: string;
+  cloud: 'cloudflare' | 'aws' | 'fastly';
+  pop: ThreeUppercaseLetters;
   country: TwoUppercaseLetters;
   cacheStatus: string | null;
 }

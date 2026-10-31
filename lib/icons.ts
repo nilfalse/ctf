@@ -1,7 +1,7 @@
 import * as country from '~/lib/country.ts';
 import { prefs } from '~/lib/prefs.ts';
 import * as svg from '~/lib/svg.ts';
-import * as offscreen from '~/offscreen/offscreen.api.ts';
+import * as offscreen from '~/offscreen/api.ts';
 import type { IconData, Path } from '~/webext/action/index.ts';
 
 import { BASE_URL } from '../const.ts' with { type: 'macro' };

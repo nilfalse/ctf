@@ -1,4 +1,4 @@
-[<img src="https://raw.githubusercontent.com/nilfalse/nilfalse.github.io/refs/heads/main/images/ctf/logo/logo.svg" alt="Capture The Flag Logo" width="110px" align="left" />](https://nilfalse.com/addons/ctf)
+[<img src="./assets/logo.svg" alt="Capture The Flag Logo" width="110px" align="left" />](https://nilfalse.com/addons/ctf)
 
 # [Capture The Flag](https://nilfalse.com/addons/ctf)
 

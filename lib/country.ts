@@ -9,6 +9,10 @@ export /* @inline */ function name(iso: TwoUppercaseLetters) {
 }
 
 export function emoji(iso: TwoUppercaseLetters) {
+  if (iso === 'ZZ') {
+    return '🏁';
+  }
+
   return codepoints(iso)
     .map((c) => String.fromCodePoint(c))
     .join('');

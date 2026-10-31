@@ -2,6 +2,7 @@ import { loadAirports } from '~/lib/airports.ts';
 import * as ensign from '~/lib/ensign.ts';
 import * as history from '~/lib/history.ts';
 import * as itinerary from '~/lib/itinerary/index.ts';
+import { loadGeoLite } from '~/lib/maxmind.ts';
 import { migrate } from '~/lib/migration.ts';
 import * as q from '~/lib/q.ts';
 import * as net from '~/webext/net.ts';
@@ -61,8 +62,8 @@ tabs.onClosed(function (tabId) {
   q.unqueue(tabId);
 });
 
-runtime.onInstalled(async function () {
+runtime.onInstalled(function () {
   console.log('Capture The Flag: installed');
 
-  await Promise.all([migrate(), loadAirports()]);
+  return Promise.all([migrate(), loadAirports(), loadGeoLite(true)]);
 });

@@ -787,5 +787,16 @@
   },
   "EXT_SHORT_NAME": {
     "message": "CTF"
+  },
+  "TITLE": {
+    "message": "$NAME$:\n$COUNTRY$",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      },
+      "country": {
+        "content": "$2"
+      }
+    }
   }
 }

@@ -1,6 +1,15 @@
 import type { Hop } from '~/lib/clouds/interfaces.ts';
 import type { Itinerary } from '~/lib/itinerary/interfaces.ts';
 
+const CLOUD_TO_PARAM = {
+  aws: 'aws',
+  cloudflare: 'cf',
+  fastly: 'f',
+} as const satisfies Record<Hop['cloud'], string>;
+
+// A shared param would invert to a union, and PARAM_TO_CLOUD could then drop a cloud
+export type _UniqueParams = AssertNever<Collisions<typeof CLOUD_TO_PARAM>>;
+
 export function toSearchParams(i: Itinerary) {
   const search = new URLSearchParams({ h: i.hostname, ip: i.ip });
 
@@ -17,13 +26,19 @@ export function toSearchParams(i: Itinerary) {
     search.append('p', i.powered);
   }
 
-  for (const { pop, country, cacheStatus } of i.hops) {
-    const v = `cf.${pop}.${country}`;
+  for (const { cloud, pop, country, cacheStatus } of i.hops) {
+    const v = `${CLOUD_TO_PARAM[cloud]}.${pop}.${country}`;
     search.append('hop', cacheStatus ? `${v}.${cacheStatus}` : v);
   }
 
   return search;
 }
+
+const PARAM_TO_CLOUD: Invert<typeof CLOUD_TO_PARAM> = {
+  aws: 'aws',
+  cf: 'cloudflare',
+  f: 'fastly',
+};
 
 export function fromSearchParams(s: string): Itinerary | null {
   if (!s) {
@@ -33,19 +48,17 @@ export function fromSearchParams(s: string): Itinerary | null {
   const params = new URLSearchParams(s);
 
   const hops = params.getAll('hop').map(function (value) {
-    const [cloud, pop, country, ...cache] = value.split('.');
-    switch (cloud) {
-      case 'cf':
-        return {
-          cloud: 'cloudflare',
-          pop,
-          country,
-          cacheStatus: cache.length ? cache.join('.') : null,
-        } as Hop;
-
-      default:
-        throw new Error('Unexpected hop: ' + value);
+    const [param, pop, country, ...cache] = value.split('.');
+    if (!Object.hasOwn(PARAM_TO_CLOUD, param)) {
+      throw new Error('Unexpected hop: ' + value);
     }
+
+    return {
+      cloud: PARAM_TO_CLOUD[param as keyof typeof PARAM_TO_CLOUD],
+      pop,
+      country,
+      cacheStatus: cache.length ? cache.join('.') : null,
+    } as Hop;
   });
 
   return {
