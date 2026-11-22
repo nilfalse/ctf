@@ -18,7 +18,7 @@ export async function rasterize(url: string, sizes: number[]) {
   return Object.fromEntries(
     sizes.map((size, i) => [
       size,
-      new ImageData(new Uint8ClampedArray(pixels[i]), size),
+      new ImageData(new Uint8ClampedArray(pixels[i]!), size),
     ]),
   );
 }

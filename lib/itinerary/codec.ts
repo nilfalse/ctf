@@ -47,18 +47,18 @@ export function fromSearchParams(s: string): Itinerary | null {
 
   const params = new URLSearchParams(s);
 
-  const hops = params.getAll('hop').map(function (value) {
+  const hops = params.getAll('hop').map<Hop>(function (value) {
     const [param, pop, country, ...cache] = value.split('.');
-    if (!Object.hasOwn(PARAM_TO_CLOUD, param)) {
+    if (!param || !pop || !country || !Object.hasOwn(PARAM_TO_CLOUD, param)) {
       throw new Error('Unexpected hop: ' + value);
     }
 
     return {
       cloud: PARAM_TO_CLOUD[param as keyof typeof PARAM_TO_CLOUD],
-      pop,
-      country,
+      pop: pop as ThreeUppercaseLetters,
+      country: country as TwoUppercaseLetters,
       cacheStatus: cache.length ? cache.join('.') : null,
-    } as Hop;
+    };
   });
 
   return {

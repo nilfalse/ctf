@@ -1,3 +1,3 @@
 export function first(array?: readonly string[]) {
-  return array ? array[0] : null;
+  return array?.[0] ?? null;
 }

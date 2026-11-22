@@ -1,4 +1,4 @@
-import * as airports from '~/lib/airports.ts';
+import * as edges from '~/lib/edges.ts';
 import type * as http from '~/lib/http.ts';
 
 import * as aws from './aws.ts';
@@ -14,7 +14,7 @@ export async function infer(headers: http.Headers) {
     ...fastly.infer(headers),
   ];
 
-  const countries = await airports.locate(hops.map((h) => h.pop));
+  const countries = await edges.locate(hops.map((h) => h.pop));
   for (const hop of hops) {
     hop.country = countries[hop.pop] ?? 'ZZ';
   }

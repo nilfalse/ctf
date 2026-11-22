@@ -2,16 +2,16 @@ import { parse } from 'http-z';
 import { outdent } from 'outdent';
 import { beforeEach, expect, test, vi } from 'vitest';
 
-import * as airports from '~/lib/airports.ts';
+import * as edges from '~/lib/edges.ts';
 import { toHeaderMap } from '~/lib/http.ts';
 
 import * as clouds from './index.ts';
 import type { Hop } from './interfaces.ts';
 
-vi.mock('~/lib/airports.ts');
+vi.mock('~/lib/edges.ts');
 
 beforeEach(() => {
-  vi.mocked(airports.locate).mockResolvedValue({
+  vi.mocked(edges.locate).mockResolvedValue({
     CPH: 'DK',
     FRA: 'DE',
     KBP: 'UA',
@@ -266,7 +266,5 @@ it('should $spec', async ({ http, hops }) => {
 
   // Assert
   expect(inferred).toEqual(hops);
-  expect(airports.locate).toHaveBeenCalledExactlyOnceWith(
-    hops.map((h) => h.pop),
-  );
+  expect(edges.locate).toHaveBeenCalledExactlyOnceWith(hops.map((h) => h.pop));
 });

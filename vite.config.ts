@@ -42,8 +42,8 @@ export default defineConfig(({ mode }) => {
   return {
     builder: {
       async buildApp(builder) {
-        await builder.build(builder.environments.prerender);
-        await builder.build(builder.environments.client);
+        await builder.build(builder.environments.prerender!);
+        await builder.build(builder.environments.client!);
       },
     },
 

@@ -1,4 +1,4 @@
-import { loadAirports } from '~/lib/airports.ts';
+import { refreshEdges } from '~/lib/edges.ts';
 import * as ensign from '~/lib/ensign.ts';
 import * as history from '~/lib/history.ts';
 import * as itinerary from '~/lib/itinerary/index.ts';
@@ -65,5 +65,5 @@ tabs.onClosed(function (tabId) {
 runtime.onInstalled(function () {
   console.log('Capture The Flag: installed');
 
-  return Promise.all([migrate(), loadAirports(), loadGeoLite(true)]);
+  return Promise.all([migrate(), refreshEdges(), loadGeoLite(true)]);
 });

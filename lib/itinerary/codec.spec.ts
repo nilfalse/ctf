@@ -139,4 +139,9 @@ describe('fromSearchParams', () => {
     expect(() =>
       fromSearchParams('h=example.com&hop=constructor.KBP.UA'),
     ).toThrow('Unexpected hop: constructor.KBP.UA'));
+
+  it('should reject an incomplete hop', () =>
+    expect(() => fromSearchParams('h=example.com&hop=cf')).toThrow(
+      'Unexpected hop: cf',
+    ));
 });

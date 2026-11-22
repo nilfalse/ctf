@@ -46,7 +46,7 @@ export default function ({ input, output, runtime }: Options): Plugin {
 
     // dev or preview
     configureServer(server) {
-      const environment = server.environments.prerender;
+      const environment = server.environments.prerender!;
       if (!isRunnableDevEnvironment(environment)) {
         return;
       }

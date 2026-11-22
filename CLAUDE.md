@@ -4,9 +4,9 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 
 ## Code
 
-- `lib/airports.ts`: IATA code to country, downloaded from ctf.pages.dev into `storage.local` on install.
 - `lib/clouds/`: CDN hops (cloud, POP, country) inferred from response headers: Cloudflare, AWS and Fastly.
 - `lib/country.ts`: country names (from `_locales`) and flag emoji.
+- `lib/edges.ts`: CDN POP code to country, downloaded from ctf.pages.dev into `storage.local` on install; edges missing from the dataset are removed.
 - `lib/ensign.ts`: sets a tab's icon and popup URL from an itinerary.
 - `lib/history.ts`: per-tab LRU of itineraries keyed by origin, in `storage.session`.
 - `lib/icons.ts`: the flag icon, by the `icons` preference. With `FEATURE_TOOLBAR_SVG` disabled the toolbar takes no SVG, so `offscreen/` draws it into `ImageData` on an offscreen page, because decoding SVG needs a DOM.
