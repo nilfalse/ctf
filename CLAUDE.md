@@ -27,7 +27,7 @@ MV3 WebExtension. Captures the HTTP response of each tab's top frame, finds the 
 
 ## Permissions
 
-- There is **no `tabs` permission** and none is to be added. Only `webRequest`, `storage` and `host_permissions: ["*://*/*"]` (plus `dns` with `FEATURE_DNS`, and `offscreen` with `FEATURE_TOOLBAR_SVG` disabled). `tab.url` and `changeInfo.url` are therefore absent for URLs no host pattern covers, such as `about:blank`.
+- There is **no `tabs` permission** and none is to be added. Only `alarms`, `webRequest`, `storage` and `host_permissions: ["*://*/*"]` (plus `dns` with `FEATURE_DNS`, and `offscreen` with `FEATURE_TOOLBAR_SVG` disabled). `tab.url` and `changeInfo.url` are therefore absent for URLs no host pattern covers, such as `about:blank`.
 
 ## Commands
 

@@ -5,6 +5,7 @@ import * as itinerary from '~/lib/itinerary/index.ts';
 import { loadGeoLite } from '~/lib/maxmind.ts';
 import { migrate } from '~/lib/migration.ts';
 import * as q from '~/lib/q.ts';
+import * as alarms from '~/webext/alarms.ts';
 import * as net from '~/webext/net.ts';
 import * as prefs from '~/webext/prefs/listener.ts';
 import * as runtime from '~/webext/runtime/hooks.ts';
@@ -66,4 +67,11 @@ runtime.onInstalled(function () {
   console.log('Capture The Flag: installed');
 
   return Promise.all([migrate(), refreshEdges(), loadGeoLite(true)]);
+});
+
+alarms.alarm('refresh', 'WEEKLY');
+alarms.onAlarm('refresh', function () {
+  console.log('Capture The Flag: refresh datasets');
+
+  return Promise.all([refreshEdges(), loadGeoLite(true)]);
 });

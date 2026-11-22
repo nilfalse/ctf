@@ -35,7 +35,11 @@ export default function (opts: Options): Plugin {
 
       const { GITHUB_SHA } = process.env;
 
-      const permissions: Moz.Manifest.Permission[] = ['webRequest', 'storage'];
+      const permissions: Moz.Manifest.Permission[] = [
+        'alarms',
+        'webRequest',
+        'storage',
+      ];
       if (feature('DNS')) {
         permissions.push('dns');
       }
